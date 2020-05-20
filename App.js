@@ -9,7 +9,7 @@ import {
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
 
-const socket = new WebSocket('ws://localhost:8080');
+const socket = new WebSocket("ws://localhost:8080/ws");
 
 export default class App extends Component {
 
