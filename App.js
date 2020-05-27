@@ -1,102 +1,38 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import {
+import { Button, View } from 'react-native';
+/* import {
   Appbar, Avatar, Button, Card, Title, Paragraph,
   Provider as PaperProvider
-} from 'react-native-paper';
-import Highcharts from 'highcharts/highstock';
+} from 'react-native-paper';*/
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Index from './src/screen/Index'
+import Dashboard from './src/screen/Dashboard'
+import Settings from './src/screen/Settings'
+import Game from './src/screen/Game'
 
 
-const socket = new WebSocket("ws://localhost:8080/ws");
+const Stack = createStackNavigator();
 
-
-/* Navigation Screens
-
-Start with simple Stack Navigator
-
-Index
-Dashboard
-Settings
-Game */
-
-const getSeries = () => {
-  return Highcharts.charts[0].series[0];
-};
-
-export default class App extends Component {
-
-  componentDidMount() {
-
-    console.log("componentDidMount CALLED");
-
-    // A. Add Highstock Chart
-    Highcharts.chart('highStock', {
-      "rangeSelector": {
-        "selected": 1
-      },
-      "title": {
-        "text": "Sine Wave Stock Price"
-      },
-      "series": [
-        {
-          "name": "Sine Wave",
-          "data": [],
-          "tooltip": {
-            "valueDecimals": 2
-          }
-        }
-      ]
-    });
-
-    // B. WebSocket
-    socket.addEventListener('open', function (event) {
-      console.log("Websocket client connected");
-      socket.send('Hello Server!');
-    });
-
-    socket.addEventListener('message', function (event) {
-
-      // console.log('Message from server ', event.data);
-      let data = JSON.parse([event.data]);
-      console.log(data);
-      getSeries().addPoint(data, true, false);
-    });
-  }
-
-  render() {
-    return (
-      <PaperProvider>
-
-        <Appbar.Header >
-          <Appbar.Content title="Beat The Market" subtitle="Can you... beat the market ?!" />
-          <Appbar.Action icon="label" onPress={() => console.log('Pressed label')} />
-          <Appbar.Action icon="delete" onPress={() => console.log('Pressed delete')} />
-        </Appbar.Header>
-
-        <Card>
-          <Card.Content>
-            <Title>IBM</Title>
-            <Paragraph>American Blue Chip company</Paragraph>
-          </Card.Content>
-
-          <div id="highStock"/>
-
-          <Card.Actions>
-            <Button>Cancel</Button>
-            <Button>Ok</Button>
-          </Card.Actions>
-        </Card>
-
-      </PaperProvider>
-    );
-  }
+function AppStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Index" component={Index} />
+      <Stack.Screen name="Dashboard" component={Dashboard} />
+      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Game" component={Game} />
+    </Stack.Navigator>
+  );
 }
 
-const styles = StyleSheet.create({
-  bottom: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-});
+const linking = {
+  prefixes: ['http://localhost', 'localhost://'],
+};
+
+export default function App() {
+  return (
+    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
+      <AppStack/>
+    </NavigationContainer>
+  );
+}
