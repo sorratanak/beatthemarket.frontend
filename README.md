@@ -9,6 +9,12 @@ _"When you authenticate a modern client SDK, it generates an ID token / refresh 
 * [Demystifying Firebase Auth Tokens](https://medium.com/@jwngr/demystifying-firebase-auth-tokens-e0c533ed330c)
 * [Firebase Guildes / Manage User Sessions](https://firebase.google.com/docs/auth/admin/manage-sessions)
 
+## Custom Fonts
+
+This project uses custom fonts via `Font.loadAsync`.
+
+* [Using Custom Fonts](https://docs.expo.io/guides/using-custom-fonts/?redirected#using-fontloadasync-instead-of-the-usefonts-hook)
+* [Expo Font SDK](https://docs.expo.io/versions/latest/sdk/font/)
 
 ## Building 
 
@@ -18,3 +24,10 @@ expo build:web
 
 # This outputs the site in web-build/
 ```
+
+## Reference
+
+
+**React Native Guides**
+* https://www.reactnative.guide/
+* https://reactnative.dev/docs/getting-started

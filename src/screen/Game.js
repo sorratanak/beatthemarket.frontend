@@ -6,19 +6,22 @@ import {
   Card, Title, Paragraph,
   Provider as PaperProvider
 } from 'react-native-paper';
+import * as Font from 'expo-font';
 import Highcharts from 'highcharts/highstock';
 
-/*function Game({ navigation }) {
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Button title="Go back" onPress={() => navigation.goBack()} />
-        </View>
-    );
-}*/
+
+let customFonts = {
+  'PragmataPro': require('../../assets/fonts/PragmataPro.ttf'),
+};
 
 // const socket = new WebSocket("ws://localhost:8080/ws");
 
 export default class Game extends Component {
+
+  async _loadFontsAsync() {
+    await Font.loadAsync(customFonts);
+    this.setState({ fontsLoaded: true });
+  }
 
   componentDidMount() {
 
@@ -65,10 +68,15 @@ export default class Game extends Component {
     return (
       <PaperProvider>
 
-        <Appbar.Header >
-          <Appbar.Content title="Beat The Market" subtitle="Can you... beat the market ?!" />
-          <Appbar.Action icon="label" onPress={() => console.log('Pressed label')} />
-          <Appbar.Action icon="delete" onPress={() => console.log('Pressed delete')} />
+        <Appbar.Header>
+          <Appbar.Action
+
+            /* TODO
+               Replace icon with our "Beat The Market" one, centered
+               This isn't working
+               icon={require('./spiro.svg')} */
+            icon="label"
+            onPress={() => console.log('Pressed label')} />
         </Appbar.Header>
 
         <Button
@@ -83,8 +91,7 @@ export default class Game extends Component {
 
         <Card>
           <Card.Content>
-            <Title>IBM</Title>
-            <Paragraph>American Blue Chip company</Paragraph>
+            <Title style={{ fontFamily: 'PragmataPro' }}>IBM</Title>
           </Card.Content>
 
           <div id="highStock" />
