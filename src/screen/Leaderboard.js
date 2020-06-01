@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, View } from 'react-native';
 
-function Settings({ navigation }) {
+function Leaderboard({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button
@@ -15,4 +15,4 @@ function Settings({ navigation }) {
   );
 }
 
-export default Settings;
+export default Leaderboard;

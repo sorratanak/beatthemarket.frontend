@@ -12,6 +12,8 @@
     "@react-navigation/native": "^5.4.3",
     "@react-navigation/stack": "^5.4.0",
     "expo": "~37.0.3",
+    "firebase": "^7.14.5",
+    "firebaseui": "^4.5.0",
     "highcharts": "^8.1.0",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",

@@ -5,9 +5,14 @@ function Dashboard({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
+        title="Leaderboard"
+        onPress={() => navigation.navigate('Leaderboard')}/>
+      <Button
+        title="Settings"
+        onPress={() => navigation.navigate('Settings')}/>
+      <Button
+        title="Game"
+        onPress={() => navigation.navigate('Game')}/>
       <Button title="Go back" onPress={() => navigation.goBack()} />
     </View>
   );
