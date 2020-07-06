@@ -5,10 +5,27 @@ import * as firebaseui from 'firebaseui'
 import Constants from 'expo-constants';
 import * as Font from 'expo-font';
 
-
 let customFonts = {
     'PragmataPro': require('../../assets/fonts/PragmataPro.ttf'),
 };
+
+// const socket = new WebSocket("ws://localhost:8080/graphql-ws");
+const socket = new WebSocket("ws://localhost:8080/ws");
+
+socket.addEventListener('open', function (event) {
+
+    console.log("Websocket client connected");
+    // socket.send('Hello Server!');
+});
+
+socket.addEventListener('message', function (event) {
+
+    console.log('Message from server ', event.data);
+    /* let data = JSON.parse([event.data]);
+    console.log(data);
+    getSeries().addPoint(data, true, false); */
+});
+
 
 export default class Index extends Component {
 
@@ -33,7 +50,7 @@ export default class Index extends Component {
         // Set to null if One-tap sign-up is not supported.
         // var CLIENT_ID = 'YOUR_OAUTH_CLIENT_ID';
 
-        /* B. Initialize the FirebaseUI 
+        /* B. Initialize the FirebaseUI
          */
         var uiConfig = {
             signInSuccessUrl: '/Dashboard',
