@@ -2,12 +2,13 @@ import './GestureHandler';
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { Home, Details, SignIn } from '../screens';
+import { Home, Details, SignIn, SignUp } from '../screens';
 
 export type StackParams = {
   Home: undefined;
   Details: { data: string } | undefined;
   SignIn: undefined;
+  SignUp: undefined;
 };
 
 const AuthStack = createStackNavigator<StackParams>();
@@ -15,6 +16,7 @@ const AuthStack = createStackNavigator<StackParams>();
 export const AuthStackComponent = () => (
   <AuthStack.Navigator>
     <AuthStack.Screen name="SignIn" component={SignIn} />
+    <AuthStack.Screen name="SignUp" component={SignUp} />
   </AuthStack.Navigator>
 );
 
