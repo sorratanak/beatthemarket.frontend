@@ -1,9 +1,14 @@
 import React from 'react';
-import {AppRegistry, Platform} from 'react-native';
-import {Navigation} from './navigation';
+import { AppRegistry, Platform } from 'react-native';
+import RootNavigation from './navigation/rootNavigation';
+import UserContextProvider from './userContext';
 
 export function App() {
-  return <Navigation />;
+  return (
+    <UserContextProvider>
+      <RootNavigation />
+    </UserContextProvider>
+  );
 }
 
 AppRegistry.registerComponent('example', () => App);

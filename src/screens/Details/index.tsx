@@ -1,16 +1,16 @@
 import React from 'react';
-import {Text, Button} from 'react-native';
-import {Container} from '../../components';
-import {useRoute, RouteProp, useNavigation} from '@react-navigation/native';
-import {StackParams} from '../../navigation';
-import {StackNavigationProp} from '@react-navigation/stack';
+import { Text, Button } from 'react-native';
+import { Container } from '../../components';
+import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
+import { StackParams } from '../../navigation';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 type NavigationProps = StackNavigationProp<StackParams, 'Details'>;
 type RouteProps = RouteProp<StackParams, 'Details'>;
 
 export function Details() {
-  const {push, popToTop, navigate, goBack} = useNavigation<NavigationProps>();
-  const {params} = useRoute<RouteProps>();
+  const { push, popToTop, navigate, goBack } = useNavigation<NavigationProps>();
+  const { params } = useRoute<RouteProps>();
 
   return (
     <Container>
