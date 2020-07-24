@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { getToken, removeToken, setToken } from './utilities';
+import { SignUp, SignIn } from './firebase/firebase';
 
 export interface ContextProps {
   token: string | null;
   logout: () => void;
   signIn: () => void;
+  signUp: () => void;
 }
 
 export const UserContext = React.createContext({
   token: null,
   logout: () => {},
-  signIn: () => {},
+  signIn: (email: string, password: string) => {},
+  signUp: (email: string, password: string) => {},
 });
 
 const ContextProvider = ({
@@ -32,12 +35,23 @@ const ContextProvider = ({
   };
 
   const signIn = (email: string, password: string) => {
-    setToken(email + password);
-    setLocalToken(email + password);
+    SignIn({ email, password }).then((user) => {
+      console.log('user is', user);
+      setToken(email + password);
+      setLocalToken(email + password);
+    });
+  };
+
+  const signUp = (email: string, password: string) => {
+    SignUp({ email, password }).then((user) => {
+      console.log('user is', user);
+      setToken(email + password);
+      setLocalToken(email + password);
+    });
   };
 
   return (
-    <UserContext.Provider value={{ token, logout, signIn }}>
+    <UserContext.Provider value={{ token, logout, signIn, signUp }}>
       {children}
     </UserContext.Provider>
   );
