@@ -10,7 +10,7 @@ export interface ContextProps {
 export const UserContext = React.createContext({
   token: null,
   logout: () => {},
-  signIn: (email: string, password: string) => {},
+  signIn: () => {},
 });
 
 const ContextProvider = ({
@@ -21,8 +21,8 @@ const ContextProvider = ({
   const [token, setLocalToken] = useState<string | null>(null);
 
   useEffect(() => {
-    getToken().then((token) => {
-      setLocalToken(token);
+    getToken().then((localToken) => {
+      setLocalToken(localToken);
     });
   }, [setLocalToken]);
 
@@ -32,15 +32,14 @@ const ContextProvider = ({
   };
 
   const signIn = (email: string, password: string) => {
-    setToken(email);
-    setLocalToken(email);
+    setToken(email + password);
+    setLocalToken(email + password);
   };
 
   return (
-    <UserContext.Provider
-      value={{ token, logout, signIn }}
-      children={children}
-    />
+    <UserContext.Provider value={{ token, logout, signIn }}>
+      {children}
+    </UserContext.Provider>
   );
 };
 

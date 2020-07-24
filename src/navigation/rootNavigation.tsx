@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { View } from 'react-native';
 import { UserContext } from '../userContext';
 import { MainStackComponent, AuthStackComponent } from '.';
-import { View } from 'react-native';
 
 const RootNavigation = () => {
   const { token } = useContext(UserContext);
