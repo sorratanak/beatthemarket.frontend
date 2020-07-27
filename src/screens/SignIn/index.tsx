@@ -11,15 +11,15 @@ type NavigationProps = StackNavigationProp<StackParams, 'SignIn'>;
 
 export function SignIn() {
   const { navigate } = useNavigation<NavigationProps>();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
 
   const { signIn } = useContext(UserContext);
 
   return (
     <Container>
       <Text>Sign In</Text>
-      <TextInput
+      {/* <TextInput
         style={styles.textInputStyle}
         placeholder="Email"
         value={email}
@@ -31,8 +31,8 @@ export function SignIn() {
         value={password}
         onChangeText={setPassword}
         secureTextEntry
-      />
-      <Button title="Sign in" onPress={() => signIn(email, password)} />
+      /> */}
+      <Button title="Sign in" onPress={signIn} />
       <Text>Don't have an account?</Text>
       <Button title="Go To Sign Up" onPress={() => navigate('SignUp')} />
     </Container>

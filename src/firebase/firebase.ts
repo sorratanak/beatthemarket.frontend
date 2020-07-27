@@ -1,4 +1,5 @@
 import { auth } from './helper';
+import { authGoogle } from './helper.web';
 
 export const SignUp = async ({
   email,
@@ -12,14 +13,25 @@ export const SignUp = async ({
   return user;
 };
 
-export const SignIn = async ({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) => {
-  const { user } = await auth.signInWithEmailAndPassword(email, password);
+export const SignIn = async () => {
+  // const { user } = await auth.signInWithEmailAndPassword(email, password);
+  try {
+    const googleCredentials: any = await authGoogle();
+    const { accessToken } = googleCredentials.credential;
 
-  return user;
+    // console.log(accessToken);
+
+    // React query: (+ accessToken in auth headers)
+    // mutation Login {
+    //   login {
+    //     message
+    //   }
+    // }
+
+    // TODO return backend user + accessToken
+    return { accessToken };
+  } catch (e) {
+    // throw e;
+  }
+  // console.log(response);
 };

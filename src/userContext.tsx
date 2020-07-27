@@ -12,7 +12,7 @@ export interface ContextProps {
 export const UserContext = React.createContext({
   token: null,
   logout: () => {},
-  signIn: (email: string, password: string) => {},
+  signIn: () => {},
   signUp: (email: string, password: string) => {},
 });
 
@@ -34,11 +34,13 @@ const ContextProvider = ({
     setLocalToken(null);
   };
 
-  const signIn = (email: string, password: string) => {
-    SignIn({ email, password }).then((user) => {
+  const signIn = () => {
+    SignIn().then((response) => {
+      const { accessToken, user } = response;
+
       console.log('user is', user);
-      setToken(email + password);
-      setLocalToken(email + password);
+      setToken(accessToken);
+      setLocalToken(accessToken);
     });
   };
 
