@@ -17,8 +17,8 @@ const loginQuery = async (googleAccessToken: string) => {
   return response;
 };
 
-const loginQueries = {
+const queries = {
   loginQuery,
 };
 
-export default loginQueries;
+export default queries;
