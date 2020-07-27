@@ -14,7 +14,7 @@ export function SignIn() {
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
 
-  const { signIn } = useContext(UserContext);
+  const { signInWithGoogle } = useContext(UserContext);
 
   return (
     <Container>
@@ -32,7 +32,7 @@ export function SignIn() {
         onChangeText={setPassword}
         secureTextEntry
       /> */}
-      <Button title="Sign in" onPress={signIn} />
+      <Button title="Sign in" onPress={signInWithGoogle} />
       <Text>Don't have an account?</Text>
       <Button title="Go To Sign Up" onPress={() => navigate('SignUp')} />
     </Container>

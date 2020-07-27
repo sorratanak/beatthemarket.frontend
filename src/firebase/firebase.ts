@@ -17,9 +17,8 @@ export const SignIn = async () => {
   // const { user } = await auth.signInWithEmailAndPassword(email, password);
   try {
     const googleCredentials: any = await authGoogle();
-    const { accessToken } = googleCredentials.credential;
-
-    // console.log(accessToken);
+    console.log(googleCredentials);
+    const { accessToken: googleAccessToken } = googleCredentials?.credential;
 
     // React query: (+ accessToken in auth headers)
     // mutation Login {
@@ -28,10 +27,12 @@ export const SignIn = async () => {
     //   }
     // }
 
+    // TODO googleAccessToken only for now
+    const accessToken: string = googleAccessToken;
+
     // TODO return backend user + accessToken
-    return { accessToken };
+    return { accessToken, user: null };
   } catch (e) {
-    // throw e;
+    console.log(e?.message);
   }
-  // console.log(response);
 };

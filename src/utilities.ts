@@ -6,9 +6,11 @@ export function setToken(token: string) {
 }
 
 export async function getToken() {
-  return await AsyncStorage.getItem(TOKEN_KEY);
+  const storageResponse = await AsyncStorage.getItem(TOKEN_KEY);
+  return storageResponse;
 }
 
 export async function removeToken() {
-  return await AsyncStorage.removeItem(TOKEN_KEY);
+  const storageResponse = await AsyncStorage.removeItem(TOKEN_KEY);
+  return storageResponse;
 }

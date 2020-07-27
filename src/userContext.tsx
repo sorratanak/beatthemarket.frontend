@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { noop } from 'lodash';
+
 import { getToken, removeToken, setToken } from './utilities';
 import { SignUp, SignIn } from './firebase/firebase';
 
 export interface ContextProps {
   token: string | null;
   logout: () => void;
-  signIn: () => void;
-  signUp: () => void;
+  signInWithGoogle: () => void;
+  signUp: (email: string, password: string) => void;
 }
 
-export const UserContext = React.createContext({
+const DEFAULT_USER_CONTEXT: ContextProps = {
   token: null,
-  logout: () => {},
-  signIn: () => {},
-  signUp: (email: string, password: string) => {},
-});
+  logout: noop,
+  signInWithGoogle: noop,
+  signUp: noop,
+};
+
+export const UserContext = React.createContext(DEFAULT_USER_CONTEXT);
 
 const ContextProvider = ({
   children,
@@ -34,13 +38,14 @@ const ContextProvider = ({
     setLocalToken(null);
   };
 
-  const signIn = () => {
+  const signInWithGoogle = () => {
     SignIn().then((response) => {
-      const { accessToken, user } = response;
+      if (response) {
+        const { accessToken, user } = response;
 
-      console.log('user is', user);
-      setToken(accessToken);
-      setLocalToken(accessToken);
+        setToken(accessToken);
+        setLocalToken(accessToken);
+      }
     });
   };
 
@@ -53,7 +58,7 @@ const ContextProvider = ({
   };
 
   return (
-    <UserContext.Provider value={{ token, logout, signIn, signUp }}>
+    <UserContext.Provider value={{ token, logout, signInWithGoogle, signUp }}>
       {children}
     </UserContext.Provider>
   );
