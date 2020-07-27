@@ -1,5 +1,6 @@
 import { auth } from './helper';
 import { authGoogle } from './helper.web';
+import graphqlQueries from '../graphql';
 
 export const SignUp = async ({
   email,
@@ -19,6 +20,8 @@ export const SignIn = async () => {
     const googleCredentials: any = await authGoogle();
     console.log(googleCredentials);
     const { accessToken: googleAccessToken } = googleCredentials?.credential;
+
+    await graphqlQueries.loginQuery(googleAccessToken);
 
     // React query: (+ accessToken in auth headers)
     // mutation Login {
