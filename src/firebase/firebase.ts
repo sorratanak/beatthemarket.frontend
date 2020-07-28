@@ -26,6 +26,8 @@ export const SignIn = async () => {
 
     const userResponse = await graphqlQueries.loginQuery();
 
+    console.log('graphql ', userResponse);
+
     return { accessToken, user: userResponse || null };
   } catch (e) {
     console.log(e);

@@ -1,15 +1,24 @@
 import firebaseAuth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-community/google-signin';
 
-GoogleSignin.configure();
+GoogleSignin.configure({
+  webClientId:
+    '1062410862638-b94modujdnkue3587c86qfn28960v6u1.apps.googleusercontent.com',
+});
 
 export const auth = firebaseAuth();
 console.log('auth is', auth);
+
 export const authGoogle = async () => {
-  console.log('start authGoogle', GoogleSignin);
-  await GoogleSignin;
-  const { idToken } = await GoogleSignin.signIn();
-  console.log(idToken);
-  const googleCredential = firebaseAuth.GoogleAuthProvider.credential(idToken);
-  return firebaseAuth().signInWithCredential(googleCredential);
+  try {
+    console.log('start authGoogle', GoogleSignin);
+    const { idToken } = await GoogleSignin.signIn();
+    console.log(idToken);
+    const googleCredential = firebaseAuth.GoogleAuthProvider.credential(
+      idToken,
+    );
+    return firebaseAuth().signInWithCredential(googleCredential);
+  } catch (error) {
+    console.log('error ', error);
+  }
 };
