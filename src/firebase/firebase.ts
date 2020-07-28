@@ -17,7 +17,10 @@ export const SignUp = async ({
 export const SignIn = async () => {
   // const { user } = await auth.signInWithEmailAndPassword(email, password);
   try {
-    await authGoogle();
+    console.log('start');
+    const user = await authGoogle();
+
+    console.log('after google', user);
     const accessToken: string = await auth.currentUser.getIdToken();
     setToken(accessToken);
 
@@ -25,6 +28,6 @@ export const SignIn = async () => {
 
     return { accessToken, user: userResponse || null };
   } catch (e) {
-    console.log(e?.message);
+    console.log(e);
   }
 };
