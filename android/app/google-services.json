@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1062410862638",
+    "firebase_url": "https://beatthemarket-c13f8.firebaseio.com",
+    "project_id": "beatthemarket-c13f8",
+    "storage_bucket": "beatthemarket-c13f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062410862638:android:d31912813edcf169551fbf",
+        "android_client_info": {
+          "package_name": "com.beatthemarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062410862638-b94modujdnkue3587c86qfn28960v6u1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjDOWp801KPtLcixOcXSgBIWaEqY51nS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1062410862638-b94modujdnkue3587c86qfn28960v6u1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1062410862638-h3gjjoihoo45v6f1g2cfqlkpm55u43iv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.beatthemarket.beatthemarket"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
