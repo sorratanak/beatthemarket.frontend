@@ -11,7 +11,7 @@ type NavigationProps = StackNavigationProp<StackParams, 'Home'>;
 export function Home() {
   const { navigate } = useNavigation<NavigationProps>();
   const { logout } = useContext(UserContext);
-  console.log('testtst');
+  console.log('Home, sweet Home :)');
   return (
     <Container>
       <Text>Home Screen</Text>

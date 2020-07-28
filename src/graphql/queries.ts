@@ -1,20 +1,23 @@
 import { gql } from '@apollo/client';
 
 import { graphqlApi } from '.';
+import { IUser } from '../types';
 
-const loginQuery = async (googleAccessToken: string) => {
-  const response = await graphqlApi.query({
-    query: gql`
+const loginQuery = async (): Promise<IUser> => {
+  const response = await graphqlApi.mutate({
+    mutation: gql`
       mutation Login {
         login {
           message
+          user
         }
       }
     `,
   });
 
-  console.log('LOGIN_QUERY', response);
-  return response;
+  const parsedUser: IUser = JSON.parse(response.data.login.user);
+
+  return parsedUser;
 };
 
 const queries = {

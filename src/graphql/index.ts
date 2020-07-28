@@ -1,10 +1,28 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import queries from './queries';
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
-export const SERVER_API_URL = 'https://48p1r2roz4.sse.codesandbox.io';
+import queries from './queries';
+import { getToken } from '../utilities';
+
+export const SERVER_API_URL = 'http://127.0.0.1:8080/api';
+
+const httpLink = createHttpLink({
+  uri: SERVER_API_URL,
+});
+
+const authLink = setContext(async (_, { headers }) => {
+  const token = await getToken();
+
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
 
 export const graphqlApi = new ApolloClient({
-  uri: SERVER_API_URL,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 

@@ -1,6 +1,6 @@
-import { auth } from './helper';
-import { authGoogle } from './helper.web';
+import { auth, authGoogle } from './helper';
 import { graphqlQueries } from '../graphql';
+import { setToken } from '../utilities';
 
 export const SignUp = async ({
   email,
@@ -17,16 +17,13 @@ export const SignUp = async ({
 export const SignIn = async () => {
   // const { user } = await auth.signInWithEmailAndPassword(email, password);
   try {
-    const googleCredentials: any = await authGoogle();
-    console.log(googleCredentials);
-    const { accessToken: googleAccessToken } = googleCredentials?.credential;
+    await authGoogle();
+    const accessToken: string = await auth.currentUser.getIdToken();
+    setToken(accessToken);
 
-    const response = await graphqlQueries.loginQuery(googleAccessToken);
+    const userResponse = await graphqlQueries.loginQuery();
 
-    // TODO googleAccessToken only for now
-    const accessToken: string = googleAccessToken;
-
-    return { accessToken, user: response || null };
+    return { accessToken, user: userResponse || null };
   } catch (e) {
     console.log(e?.message);
   }
