@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 import { graphqlApi } from '.';
 import { IUser } from '../types';
 
-const loginQuery = async (): Promise<IUser> => {
+const login = async (): Promise<IUser> => {
   const response = await graphqlApi.mutate({
     mutation: gql`
       mutation Login {
@@ -20,18 +20,6 @@ const loginQuery = async (): Promise<IUser> => {
   return parsedUser;
 };
 
-const createGameQuery = gql`
-  mutation CreateGame($gameLevel: String!) {
-    createGame(gameLevel: $gameLevel) {
-      id
-      stocks
-    }
-  }
-`;
+const requests = { login };
 
-const queries = {
-  loginQuery,
-  createGameQuery,
-};
-
-export default queries;
+export default { requests };

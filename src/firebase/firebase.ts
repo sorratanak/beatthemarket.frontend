@@ -1,5 +1,5 @@
 import { auth, authGoogle } from './helper';
-import { graphqlQueries } from '../graphql';
+import loginGraphql from '../graphql/login';
 import { setToken } from '../utilities';
 
 export const SignUp = async ({
@@ -17,16 +17,12 @@ export const SignUp = async ({
 export const SignIn = async () => {
   // const { user } = await auth.signInWithEmailAndPassword(email, password);
   try {
-    console.log('start');
-    const user = await authGoogle();
+    await authGoogle();
 
-    console.log('after google', user);
     const accessToken: string = await auth.currentUser.getIdToken();
     setToken(accessToken);
 
-    const userResponse = await graphqlQueries.loginQuery();
-
-    console.log('graphql ', userResponse);
+    const userResponse = await loginGraphql.requests.login();
 
     return { accessToken, user: userResponse || null };
   } catch (e) {

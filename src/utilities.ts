@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { TOKEN_KEY } from './constants';
 
 export function setToken(token: string) {
+  console.log('new access token', token);
   AsyncStorage.setItem(TOKEN_KEY, token);
 }
 

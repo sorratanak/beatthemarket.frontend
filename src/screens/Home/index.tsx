@@ -1,22 +1,38 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback, useEffect } from 'react';
 import { Text, Button } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { useLazyQuery } from '@apollo/client';
-import { StackParams } from '../../navigation';
+// import { StackNavigationProp } from '@react-navigation/stack';
+import { useMutation, useSubscription } from '@apollo/client';
+// import { StackParams } from '../../navigation';
 import { Container } from '../../components';
 import { UserContext } from '../../userContext';
-import queries from '../../graphql/queries';
+import gameGraphql from '../../graphql/game';
 
 // type NavigationProps = StackNavigationProp<StackParams, 'Home'>;
 
 export function Home() {
   const { logout } = useContext(UserContext);
 
-  const [createGame, { loading, data, error }] = useLazyQuery(
-    queries.createGameQuery,
+  const [createGame, { data: createGameResponse }] = useMutation(
+    gameGraphql.queries.CREATE_GAME,
   );
+  const [startGame, { data: startGameResponse }] = useMutation(
+    gameGraphql.queries.START_GAME,
+  );
+  // const [subscribeStockTicks, { loading, data: stockTicks }] = useSubscription(
+  //   gameGraphql.queries.SUBSCRIBE_STOCK_TICKS,
+  // );
 
-  console.log('loading, error, data', loading, data, error);
+  useEffect(() => {
+    if (createGameResponse) {
+      startGame({ variables: { id: createGameResponse.createGame.id } });
+    }
+  }, [createGameResponse]);
+
+  console.log('START_GAME data', startGameResponse);
+
+  const onCreateGamePress = useCallback(() => {
+    createGame({ variables: { gameLevel: 'one' } });
+  }, []);
 
   return (
     <Container>
@@ -24,7 +40,7 @@ export function Home() {
       <Button
         testID="Create Game"
         title="Create Game"
-        onPress={() => createGame({ variables: { gameLevel: 'one' } })}
+        onPress={onCreateGamePress}
       />
       <Button
         testID="logout"

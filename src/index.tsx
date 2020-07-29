@@ -1,12 +1,17 @@
 import React from 'react';
 import { AppRegistry, Platform } from 'react-native';
+import { ApolloProvider } from '@apollo/client';
+
+import { graphqlApi } from './graphql';
 import RootNavigation from './navigation/rootNavigation';
 import UserContextProvider from './userContext';
 
 export function App() {
   return (
     <UserContextProvider>
-      <RootNavigation />
+      <ApolloProvider client={graphqlApi}>
+        <RootNavigation />
+      </ApolloProvider>
     </UserContextProvider>
   );
 }
