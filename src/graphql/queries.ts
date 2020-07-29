@@ -20,8 +20,18 @@ const loginQuery = async (): Promise<IUser> => {
   return parsedUser;
 };
 
+const createGameQuery = gql`
+  mutation CreateGame($gameLevel: String!) {
+    createGame(gameLevel: $gameLevel) {
+      id
+      stocks
+    }
+  }
+`;
+
 const queries = {
   loginQuery,
+  createGameQuery,
 };
 
 export default queries;

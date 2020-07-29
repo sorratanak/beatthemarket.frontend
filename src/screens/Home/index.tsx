@@ -1,24 +1,30 @@
 import React, { useContext } from 'react';
 import { Text, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { useLazyQuery } from '@apollo/client';
 import { StackParams } from '../../navigation';
 import { Container } from '../../components';
 import { UserContext } from '../../userContext';
+import queries from '../../graphql/queries';
 
-type NavigationProps = StackNavigationProp<StackParams, 'Home'>;
+// type NavigationProps = StackNavigationProp<StackParams, 'Home'>;
 
 export function Home() {
-  const { navigate } = useNavigation<NavigationProps>();
   const { logout } = useContext(UserContext);
-  console.log('Home, sweet Home :)');
+
+  const [createGame, { loading, data, error }] = useLazyQuery(
+    queries.createGameQuery,
+  );
+
+  console.log('loading, error, data', loading, data, error);
+
   return (
     <Container>
       <Text>Home Screen</Text>
       <Button
-        testID="details"
-        title="Go to Details"
-        onPress={() => navigate('Details', { data: '🤪' })}
+        testID="Create Game"
+        title="Create Game"
+        onPress={() => createGame({ variables: { gameLevel: 'one' } })}
       />
       <Button
         testID="logout"
