@@ -4,7 +4,11 @@ const CREATE_GAME = gql`
   mutation CreateGame($gameLevel: String!) {
     createGame(gameLevel: $gameLevel) {
       id
-      stocks
+      stocks {
+        id
+        name
+        symbol
+      }
     }
   }
 `;

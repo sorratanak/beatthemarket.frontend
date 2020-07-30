@@ -11,3 +11,5 @@ export interface IUser {
   userExternalUid: string;
   userAccounts: IUserBankAccount[];
 }
+
+export interface IStockTick {}

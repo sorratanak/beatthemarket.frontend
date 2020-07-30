@@ -24,7 +24,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
       console.log('[GraphQL error]:', message, locations, path),
     );
 
-  if (networkError) console.log(`[Network error]: ${networkError}`);
+  if (networkError) console.log('[Network error]', networkError);
 });
 
 const httpLink = createHttpLink({

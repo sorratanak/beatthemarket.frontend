@@ -1,11 +1,12 @@
 import React, { useContext, useCallback, useEffect } from 'react';
 import { Text, Button } from 'react-native';
 // import { StackNavigationProp } from '@react-navigation/stack';
-import { useMutation, useSubscription } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 // import { StackParams } from '../../navigation';
 import { Container } from '../../components';
 import { UserContext } from '../../userContext';
 import gameGraphql from '../../graphql/game';
+import { StockTicksList } from '../../components/StockTicksList';
 
 // type NavigationProps = StackNavigationProp<StackParams, 'Home'>;
 
@@ -18,9 +19,6 @@ export function Home() {
   const [startGame, { data: startGameResponse }] = useMutation(
     gameGraphql.queries.START_GAME,
   );
-  // const [subscribeStockTicks, { loading, data: stockTicks }] = useSubscription(
-  //   gameGraphql.queries.SUBSCRIBE_STOCK_TICKS,
-  // );
 
   useEffect(() => {
     if (createGameResponse) {
@@ -37,6 +35,12 @@ export function Home() {
   return (
     <Container>
       <Text>Home Screen</Text>
+      {/* {startGameResponse && (
+        <StockTicksList
+          gameId={createGameResponse.createGame.id}
+          testID="Stock ticks list"
+        />
+      )} */}
       <Button
         testID="Create Game"
         title="Create Game"
