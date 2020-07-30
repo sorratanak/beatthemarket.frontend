@@ -7,14 +7,14 @@ export const styles = StyleSheet.create({
   flex2Container: {
     flex: 2,
   },
-  listContainer: {
-    flex: 1,
-    backgroundColor: '#E0E0E0',
+  flex3Container: {
+    flex: 3,
   },
   listContentContainer: {
     padding: 20,
   },
   listItemContainer: {
+    flex: 1,
     flexDirection: 'row',
     width: '100%',
     alignItems: 'center',

@@ -2,10 +2,12 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    paddingTop: 30,
     flexDirection: 'row',
     width: '100%',
     paddingVertical: 20,
+    backgroundColor: 'lightgray',
+    borderRadius: 14,
   },
   scoreLabelContainer: {
     flex: 1,

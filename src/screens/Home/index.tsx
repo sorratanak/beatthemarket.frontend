@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client';
 import { Container, ScoreBoard } from '../../components';
 import { UserContext } from '../../userContext';
 import gameGraphql from '../../graphql/game';
-import { StockTicksList } from '../../components/StockTicksList';
+// import { StockTicksList } from '../../components/StockTicksList';
 
 // type NavigationProps = StackNavigationProp<StackParams, 'Home'>;
 

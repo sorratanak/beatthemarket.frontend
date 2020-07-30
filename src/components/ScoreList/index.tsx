@@ -12,7 +12,7 @@ export function ScoreList({ data }: Props) {
     return (
       <View style={styles.rowContainer}>
         <Text style={[styles.flexContainer, styles.title]}>Rank</Text>
-        <Text style={[styles.flex2Container, styles.title]}>Username</Text>
+        <Text style={[styles.flex3Container, styles.title]}>Username</Text>
         <Text style={[styles.flex2Container, styles.title]}>Score</Text>
       </View>
     );
@@ -25,7 +25,7 @@ export function ScoreList({ data }: Props) {
       ListHeaderComponent={renderListHeader()}
       keyExtractor={(item) => `score-record-${item.id}`}
       contentContainerStyle={styles.listContentContainer}
-      style={styles.listContainer}
+      style={styles.flexContainer}
     />
   );
 }
@@ -42,7 +42,7 @@ function ScoreListItem({ item }: ScoreListItemProps) {
           <Text style={styles.rankText}>{item.rank}</Text>
         </View>
       </View>
-      <Text style={[styles.flex2Container, styles.text]}>{item.username}</Text>
+      <Text style={[styles.flex3Container, styles.text]}>{item.username}</Text>
       <Text style={[styles.flex2Container, styles.text]}>{item.score}</Text>
     </View>
   );

@@ -1,18 +1,18 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
-import { styles } from './styles';
 import { MyScore } from '../MyScore';
+import { styles } from './styles';
 
-interface Props {}
+// interface Props {}
 
 const TAB_NAMES = {
-  MY_SCORE: 'My Score',
-  GLOBAL: 'Global',
+  SINGLE_PLAYER: 'Single player',
+  MULTIPLAYER: 'Multi player',
 };
 
-export function ScoreBoard({}: Props) {
-  const [currentTab, setCurrentTab] = useState(TAB_NAMES.MY_SCORE);
+export function ScoreBoard() {
+  const [currentTab, setCurrentTab] = useState(TAB_NAMES.SINGLE_PLAYER);
 
   const renderTabs = useCallback(() => {
     return (
@@ -20,22 +20,24 @@ export function ScoreBoard({}: Props) {
         <TouchableOpacity
           style={[
             styles.tabContainer,
-            currentTab === TAB_NAMES.MY_SCORE
+            currentTab === TAB_NAMES.SINGLE_PLAYER
               ? styles.tabActiveContainer
               : null,
           ]}
-          disabled={currentTab === TAB_NAMES.MY_SCORE}
-          onPress={() => setCurrentTab(TAB_NAMES.MY_SCORE)}>
-          <Text style={styles.tabTitle}>{TAB_NAMES.MY_SCORE}</Text>
+          disabled={currentTab === TAB_NAMES.SINGLE_PLAYER}
+          onPress={() => setCurrentTab(TAB_NAMES.SINGLE_PLAYER)}>
+          <Text style={styles.tabTitle}>{TAB_NAMES.SINGLE_PLAYER}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
             styles.tabContainer,
-            currentTab === TAB_NAMES.GLOBAL ? styles.tabActiveContainer : null,
+            currentTab === TAB_NAMES.MULTIPLAYER
+              ? styles.tabActiveContainer
+              : null,
           ]}
-          disabled={currentTab === TAB_NAMES.GLOBAL}
-          onPress={() => setCurrentTab(TAB_NAMES.GLOBAL)}>
-          <Text style={styles.tabTitle}>{TAB_NAMES.GLOBAL}</Text>
+          disabled={currentTab === TAB_NAMES.MULTIPLAYER}
+          onPress={() => setCurrentTab(TAB_NAMES.MULTIPLAYER)}>
+          <Text style={styles.tabTitle}>{TAB_NAMES.MULTIPLAYER}</Text>
         </TouchableOpacity>
       </View>
     );
