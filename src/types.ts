@@ -18,4 +18,11 @@ export interface IScore {
   percent: string | number;
 }
 
+export interface IScoreRecord {
+  id: string;
+  rank: number;
+  username: string;
+  score: string;
+}
+
 export interface IStockTick {}
