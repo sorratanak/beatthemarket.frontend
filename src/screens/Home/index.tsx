@@ -35,12 +35,12 @@ export function Home() {
   return (
     <Container>
       <ScoreBoard />
-      {/* {startGameResponse && (
+      {startGameResponse && (
         <StockTicksList
           gameId={createGameResponse.createGame.id}
           testID="Stock ticks list"
         />
-      )} */}
+      )}
       <Button
         testID="Create Game"
         title="Create Game"
