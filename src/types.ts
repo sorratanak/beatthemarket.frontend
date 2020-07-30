@@ -12,4 +12,10 @@ export interface IUser {
   userAccounts: IUserBankAccount[];
 }
 
+export interface IScore {
+  rate: string | number;
+  deposit: string | number;
+  percent: string | number;
+}
+
 export interface IStockTick {}

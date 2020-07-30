@@ -2,10 +2,10 @@ import React, { ReactNode } from 'react';
 import { View } from 'react-native';
 import { styles } from './styles';
 
-type Props = {
+interface Props {
   children: ReactNode | ReactNode[];
   testID?: string;
-};
+}
 
 export function Container({ children, testID }: Props) {
   return (

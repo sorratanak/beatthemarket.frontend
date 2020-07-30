@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { useSubscription } from '@apollo/client';
 
@@ -6,10 +6,10 @@ import gameGraphql from '../../graphql/game';
 import { styles } from './styles';
 // import { IStockTick } from '../../types';
 
-type Props = {
+interface Props {
   gameId: string;
   testID?: string;
-};
+}
 
 export function StockTicksList({ gameId, testID }: Props) {
   const { loading, data, error } = useSubscription(

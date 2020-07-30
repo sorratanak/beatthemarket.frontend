@@ -3,7 +3,7 @@ import { Text, Button } from 'react-native';
 // import { StackNavigationProp } from '@react-navigation/stack';
 import { useMutation } from '@apollo/client';
 // import { StackParams } from '../../navigation';
-import { Container } from '../../components';
+import { Container, ScoreBoard } from '../../components';
 import { UserContext } from '../../userContext';
 import gameGraphql from '../../graphql/game';
 import { StockTicksList } from '../../components/StockTicksList';
@@ -34,7 +34,7 @@ export function Home() {
 
   return (
     <Container>
-      <Text>Home Screen</Text>
+      <ScoreBoard />
       {/* {startGameResponse && (
         <StockTicksList
           gameId={createGameResponse.createGame.id}
