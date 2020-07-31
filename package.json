@@ -35,13 +35,17 @@
     "react-native-reanimated": "^1.9.0",
     "react-native-safe-area-context": "^3.0.7",
     "react-native-screens": "^2.9.0",
+    "react-native-svg": "^12.1.0",
     "react-native-web": "^0.13.3",
     "react-query": "^2.5.6",
     "react-scripts": "^3.4.1",
-    "subscriptions-transport-ws": "^0.9.17"
+    "subscriptions-transport-ws": "^0.9.17",
+    "victory": "^35.0.7",
+    "victory-native": "^35.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/runtime": "^7.10.4",
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/jest": "^26.0.4",
