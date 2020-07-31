@@ -7,13 +7,10 @@ GoogleSignin.configure({
 });
 
 export const auth = firebaseAuth();
-console.log('auth is', auth);
 
 export const authGoogle = async () => {
   try {
-    console.log('start authGoogle', GoogleSignin);
     const { idToken } = await GoogleSignin.signIn();
-    console.log(idToken);
     const googleCredential = firebaseAuth.GoogleAuthProvider.credential(
       idToken,
     );

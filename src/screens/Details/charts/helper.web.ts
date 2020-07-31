@@ -1,3 +1,7 @@
-import { VictoryChart, VictoryCandlestick } from 'victory';
+import {
+  VictoryChart,
+  VictoryCandlestick,
+  VictoryZoomContainer,
+} from 'victory';
 
-export { VictoryCandlestick, VictoryChart };
+export { VictoryCandlestick, VictoryChart, VictoryZoomContainer };

@@ -1,3 +1,7 @@
-import { VictoryChart, VictoryCandlestick } from 'victory-native';
+import {
+  VictoryChart,
+  VictoryCandlestick,
+  VictoryZoomContainer,
+} from 'victory-native';
 
-export { VictoryCandlestick, VictoryChart };
+export { VictoryCandlestick, VictoryChart, VictoryZoomContainer };

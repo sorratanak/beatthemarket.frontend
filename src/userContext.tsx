@@ -28,6 +28,7 @@ const ContextProvider = ({
   const [token, setLocalToken] = useState<string | null>(null);
 
   useEffect(() => {
+    // TODO firebase get accessToken
     getToken().then((localToken) => {
       setLocalToken(localToken);
     });
