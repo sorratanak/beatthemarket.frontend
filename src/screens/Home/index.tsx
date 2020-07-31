@@ -1,12 +1,11 @@
 import React, { useContext, useCallback, useEffect } from 'react';
-import { Text, Button } from 'react-native';
+import { Button } from 'react-native';
 // import { StackNavigationProp } from '@react-navigation/stack';
 import { useMutation } from '@apollo/client';
 // import { StackParams } from '../../navigation';
-import { Container, ScoreBoard } from '../../components';
+import { Container, ScoreBoard, StockTicksList } from '../../components';
 import { UserContext } from '../../userContext';
 import gameGraphql from '../../graphql/game';
-// import { StockTicksList } from '../../components/StockTicksList';
 
 // type NavigationProps = StackNavigationProp<StackParams, 'Home'>;
 
@@ -35,12 +34,12 @@ export function Home() {
   return (
     <Container>
       <ScoreBoard />
-      {/* {startGameResponse && (
+      {startGameResponse && (
         <StockTicksList
           gameId={createGameResponse.createGame.id}
           testID="Stock ticks list"
         />
-      )} */}
+      )}
       <Button
         testID="Create Game"
         title="Create Game"
