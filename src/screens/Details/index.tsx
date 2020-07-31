@@ -5,6 +5,7 @@ import {
   VictoryChart,
   VictoryCandlestick,
   VictoryZoomContainer,
+  style as chartStyle,
 } from './charts/helper';
 
 import { Container } from '../../components';
@@ -34,10 +35,6 @@ const INITIAL_DATA: ChartRecord[] = [
   { x: 7, open: 70, close: 22, high: 70, low: 5 },
   { x: 8, open: 70, close: 22, high: 70, low: 5 },
 ];
-
-const style: { [key: string]: React.CSSProperties } = {
-  // parent: { border: '1px solid #ccc', margin: '2%', maxWidth: '40%' },
-};
 
 export function Details() {
   const [data, setData] = useState(INITIAL_DATA);
@@ -78,7 +75,7 @@ export function Details() {
       <Text>Details Screen</Text>
       <VictoryChart
         scale={{ x: 'time' }}
-        style={style}
+        style={chartStyle}
         domain={{ y: [0, 100] }}
         containerComponent={
           <VictoryZoomContainer

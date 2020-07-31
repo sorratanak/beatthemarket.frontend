@@ -29,9 +29,11 @@ const ContextProvider = ({
   const [token, setLocalToken] = useState<string | null>(null);
 
   useEffect(() => {
-    auth.currentUser.getIdToken().then((accessToken) => {
-      setLocalToken(accessToken);
-    });
+    if (auth && auth.currentUser) {
+      auth.currentUser.getIdToken().then((accessToken) => {
+        setLocalToken(accessToken);
+      });
+    }
   }, [setLocalToken]);
 
   const logout = () => {
