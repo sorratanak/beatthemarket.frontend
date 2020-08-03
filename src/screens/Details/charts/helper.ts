@@ -1,11 +1,18 @@
 import {
   VictoryChart,
-  VictoryCandlestick,
+  VictoryLine,
+  VictoryScatter,
   VictoryZoomContainer,
 } from 'victory-native';
 
 const style: { [key: string]: React.CSSProperties } = {
-  // parent: { border: '1px solid #ccc', margin: '2%', maxWidth: '40%' },
+  parent: {},
 };
 
-export { VictoryCandlestick, VictoryChart, VictoryZoomContainer, style };
+export {
+  VictoryLine,
+  VictoryScatter,
+  VictoryChart,
+  VictoryZoomContainer,
+  style,
+};
