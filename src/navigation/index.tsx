@@ -3,12 +3,12 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { MainNavigator, MainNavigatorWrapper } from './MainNavigator';
-import { Home, Details, SignIn, SignUp } from '../screens';
+import { Home, Game, SignIn, SignUp } from '../screens';
 import { tabOptions } from './tabBarOptions';
 
 export type StackParams = {
   Home: undefined;
-  Details: { data: string } | undefined;
+  Game: { data: string } | undefined;
   SignIn: undefined;
   SignUp: undefined;
 };
@@ -27,7 +27,7 @@ const MainStack = createStackNavigator<StackParams>();
 export const MainStackComponent = () => (
   <MainStack.Navigator initialRouteName="Home">
     <MainStack.Screen name="Home" component={Home} />
-    <MainStack.Screen name="Details" component={Details} />
+    <MainStack.Screen name="Game" component={Game} />
   </MainStack.Navigator>
 );
 
@@ -35,14 +35,14 @@ export function MainNavComponent() {
   return (
     <MainNavigatorWrapper>
       <MainNavigator.Screen
-        name="Main"
+        name="Home"
         component={MainStackComponent}
         options={tabOptions.main}
       />
       <MainNavigator.Screen
-        name="Details"
-        component={Details}
-        options={tabOptions.details}
+        name="Game"
+        component={Game}
+        options={tabOptions.game}
       />
     </MainNavigatorWrapper>
   );

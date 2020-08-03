@@ -26,3 +26,8 @@ export interface IScoreRecord {
 }
 
 export interface IStockTick {}
+
+export interface IPoint {
+  x: number;
+  y: number;
+}
