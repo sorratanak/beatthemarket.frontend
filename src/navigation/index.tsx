@@ -1,10 +1,10 @@
 import './GestureHandler';
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import MainNavigatorWrapper, { MainNavigator } from './MainNavigatorWrapper';
 import { Home, Details, SignIn, SignUp } from '../screens';
-import { tabOptions, tabBarOptions } from './tabBarOptions';
+import { tabOptions } from './tabBarOptions';
 
 export type StackParams = {
   Home: undefined;
@@ -31,19 +31,17 @@ export const MainStackComponent = () => (
   </MainStack.Navigator>
 );
 
-const TabStack = createBottomTabNavigator();
-
-export const TabComponent = () => (
-  <TabStack.Navigator tabBarOptions={tabBarOptions}>
-    <TabStack.Screen
+export const MainNavComponent = () => (
+  <MainNavigatorWrapper>
+    <MainNavigator.Screen
       name="Main"
       component={MainStackComponent}
       options={tabOptions.main}
     />
-    <TabStack.Screen
+    <MainNavigator.Screen
       name="Details"
       component={Details}
       options={tabOptions.details}
     />
-  </TabStack.Navigator>
+  </MainNavigatorWrapper>
 );

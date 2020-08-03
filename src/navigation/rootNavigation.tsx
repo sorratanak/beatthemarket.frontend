@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { View } from 'react-native';
 import { UserContext } from '../userContext';
-import { TabComponent, AuthStackComponent } from '.';
+import { MainNavComponent, AuthStackComponent } from '.';
 import { styles } from './styles';
 
 const RootNavigation = () => {
@@ -11,7 +11,7 @@ const RootNavigation = () => {
   return (
     <View style={styles.containerStyle}>
       <NavigationContainer>
-        {token ? <TabComponent /> : <AuthStackComponent />}
+        {token ? <MainNavComponent /> : <AuthStackComponent />}
       </NavigationContainer>
     </View>
   );
