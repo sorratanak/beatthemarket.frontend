@@ -2,7 +2,7 @@ import './GestureHandler';
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import MainNavigatorWrapper, { MainNavigator } from './MainNavigatorWrapper';
+import { MainNavigator, MainNavigatorWrapper } from './MainNavigator';
 import { Home, Details, SignIn, SignUp } from '../screens';
 import { tabOptions } from './tabBarOptions';
 
@@ -31,17 +31,19 @@ export const MainStackComponent = () => (
   </MainStack.Navigator>
 );
 
-export const MainNavComponent = () => (
-  <MainNavigatorWrapper>
-    <MainNavigator.Screen
-      name="Main"
-      component={MainStackComponent}
-      options={tabOptions.main}
-    />
-    <MainNavigator.Screen
-      name="Details"
-      component={Details}
-      options={tabOptions.details}
-    />
-  </MainNavigatorWrapper>
-);
+export function MainNavComponent() {
+  return (
+    <MainNavigatorWrapper>
+      <MainNavigator.Screen
+        name="Main"
+        component={MainStackComponent}
+        options={tabOptions.main}
+      />
+      <MainNavigator.Screen
+        name="Details"
+        component={Details}
+        options={tabOptions.details}
+      />
+    </MainNavigatorWrapper>
+  );
+}
