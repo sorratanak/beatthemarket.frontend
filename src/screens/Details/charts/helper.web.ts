@@ -1,15 +1,22 @@
 import {
   VictoryChart,
-  VictoryCandlestick,
+  VictoryScatter,
+  VictoryLine,
   VictoryZoomContainer,
 } from 'victory';
 
 const style: { [key: string]: React.CSSProperties } = {
   parent: {
-    maxWidth: '70%',
-    maxHeight: '80hv',
+    flex: 1,
+    maxWidth: '80%',
+    justifyContent: 'center',
   },
-  // parent: { border: '1px solid #ccc', margin: '2%', maxWidth: '40%' },
 };
 
-export { VictoryCandlestick, VictoryChart, VictoryZoomContainer, style };
+export {
+  VictoryScatter,
+  VictoryLine,
+  VictoryChart,
+  VictoryZoomContainer,
+  style,
+};

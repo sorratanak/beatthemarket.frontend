@@ -3,61 +3,48 @@ import { Text } from 'react-native';
 
 import {
   VictoryChart,
-  VictoryCandlestick,
+  VictoryScatter,
+  VictoryLine,
   VictoryZoomContainer,
   style as chartStyle,
 } from './charts/helper';
 
 import { Container } from '../../components';
+import { COLORS } from '../../themes/colors';
 
 // type NavigationProps = StackNavigationProp<StackParams, 'Details'>;
 // type RouteProps = RouteProp<StackParams, 'Details'>;
 
 interface ChartRecord {
   x: number;
-  open: number;
-  close: number;
-  high: number;
-  low: number;
+  y: number;
 }
 
-const OPEN_COEFFICIENT = 50;
-const CLOSE_COEFFICIENT = 70;
-const HIGH_COEFFICIENT = 25;
+const VALUE_COEFFICIENT: number = 100;
 
 const INITIAL_DATA: ChartRecord[] = [
-  { x: 1, open: 9, close: 30, high: 56, low: 7 },
-  { x: 2, open: 80, close: 40, high: 120, low: 10 },
-  { x: 3, open: 50, close: 80, high: 90, low: 20 },
-  { x: 4, open: 70, close: 22, high: 70, low: 5 },
-  { x: 5, open: 80, close: 40, high: 120, low: 10 },
-  { x: 6, open: 50, close: 80, high: 90, low: 20 },
-  { x: 7, open: 70, close: 22, high: 70, low: 5 },
-  { x: 8, open: 70, close: 22, high: 70, low: 5 },
+  { x: 1, y: 20 },
+  { x: 2, y: 40 },
+  { x: 3, y: 50 },
+  { x: 4, y: 40 },
+  { x: 5, y: 60 },
+  { x: 6, y: 40 },
+  { x: 7, y: 20 },
+  { x: 8, y: 20 },
+  { x: 9, y: 70 },
 ];
 
 export function Details() {
   const [data, setData] = useState(INITIAL_DATA);
 
   const addRandomItem = useCallback((): void => {
-    // const x = new Date(
-    //   moment(data[data.length - 1].x)
-    //     .add(1, 'day')
-    //     .format(),
-    // );
     const x = data[data.length - 1].x + 1;
 
-    const open = Math.random() * OPEN_COEFFICIENT;
-    const close = Math.random() * CLOSE_COEFFICIENT;
-    const high = Math.random() * HIGH_COEFFICIENT + close;
-    const low = Math.random() * open;
+    const y = Math.random() * VALUE_COEFFICIENT;
 
     const newItem = {
       x,
-      open,
-      close,
-      high,
-      low,
+      y,
     };
 
     data.push(newItem);
@@ -74,7 +61,6 @@ export function Details() {
     <Container>
       <Text>Details Screen</Text>
       <VictoryChart
-        scale={{ x: 'time' }}
         style={chartStyle}
         domain={{ y: [0, 100] }}
         containerComponent={
@@ -84,14 +70,28 @@ export function Details() {
             ouiaSafe
             zoomDomain={{ x: [data.length - 8, data.length + 2], y: [0, 100] }}
           />
-        }
-        domainPadding={{ x: [20, 50] }}>
-        <VictoryCandlestick
-          candleColors={{ positive: '#8BC34A', negative: '#C62828' }}
+        }>
+        <VictoryLine
+          style={{ data: { stroke: COLORS.CORNFLOWER_BLUE } }}
           data={data}
-          candleWidth={10}
-          style={{ data: { stroke: 'none' } }}
-          size={1}
+          interpolation="cardinal"
+          animate={{
+            duration: 1000,
+            onLoad: {
+              duration: 1000,
+            },
+          }}
+        />
+        <VictoryScatter
+          size={3}
+          style={{ data: { backgroundColor: COLORS.CORNFLOWER_BLUE } }}
+          data={data}
+          animate={{
+            duration: 1000,
+            onLoad: {
+              duration: 1000,
+            },
+          }}
         />
       </VictoryChart>
     </Container>
