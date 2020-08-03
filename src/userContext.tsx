@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import noop from 'lodash/noop';
 
-import { auth } from './firebase/helper';
 import { getToken, removeToken, setToken } from './utilities';
 import { SignUp, SignIn } from './firebase/firebase';
 
@@ -29,11 +28,9 @@ const ContextProvider = ({
   const [token, setLocalToken] = useState<string | null>(null);
 
   useEffect(() => {
-    if (auth && auth.currentUser) {
-      auth.currentUser.getIdToken().then((accessToken) => {
-        setLocalToken(accessToken);
-      });
-    }
+    getToken().then((accessToken) => {
+      setLocalToken(accessToken);
+    });
   }, [setLocalToken]);
 
   const logout = () => {
