@@ -57,6 +57,13 @@ export function Details() {
     }, 1000);
   }, []);
 
+  const ANIMATION_OPTIONS = {
+    duration: 1000,
+    onLoad: {
+      duration: 1000,
+    },
+  };
+
   return (
     <Container>
       <Text>Details Screen</Text>
@@ -75,23 +82,13 @@ export function Details() {
           style={{ data: { stroke: COLORS.CORNFLOWER_BLUE } }}
           data={data}
           interpolation="cardinal"
-          animate={{
-            duration: 1000,
-            onLoad: {
-              duration: 1000,
-            },
-          }}
+          animate={ANIMATION_OPTIONS}
         />
         <VictoryScatter
           size={3}
-          style={{ data: { backgroundColor: COLORS.CORNFLOWER_BLUE } }}
+          style={{ data: { fill: COLORS.CORNFLOWER_BLUE } }}
           data={data}
-          animate={{
-            duration: 1000,
-            onLoad: {
-              duration: 1000,
-            },
-          }}
+          animate={ANIMATION_OPTIONS}
         />
       </VictoryChart>
     </Container>
