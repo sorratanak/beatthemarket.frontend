@@ -12,11 +12,11 @@ interface Props {
 }
 
 export function StockTicksList({ gameId, testID }: Props) {
+  console.log('render stock ticks');
   const response = useSubscription(gameGraphql.queries.SUBSCRIBE_STOCK_TICKS, {
     variables: { gameId },
   });
 
-  console.log('SUBSCRIPTION, gameId is', gameId);
   console.log('use subscription loading, data, error', response);
 
   return <View style={styles.container} testID={testID} />;

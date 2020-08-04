@@ -34,7 +34,7 @@ export function Home() {
   return (
     <Container>
       <ScoreBoard />
-      {startGameResponse && (
+      {startGameResponse && startGameResponse.startGame && (
         <StockTicksList
           gameId={createGameResponse.createGame.id}
           testID="Stock ticks list"
