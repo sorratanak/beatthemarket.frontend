@@ -1,6 +1,6 @@
 import { auth, authGoogle } from './helper';
 import loginGraphql from '../graphql/login';
-import { setToken } from '../utilities';
+import { getFirebaseToken } from '../utilities';
 
 export const SignUp = async ({
   email,
@@ -19,8 +19,7 @@ export const SignIn = async () => {
   try {
     await authGoogle();
 
-    const accessToken: string = await auth.currentUser.getIdToken();
-    setToken(accessToken);
+    const accessToken: string = await getFirebaseToken();
 
     const userResponse = await loginGraphql.requests.login();
 

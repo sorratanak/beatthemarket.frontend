@@ -16,8 +16,8 @@ export const tabOptions = {
     tabBarLabel: 'Main',
     tabBarIcon: () => null,
   },
-  details: {
-    tabBarLabel: 'Details',
+  game: {
+    tabBarLabel: 'Game',
     tabBarIcon: () => null,
   },
 };

@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import noop from 'lodash/noop';
 
-import { getToken, removeToken, setToken } from './utilities';
+import {
+  getFirebaseToken,
+  setUserToStorage,
+  removeUserFromStorage,
+  getUserFromStorage,
+} from './utilities';
 import { SignUp, SignIn } from './firebase/firebase';
+import { IUser } from './types';
 
 export interface ContextProps {
   token: string | null;
+  user: IUser | null;
   logout: () => void;
   signInWithGoogle: () => void;
   signUp: (email: string, password: string) => void;
@@ -13,6 +20,7 @@ export interface ContextProps {
 
 const DEFAULT_USER_CONTEXT: ContextProps = {
   token: null,
+  user: null,
   logout: noop,
   signInWithGoogle: noop,
   signUp: noop,
@@ -25,16 +33,23 @@ const ContextProvider = ({
 }: {
   children: React.ReactNode | React.ReactNode[];
 }) => {
-  const [token, setLocalToken] = useState<string | null>(null);
+  const [localUser, setLocalUser] = useState<IUser | null>(null);
+  const [localToken, setLocalToken] = useState<string | null>(null);
 
   useEffect(() => {
-    getToken().then((accessToken) => {
-      setLocalToken(accessToken);
+    getUserFromStorage().then((user) => {
+      if (user) {
+        setLocalUser(user);
+        getFirebaseToken().then((accessToken) => {
+          setLocalToken(accessToken);
+        });
+      }
     });
-  }, [setLocalToken]);
+  }, [setLocalUser, setLocalToken]);
 
   const logout = () => {
-    removeToken();
+    removeUserFromStorage();
+    setLocalUser(null);
     setLocalToken(null);
   };
 
@@ -43,7 +58,8 @@ const ContextProvider = ({
       if (response) {
         const { accessToken, user } = response;
 
-        setToken(accessToken);
+        setUserToStorage(user);
+        setLocalUser(user);
         setLocalToken(accessToken);
       }
     });
@@ -52,13 +68,20 @@ const ContextProvider = ({
   const signUp = (email: string, password: string) => {
     SignUp({ email, password }).then((user) => {
       console.log('user is', user);
-      setToken(email + password);
+      // setToken(email + password);
       setLocalToken(email + password);
     });
   };
 
   return (
-    <UserContext.Provider value={{ token, logout, signInWithGoogle, signUp }}>
+    <UserContext.Provider
+      value={{
+        token: localToken,
+        user: localUser,
+        logout,
+        signInWithGoogle,
+        signUp,
+      }}>
       {children}
     </UserContext.Provider>
   );

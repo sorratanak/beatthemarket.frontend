@@ -6,12 +6,12 @@ import { MainNavComponent, AuthStackComponent } from '.';
 import { styles } from './styles';
 
 const RootNavigation = () => {
-  const { token } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   return (
     <View style={styles.containerStyle}>
       <NavigationContainer>
-        {token ? <MainNavComponent /> : <AuthStackComponent />}
+        {user ? <MainNavComponent /> : <AuthStackComponent />}
       </NavigationContainer>
     </View>
   );
