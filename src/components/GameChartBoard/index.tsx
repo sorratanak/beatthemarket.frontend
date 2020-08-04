@@ -11,7 +11,7 @@ interface Props {
 export function GameChartBoard({ chartData }: Props) {
   return (
     <View style={styles.container}>
-      <LineChart data={chartData} />;
+      <LineChart data={chartData} />
     </View>
   );
 }
