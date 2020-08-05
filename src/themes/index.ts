@@ -1,6 +1,10 @@
 import { COLORS } from './colors';
+import { ITheme } from './interface';
 
-export const LIGHT_THEME = {
+export const LIGHT_THEME: ITheme = {
+  COMMON: {
+    MENU_BACKGROUND_COLOR: COLORS.WHITE,
+  },
   GAME_SCREEN: {
     BACKGROUND_COLOR: COLORS.MERCURY,
     VIEW_COLOR: COLORS.WHITE,
@@ -16,7 +20,10 @@ export const LIGHT_THEME = {
   },
 };
 
-export const DARK_THEME = {
+export const DARK_THEME: ITheme = {
+  COMMON: {
+    MENU_BACKGROUND_COLOR: COLORS.EBONY_CLAY,
+  },
   GAME_SCREEN: {
     BACKGROUND_COLOR: COLORS.MIRAGE,
     VIEW_COLOR: COLORS.EBONY_CLAY,

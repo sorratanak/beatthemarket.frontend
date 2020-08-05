@@ -9,21 +9,27 @@ import {
 } from './utilities';
 import { SignUp, SignIn } from './firebase/firebase';
 import { IUser } from './types';
+import { ITheme } from './themes/interface';
+import { LIGHT_THEME } from './themes';
 
 export interface ContextProps {
   token: string | null;
   user: IUser | null;
+  theme: ITheme;
   logout: () => void;
   signInWithGoogle: () => void;
   signUp: (email: string, password: string) => void;
+  switchTheme: (theme: ITheme) => void;
 }
 
 const DEFAULT_USER_CONTEXT: ContextProps = {
   token: null,
   user: null,
+  theme: null,
   logout: noop,
   signInWithGoogle: noop,
   signUp: noop,
+  switchTheme: noop,
 };
 
 export const UserContext = React.createContext(DEFAULT_USER_CONTEXT);
@@ -35,6 +41,7 @@ const ContextProvider = ({
 }) => {
   const [localUser, setLocalUser] = useState<IUser | null>(null);
   const [localToken, setLocalToken] = useState<string | null>(null);
+  const [theme, setTheme] = useState<ITheme>(LIGHT_THEME);
 
   useEffect(() => {
     getUserFromStorage().then((user) => {
@@ -73,14 +80,20 @@ const ContextProvider = ({
     });
   };
 
+  const switchTheme = (someTheme: ITheme) => {
+    setTheme(someTheme);
+  };
+
   return (
     <UserContext.Provider
       value={{
+        theme,
         token: localToken,
         user: localUser,
         logout,
         signInWithGoogle,
         signUp,
+        switchTheme,
       }}>
       {children}
     </UserContext.Provider>
