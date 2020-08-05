@@ -1,6 +1,8 @@
 export interface ITheme {
-  COMMON: {
-    MENU_BACKGROUND_COLOR: string;
+  MENU: {
+    BACKGROUND_COLOR: string;
+    TITLE_COLOR?: string;
+    ACTIVE_LABEL_COLOR?: string;
   };
   GAME_SCREEN: {
     BACKGROUND_COLOR: string;

@@ -2,8 +2,8 @@ import { COLORS } from './colors';
 import { ITheme } from './interface';
 
 export const LIGHT_THEME: ITheme = {
-  COMMON: {
-    MENU_BACKGROUND_COLOR: COLORS.WHITE,
+  MENU: {
+    BACKGROUND_COLOR: COLORS.WHITE,
   },
   GAME_SCREEN: {
     BACKGROUND_COLOR: COLORS.MERCURY,
@@ -21,8 +21,8 @@ export const LIGHT_THEME: ITheme = {
 };
 
 export const DARK_THEME: ITheme = {
-  COMMON: {
-    MENU_BACKGROUND_COLOR: COLORS.EBONY_CLAY,
+  MENU: {
+    BACKGROUND_COLOR: COLORS.EBONY_CLAY,
   },
   GAME_SCREEN: {
     BACKGROUND_COLOR: COLORS.MIRAGE,
