@@ -4,7 +4,6 @@ import { useSubscription } from '@apollo/client';
 
 import gameGraphql from '../../graphql/game';
 import { styles } from './styles';
-// import { IStockTick } from '../../types';
 
 interface Props {
   gameId: string;

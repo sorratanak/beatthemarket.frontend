@@ -1,7 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { ScoreRow, ScoreList } from '..';
+import { ScoreRow } from '../ScoreRow';
+import { ScoreList } from '../ScoreList';
 import { styles } from './styles';
 import { IScore } from '../../types';
 import { DUMMY_DATA } from './dummy';

@@ -10,7 +10,6 @@ import { WebSocketLink } from '@apollo/client/link/ws';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { Platform } from 'react-native';
-import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 import { getFirebaseToken } from '../utilities';
 
@@ -32,42 +31,14 @@ const httpLink = createHttpLink({
   uri: SERVER_API_URL,
 });
 
-// const wsClient = new SubscriptionClient(SERVER_WS_URL, {
-//   reconnect: true,
-//   lazy: true,
-//   timeout: 10000,
-//   connectionParams: async () => {
-//     const token = await getToken();
-//     const bearerToken = `Bearer ${token}`;
-//     return {
-//       token: bearerToken,
-//       authorization: token ? bearerToken : '',
-//       Authorization: token ? bearerToken : '',
-//       authToken: bearerToken,
-//       headers: {
-//         authorization: token ? bearerToken : '',
-//       },
-//     };
-//   },
-// });
-
-// const wsLink = new WebSocketLink(wsClient);
-
 const wsLink = new WebSocketLink({
   uri: SERVER_WS_URL,
   options: {
     lazy: true,
     connectionParams: async () => {
       const token = await getFirebaseToken();
-      const bearerToken = `Bearer ${token}`;
       return {
-        token: bearerToken,
-        authToken: bearerToken,
-        authorization: token ? bearerToken : '',
-        Authorization: token ? bearerToken : '',
-        headers: {
-          authorization: token ? bearerToken : '',
-        },
+        token: token ? `Bearer ${token}` : '',
       };
     },
   },

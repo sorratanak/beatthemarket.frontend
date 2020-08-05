@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { IPoint } from '../../types';
-import { LineChart } from '..';
+import { LineChart } from '../LineChart';
 import { styles } from './styles';
 
 interface Props {
