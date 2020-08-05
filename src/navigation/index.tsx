@@ -5,10 +5,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { MainNavigator, MainNavigatorWrapper } from './MainNavigator';
 import { Home, Game, SignIn, SignUp } from '../screens';
 import { tabOptions } from './tabBarOptions';
+import { Settings } from '../screens/Settings';
 
 export type StackParams = {
   Home: undefined;
   Game: { gameId: string } | undefined;
+  Settings: undefined;
   SignIn: undefined;
   SignUp: undefined;
 };
@@ -34,6 +36,11 @@ export function MainNavComponent() {
         name="Game"
         component={Game}
         options={tabOptions.game}
+      />
+      <MainNavigator.Screen
+        name="Settings"
+        component={Settings}
+        options={tabOptions.settings}
       />
     </MainNavigatorWrapper>
   );

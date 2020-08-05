@@ -20,4 +20,8 @@ export const tabOptions = {
     tabBarLabel: 'Game',
     tabBarIcon: () => null,
   },
+  settings: {
+    tabBarLabel: 'Settings',
+    tabBarIcon: () => null,
+  },
 };
