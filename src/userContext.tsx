@@ -6,6 +6,9 @@ import {
   setUserToStorage,
   removeUserFromStorage,
   getUserFromStorage,
+  setThemeToStorage,
+  getThemeFromStorage,
+  removeThemeFromStorage,
 } from './utilities';
 import { SignUp, SignIn } from './firebase/firebase';
 import { IUser } from './types';
@@ -44,6 +47,11 @@ const ContextProvider = ({
   const [theme, setTheme] = useState<ITheme>(LIGHT_THEME);
 
   useEffect(() => {
+    getThemeFromStorage().then((storageTheme) => {
+      if (storageTheme) {
+        setTheme(storageTheme);
+      }
+    });
     getUserFromStorage().then((user) => {
       if (user) {
         setLocalUser(user);
@@ -82,6 +90,7 @@ const ContextProvider = ({
 
   const switchTheme = (someTheme: ITheme) => {
     setTheme(someTheme);
+    setThemeToStorage(someTheme);
   };
 
   return (
