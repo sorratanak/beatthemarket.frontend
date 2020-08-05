@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import _ from 'lodash';
 
 import {
   VictoryChart,
@@ -15,16 +16,28 @@ interface Props {
   data: IPoint[];
 }
 export function LineChart({ data }: Props) {
+  const [dynamicYDomainMin, dynamicYDomainMax] = useMemo(() => {
+    return [
+      _.minBy(data, (el) => el.y)?.y - 0.5,
+      _.maxBy(data, (el) => el.y)?.y + 0.5,
+    ];
+  }, [data]);
+
   return (
     <VictoryChart
       style={chartStyle}
-      domain={{ y: [0, 100] }}
       containerComponent={
         <VictoryZoomContainer
           allowPan={false}
           allowZoom={false}
           ouiaSafe
-          zoomDomain={{ x: [data.length - 8, data.length + 2], y: [0, 100] }}
+          zoomDomain={{
+            x: [data.length > 8 ? data.length - 8 : 1, data.length + 1],
+            y:
+              dynamicYDomainMin && dynamicYDomainMax
+                ? [dynamicYDomainMin, dynamicYDomainMax]
+                : undefined,
+          }}
         />
       }>
       <VictoryLine

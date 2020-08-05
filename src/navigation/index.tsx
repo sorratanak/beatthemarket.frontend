@@ -8,7 +8,7 @@ import { tabOptions } from './tabBarOptions';
 
 export type StackParams = {
   Home: undefined;
-  Game: { data: string } | undefined;
+  Game: { gameId: string } | undefined;
   SignIn: undefined;
   SignUp: undefined;
 };
@@ -22,21 +22,12 @@ export const AuthStackComponent = () => (
   </AuthStack.Navigator>
 );
 
-const MainStack = createStackNavigator<StackParams>();
-
-export const MainStackComponent = () => (
-  <MainStack.Navigator initialRouteName="Home">
-    <MainStack.Screen name="Home" component={Home} />
-    <MainStack.Screen name="Game" component={Game} />
-  </MainStack.Navigator>
-);
-
 export function MainNavComponent() {
   return (
     <MainNavigatorWrapper>
       <MainNavigator.Screen
         name="Home"
-        component={MainStackComponent}
+        component={Home}
         options={tabOptions.main}
       />
       <MainNavigator.Screen

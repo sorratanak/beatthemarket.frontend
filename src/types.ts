@@ -25,9 +25,15 @@ export interface IScoreRecord {
   score: string;
 }
 
-export interface IStockTick {}
+export interface IStockTick {
+  stockId: string;
+  stockName: string;
+  stockTickClose: number;
+  stockTickId: string;
+  stockTickTime: string;
+}
 
 export interface IPoint {
-  x: number;
+  x: number | string;
   y: number;
 }

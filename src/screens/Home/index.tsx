@@ -1,17 +1,17 @@
 import React, { useContext, useCallback, useEffect } from 'react';
 import { Button } from 'react-native';
-// import { StackNavigationProp } from '@react-navigation/stack';
-import { useMutation } from '@apollo/client';
-// import { StackParams } from '../../navigation';
-import { Container, ScoreBoard, StockTicksList } from '../../components';
+import { useMutation, useQuery } from '@apollo/client';
+
+import { ScreenProps } from './props';
+import { Container, ScoreBoard } from '../../components';
 import { UserContext } from '../../userContext';
 import gameGraphql from '../../graphql/game';
+import usersGraphql from '../../graphql/users';
 
-// type NavigationProps = StackNavigationProp<StackParams, 'Home'>;
-
-export function Home() {
+export function Home({ navigation }: ScreenProps) {
   const { logout } = useContext(UserContext);
 
+  /* Mutations */
   const [createGame, { data: createGameResponse }] = useMutation(
     gameGraphql.queries.CREATE_GAME,
   );
@@ -19,13 +19,24 @@ export function Home() {
     gameGraphql.queries.START_GAME,
   );
 
+  /* Queries */
+  const { data: users, loading: usersLoading, error: usersError } = useQuery(
+    usersGraphql.queries.GET_USERS,
+  );
+
+  console.log('Users', users, usersLoading, usersError);
+
   useEffect(() => {
     if (createGameResponse) {
       startGame({ variables: { id: createGameResponse.createGame.id } });
     }
   }, [createGameResponse]);
 
-  console.log('START_GAME data', startGameResponse);
+  useEffect(() => {
+    if (createGameResponse && startGameResponse) {
+      navigation.navigate('Game', { gameId: createGameResponse.createGame.id });
+    }
+  }, [startGameResponse]);
 
   const onCreateGamePress = useCallback(() => {
     createGame({ variables: { gameLevel: 'one' } });
@@ -34,12 +45,6 @@ export function Home() {
   return (
     <Container>
       <ScoreBoard />
-      {startGameResponse && startGameResponse.startGame && (
-        <StockTicksList
-          gameId={createGameResponse.createGame.id}
-          testID="Stock ticks list"
-        />
-      )}
       <Button
         testID="Create Game"
         title="Create Game"

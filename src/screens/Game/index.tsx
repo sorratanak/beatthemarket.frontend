@@ -1,52 +1,36 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
+import _ from 'lodash';
+import moment from 'moment';
 
+import { StockTicksSubscriber } from '../../graphql/subscribers/stockTicks';
+import { ScreenProps } from './props';
 import { Container, GameChartBoard } from '../../components';
-import { IPoint } from '../../types';
+import { IPoint, IStockTick } from '../../types';
 
-// type NavigationProps = StackNavigationProp<StackParams, 'Details'>;
-// type RouteProps = RouteProp<StackParams, 'Details'>;
+export function Game({ route }: ScreenProps) {
+  const [gameId, setGameId] = useState<string>(null);
+  const [data, setData] = useState<IPoint[]>([]);
 
-const VALUE_COEFFICIENT: number = 100;
-const TIMEOUT: number = 1000;
-
-const INITIAL_DATA: IPoint[] = [
-  { x: 1, y: 20 },
-  { x: 2, y: 40 },
-  { x: 3, y: 50 },
-  { x: 4, y: 40 },
-  { x: 5, y: 60 },
-  { x: 6, y: 40 },
-  { x: 7, y: 20 },
-  { x: 8, y: 20 },
-  { x: 9, y: 70 },
-];
-
-export function Game() {
-  const [data, setData] = useState(INITIAL_DATA);
-
-  const addRandomPoint = useCallback((): void => {
-    const x = data[data.length - 1].x + 1;
-
-    const y = Math.random() * VALUE_COEFFICIENT;
-
-    const newPoint: IPoint = {
-      x,
-      y,
-    };
-
-    data.push(newPoint);
-    setData([...data]);
-  }, [data, setData]);
-
+  console.log('gameId is', gameId);
   useEffect(() => {
-    setInterval(() => {
-      addRandomPoint();
-    }, TIMEOUT);
-  }, []);
+    setGameId(route?.params?.gameId);
+  }, [route?.params?.gameId]);
+
+  const addNewData = (stockTicks: IStockTick[]) => {
+    const newData: IPoint[] = [];
+
+    newData.push({
+      x: moment(Number(stockTicks[0].stockTickTime)).format('mm:ss'),
+      y: stockTicks[0].stockTickClose,
+    });
+
+    setData([...data, ...newData]);
+  };
 
   return (
     <Container>
       <GameChartBoard chartData={data} />
+      {gameId && <StockTicksSubscriber gameId={gameId} callback={addNewData} />}
     </Container>
   );
 }
