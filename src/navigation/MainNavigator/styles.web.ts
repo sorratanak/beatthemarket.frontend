@@ -6,9 +6,10 @@ export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
       backgroundColor: theme.MENU.BACKGROUND_COLOR,
-      shadowOpacity: 0.15,
-      shadowRadius: 10,
-      shadowColor: COLORS.GRAY,
+      borderRightWidth: undefined,
+      shadowOpacity: 0.1,
+      shadowRadius: 15,
+      shadowColor: COLORS.BLACK,
       shadowOffset: { height: 0, width: 0 },
     },
     title: {

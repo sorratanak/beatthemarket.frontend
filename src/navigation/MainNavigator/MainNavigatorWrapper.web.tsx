@@ -42,7 +42,9 @@ export const MainNavigatorWrapper = ({ children }: Props) => {
         <CustomDrawerContent themedStyles={themedStyles} {...props} />
       )}
       drawerContentOptions={{
+        activeBackgroundColor: null,
         activeTintColor: theme.MENU.ACTIVE_LABEL_COLOR,
+        inactiveTintColor: theme.MENU.INACTIVE_LABEL_COLOR,
         labelStyle: themedStyles.itemLabel,
         itemStyle: themedStyles.itemContainer,
       }}

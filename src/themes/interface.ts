@@ -3,6 +3,7 @@ export interface ITheme {
     BACKGROUND_COLOR: string;
     TITLE_COLOR?: string;
     ACTIVE_LABEL_COLOR?: string;
+    INACTIVE_LABEL_COLOR?: string;
   };
   GAME_SCREEN: {
     BACKGROUND_COLOR: string;
@@ -16,5 +17,9 @@ export interface ITheme {
     LIST_VIEW_INDICATOR_POSITIVE_COLOR: string;
     LIST_VIEW_INDICATOR_NEGATIVE_COLOR: string;
     LIST_VIEW_INDICATOR_TEXT_COLOR: string;
+  };
+  SETTINGS_SCREEN: {
+    BACKGROUND_COLOR: string;
+    SWITCH_TITLE_COLOR: string;
   };
 }
