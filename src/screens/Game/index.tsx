@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import _ from 'lodash';
+import React, { useState, useEffect, useContext } from 'react';
+// import _ from 'lodash';
 import moment from 'moment';
 
 import { StockTicksSubscriber } from '../../graphql/subscribers/stockTicks';
 import { ScreenProps } from './props';
 import { Container, GameChartBoard } from '../../components';
 import { IPoint, IStockTick } from '../../types';
+import { UserContext } from '../../userContext';
+import { getThemedStyles } from './styles';
 
 export function Game({ route }: ScreenProps) {
+  const { theme } = useContext(UserContext);
+
+  const themedStyles = getThemedStyles(theme);
+
   const [gameId, setGameId] = useState<string>(null);
   const [data, setData] = useState<IPoint[]>([]);
 
@@ -28,7 +34,7 @@ export function Game({ route }: ScreenProps) {
   };
 
   return (
-    <Container>
+    <Container style={themedStyles.container}>
       <GameChartBoard chartData={data} />
       {gameId && <StockTicksSubscriber gameId={gameId} callback={addNewData} />}
     </Container>
