@@ -1,12 +1,12 @@
 import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 
-import { IPoint, IStockChange, IUser } from '../../types';
+import { IPoint, IStockChange, IUser, IStockTick } from '../../types';
 import { LineChart } from '../LineChart';
 import { getThemedStyles } from './styles';
 import { UserContext } from '../../userContext';
 import { getStockChanges } from '../../utils/parsing';
-import { styles } from '../Container/styles';
+import { StockList } from '../StockList';
 
 interface ChartHeaderProps {
   themedStyles: any;
@@ -53,7 +53,7 @@ function ChartHeader({ themedStyles, data, user }: ChartHeaderProps) {
       )}
       <View style={themedStyles.userBalanceContainer}>
         <Text style={themedStyles.chartHeaderStockChangeValue}>
-          $ {user?.userAccounts[0].accountBalance}
+          $ {user?.userAccounts[0]?.accountBalance}
         </Text>
       </View>
     </View>
@@ -61,6 +61,7 @@ function ChartHeader({ themedStyles, data, user }: ChartHeaderProps) {
 }
 
 interface Props {
+  // stocks: IStockTick[];
   chartData: IPoint[];
 }
 export function GameChartBoard({ chartData }: Props) {
@@ -77,6 +78,7 @@ export function GameChartBoard({ chartData }: Props) {
       </View>
       <View style={themedStyles.infoArea}>
         <Text>Info area</Text>
+        <StockList data={[]} onItemPress={() => {}} />
       </View>
     </View>
   );
