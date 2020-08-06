@@ -34,10 +34,11 @@ export const getThemedStyles = (theme: ITheme) =>
     chartHeaderSubcontainer: {
       flex: 1,
       flexDirection: 'row',
+      alignItems: 'center',
     },
     chartHeaderImageContainer: {
       width: 110,
-      height: '100hv',
+      height: '100%',
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: theme.GAME_SCREEN.VIEW_COLOR,
@@ -45,10 +46,31 @@ export const getThemedStyles = (theme: ITheme) =>
       ...COMMON_STYLES.SHADOW_BOX,
     },
     chartHeaderTitle: {
+      fontWeight: '500',
+      fontSize: 40,
+      lineHeight: 35,
       color: theme.GAME_SCREEN.TEXT_COLOR,
+      marginLeft: 29,
     },
     chartHeaderTitleAbbr: {
       color: theme.GAME_SCREEN.TEXT_COLOR,
+      fontSize: 26,
+      lineHeight: 35,
+      marginLeft: 10,
+    },
+    chartHeaderStockChangeValue: {
+      color: theme.GAME_SCREEN.TEXT_COLOR,
+      lineHeight: 28,
+      fontSize: 20,
+      fontWeight: '500',
+    },
+    chartHeaderStockChangePositivePercent: {
+      color: theme.GAME_SCREEN.NUMBER_INDICATOR_UP,
+      marginLeft: 19,
+    },
+    chartHeaderStockChangeNegativePercent: {
+      color: theme.GAME_SCREEN.NUMBER_INDICATOR_DOWN,
+      marginLeft: 19,
     },
 
     /* Chart */
