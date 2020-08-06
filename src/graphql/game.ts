@@ -14,9 +14,13 @@ const CREATE_GAME = gql`
 `;
 
 const START_GAME = gql`
-  mutation StartGame($id: String!) {
-    startGame(id: $id) {
-      message
+  mutation StartGame($id: String!, $startPosition: Int) {
+    startGame(id: $id, startPosition: $startPosition) {
+      stockTickId
+      stockTickTime
+      stockTickClose
+      stockId
+      stockName
     }
   }
 `;
