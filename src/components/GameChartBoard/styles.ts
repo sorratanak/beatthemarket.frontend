@@ -24,6 +24,7 @@ export const getThemedStyles = (theme: ITheme) =>
     chartHeaderStockChangeValue: {},
     chartHeaderStockChangePositivePercent: {},
     chartHeaderStockChangeNegativePercent: {},
+    userBalanceContainer: {},
 
     /* Chart */
     chartContainer: {},

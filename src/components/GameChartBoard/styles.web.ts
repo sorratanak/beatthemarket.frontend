@@ -72,6 +72,10 @@ export const getThemedStyles = (theme: ITheme) =>
       color: theme.GAME_SCREEN.NUMBER_INDICATOR_DOWN,
       marginLeft: 19,
     },
+    userBalanceContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
 
     /* Chart */
     chartContainer: {
