@@ -1,17 +1,19 @@
 import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 
-import { IPoint, IStockChange } from '../../types';
+import { IPoint, IStockChange, IUser, IStockTick } from '../../types';
 import { LineChart } from '../LineChart';
 import { getThemedStyles } from './styles';
 import { UserContext } from '../../userContext';
 import { getStockChanges } from '../../utils/parsing';
+import { StockList } from '../StockList';
 
 interface ChartHeaderProps {
   themedStyles: any;
+  user: IUser;
   data: IPoint[];
 }
-function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
+function ChartHeader({ themedStyles, data, user }: ChartHeaderProps) {
   const [prelastItem, lastItem] = useMemo(() => {
     const [prelast, last] = data.slice(-2);
     return !last ? [null, prelast] : [prelast, last];
@@ -44,32 +46,39 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
                 ? themedStyles.chartHeaderStockChangePositivePercent
                 : themedStyles.chartHeaderStockChangeNegativePercent
             }>
-            {` `}
-            {stockChange.percent}
+            {stockChange.difference}
+            {`    `}({stockChange.percent}%)
           </Text>
         </View>
       )}
+      <View style={themedStyles.userBalanceContainer}>
+        <Text style={themedStyles.chartHeaderStockChangeValue}>
+          $ {user?.userAccounts[0]?.accountBalance}
+        </Text>
+      </View>
     </View>
   );
 }
 
 interface Props {
+  // stocks: IStockTick[];
   chartData: IPoint[];
 }
 export function GameChartBoard({ chartData }: Props) {
-  const { theme } = useContext(UserContext);
+  const { theme, user } = useContext(UserContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   return (
     <View style={themedStyles.container}>
       <View style={themedStyles.chartArea}>
-        <ChartHeader themedStyles={themedStyles} data={chartData} />
+        <ChartHeader themedStyles={themedStyles} data={chartData} user={user} />
         <View style={themedStyles.chartContainer}>
           <LineChart data={chartData} />
         </View>
       </View>
       <View style={themedStyles.infoArea}>
         <Text>Info area</Text>
+        <StockList data={[]} onItemPress={() => {}} />
       </View>
     </View>
   );
