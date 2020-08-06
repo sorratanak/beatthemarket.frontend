@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Dimensions } from 'react-native';
 import _ from 'lodash';
 
 import {
@@ -11,6 +12,10 @@ import {
 import { COLORS } from '../../themes/colors';
 import { IPoint } from '../../types';
 import { ANIMATION_OPTIONS } from './config';
+
+const WINDOW = Dimensions.get('window');
+const CHART_HEIGHT = WINDOW.height * 0.6;
+const CHART_WIDTH = WINDOW.width * 0.75;
 
 interface Props {
   data: IPoint[];
@@ -25,6 +30,9 @@ export function LineChart({ data }: Props) {
 
   return (
     <VictoryChart
+      // TODO add dynamic chart width/height
+      width={CHART_WIDTH}
+      height={CHART_HEIGHT}
       style={chartStyle}
       containerComponent={
         <VictoryZoomContainer
@@ -40,6 +48,7 @@ export function LineChart({ data }: Props) {
           }}
         />
       }>
+      {/* TODO VictoryAxis */}
       <VictoryLine
         data={data}
         style={{ data: { stroke: COLORS.CORNFLOWER_BLUE } }}

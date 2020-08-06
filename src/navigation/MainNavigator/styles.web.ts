@@ -1,16 +1,13 @@
 import { StyleSheet } from 'react-native';
 import { ITheme } from '../../themes/interface';
-import { COLORS } from '../../themes/colors';
+import { COMMON_STYLES } from '../../themes/commonStyles';
 
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
       backgroundColor: theme.MENU.BACKGROUND_COLOR,
       borderRightWidth: undefined,
-      shadowOpacity: 0.1,
-      shadowRadius: 15,
-      shadowColor: COLORS.BLACK,
-      shadowOffset: { height: 0, width: 0 },
+      ...COMMON_STYLES.SHADOW_BOX,
     },
     title: {
       textAlign: 'center',

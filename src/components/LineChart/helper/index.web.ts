@@ -1,21 +1,18 @@
 import {
   VictoryChart,
-  VictoryScatter,
   VictoryLine,
+  VictoryScatter,
   VictoryZoomContainer,
 } from 'victory';
 
+// https://formidable.com/open-source/victory/guides/custom-charts
 const style: { [key: string]: React.CSSProperties } = {
-  parent: {
-    flex: 1,
-    maxWidth: '80%',
-    justifyContent: 'center',
-  },
+  parent: {},
 };
 
 export {
-  VictoryScatter,
   VictoryLine,
+  VictoryScatter,
   VictoryChart,
   VictoryZoomContainer,
   style,
