@@ -37,3 +37,10 @@ export interface IPoint {
   x: number | string;
   y: number;
 }
+
+export interface IStockChange {
+  percent: number;
+  type: 'fall' | 'rise';
+  currentValue: number;
+  difference: number;
+}
