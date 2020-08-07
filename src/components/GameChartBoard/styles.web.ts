@@ -88,7 +88,6 @@ export const getThemedStyles = (theme: ITheme) =>
     /* Footer */
     infoArea: {
       flex: 1,
-      backgroundColor: 'yellow',
       width: '100%',
     },
   });

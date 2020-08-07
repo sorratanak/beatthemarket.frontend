@@ -23,9 +23,8 @@ function StockListItem({
     <TouchableOpacity
       onPress={() => onPress(item)}
       style={[
-        isActive
-          ? themedStyles.activeListItemContainer
-          : themedStyles.listItemContainer,
+        themedStyles.listItemContainer,
+        isActive ? themedStyles.activeListItemContainer : null,
       ]}>
       <Text style={themedStyles.listItemTitle}>{item.name}</Text>
     </TouchableOpacity>

@@ -16,6 +16,7 @@ interface IGameScreenTheme {
   BUTTON_UP_COLOR?: string;
   BUTTON_DOWN_COLOR?: string;
   LIST_VIEW_COLOR?: string;
+  LIST_VIEW_ACTIVE_COLOR?: string;
   LIST_VIEW_INDICATOR_POSITIVE_COLOR?: string;
   LIST_VIEW_INDICATOR_NEGATIVE_COLOR?: string;
   LIST_VIEW_INDICATOR_TEXT_COLOR?: string;
