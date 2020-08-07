@@ -52,9 +52,9 @@ function ChartHeader({ themedStyles, data, user }: ChartHeaderProps) {
         </View>
       )}
       <View style={themedStyles.userBalanceContainer}>
-        <Text style={themedStyles.chartHeaderStockChangeValue}>
+        {/* <Text style={themedStyles.chartHeaderStockChangeValue}>
           $ {user?.userAccounts[0]?.accountBalance}
-        </Text>
+        </Text> */}
       </View>
     </View>
   );
