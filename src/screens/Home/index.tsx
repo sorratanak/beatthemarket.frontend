@@ -4,12 +4,14 @@ import { useMutation, useQuery } from '@apollo/client';
 
 import { ScreenProps } from './props';
 import { Container, ScoreBoard } from '../../components';
-import { UserContext } from '../../userContext';
+import { UserContext } from '../../contexts/userContext';
+import { GameContext } from '../../contexts/gameContext';
 import gameGraphql from '../../graphql/game';
 import usersGraphql from '../../graphql/users';
 
 export function Home({ navigation }: ScreenProps) {
   const { logout } = useContext(UserContext);
+  const { onSetGameId } = useContext(GameContext);
 
   /* Mutations */
   const [createGame, { data: createGameResponse }] = useMutation(
@@ -34,7 +36,8 @@ export function Home({ navigation }: ScreenProps) {
 
   useEffect(() => {
     if (createGameResponse && startGameResponse) {
-      navigation.navigate('Game', { gameId: createGameResponse.createGame.id });
+      onSetGameId(createGameResponse.createGame.id);
+      navigation.navigate('Game');
     }
   }, [startGameResponse]);
 

@@ -2,7 +2,7 @@ import React, { useContext, useCallback } from 'react';
 import { Switch, Text } from 'react-native';
 
 import { Container } from '../../components';
-import { UserContext } from '../../userContext';
+import { UserContext } from '../../contexts/userContext';
 import { LIGHT_THEME } from '../../themes/index.web';
 import { DARK_THEME } from '../../themes';
 import { COLORS } from '../../themes/colors';

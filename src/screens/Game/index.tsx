@@ -6,21 +6,17 @@ import { StockTicksSubscriber } from '../../graphql/subscribers/stockTicks';
 import { ScreenProps } from './props';
 import { Container, GameChartBoard } from '../../components';
 import { IPoint, IStockTick } from '../../types';
-import { UserContext } from '../../userContext';
+import { UserContext } from '../../contexts/userContext';
+import { GameContext } from '../../contexts/gameContext';
 import { getThemedStyles } from './styles';
 
 export function Game({ route }: ScreenProps) {
   const { theme } = useContext(UserContext);
+  const { gameId, stocks } = useContext(GameContext);
 
   const themedStyles = getThemedStyles(theme);
 
-  const [gameId, setGameId] = useState<string>(null);
   const [data, setData] = useState<IPoint[]>([]);
-
-  console.log('gameId is', gameId);
-  useEffect(() => {
-    setGameId(route?.params?.gameId);
-  }, [route?.params?.gameId]);
 
   const addNewData = (stockTicks: IStockTick[]) => {
     const newData: IPoint[] = [];

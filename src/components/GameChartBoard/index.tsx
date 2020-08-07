@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 import { IPoint, IStockChange, IUser, IStockTick } from '../../types';
 import { LineChart } from '../LineChart';
 import { getThemedStyles } from './styles';
-import { UserContext } from '../../userContext';
+import { UserContext } from '../../contexts/userContext';
 import { getStockChanges } from '../../utils/parsing';
 import { StockList } from '../StockList';
 

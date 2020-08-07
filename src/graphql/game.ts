@@ -32,7 +32,6 @@ const SUBSCRIBE_STOCK_TICKS = gql`
       stockTickTime
       stockTickClose
       stockId
-      stockName
     }
   }
 `;

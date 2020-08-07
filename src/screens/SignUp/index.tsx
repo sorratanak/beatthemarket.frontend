@@ -3,7 +3,7 @@ import { Text, Button, TextInput } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { StackParams } from '../../navigation';
 import { Container } from '../../components';
-import { UserContext } from '../../userContext';
+import { UserContext } from '../../contexts/userContext';
 import { styles } from './styles';
 
 type NavigationProps = StackNavigationProp<StackParams, 'SignIn'>;

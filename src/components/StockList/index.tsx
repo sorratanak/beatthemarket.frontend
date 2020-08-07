@@ -3,7 +3,7 @@ import { FlatList, TouchableOpacity, Text } from 'react-native';
 
 import { getThemedStyles } from './styles';
 import { IStockTick } from '../../types';
-import { UserContext } from '../../userContext';
+import { UserContext } from '../../contexts/userContext';
 
 interface StockListItemProps {
   item: IStockTick;
@@ -15,7 +15,7 @@ function StockListItem({ item, onPress, themedStyles }: StockListItemProps) {
     <TouchableOpacity
       onPress={() => onPress(item)}
       style={themedStyles.listItemContainer}>
-      <Text style={themedStyles.listItemTitle}>{item.stockName}</Text>
+      <Text style={themedStyles.listItemTitle}>{item.stockId}</Text>
     </TouchableOpacity>
   );
 }

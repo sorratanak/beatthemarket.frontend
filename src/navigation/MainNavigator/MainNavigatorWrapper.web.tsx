@@ -8,7 +8,7 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 
-import { UserContext } from '../../userContext';
+import { UserContext } from '../../contexts/userContext';
 import { getThemedStyles } from './styles.web';
 
 export const MainNavigator = createDrawerNavigator();

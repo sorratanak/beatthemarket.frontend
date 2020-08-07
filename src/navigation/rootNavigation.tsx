@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { View } from 'react-native';
-import { UserContext } from '../userContext';
+import { UserContext } from '../contexts/userContext';
 import { MainNavComponent, AuthStackComponent } from '.';
 import { styles } from './styles';
 

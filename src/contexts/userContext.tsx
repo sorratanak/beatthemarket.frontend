@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import noop from 'lodash/noop';
 
 import {
@@ -8,12 +8,11 @@ import {
   getUserFromStorage,
   setThemeToStorage,
   getThemeFromStorage,
-  removeThemeFromStorage,
-} from './utilities';
-import { SignUp, SignIn } from './firebase/firebase';
-import { IUser } from './types';
-import { ITheme } from './themes/interface';
-import { LIGHT_THEME } from './themes';
+} from '../utilities';
+import { SignUp, SignIn } from '../firebase/firebase';
+import { IUser } from '../types';
+import { ITheme } from '../themes/interface';
+import { LIGHT_THEME } from '../themes';
 
 export interface ContextProps {
   token: string | null;
@@ -62,13 +61,13 @@ const ContextProvider = ({
     });
   }, [setLocalUser, setLocalToken]);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     removeUserFromStorage();
     setLocalUser(null);
     setLocalToken(null);
-  };
+  }, []);
 
-  const signInWithGoogle = () => {
+  const signInWithGoogle = useCallback(() => {
     SignIn().then((response) => {
       if (response) {
         const { accessToken, user } = response;
@@ -78,20 +77,23 @@ const ContextProvider = ({
         setLocalToken(accessToken);
       }
     });
-  };
+  }, [setUserToStorage, setLocalUser, setLocalToken]);
 
-  const signUp = (email: string, password: string) => {
-    SignUp({ email, password }).then((user) => {
-      console.log('user is', user);
-      // setToken(email + password);
-      setLocalToken(email + password);
-    });
-  };
+  const signUp = useCallback(
+    (email: string, password: string) => {
+      SignUp({ email, password }).then((user) => {
+        console.log('user is', user);
+        // setToken(email + password);
+        setLocalToken(email + password);
+      });
+    },
+    [setLocalToken],
+  );
 
-  const switchTheme = (someTheme: ITheme) => {
+  const switchTheme = useCallback((someTheme: ITheme) => {
     setTheme(someTheme);
     setThemeToStorage(someTheme);
-  };
+  }, []);
 
   return (
     <UserContext.Provider

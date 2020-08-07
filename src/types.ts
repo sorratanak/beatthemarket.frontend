@@ -27,7 +27,6 @@ export interface IScoreRecord {
 
 export interface IStockTick {
   stockId: string;
-  stockName: string;
   stockTickClose: number;
   stockTickId: string;
   stockTickTime: string;
@@ -43,4 +42,11 @@ export interface IStockChange {
   type: 'fall' | 'rise';
   currentValue: number;
   difference: number;
+}
+
+export interface IStock {
+  id: string;
+  name: string;
+  symbol: string;
+  ticks?: IStockTick[];
 }
