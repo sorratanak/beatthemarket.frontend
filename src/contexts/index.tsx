@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import UserContextProvider from './userContext';
-import GameContextProvider from './gameContext';
+import UserContextProvider, { UserContext } from './userContext';
+import GameContextProvider, { GameContext } from './gameContext';
 
 interface Props {
   children: ReactNode;
@@ -12,5 +12,7 @@ const MultipleContextProvider = ({ children }: Props) => {
     </UserContextProvider>
   );
 };
+
+export { UserContext, GameContext };
 
 export default MultipleContextProvider;

@@ -1,40 +1,50 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import _ from 'lodash';
 import moment from 'moment';
 
 import { StockTicksSubscriber } from '../../graphql/subscribers/stockTicks';
 import { Container, GameChartBoard } from '../../components';
-import { IPoint, IStockTick } from '../../types';
-import { UserContext } from '../../contexts/userContext';
-import { GameContext } from '../../contexts/gameContext';
+import { IPoint } from '../../types';
+import { UserContext, GameContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 
 export function Game() {
   const { theme } = useContext(UserContext);
-  const { gameId, stocks, onAddStockTicks } = useContext(GameContext);
-
-  console.log('stocks is', stocks);
+  const { gameId, activeStock, stocks, onAddStockTicks } = useContext(
+    GameContext,
+  );
 
   const themedStyles = getThemedStyles(theme);
 
   const [data, setData] = useState<IPoint[]>([]);
 
-  const addNewData = (stockTicks: IStockTick[]) => {
-    onAddStockTicks(stockTicks);
+  useEffect(() => {
+    if (!gameId || !activeStock) {
+      setData([]);
+    } else {
+      const { ticks } = activeStock;
 
-    const newData: IPoint[] = [];
+      const newData: IPoint[] = _.map(ticks, (tick) => {
+        return {
+          x: moment(Number(tick.stockTickTime)).format('mm:ss'),
+          y: tick.stockTickClose,
+        };
+      });
 
-    newData.push({
-      x: moment(Number(stockTicks[0].stockTickTime)).format('mm:ss'),
-      y: stockTicks[0].stockTickClose,
-    });
-
-    setData([...data, ...newData]);
-  };
+      setData(newData);
+    }
+  }, [gameId, activeStock?.ticks?.length]);
 
   return (
     <Container style={themedStyles.container}>
-      <GameChartBoard chartData={data} />
-      {gameId && <StockTicksSubscriber gameId={gameId} callback={addNewData} />}
+      <GameChartBoard
+        activeStock={activeStock}
+        stocks={stocks}
+        chartData={data}
+      />
+      {gameId && (
+        <StockTicksSubscriber gameId={gameId} callback={onAddStockTicks} />
+      )}
     </Container>
   );
 }

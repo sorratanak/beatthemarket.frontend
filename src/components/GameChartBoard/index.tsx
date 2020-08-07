@@ -1,10 +1,10 @@
 import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 
-import { IPoint, IStockChange, IUser, IStockTick } from '../../types';
+import { IPoint, IStockChange, IUser, IStock } from '../../types';
 import { LineChart } from '../LineChart';
+import { GameContext, UserContext } from '../../contexts';
 import { getThemedStyles } from './styles';
-import { UserContext } from '../../contexts/userContext';
 import { getStockChanges } from '../../utils/parsing';
 import { StockList } from '../StockList';
 
@@ -61,11 +61,13 @@ function ChartHeader({ themedStyles, data, user }: ChartHeaderProps) {
 }
 
 interface Props {
-  // stocks: IStockTick[];
+  stocks: IStock[];
+  activeStock: IStock;
   chartData: IPoint[];
 }
-export function GameChartBoard({ chartData }: Props) {
+export function GameChartBoard({ stocks, activeStock, chartData }: Props) {
   const { theme, user } = useContext(UserContext);
+  const { onSetActiveStock } = useContext(GameContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   return (
@@ -77,8 +79,11 @@ export function GameChartBoard({ chartData }: Props) {
         </View>
       </View>
       <View style={themedStyles.infoArea}>
-        <Text>Info area</Text>
-        <StockList data={[]} onItemPress={() => {}} />
+        <StockList
+          data={stocks}
+          activeStock={activeStock}
+          onItemPress={onSetActiveStock}
+        />
       </View>
     </View>
   );

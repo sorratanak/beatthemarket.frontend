@@ -14,7 +14,7 @@ import { IUser } from '../types';
 import { ITheme } from '../themes/interface';
 import { LIGHT_THEME } from '../themes';
 
-export interface ContextProps {
+interface ContextProps {
   token: string | null;
   user: IUser | null;
   theme: ITheme;

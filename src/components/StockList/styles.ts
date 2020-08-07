@@ -6,5 +6,6 @@ export const getThemedStyles = (theme: ITheme) =>
     container: {},
     contentContainer: {},
     listItemContainer: {},
+    activeListItemContainer: {},
     listItemTitle: {},
   });

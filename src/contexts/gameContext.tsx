@@ -3,20 +3,24 @@ import _ from 'lodash';
 
 import { IStock, IStockTick } from '../types';
 
-export interface ContextProps {
+interface ContextProps {
   gameId: string;
   stocks: IStock[];
+  activeStock: IStock;
   onSetGameId: (gameId: string) => void;
   onSetStocks: (stocks: IStock[]) => void;
   onAddStockTicks: (ticks: IStockTick[]) => void;
+  onSetActiveStock: (activeStock: IStock) => void;
 }
 
 const DEFAULT_GAME_CONTEXT: ContextProps = {
   gameId: null,
   stocks: null,
+  activeStock: null,
   onSetGameId: _.noop,
   onSetStocks: _.noop,
   onAddStockTicks: _.noop,
+  onSetActiveStock: _.noop,
 };
 
 export const GameContext = React.createContext(DEFAULT_GAME_CONTEXT);
@@ -27,6 +31,7 @@ const ContextProvider = ({
   children: React.ReactNode | React.ReactNode[];
 }) => {
   const [gameId, setGameId] = useState<string>(null);
+  const [activeStock, setActiveStock] = useState<IStock>(null);
   const [stocks, setStocks] = useState<IStock[]>([]);
 
   const onSetGameId = useCallback(
@@ -38,7 +43,10 @@ const ContextProvider = ({
 
   const onSetStocks = useCallback(
     (data: IStock[]) => {
-      setStocks(data);
+      if (data) {
+        setStocks(data);
+        setActiveStock(data[0]);
+      }
     },
     [setStocks],
   );
@@ -66,9 +74,24 @@ const ContextProvider = ({
     [stocks, setStocks],
   );
 
+  const onSetActiveStock = useCallback(
+    (newActiveStock: IStock) => {
+      setActiveStock(newActiveStock);
+    },
+    [setActiveStock],
+  );
+
   return (
     <GameContext.Provider
-      value={{ gameId, stocks, onSetStocks, onAddStockTicks, onSetGameId }}>
+      value={{
+        gameId,
+        stocks,
+        activeStock,
+        onSetStocks,
+        onSetActiveStock,
+        onAddStockTicks,
+        onSetGameId,
+      }}>
       {children}
     </GameContext.Provider>
   );
