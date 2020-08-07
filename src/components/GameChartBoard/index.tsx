@@ -37,9 +37,9 @@ function ChartHeader({
         <View style={themedStyles.chartHeaderImageContainer}>
           <Text>Image here</Text>
         </View>
-        <Text style={themedStyles.chartHeaderTitle}>{activeStock.name} </Text>
+        <Text style={themedStyles.chartHeaderTitle}>{activeStock?.name} </Text>
         <Text style={themedStyles.chartHeaderTitleAbbr}>
-          ({activeStock.symbol})
+          ({activeStock?.symbol})
         </Text>
       </View>
       {stockChange && (
