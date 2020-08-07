@@ -11,9 +11,15 @@ import { StockList } from '../StockList';
 interface ChartHeaderProps {
   themedStyles: any;
   user: IUser;
+  activeStock: IStock;
   data: IPoint[];
 }
-function ChartHeader({ themedStyles, data, user }: ChartHeaderProps) {
+function ChartHeader({
+  themedStyles,
+  data,
+  activeStock,
+  user,
+}: ChartHeaderProps) {
   const [prelastItem, lastItem] = useMemo(() => {
     const [prelast, last] = data.slice(-2);
     return !last ? [null, prelast] : [prelast, last];
@@ -31,8 +37,10 @@ function ChartHeader({ themedStyles, data, user }: ChartHeaderProps) {
         <View style={themedStyles.chartHeaderImageContainer}>
           <Text>Image here</Text>
         </View>
-        <Text style={themedStyles.chartHeaderTitle}>Tesla </Text>
-        <Text style={themedStyles.chartHeaderTitleAbbr}>(TSLA)</Text>
+        <Text style={themedStyles.chartHeaderTitle}>{activeStock.name} </Text>
+        <Text style={themedStyles.chartHeaderTitleAbbr}>
+          ({activeStock.symbol})
+        </Text>
       </View>
       {stockChange && (
         <View style={themedStyles.chartHeaderSubcontainer}>
@@ -73,7 +81,12 @@ export function GameChartBoard({ stocks, activeStock, chartData }: Props) {
   return (
     <View style={themedStyles.container}>
       <View style={themedStyles.chartArea}>
-        <ChartHeader themedStyles={themedStyles} data={chartData} user={user} />
+        <ChartHeader
+          activeStock={activeStock}
+          themedStyles={themedStyles}
+          data={chartData}
+          user={user}
+        />
         <View style={themedStyles.chartContainer}>
           <LineChart data={chartData} />
         </View>
