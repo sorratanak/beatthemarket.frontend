@@ -31,4 +31,13 @@ export const getThemedStyles = (theme: ITheme) =>
 
     /* Footer */
     infoArea: {},
+    chartFooterContainer: {},
+    chartFooterCell: {},
+    chartFooterSliderButtonContainer: {},
+    chartFooterSliderButtonTitle: {},
+    chartFooterSliderContainer: {},
+    chartFooterButtonContainer: {},
+    chartFooterButtonRise: {},
+    chartFooterButtonFall: {},
+    chartFooterButtonText: {},
   });

@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { ITheme } from '../../themes/interface';
 import { COMMON_STYLES } from '../../themes/commonStyles';
+import { COLORS } from '../../themes/colors';
 
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
@@ -89,5 +90,50 @@ export const getThemedStyles = (theme: ITheme) =>
     infoArea: {
       flex: 1,
       width: '100%',
+    },
+    chartFooterContainer: {
+      flex: 1,
+      paddingHorizontal: 20,
+      flexDirection: 'row',
+      width: '100%',
+    },
+    chartFooterCell: {
+      alignItems: 'center',
+      justifyContent: 'space-evenly',
+      flexDirection: 'row',
+      flex: 1,
+    },
+    chartFooterSliderButtonContainer: {
+      width: 40,
+      height: 30,
+      borderRadius: 10,
+      backgroundColor: theme.GAME_SCREEN.VIEW_COLOR,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    chartFooterSliderButtonTitle: {
+      fontSize: 20,
+    },
+    chartFooterSliderContainer: {
+      flex: 0,
+      flexGrow: 0,
+      width: 300,
+      height: 20,
+    },
+    chartFooterButtonContainer: {
+      width: 257,
+      paddingVertical: 16,
+      borderRadius: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    chartFooterButtonRise: {
+      backgroundColor: theme.GAME_SCREEN.BUTTON_UP_COLOR,
+    },
+    chartFooterButtonFall: {
+      backgroundColor: theme.GAME_SCREEN.BUTTON_DOWN_COLOR,
+    },
+    chartFooterButtonText: {
+      color: COLORS.WHITE,
     },
   });
