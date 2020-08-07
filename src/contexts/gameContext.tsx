@@ -52,16 +52,18 @@ const ContextProvider = ({
           updatedStocks,
           (stock) => stock.id === tick.stockId,
         );
-        if (!currentStock.ticks) {
-          currentStock.ticks = [tick];
-        } else {
-          currentStock.ticks.push(tick);
+        if (currentStock) {
+          if (!currentStock.ticks) {
+            currentStock.ticks = [tick];
+          } else {
+            currentStock.ticks.push(tick);
+          }
         }
       });
 
       setStocks(updatedStocks);
     },
-    [setStocks],
+    [stocks, setStocks],
   );
 
   return (

@@ -9,7 +9,7 @@ import { Settings } from '../screens/Settings';
 
 export type StackParams = {
   Home: undefined;
-  Game: { gameId: string } | undefined;
+  Game: undefined;
   Settings: undefined;
   SignIn: undefined;
   SignUp: undefined;

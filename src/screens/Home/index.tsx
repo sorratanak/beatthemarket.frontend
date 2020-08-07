@@ -7,11 +7,11 @@ import { Container, ScoreBoard } from '../../components';
 import { UserContext } from '../../contexts/userContext';
 import { GameContext } from '../../contexts/gameContext';
 import gameGraphql from '../../graphql/game';
-import usersGraphql from '../../graphql/users';
+// import usersGraphql from '../../graphql/users';
 
 export function Home({ navigation }: ScreenProps) {
   const { logout } = useContext(UserContext);
-  const { onSetGameId } = useContext(GameContext);
+  const { onSetGameId, onSetStocks } = useContext(GameContext);
 
   /* Mutations */
   const [createGame, { data: createGameResponse }] = useMutation(
@@ -22,11 +22,9 @@ export function Home({ navigation }: ScreenProps) {
   );
 
   /* Queries */
-  const { data: users, loading: usersLoading, error: usersError } = useQuery(
-    usersGraphql.queries.GET_USERS,
-  );
-
-  console.log('Users', users, usersLoading, usersError);
+  // const { data: users, loading: usersLoading, error: usersError } = useQuery(
+  //   usersGraphql.queries.GET_USERS,
+  // );
 
   useEffect(() => {
     if (createGameResponse) {
@@ -36,7 +34,9 @@ export function Home({ navigation }: ScreenProps) {
 
   useEffect(() => {
     if (createGameResponse && startGameResponse) {
-      onSetGameId(createGameResponse.createGame.id);
+      const { stocks, id: gameId } = createGameResponse.createGame;
+      onSetStocks(stocks);
+      onSetGameId(gameId);
       navigation.navigate('Game');
     }
   }, [startGameResponse]);

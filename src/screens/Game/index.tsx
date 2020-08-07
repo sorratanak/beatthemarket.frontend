@@ -1,24 +1,26 @@
-import React, { useState, useEffect, useContext } from 'react';
-// import _ from 'lodash';
+import React, { useState, useContext } from 'react';
 import moment from 'moment';
 
 import { StockTicksSubscriber } from '../../graphql/subscribers/stockTicks';
-import { ScreenProps } from './props';
 import { Container, GameChartBoard } from '../../components';
 import { IPoint, IStockTick } from '../../types';
 import { UserContext } from '../../contexts/userContext';
 import { GameContext } from '../../contexts/gameContext';
 import { getThemedStyles } from './styles';
 
-export function Game({ route }: ScreenProps) {
+export function Game() {
   const { theme } = useContext(UserContext);
-  const { gameId, stocks } = useContext(GameContext);
+  const { gameId, stocks, onAddStockTicks } = useContext(GameContext);
+
+  console.log('stocks is', stocks);
 
   const themedStyles = getThemedStyles(theme);
 
   const [data, setData] = useState<IPoint[]>([]);
 
   const addNewData = (stockTicks: IStockTick[]) => {
+    onAddStockTicks(stockTicks);
+
     const newData: IPoint[] = [];
 
     newData.push({
