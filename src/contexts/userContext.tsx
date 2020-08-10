@@ -6,32 +6,25 @@ import {
   setUserToStorage,
   removeUserFromStorage,
   getUserFromStorage,
-  setThemeToStorage,
-  getThemeFromStorage,
 } from '../utilities';
 import { SignUp, SignIn } from '../firebase/firebase';
 import { IUser } from '../types';
 import { ITheme } from '../themes/interface';
-import { LIGHT_THEME } from '../themes';
 
 interface ContextProps {
   token: string | null;
   user: IUser | null;
-  theme: ITheme;
   logout: () => void;
   signInWithGoogle: () => void;
   signUp: (email: string, password: string) => void;
-  switchTheme: (theme: ITheme) => void;
 }
 
 const DEFAULT_USER_CONTEXT: ContextProps = {
   token: null,
   user: null,
-  theme: null,
   logout: noop,
   signInWithGoogle: noop,
   signUp: noop,
-  switchTheme: noop,
 };
 
 export const UserContext = React.createContext(DEFAULT_USER_CONTEXT);
@@ -43,14 +36,8 @@ const ContextProvider = ({
 }) => {
   const [localUser, setLocalUser] = useState<IUser | null>(null);
   const [localToken, setLocalToken] = useState<string | null>(null);
-  const [theme, setTheme] = useState<ITheme>(LIGHT_THEME);
 
   useEffect(() => {
-    getThemeFromStorage().then((storageTheme) => {
-      if (storageTheme) {
-        setTheme(storageTheme);
-      }
-    });
     getUserFromStorage().then((user) => {
       if (user) {
         setLocalUser(user);
@@ -59,13 +46,13 @@ const ContextProvider = ({
         });
       }
     });
-  }, [setLocalUser, setLocalToken]);
+  }, [getUserFromStorage, getFirebaseToken, setLocalUser, setLocalToken]);
 
   const logout = useCallback(() => {
     removeUserFromStorage();
     setLocalUser(null);
     setLocalToken(null);
-  }, []);
+  }, [removeUserFromStorage, setLocalUser, setLocalToken]);
 
   const signInWithGoogle = useCallback(() => {
     SignIn().then((response) => {
@@ -90,21 +77,14 @@ const ContextProvider = ({
     [setLocalToken],
   );
 
-  const switchTheme = useCallback((someTheme: ITheme) => {
-    setTheme(someTheme);
-    setThemeToStorage(someTheme);
-  }, []);
-
   return (
     <UserContext.Provider
       value={{
-        theme,
         token: localToken,
         user: localUser,
         logout,
         signInWithGoogle,
         signUp,
-        switchTheme,
       }}>
       {children}
     </UserContext.Provider>

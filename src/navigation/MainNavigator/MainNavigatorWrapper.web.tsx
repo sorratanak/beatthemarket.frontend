@@ -8,8 +8,8 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 
-import { UserContext } from '../../contexts/userContext';
 import { getThemedStyles } from './styles.web';
+import { ThemeContext } from '../../contexts';
 
 export const MainNavigator = createDrawerNavigator();
 
@@ -31,7 +31,7 @@ interface Props {
   children: ReactNode[];
 }
 export const MainNavigatorWrapper = ({ children }: Props) => {
-  const { theme } = useContext(UserContext);
+  const { theme } = useContext(ThemeContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 

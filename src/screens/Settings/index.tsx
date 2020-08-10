@@ -2,14 +2,14 @@ import React, { useContext, useCallback } from 'react';
 import { Switch, Text } from 'react-native';
 
 import { Container } from '../../components';
-import { UserContext } from '../../contexts/userContext';
 import { LIGHT_THEME } from '../../themes/index.web';
 import { DARK_THEME } from '../../themes';
 import { COLORS } from '../../themes/colors';
 import { getThemedStyles } from './styles';
+import { ThemeContext } from '../../contexts';
 
 export function Settings() {
-  const { theme, switchTheme } = useContext(UserContext);
+  const { theme, switchTheme } = useContext(ThemeContext);
 
   const themedStyles = getThemedStyles(theme);
 

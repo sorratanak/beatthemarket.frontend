@@ -5,11 +5,11 @@ import moment from 'moment';
 import { StockTicksSubscriber } from '../../graphql/subscribers/stockTicks';
 import { Container, GameChartBoard } from '../../components';
 import { IPoint } from '../../types';
-import { UserContext, GameContext } from '../../contexts';
+import { GameContext, ThemeContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 
 export function Game() {
-  const { theme } = useContext(UserContext);
+  const { theme } = useContext(ThemeContext);
   const { gameId, activeStock, onAddStockTicks } = useContext(GameContext);
 
   const themedStyles = getThemedStyles(theme);

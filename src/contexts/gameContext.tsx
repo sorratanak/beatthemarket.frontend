@@ -98,9 +98,7 @@ const ContextProvider = ({
 
   const onSellStock = useCallback(
     (stockAmount: number) => {
-      console.log('onSellStock');
       const payload = getSellBuyStockRequest(gameId, activeStock, stockAmount);
-      console.log(['payload is ', payload]);
       sellStock(payload);
     },
     [gameId, activeStock, sellStock],

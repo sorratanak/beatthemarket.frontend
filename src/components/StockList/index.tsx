@@ -3,7 +3,7 @@ import { FlatList, TouchableOpacity, Text } from 'react-native';
 
 import { getThemedStyles } from './styles';
 import { IStock } from '../../types';
-import { UserContext } from '../../contexts/userContext';
+import { ThemeContext } from '../../contexts';
 
 interface StockListItemProps {
   item: IStock;
@@ -37,7 +37,7 @@ interface Props {
   onItemPress: (item: IStock) => void;
 }
 export function StockList({ data, activeStock, onItemPress }: Props) {
-  const { theme } = useContext(UserContext);
+  const { theme } = useContext(ThemeContext);
   const themedStyles = getThemedStyles(theme);
 
   return (

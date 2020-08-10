@@ -10,7 +10,7 @@ import Slider from '@react-native-community/slider';
 
 import { IPoint, IStockChange } from '../../types';
 import { LineChart } from '../LineChart';
-import { GameContext, UserContext } from '../../contexts';
+import { GameContext, ThemeContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 import { getStockChanges } from '../../utils/parsing';
 import { StockList } from '../StockList';
@@ -152,7 +152,7 @@ interface Props {
   chartData: IPoint[];
 }
 export function GameChartBoard({ chartData }: Props) {
-  const { theme } = useContext(UserContext);
+  const { theme } = useContext(ThemeContext);
   const { onSetActiveStock, stocks, activeStock } = useContext(GameContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
