@@ -50,6 +50,7 @@ export function LineChart({ data }: Props) {
       }>
       {/* TODO VictoryAxis */}
       <VictoryLine
+        // TODO dynamic getData by zoom domain
         data={data}
         style={{ data: { stroke: COLORS.CORNFLOWER_BLUE } }}
         interpolation="cardinal"

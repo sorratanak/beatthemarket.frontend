@@ -1,4 +1,4 @@
-import { IPoint, IStockChange } from '../types';
+import { IPoint, IStockChange, IStock, IBuySellStockRequest } from '../types';
 
 export function getStockChanges(prelastItem: IPoint, lastItem: IPoint) {
   const currentValue: number = lastItem?.y;
@@ -21,4 +21,29 @@ export function getStockChanges(prelastItem: IPoint, lastItem: IPoint) {
   };
 
   return stockChange;
+}
+
+export function getSellBuyStockRequest(
+  gameId: string,
+  activeStock: IStock,
+  stockAmount: number,
+): IBuySellStockRequest {
+  const [lastTick] = activeStock?.ticks?.slice(-1);
+
+  const requestBody: IBuySellStockRequest = {
+    variables: {
+      input: {
+        gameId,
+        stockId: activeStock.id,
+        stockAmount,
+        tickId: lastTick.stockTickId,
+        tickTime: Number(lastTick.stockTickTime),
+        tickPrice: lastTick.stockTickClose,
+      },
+    },
+  };
+
+  console.log('buysellstockrequest', requestBody);
+
+  return requestBody;
 }

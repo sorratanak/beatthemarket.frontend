@@ -10,9 +10,7 @@ import { getThemedStyles } from './styles';
 
 export function Game() {
   const { theme } = useContext(UserContext);
-  const { gameId, activeStock, stocks, onAddStockTicks } = useContext(
-    GameContext,
-  );
+  const { gameId, activeStock, onAddStockTicks } = useContext(GameContext);
 
   const themedStyles = getThemedStyles(theme);
 
@@ -37,11 +35,7 @@ export function Game() {
 
   return (
     <Container style={themedStyles.container}>
-      <GameChartBoard
-        activeStock={activeStock}
-        stocks={stocks}
-        chartData={data}
-      />
+      <GameChartBoard chartData={data} />
       {gameId && (
         <StockTicksSubscriber gameId={gameId} callback={onAddStockTicks} />
       )}

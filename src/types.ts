@@ -50,3 +50,23 @@ export interface IStock {
   symbol: string;
   ticks?: IStockTick[];
 }
+
+export interface IBuySellStockInput {
+  gameId: string;
+  stockId: string;
+  stockAmount: number;
+  tickId: string;
+  tickTime: number;
+  tickPrice: number;
+}
+
+/* ------ Requests ------ */
+
+export interface IGraphqlVariableRequest<VariablesObj> {
+  variables: VariablesObj;
+}
+
+export interface IBuySellStockRequest
+  extends IGraphqlVariableRequest<{ input: IBuySellStockInput }> {}
+
+/* ---------------------- */

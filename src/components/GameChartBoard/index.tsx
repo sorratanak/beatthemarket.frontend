@@ -8,7 +8,7 @@ import React, {
 import { View, Text, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
 
-import { IPoint, IStockChange, IUser, IStock } from '../../types';
+import { IPoint, IStockChange } from '../../types';
 import { LineChart } from '../LineChart';
 import { GameContext, UserContext } from '../../contexts';
 import { getThemedStyles } from './styles';
@@ -19,16 +19,12 @@ import { STOCK_CHANGE_TYPE } from '../../constants';
 
 interface ChartHeaderProps {
   themedStyles: any;
-  user: IUser;
-  activeStock: IStock;
   data: IPoint[];
 }
-function ChartHeader({
-  themedStyles,
-  data,
-  activeStock,
-  user,
-}: ChartHeaderProps) {
+function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
+  // const { user } = useContext(UserContext);
+  const { activeStock } = useContext(GameContext);
+
   const [prelastItem, lastItem] = useMemo(() => {
     const [prelast, last] = data.slice(-2);
     return !last ? [null, prelast] : [prelast, last];
@@ -81,6 +77,8 @@ interface ChartFooterProps {
   themedStyles: any;
 }
 function ChartFooter({ themedStyles }: ChartFooterProps) {
+  const { onBuyStock, onSellStock } = useContext(GameContext);
+
   const SHARED_CHANGE_STEP = 20;
   const SLIDER_MIN_VALUE = 1;
   const SLIDER_MAX_VALUE = 500;
@@ -130,7 +128,7 @@ function ChartFooter({ themedStyles }: ChartFooterProps) {
       </View>
       <View style={themedStyles.chartFooterCell}>
         <TouchableOpacity
-          onPress={() => console.log('on RISE')}
+          onPress={() => onBuyStock(sliderValue)}
           style={[
             themedStyles.chartFooterButtonContainer,
             themedStyles.chartFooterButtonRise,
@@ -138,7 +136,7 @@ function ChartFooter({ themedStyles }: ChartFooterProps) {
           <Text style={themedStyles.chartFooterButtonText}>Rise</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => console.log('on FALL')}
+          onPress={() => onSellStock(sliderValue)}
           style={[
             themedStyles.chartFooterButtonContainer,
             themedStyles.chartFooterButtonFall,
@@ -151,24 +149,17 @@ function ChartFooter({ themedStyles }: ChartFooterProps) {
 }
 
 interface Props {
-  stocks: IStock[];
-  activeStock: IStock;
   chartData: IPoint[];
 }
-export function GameChartBoard({ stocks, activeStock, chartData }: Props) {
-  const { theme, user } = useContext(UserContext);
-  const { onSetActiveStock } = useContext(GameContext);
+export function GameChartBoard({ chartData }: Props) {
+  const { theme } = useContext(UserContext);
+  const { onSetActiveStock, stocks, activeStock } = useContext(GameContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   return (
     <View style={themedStyles.container}>
       <View style={themedStyles.chartArea}>
-        <ChartHeader
-          activeStock={activeStock}
-          themedStyles={themedStyles}
-          data={chartData}
-          user={user}
-        />
+        <ChartHeader themedStyles={themedStyles} data={chartData} />
         <View style={themedStyles.chartContainer}>
           <LineChart data={chartData} />
         </View>

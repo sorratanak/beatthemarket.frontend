@@ -8,11 +8,11 @@ import MultipleContextProvider from './contexts';
 
 export function App() {
   return (
-    <MultipleContextProvider>
-      <ApolloProvider client={graphqlApi}>
+    <ApolloProvider client={graphqlApi}>
+      <MultipleContextProvider>
         <RootNavigation />
-      </ApolloProvider>
-    </MultipleContextProvider>
+      </MultipleContextProvider>
+    </ApolloProvider>
   );
 }
 

@@ -36,10 +36,28 @@ const SUBSCRIBE_STOCK_TICKS = gql`
   }
 `;
 
+const BUY_STOCK = gql`
+  mutation BuyStock($input: BuyStock!) {
+    buyStock(input: $input) {
+      message
+    }
+  }
+`;
+
+const SELL_STOCK = gql`
+  mutation SellStock($input: SellStock!) {
+    sellStock(input: $input) {
+      message
+    }
+  }
+`;
+
 const queries = {
   CREATE_GAME,
   START_GAME,
   SUBSCRIBE_STOCK_TICKS,
+  BUY_STOCK,
+  SELL_STOCK,
 };
 
 export default { queries };

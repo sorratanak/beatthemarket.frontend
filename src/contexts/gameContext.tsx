@@ -1,7 +1,10 @@
 import React, { useState, useCallback } from 'react';
+import { useMutation } from '@apollo/client';
 import _ from 'lodash';
 
 import { IStock, IStockTick } from '../types';
+import gameGraphql from '../graphql/game';
+import { getSellBuyStockRequest } from '../utils/parsing';
 
 interface ContextProps {
   gameId: string;
@@ -11,6 +14,8 @@ interface ContextProps {
   onSetStocks: (stocks: IStock[]) => void;
   onAddStockTicks: (ticks: IStockTick[]) => void;
   onSetActiveStock: (activeStock: IStock) => void;
+  onSellStock: (stockAmount: number) => void;
+  onBuyStock: (stockAmount: number) => void;
 }
 
 const DEFAULT_GAME_CONTEXT: ContextProps = {
@@ -21,6 +26,8 @@ const DEFAULT_GAME_CONTEXT: ContextProps = {
   onSetStocks: _.noop,
   onAddStockTicks: _.noop,
   onSetActiveStock: _.noop,
+  onSellStock: _.noop,
+  onBuyStock: _.noop,
 };
 
 export const GameContext = React.createContext(DEFAULT_GAME_CONTEXT);
@@ -33,6 +40,13 @@ const ContextProvider = ({
   const [gameId, setGameId] = useState<string>(null);
   const [activeStock, setActiveStock] = useState<IStock>(null);
   const [stocks, setStocks] = useState<IStock[]>([]);
+
+  const [buyStock, { data: buyStockResponse }] = useMutation(
+    gameGraphql.queries.BUY_STOCK,
+  );
+  const [sellStock, { data: sellStockResponse }] = useMutation(
+    gameGraphql.queries.SELL_STOCK,
+  );
 
   const onSetGameId = useCallback(
     (someGameId: string) => {
@@ -74,6 +88,24 @@ const ContextProvider = ({
     [stocks, setStocks],
   );
 
+  const onBuyStock = useCallback(
+    (stockAmount: number) => {
+      const payload = getSellBuyStockRequest(gameId, activeStock, stockAmount);
+      buyStock(payload);
+    },
+    [gameId, activeStock, buyStock],
+  );
+
+  const onSellStock = useCallback(
+    (stockAmount: number) => {
+      console.log('onSellStock');
+      const payload = getSellBuyStockRequest(gameId, activeStock, stockAmount);
+      console.log(['payload is ', payload]);
+      sellStock(payload);
+    },
+    [gameId, activeStock, sellStock],
+  );
+
   const onSetActiveStock = useCallback(
     (newActiveStock: IStock) => {
       setActiveStock(newActiveStock);
@@ -91,6 +123,8 @@ const ContextProvider = ({
         onSetActiveStock,
         onAddStockTicks,
         onSetGameId,
+        onSellStock,
+        onBuyStock,
       }}>
       {children}
     </GameContext.Provider>
