@@ -35,7 +35,7 @@ export function getSellBuyStockRequest(
       input: {
         gameId,
         stockId: activeStock.id,
-        stockAmount,
+        stockAmount: Math.round(stockAmount),
         tickId: lastTick.stockTickId,
         tickTime: Number(lastTick.stockTickTime),
         tickPrice: lastTick.stockTickClose,
