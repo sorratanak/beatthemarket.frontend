@@ -31,7 +31,7 @@ export function Game() {
 
       setData(newData);
     }
-  }, [gameId, activeStock?.ticks?.length]);
+  }, [gameId, activeStock, activeStock?.ticks?.length]);
 
   return (
     <Container style={themedStyles.container}>

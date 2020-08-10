@@ -1,6 +1,6 @@
 export const ANIMATION_OPTIONS = {
-  duration: 1000,
+  duration: 500,
   onLoad: {
-    duration: 1000,
+    duration: 500,
   },
 };

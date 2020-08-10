@@ -156,12 +156,19 @@ export function GameChartBoard({ chartData }: Props) {
   const { onSetActiveStock, stocks, activeStock } = useContext(GameContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
+  const [isChart, setIsChart] = useState(false);
+
+  useEffect(() => {
+    setIsChart(false);
+    setTimeout(() => setIsChart(true), 50);
+  }, [activeStock]);
+
   return (
     <View style={themedStyles.container}>
       <View style={themedStyles.chartArea}>
         <ChartHeader themedStyles={themedStyles} data={chartData} />
         <View style={themedStyles.chartContainer}>
-          <LineChart data={chartData} />
+          {isChart && <LineChart data={chartData} />}
         </View>
       </View>
       <View style={themedStyles.infoArea}>
