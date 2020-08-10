@@ -2,15 +2,19 @@ import React, { useState, useContext, useEffect } from 'react';
 import _ from 'lodash';
 import moment from 'moment';
 
-import { StockTicksSubscriber } from '../../graphql/subscribers/stockTicks';
+import {
+  PortfolioSubscriber,
+  StockTicksSubscriber,
+} from '../../graphql/subscribers';
 import { Container, GameChartBoard } from '../../components';
 import { IPoint } from '../../types';
-import { GameContext, ThemeContext } from '../../contexts';
+import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 
 export function Game() {
   const { theme } = useContext(ThemeContext);
   const { gameId, activeStock, onAddStockTicks } = useContext(GameContext);
+  const { onSetPortfolio } = useContext(PortfolioContext);
 
   const themedStyles = getThemedStyles(theme);
 
@@ -37,7 +41,10 @@ export function Game() {
     <Container style={themedStyles.container}>
       <GameChartBoard chartData={data} />
       {gameId && (
-        <StockTicksSubscriber gameId={gameId} callback={onAddStockTicks} />
+        <>
+          <StockTicksSubscriber gameId={gameId} callback={onAddStockTicks} />
+          <PortfolioSubscriber gameId={gameId} callback={onSetPortfolio} />
+        </>
       )}
     </Container>
   );
