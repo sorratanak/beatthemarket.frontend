@@ -5,6 +5,7 @@ import moment from 'moment';
 import {
   PortfolioSubscriber,
   StockTicksSubscriber,
+  GameEventsSubscriber,
 } from '../../graphql/subscribers';
 import { Container, GameChartBoard } from '../../components';
 import { IPoint } from '../../types';
@@ -13,7 +14,9 @@ import { getThemedStyles } from './styles';
 
 export function Game() {
   const { theme } = useContext(ThemeContext);
-  const { gameId, activeStock, onAddStockTicks } = useContext(GameContext);
+  const { gameId, activeStock, onAddStockTicks, onSetGameEvents } = useContext(
+    GameContext,
+  );
   const { onSetPortfolio } = useContext(PortfolioContext);
 
   const themedStyles = getThemedStyles(theme);
@@ -44,6 +47,7 @@ export function Game() {
         <>
           <StockTicksSubscriber gameId={gameId} callback={onAddStockTicks} />
           <PortfolioSubscriber gameId={gameId} callback={onSetPortfolio} />
+          <GameEventsSubscriber gameId={gameId} callback={onSetGameEvents} />
         </>
       )}
     </Container>

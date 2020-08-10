@@ -1,24 +1,25 @@
 import { useEffect } from 'react';
 import { useSubscription } from '@apollo/client';
 
-import porfolioGraphql from '../portfolio';
+import gameGraphql from '../game';
 
 interface Props {
   gameId: string;
   callback: (data: any) => void; // TODO typing
 }
-export function PortfolioSubscriber({ gameId, callback }: Props) {
+export function GameEventsSubscriber({ gameId, callback }: Props) {
   const { data, loading, error } = useSubscription(
-    porfolioGraphql.queries.SUBSCRIBE_PORTFOLIO,
+    gameGraphql.queries.SUBSCRIBE_GAME_EVENTS,
     {
       variables: { gameId },
     },
   );
 
-  console.log('Portfolio Subscriber', data, loading, error);
+  console.log('GameEvents Subscriber', data, loading, error);
 
   useEffect(() => {
     if (data) {
+      console.log('GameEvents callback data', data);
       callback(data);
     }
   }, [data]);

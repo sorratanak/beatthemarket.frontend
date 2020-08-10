@@ -3,7 +3,7 @@ import noop from 'lodash/noop';
 
 interface ContextProps {
   portfolio: any;
-  onSetPortfolio: (portfolio: any) => void;
+  onSetPortfolio: (portfolio: any) => void; // TODO typing
 }
 
 const DEFAULT_PORTFOLIO_CONTEXT: ContextProps = {
@@ -18,7 +18,7 @@ const ContextProvider = ({
 }: {
   children: React.ReactNode | React.ReactNode[];
 }) => {
-  const [portfolio, setPortfolio] = useState(null);
+  const [portfolio, setPortfolio] = useState(null); // TODO typing
 
   const onSetPortfolio = useCallback(
     (newPortfolio: any) => {

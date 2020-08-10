@@ -3,31 +3,35 @@ import { useMutation } from '@apollo/client';
 import _ from 'lodash';
 
 import { IStock, IStockTick } from '../types';
-import gameGraphql from '../graphql/game';
 import { getSellBuyStockRequest } from '../utils/parsing';
+import gameGraphql from '../graphql/game';
 
 interface ContextProps {
   gameId: string;
   stocks: IStock[];
   activeStock: IStock;
+  gameEvents: any; // TODO typing
   onSetGameId: (gameId: string) => void;
   onSetStocks: (stocks: IStock[]) => void;
   onAddStockTicks: (ticks: IStockTick[]) => void;
   onSetActiveStock: (activeStock: IStock) => void;
   onSellStock: (stockAmount: number) => void;
   onBuyStock: (stockAmount: number) => void;
+  onSetGameEvents: (gameEvents: any) => void; // TODO typing
 }
 
 const DEFAULT_GAME_CONTEXT: ContextProps = {
   gameId: null,
   stocks: null,
   activeStock: null,
+  gameEvents: null,
   onSetGameId: _.noop,
   onSetStocks: _.noop,
   onAddStockTicks: _.noop,
   onSetActiveStock: _.noop,
   onSellStock: _.noop,
   onBuyStock: _.noop,
+  onSetGameEvents: _.noop,
 };
 
 export const GameContext = React.createContext(DEFAULT_GAME_CONTEXT);
@@ -40,6 +44,7 @@ const ContextProvider = ({
   const [gameId, setGameId] = useState<string>(null);
   const [activeStock, setActiveStock] = useState<IStock>(null);
   const [stocks, setStocks] = useState<IStock[]>([]);
+  const [gameEvents, setGameEvents] = useState<any>(null); // TODO typing
 
   const [buyStock, { data: buyStockResponse }] = useMutation(
     gameGraphql.queries.BUY_STOCK,
@@ -111,18 +116,28 @@ const ContextProvider = ({
     [setActiveStock],
   );
 
+  // TODO typing
+  const onSetGameEvents = useCallback(
+    (newGameEvents: any) => {
+      setGameEvents(newGameEvents);
+    },
+    [setGameEvents],
+  );
+
   return (
     <GameContext.Provider
       value={{
         gameId,
         stocks,
         activeStock,
+        gameEvents,
         onSetStocks,
         onSetActiveStock,
         onAddStockTicks,
         onSetGameId,
         onSellStock,
         onBuyStock,
+        onSetGameEvents,
       }}>
       {children}
     </GameContext.Provider>

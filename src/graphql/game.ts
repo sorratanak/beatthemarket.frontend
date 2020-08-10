@@ -52,12 +52,36 @@ const SELL_STOCK = gql`
   }
 `;
 
+const SUBSCRIBE_GAME_EVENTS = gql`
+  subscription GameEvents($gameId: String!) {
+    gameEvents(gameId: $gameId) {
+      ... on ControlEvent {
+        event
+        gameId
+      }
+      ... on LevelStatus {
+        event
+        gameId
+        profitLoss
+        level
+      }
+      ... on LevelTimer {
+        gameId
+        level
+        minutesRemaining
+        secondsRemaining
+      }
+    }
+  }
+`;
+
 const queries = {
   CREATE_GAME,
   START_GAME,
   SUBSCRIBE_STOCK_TICKS,
   BUY_STOCK,
   SELL_STOCK,
+  SUBSCRIBE_GAME_EVENTS,
 };
 
 export default { queries };
