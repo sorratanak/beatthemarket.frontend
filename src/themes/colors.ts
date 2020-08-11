@@ -20,4 +20,5 @@ export const COLORS = {
   MACARONI_AND_CHEESE: '#FFBB7C',
   JEWEL: '#189349',
   VALENCIA: '#D24343',
+  OXFORD_BLUE: '#384652',
 };
