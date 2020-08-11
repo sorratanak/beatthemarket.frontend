@@ -8,12 +8,14 @@ import {
   VictoryScatter,
   VictoryLine,
   VictoryZoomContainer,
+  VictoryAxis,
   style as chartStyle,
 } from './helper';
 import { COLORS } from '../../themes/colors';
 import { IPoint } from '../../types';
-import { ANIMATION_OPTIONS } from './config';
-import { GameContext } from '../../contexts';
+import { ANIMATION_OPTIONS, getThemedAxises } from './config';
+import { GameContext, ThemeContext } from '../../contexts';
+import { styles } from '../Container/styles';
 
 const WINDOW = Dimensions.get('window');
 const CHART_HEIGHT = WINDOW.height * 0.6;
@@ -23,7 +25,10 @@ interface Props {
   data: IPoint[];
 }
 export function LineChart({ data }: Props) {
+  const { theme } = useContext(ThemeContext);
   const { activeStock } = useContext(GameContext);
+
+  const themedAxises = getThemedAxises(theme);
 
   const [dynamicYDomainMin, dynamicYDomainMax] = useMemo(() => {
     return [
@@ -66,7 +71,13 @@ export function LineChart({ data }: Props) {
           }}
         />
       }>
-      {/* TODO VictoryAxis */}
+      <VictoryAxis
+        dependentAxis
+        orientation="left"
+        standalone={false}
+        style={themedAxises.container}
+      />
+      <VictoryAxis standalone={false} style={themedAxises.container} />
       <VictoryLine
         // TODO dynamic getData by zoom domain
         data={data}

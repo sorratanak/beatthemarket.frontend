@@ -1,5 +1,6 @@
 import {
   VictoryChart,
+  VictoryAxis,
   VictoryLine,
   VictoryScatter,
   VictoryZoomContainer,
@@ -12,6 +13,7 @@ const style: { [key: string]: React.CSSProperties } = {
 
 export {
   VictoryLine,
+  VictoryAxis,
   VictoryScatter,
   VictoryChart,
   VictoryZoomContainer,
