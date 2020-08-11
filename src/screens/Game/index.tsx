@@ -19,6 +19,7 @@ export function Game() {
   );
   const { onSetPortfolio } = useContext(PortfolioContext);
 
+  // TODO useMemo
   const themedStyles = getThemedStyles(theme);
 
   const [data, setData] = useState<IPoint[]>([]);

@@ -11,6 +11,7 @@ import { ThemeContext } from '../../contexts';
 export function Settings() {
   const { theme, switchTheme } = useContext(ThemeContext);
 
+  // TODO useMemo
   const themedStyles = getThemedStyles(theme);
 
   const onSwitchTheme = useCallback(() => {

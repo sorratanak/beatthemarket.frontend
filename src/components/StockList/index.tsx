@@ -38,6 +38,7 @@ interface Props {
 }
 export function StockList({ data, activeStock, onItemPress }: Props) {
   const { theme } = useContext(ThemeContext);
+  // TODO useMemo
   const themedStyles = getThemedStyles(theme);
 
   return (
