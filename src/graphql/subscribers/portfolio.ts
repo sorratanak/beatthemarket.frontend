@@ -16,6 +16,8 @@ export function PortfolioSubscriber({ gameId, callback }: Props) {
     },
   );
 
+  console.log('portfolio data', data);
+
   useEffect(() => {
     if (data) {
       callback(data.portfolioUpdates[0]);

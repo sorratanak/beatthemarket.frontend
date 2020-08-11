@@ -15,11 +15,8 @@ export function GameEventsSubscriber({ gameId, callback }: Props) {
     },
   );
 
-  console.log('GameEvents Subscriber', data, loading, error);
-
   useEffect(() => {
     if (data) {
-      console.log('GameEvents callback data', data);
       callback(data);
     }
   }, [data]);
