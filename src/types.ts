@@ -56,7 +56,7 @@ export interface IBuySellStockInput {
   stockId: string;
   stockAmount: number;
   tickId: string;
-  tickTime: number;
+  // tickTime: number;
   tickPrice: number;
 }
 

@@ -37,7 +37,7 @@ export function getSellBuyStockRequest(
         stockId: activeStock.id,
         stockAmount: Math.round(stockAmount),
         tickId: lastTick.stockTickId,
-        tickTime: Number(lastTick.stockTickTime),
+        // tickTime: lastTick.stockTickTime,
         tickPrice: lastTick.stockTickClose,
       },
     },
