@@ -37,13 +37,10 @@ export function getSellBuyStockRequest(
         stockId: activeStock.id,
         stockAmount: Math.round(stockAmount),
         tickId: lastTick.stockTickId,
-        // tickTime: lastTick.stockTickTime,
         tickPrice: lastTick.stockTickClose,
       },
     },
   };
-
-  console.log('buysellstockrequest', requestBody);
 
   return requestBody;
 }

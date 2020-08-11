@@ -2,10 +2,11 @@ import { useEffect } from 'react';
 import { useSubscription } from '@apollo/client';
 
 import porfolioGraphql from '../portfolio';
+import { IPortfolio } from '../../types';
 
 interface Props {
   gameId: string;
-  callback: (data: any) => void; // TODO typing
+  callback: (portfolio: IPortfolio) => void;
 }
 export function PortfolioSubscriber({ gameId, callback }: Props) {
   const { data, loading, error } = useSubscription(
@@ -15,11 +16,9 @@ export function PortfolioSubscriber({ gameId, callback }: Props) {
     },
   );
 
-  console.log('Portfolio Subscriber', data, loading, error);
-
   useEffect(() => {
     if (data) {
-      callback(data);
+      callback(data.portfolioUpdates[0]);
     }
   }, [data]);
 

@@ -39,7 +39,6 @@ export function LineChart({ data }: Props) {
       pickRandom([
         COLORS.BILBAO,
         COLORS.VIKING,
-        COLORS.EBONY_CLAY,
         COLORS.CORNFLOWER_BLUE,
         COLORS.VALENCIA,
         COLORS.MACARONI_AND_CHEESE,

@@ -42,7 +42,7 @@ export const getThemedStyles = (theme: ITheme) =>
       height: '100%',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: theme.GAME_SCREEN.VIEW_COLOR,
+      backgroundColor: COLORS.WHITE,
       borderRadius: 10,
       ...COMMON_STYLES.SHADOW_BOX,
     },
@@ -113,6 +113,7 @@ export const getThemedStyles = (theme: ITheme) =>
     },
     chartFooterSliderButtonTitle: {
       fontSize: 20,
+      color: theme.GAME_SCREEN.TEXT_COLOR,
     },
     chartFooterSliderContainer: {
       flex: 0,

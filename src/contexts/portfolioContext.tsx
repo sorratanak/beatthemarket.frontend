@@ -1,9 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import noop from 'lodash/noop';
+import { IPortfolio } from '../types';
 
 interface ContextProps {
-  portfolio: any;
-  onSetPortfolio: (portfolio: any) => void; // TODO typing
+  portfolio: IPortfolio;
+  onSetPortfolio: (portfolio: IPortfolio) => void;
 }
 
 const DEFAULT_PORTFOLIO_CONTEXT: ContextProps = {
@@ -18,10 +19,10 @@ const ContextProvider = ({
 }: {
   children: React.ReactNode | React.ReactNode[];
 }) => {
-  const [portfolio, setPortfolio] = useState(null); // TODO typing
+  const [portfolio, setPortfolio] = useState<IPortfolio>(null);
 
   const onSetPortfolio = useCallback(
-    (newPortfolio: any) => {
+    (newPortfolio: IPortfolio) => {
       setPortfolio(newPortfolio);
     },
     [setPortfolio],

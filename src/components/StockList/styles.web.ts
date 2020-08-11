@@ -22,6 +22,8 @@ export const getThemedStyles = (theme: ITheme) => {
     activeListItemContainer: {
       backgroundColor: theme.GAME_SCREEN.LIST_VIEW_ACTIVE_COLOR,
     },
-    listItemTitle: {},
+    listItemTitle: {
+      color: theme.GAME_SCREEN.TEXT_COLOR,
+    },
   });
 };

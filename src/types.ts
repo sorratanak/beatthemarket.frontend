@@ -56,8 +56,14 @@ export interface IBuySellStockInput {
   stockId: string;
   stockAmount: number;
   tickId: string;
-  // tickTime: number;
   tickPrice: number;
+}
+
+export interface IPortfolio {
+  gameId: string;
+  profitLoss: number;
+  profitLossType: string;
+  stockId: string;
 }
 
 /* ------ Requests ------ */

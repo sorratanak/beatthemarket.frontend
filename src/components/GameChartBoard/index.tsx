@@ -10,7 +10,7 @@ import Slider from '@react-native-community/slider';
 
 import { IPoint, IStockChange } from '../../types';
 import { LineChart } from '../LineChart';
-import { GameContext, ThemeContext } from '../../contexts';
+import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 import { getStockChanges } from '../../utils/parsing';
 import { StockList } from '../StockList';
@@ -23,6 +23,7 @@ interface ChartHeaderProps {
 }
 function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
   // const { user } = useContext(UserContext);
+  const { portfolio } = useContext(PortfolioContext);
   const { activeStock } = useContext(GameContext);
 
   const [prelastItem, lastItem] = useMemo(() => {
@@ -64,11 +65,13 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
           </Text>
         </View>
       )}
-      <View style={themedStyles.userBalanceContainer}>
-        {/* <Text style={themedStyles.chartHeaderStockChangeValue}>
-          $ {user?.userAccounts[0]?.accountBalance}
-        </Text> */}
-      </View>
+      {portfolio && (
+        <View style={themedStyles.userBalanceContainer}>
+          <Text style={themedStyles.chartHeaderStockChangeValue}>
+            $ {portfolio?.profitLoss?.toFixed(2)}
+          </Text>
+        </View>
+      )}
     </View>
   );
 }
