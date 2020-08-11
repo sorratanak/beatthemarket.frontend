@@ -15,6 +15,7 @@ const COMMON_THEME: ITheme = {
     LIST_VIEW_INDICATOR_TEXT_COLOR: COLORS.BLACK,
   },
   SETTINGS_SCREEN: {},
+  SIGNIN_SCREEN: {},
 };
 
 export const LIGHT_THEME: ITheme = {
@@ -39,6 +40,7 @@ export const LIGHT_THEME: ITheme = {
     BACKGROUND_COLOR: COLORS.MERCURY,
     SWITCH_TITLE_COLOR: COLORS.BLACK,
   },
+  SIGNIN_SCREEN: {},
 };
 
 export const DARK_THEME: ITheme = {
@@ -63,4 +65,5 @@ export const DARK_THEME: ITheme = {
     BACKGROUND_COLOR: COLORS.MIRAGE,
     SWITCH_TITLE_COLOR: COLORS.WHITE,
   },
+  SIGNIN_SCREEN: {},
 };
