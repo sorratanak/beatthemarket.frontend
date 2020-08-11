@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { FlatList, TouchableOpacity, Text } from 'react-native';
 
 import { getThemedStyles } from './styles';
@@ -38,8 +38,7 @@ interface Props {
 }
 export function StockList({ data, activeStock, onItemPress }: Props) {
   const { theme } = useContext(ThemeContext);
-  // TODO useMemo
-  const themedStyles = getThemedStyles(theme);
+  const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   return (
     <FlatList

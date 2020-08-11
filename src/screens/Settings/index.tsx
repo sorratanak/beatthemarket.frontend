@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext, useCallback, useMemo } from 'react';
 import { Switch, Text } from 'react-native';
 
 import { Container } from '../../components';
@@ -11,8 +11,7 @@ import { ThemeContext } from '../../contexts';
 export function Settings() {
   const { theme, switchTheme } = useContext(ThemeContext);
 
-  // TODO useMemo
-  const themedStyles = getThemedStyles(theme);
+  const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   const onSwitchTheme = useCallback(() => {
     switchTheme(theme === LIGHT_THEME ? DARK_THEME : LIGHT_THEME);

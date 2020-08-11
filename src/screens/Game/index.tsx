@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useMemo } from 'react';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -19,8 +19,7 @@ export function Game() {
   );
   const { onSetPortfolio } = useContext(PortfolioContext);
 
-  // TODO useMemo
-  const themedStyles = getThemedStyles(theme);
+  const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   const [data, setData] = useState<IPoint[]>([]);
 
