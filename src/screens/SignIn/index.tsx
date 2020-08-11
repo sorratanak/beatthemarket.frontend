@@ -18,7 +18,7 @@ export function SignIn() {
 
   return (
     <Container>
-      <Text>Sign In</Text>
+      <Text>Google sign In</Text>
       {/* <TextInput
         style={styles.textInputStyle}
         placeholder="Email"
