@@ -1,12 +1,18 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
-  textInputStyle: {
-    borderWidth: 1,
-    borderColor: 'grey',
-    width: '80%',
-    height: 50,
-    marginTop: 10,
-    textAlign: 'center',
-  },
-});
+import { ITheme } from '../../themes/interface';
+
+export const getThemedStyles = (theme: ITheme) =>
+  StyleSheet.create({
+    signinContainer: {},
+    signinSubcontainer: {},
+    signinInputContainer: {},
+    textInputStyle: {},
+    forgotPasswordContainer: {},
+    restorePassword: {},
+    buttonContainer: {},
+    loginButton: {},
+    signupButton: {},
+    socialMediaContainer: {},
+    socialMediaButton: {},
+  });

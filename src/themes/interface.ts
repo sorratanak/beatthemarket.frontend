@@ -27,8 +27,14 @@ interface ISettingsScreenTheme {
   SWITCH_TITLE_COLOR?: string;
 }
 
+interface ISignInScreenTheme {
+  BACKGROUND_COLOR?: string;
+  BACKGROUND_TEXT_INPUT?: string;
+}
+
 export interface ITheme {
   MENU?: IMenuTheme;
   GAME_SCREEN?: IGameScreenTheme;
   SETTINGS_SCREEN?: ISettingsScreenTheme;
+  SIGNIN_SCREEN?: ISignInScreenTheme;
 }
