@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { ITheme } from '../../themes/interface';
 import { LIGHT_THEME } from '../../themes';
+import { COMMON_STYLES } from '../../themes/commonStyles';
 
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
@@ -15,39 +16,58 @@ export const getThemedStyles = (theme: ITheme) =>
       paddingVertical: 40,
     },
     textInputStyle: {
-      backgroundColor: theme.SIGNIN_SCREEN.BACKGROUND_TEXT_INPUT,
-      width: 270,
-      height: 50,
-      paddingLeft: 30,
-      marginBottom: 30,
+      backgroundColor: theme.SIGNIN_SCREEN.TEXT_INPUT_BACKGROUND,
+      color: theme.SIGNIN_SCREEN.TEXT_INPUT_COLOR,
+      fontSize: 20,
+      fontWeight: '300',
+      width: 535,
+      height: 70,
       borderWidth: theme === LIGHT_THEME ? 1 : 0,
       borderRadius: 7,
       borderColor: 'rgba(126, 126, 126, 0.2)',
+      paddingLeft: 30,
+      marginBottom: 30,
     },
     forgotPasswordContainer: {
       display: 'flex',
       flexDirection: 'row',
-      marginBottom: 20,
+      justifyContent: 'center',
+      marginBottom: 50,
+    },
+    forgotPassword: {
+      fontWeight: '300',
+      fontSize: 20,
+      color: theme.SIGNIN_SCREEN.FORGOT_PASSWORD_COLOR,
     },
     restorePassword: {
-      color: 'red',
+      fontWeight: '500',
+      fontSize: 20,
+      color: theme.SIGNIN_SCREEN.RESTORE_PASSWORD_COLOR,
     },
     buttonContainer: {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
-    loginButton: {
+    button: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: 257,
+      height: 60,
       borderWidth: 1,
       borderRadius: 7,
-      paddingVertical: 15,
-      paddingHorizontal: 25,
+      borderColor: theme.SIGNIN_SCREEN.BUTTON_BORDER_COLOR,
+    },
+    buttonText: {
+      fontWeight: '300',
+      fontSize: 20,
+    },
+    loginButtonText: {
+      color: theme.SIGNIN_SCREEN.LOGIN_BUTTON_TEXT_COLOR,
     },
     signupButton: {
-      borderWidth: 1,
-      borderRadius: 7,
-      paddingVertical: 15,
-      paddingHorizontal: 25,
+      backgroundColor: theme.SIGNIN_SCREEN.SIGNUP_BUTTON_BACKGROUND_COLOR,
     },
     socialMediaContainer: {
       display: 'flex',
@@ -57,10 +77,51 @@ export const getThemedStyles = (theme: ITheme) =>
       marginBottom: 40,
     },
     socialMediaButton: {
-      borderWidth: 1,
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      overflow: 'hidden',
       borderRadius: 7,
-      paddingVertical: 5,
-      paddingLeft: 30,
-      paddingRight: 10,
+      height: 40,
+    },
+    socialMediaButtonText: {
+      fontSize: 15,
+      fontWeight: '500',
+      paddingHorizontal: 20,
+      color: theme.SIGNIN_SCREEN.SOCIAL_MEDIA_BUTTON_TEXT_COLOR,
+    },
+    socialMediaIconContainer: {
+      display: 'flex',
+      justifyContent: 'center',
+      borderRadius: 7,
+      height: 40,
+      paddingHorizontal: 10,
+      ...COMMON_STYLES.SHADOW_BOX,
+    },
+    socialMediaIcon: {
+      width: 30,
+      height: 30,
+    },
+    googleButtonContainer: {
+      backgroundColor: theme.SIGNIN_SCREEN.GOOGLE_BUTTON_CONTAINER_COLOR,
+    },
+    googleIconContainer: {
+      backgroundColor: theme.SIGNIN_SCREEN.GOOGLE_ICON_CONTAINER_COLOR,
+    },
+    facebookButtonContainer: {
+      backgroundColor: theme.SIGNIN_SCREEN.FACEBOOK_BUTTON_CONTAINER_COLOR,
+    },
+    facebookIconContainer: {
+      backgroundColor: theme.SIGNIN_SCREEN.FACEBOOK_ICON_CONTAINER_COLOR,
+    },
+    appleButtonContainer: {
+      backgroundColor: theme.SIGNIN_SCREEN.APPLE_BUTTON_CONTAINER_COLOR,
+      borderWidth: theme === LIGHT_THEME ? 1 : 0,
+    },
+    appleButtonText: {
+      fontSize: 15,
+      fontWeight: '500',
+      paddingHorizontal: 20,
+      color: theme.SIGNIN_SCREEN.APPLE_BUTTON_TEXT_COLOR,
     },
   });

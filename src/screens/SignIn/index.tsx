@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { Text, Button, TextInput, View, TouchableOpacity } from 'react-native';
+import { Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { StackParams } from '../../navigation';
 import { Container } from '../../components';
 import { ThemeContext, UserContext } from '../../contexts';
 import { getThemedStyles } from './styles';
+import { IMAGES } from '../../assets';
 
 type NavigationProps = StackNavigationProp<StackParams, 'SignIn'>;
 
@@ -37,33 +38,74 @@ export function SignIn() {
             secureTextEntry
           />
           <View style={themedStyles.forgotPasswordContainer}>
-            <Text>Forgot your password?</Text>
+            <Text style={themedStyles.forgotPassword}>Forgot password?</Text>
             <TouchableOpacity>
-              <Text style={themedStyles.restorePassword}> Press here</Text>
+              <Text style={themedStyles.restorePassword}> Click here</Text>
             </TouchableOpacity>
           </View>
           <View style={themedStyles.buttonContainer}>
             <TouchableOpacity
-              style={themedStyles.loginButton}
+              style={themedStyles.button}
               onPress={signInWithGoogle}>
-              <Text>Log in</Text>
+              <Text
+                style={[themedStyles.buttonText, themedStyles.loginButtonText]}>
+                Log in
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={themedStyles.signupButton}
+              style={[themedStyles.signupButton, themedStyles.button]}
               onPress={() => navigate('SignUp')}>
-              <Text>Sign Up</Text>
+              <Text style={themedStyles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style={themedStyles.socialMediaContainer}>
-          <TouchableOpacity style={themedStyles.socialMediaButton}>
-            <Text>Google</Text>
+          <TouchableOpacity
+            style={[
+              themedStyles.socialMediaButton,
+              themedStyles.googleButtonContainer,
+            ]}>
+            <View
+              style={[
+                themedStyles.socialMediaIconContainer,
+                themedStyles.googleIconContainer,
+              ]}>
+              <Image
+                source={IMAGES.GOOGLE}
+                style={themedStyles.socialMediaIcon}
+              />
+            </View>
+            <Text style={themedStyles.socialMediaButtonText}>Google</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={themedStyles.socialMediaButton}>
-            <Text>Facebook</Text>
+          <TouchableOpacity
+            style={[
+              themedStyles.socialMediaButton,
+              themedStyles.facebookButtonContainer,
+            ]}>
+            <View
+              style={[
+                themedStyles.socialMediaIconContainer,
+                themedStyles.facebookIconContainer,
+              ]}>
+              <Image
+                source={IMAGES.FACEBOOK}
+                style={themedStyles.socialMediaIcon}
+              />
+            </View>
+            <Text style={themedStyles.socialMediaButtonText}>Facebook</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={themedStyles.socialMediaButton}>
-            <Text>Twitter</Text>
+          <TouchableOpacity
+            style={[
+              themedStyles.socialMediaButton,
+              themedStyles.appleButtonContainer,
+            ]}>
+            <View style={themedStyles.socialMediaIconContainer}>
+              <Image
+                source={IMAGES.APPLE}
+                style={themedStyles.socialMediaIcon}
+              />
+            </View>
+            <Text style={themedStyles.appleButtonText}>Sign in with Apple</Text>
           </TouchableOpacity>
         </View>
       </View>
