@@ -128,16 +128,21 @@ function ChartFooter({ themedStyles }: ChartFooterProps) {
           style={themedStyles.chartFooterSliderButtonContainer}>
           <Text style={themedStyles.chartFooterSliderButtonTitle}>-</Text>
         </TouchableOpacity>
-        <Slider
-          style={themedStyles.chartFooterSliderContainer}
-          value={sliderValue}
-          onValueChange={setSliderValue}
-          minimumValue={SLIDER_MIN_VALUE}
-          maximumValue={SLIDER_MAX_VALUE}
-          thumbTintColor={COLORS.WHITE}
-          minimumTrackTintColor={COLORS.GRAY}
-          maximumTrackTintColor={COLORS.GRAY}
-        />
+        <View>
+          <Text style={themedStyles.chartFooterSharedTitle}>
+            {Math.round(sliderValue)} shared
+          </Text>
+          <Slider
+            style={themedStyles.chartFooterSliderContainer}
+            value={sliderValue}
+            onValueChange={setSliderValue}
+            minimumValue={SLIDER_MIN_VALUE}
+            maximumValue={SLIDER_MAX_VALUE}
+            thumbTintColor={COLORS.WHITE}
+            minimumTrackTintColor={COLORS.GRAY}
+            maximumTrackTintColor={COLORS.GRAY}
+          />
+        </View>
         <TouchableOpacity
           onPress={() => onChangeSliderByButton(STOCK_CHANGE_TYPE.BUY)}
           style={themedStyles.chartFooterSliderButtonContainer}>
