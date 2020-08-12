@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
+import _ from 'lodash';
 
 import { IPoint, IStockChange } from '../../types';
 import { LineChart } from '../LineChart';
@@ -15,7 +16,7 @@ import { getThemedStyles } from './styles';
 import { getStockChanges } from '../../utils/parsing';
 import { StockList } from '../StockList';
 import { COLORS } from '../../themes/colors';
-import { STOCK_CHANGE_TYPE } from '../../constants';
+import { STOCK_CHANGE_TYPE, ACCOUNT_BALANCE_TYPE } from '../../constants';
 
 interface ChartHeaderProps {
   themedStyles: any;
@@ -23,8 +24,21 @@ interface ChartHeaderProps {
 }
 function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
   // const { user } = useContext(UserContext);
-  const { portfolio } = useContext(PortfolioContext);
+  const { profit, balance } = useContext(PortfolioContext);
   const { activeStock } = useContext(GameContext);
+
+  const activeProfit = useMemo(() => profit[activeStock?.id], [
+    profit,
+    activeStock,
+  ]);
+  const activeBalance = useMemo(
+    () =>
+      _.find(
+        Object.values(balance),
+        (someBalance) => someBalance.name === ACCOUNT_BALANCE_TYPE.CASH,
+      ),
+    [balance],
+  );
 
   const [prelastItem, lastItem] = useMemo(() => {
     const [prelast, last] = data.slice(-2);
@@ -65,13 +79,18 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
           </Text>
         </View>
       )}
-      {portfolio && (
-        <View style={themedStyles.userBalanceContainer}>
-          <Text style={themedStyles.chartHeaderStockChangeValue}>
-            $ {portfolio?.profitLoss?.toFixed(2)}
+      <View style={themedStyles.userBalanceContainer}>
+        {activeProfit && (
+          <Text style={themedStyles.chartHeaderStockProfitLoss}>
+            $ {activeProfit?.profitLoss?.toFixed(2)}
           </Text>
-        </View>
-      )}
+        )}
+        {activeBalance && (
+          <Text style={themedStyles.chartHeaderCashBalance}>
+            $ {activeBalance?.balance?.toFixed(2)}
+          </Text>
+        )}
+      </View>
     </View>
   );
 }

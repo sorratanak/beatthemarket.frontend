@@ -17,7 +17,7 @@ export function Game() {
   const { gameId, activeStock, onAddStockTicks, onSetGameEvents } = useContext(
     GameContext,
   );
-  const { onSetPortfolio } = useContext(PortfolioContext);
+  const { onPortfolioUpdate } = useContext(PortfolioContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -46,7 +46,7 @@ export function Game() {
       {gameId && (
         <>
           <StockTicksSubscriber gameId={gameId} callback={onAddStockTicks} />
-          <PortfolioSubscriber gameId={gameId} callback={onSetPortfolio} />
+          <PortfolioSubscriber gameId={gameId} callback={onPortfolioUpdate} />
           <GameEventsSubscriber gameId={gameId} callback={onSetGameEvents} />
         </>
       )}

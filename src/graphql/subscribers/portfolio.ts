@@ -6,7 +6,7 @@ import { IPortfolio } from '../../types';
 
 interface Props {
   gameId: string;
-  callback: (portfolio: IPortfolio) => void;
+  callback: (portfolio: IPortfolio[]) => void;
 }
 export function PortfolioSubscriber({ gameId, callback }: Props) {
   const { data, loading, error } = useSubscription(
@@ -16,9 +16,11 @@ export function PortfolioSubscriber({ gameId, callback }: Props) {
     },
   );
 
+  console.log('PortfolioSubscriber', data);
+
   useEffect(() => {
     if (data) {
-      callback(data.portfolioUpdates[0]);
+      callback(data.portfolioUpdates);
     }
   }, [data]);
 
