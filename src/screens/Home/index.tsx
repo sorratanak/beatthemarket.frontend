@@ -7,7 +7,7 @@ import { Container, ScoreBoard } from '../../components';
 import { UserContext } from '../../contexts/userContext';
 import { GameContext } from '../../contexts/gameContext';
 import gameGraphql from '../../graphql/game';
-// import usersGraphql from '../../graphql/users';
+import usersGraphql from '../../graphql/users';
 
 export function Home({ navigation }: ScreenProps) {
   const { logout } = useContext(UserContext);
@@ -22,9 +22,9 @@ export function Home({ navigation }: ScreenProps) {
   );
 
   /* Queries */
-  // const { data: users, loading: usersLoading, error: usersError } = useQuery(
-  //   usersGraphql.queries.GET_USERS,
-  // );
+  const { data: users, loading: usersLoading, error: usersError } = useQuery(
+    usersGraphql.queries.GET_USERS,
+  );
 
   useEffect(() => {
     if (createGameResponse) {
@@ -47,19 +47,13 @@ export function Home({ navigation }: ScreenProps) {
 
   return (
     <Container>
-      <ScoreBoard />
+      <ScoreBoard users={users} />
       <Button
         testID="Create Game"
         title="Create Game"
         onPress={onCreateGamePress}
       />
-      <Button
-        testID="logout"
-        title="Logout"
-        onPress={() => {
-          logout();
-        }}
-      />
+      <Button testID="logout" title="Logout" onPress={logout} />
     </Container>
   );
 }
