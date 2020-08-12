@@ -39,7 +39,7 @@ export interface IPoint {
 
 export interface IStockChange {
   percent: number;
-  type: 'fall' | 'rise';
+  type: 'sell' | 'buy';
   currentValue: number;
   difference: number;
 }

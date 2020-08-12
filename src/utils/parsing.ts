@@ -4,12 +4,12 @@ export function getStockChanges(prelastItem: IPoint, lastItem: IPoint) {
   const currentValue: number = lastItem?.y;
 
   let difference: number = 0;
-  let type: 'fall' | 'rise' = null;
+  let type: 'sell' | 'buy' = null;
   let percent: number = 0;
 
   if (prelastItem) {
     difference = Number((lastItem.y - prelastItem.y).toFixed(2));
-    type = prelastItem.y > lastItem.y ? 'fall' : 'rise';
+    type = prelastItem.y > lastItem.y ? 'sell' : 'buy';
     percent = Number(((lastItem.y / prelastItem.y) * 100 - 100).toFixed(2));
   }
 

@@ -64,7 +64,7 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
       </View>
       {stockChange && (
         <View style={themedStyles.chartHeaderSubcontainer}>
-          <Text style={themedStyles.chartHeaderStockChangeValue}>
+          <Text style={themedStyles.chartHeaderStockProfitLoss}>
             {stockChange.currentValue && `$ `}
             {stockChange.currentValue?.toFixed(2)}
           </Text>
@@ -80,16 +80,12 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
         </View>
       )}
       <View style={themedStyles.userBalanceContainer}>
-        {activeProfit && (
-          <Text style={themedStyles.chartHeaderStockProfitLoss}>
-            $ {activeProfit?.profitLoss?.toFixed(2)}
-          </Text>
-        )}
-        {activeBalance && (
-          <Text style={themedStyles.chartHeaderCashBalance}>
-            $ {activeBalance?.balance?.toFixed(2)}
-          </Text>
-        )}
+        <Text style={themedStyles.chartHeaderStockProfitLoss}>
+          $ {activeProfit?.profitLoss?.toFixed(2) || 0}
+        </Text>
+        <Text style={themedStyles.chartHeaderCashBalance}>
+          $ {activeBalance?.balance?.toFixed(2) || 0}
+        </Text>
       </View>
     </View>
   );
@@ -109,7 +105,7 @@ function ChartFooter({ themedStyles }: ChartFooterProps) {
 
   const onChangeSliderByButton = useCallback(
     (type: string) => {
-      if (type === STOCK_CHANGE_TYPE.FALL) {
+      if (type === STOCK_CHANGE_TYPE.SELL) {
         if (sliderValue > SHARED_CHANGE_STEP) {
           setSliderValue(sliderValue - SHARED_CHANGE_STEP);
         } else {
@@ -128,7 +124,7 @@ function ChartFooter({ themedStyles }: ChartFooterProps) {
     <View style={themedStyles.chartFooterContainer}>
       <View style={themedStyles.chartFooterCell}>
         <TouchableOpacity
-          onPress={() => onChangeSliderByButton(STOCK_CHANGE_TYPE.FALL)}
+          onPress={() => onChangeSliderByButton(STOCK_CHANGE_TYPE.SELL)}
           style={themedStyles.chartFooterSliderButtonContainer}>
           <Text style={themedStyles.chartFooterSliderButtonTitle}>-</Text>
         </TouchableOpacity>
@@ -143,7 +139,7 @@ function ChartFooter({ themedStyles }: ChartFooterProps) {
           maximumTrackTintColor={COLORS.GRAY}
         />
         <TouchableOpacity
-          onPress={() => onChangeSliderByButton(STOCK_CHANGE_TYPE.RISE)}
+          onPress={() => onChangeSliderByButton(STOCK_CHANGE_TYPE.BUY)}
           style={themedStyles.chartFooterSliderButtonContainer}>
           <Text style={themedStyles.chartFooterSliderButtonTitle}>+</Text>
         </TouchableOpacity>
@@ -155,7 +151,7 @@ function ChartFooter({ themedStyles }: ChartFooterProps) {
             themedStyles.chartFooterButtonContainer,
             themedStyles.chartFooterButtonRise,
           ]}>
-          <Text style={themedStyles.chartFooterButtonText}>Rise</Text>
+          <Text style={themedStyles.chartFooterButtonText}>Buy</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => onSellStock(sliderValue)}
@@ -163,7 +159,7 @@ function ChartFooter({ themedStyles }: ChartFooterProps) {
             themedStyles.chartFooterButtonContainer,
             themedStyles.chartFooterButtonFall,
           ]}>
-          <Text style={themedStyles.chartFooterButtonText}>Fall</Text>
+          <Text style={themedStyles.chartFooterButtonText}>Sell</Text>
         </TouchableOpacity>
       </View>
     </View>
