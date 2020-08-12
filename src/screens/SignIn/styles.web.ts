@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { ITheme } from '../../themes/interface';
 import { LIGHT_THEME } from '../../themes';
+import { COMMON_STYLES } from '../../themes/commonStyles';
 
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
@@ -76,10 +77,51 @@ export const getThemedStyles = (theme: ITheme) =>
       marginBottom: 40,
     },
     socialMediaButton: {
-      borderWidth: 1,
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      overflow: 'hidden',
       borderRadius: 7,
-      paddingVertical: 5,
-      paddingLeft: 30,
-      paddingRight: 10,
+      height: 40,
+    },
+    socialMediaButtonText: {
+      fontSize: 15,
+      fontWeight: '500',
+      paddingHorizontal: 20,
+      color: theme.SIGNIN_SCREEN.SOCIAL_MEDIA_BUTTON_TEXT_COLOR,
+    },
+    socialMediaIconContainer: {
+      display: 'flex',
+      justifyContent: 'center',
+      borderRadius: 7,
+      height: 40,
+      paddingHorizontal: 10,
+      ...COMMON_STYLES.SHADOW_BOX,
+    },
+    socialMediaIcon: {
+      width: 30,
+      height: 30,
+    },
+    googleButtonContainer: {
+      backgroundColor: theme.SIGNIN_SCREEN.GOOGLE_BUTTON_CONTAINER_COLOR,
+    },
+    googleIconContainer: {
+      backgroundColor: theme.SIGNIN_SCREEN.GOOGLE_ICON_CONTAINER_COLOR,
+    },
+    facebookButtonContainer: {
+      backgroundColor: theme.SIGNIN_SCREEN.FACEBOOK_BUTTON_CONTAINER_COLOR,
+    },
+    facebookIconContainer: {
+      backgroundColor: theme.SIGNIN_SCREEN.FACEBOOK_ICON_CONTAINER_COLOR,
+    },
+    appleButtonContainer: {
+      backgroundColor: theme.SIGNIN_SCREEN.APPLE_BUTTON_CONTAINER_COLOR,
+      borderWidth: theme === LIGHT_THEME ? 1 : 0,
+    },
+    appleButtonText: {
+      fontSize: 15,
+      fontWeight: '500',
+      paddingHorizontal: 20,
+      color: theme.SIGNIN_SCREEN.APPLE_BUTTON_TEXT_COLOR,
     },
   });

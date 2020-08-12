@@ -18,4 +18,13 @@ export const getThemedStyles = (theme: ITheme) =>
     signupButton: {},
     socialMediaContainer: {},
     socialMediaButton: {},
+    socialMediaButtonText: {},
+    socialMediaIconContainer: {},
+    socialMediaIcon: {},
+    googleButtonContainer: {},
+    googleIconContainer: {},
+    facebookButtonContainer: {},
+    facebookIconContainer: {},
+    appleButtonContainer: {},
+    appleButtonText: {},
   });
