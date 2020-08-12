@@ -80,6 +80,26 @@ export interface IPortfolioBalance {
 
 export type IPortfolio = IPortfolioProfit & IPortfolioBalance;
 
+export type ILevelString =
+  | 'one'
+  | 'two'
+  | 'three'
+  | 'four'
+  | 'five'
+  | 'six'
+  | 'seven'
+  | 'eight'
+  | 'nine'
+  | 'ten';
+
+export interface IGameEvent {
+  gameId: string;
+  level: ILevelString;
+  minutesRemaining: number;
+  secondsRemaining: number;
+  __typename: 'LevelTimer';
+}
+
 /* ------ Requests ------ */
 
 export interface IGraphqlVariableRequest<VariablesObj> {

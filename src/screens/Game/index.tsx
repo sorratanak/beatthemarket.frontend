@@ -14,14 +14,21 @@ import { getThemedStyles } from './styles';
 
 export function Game() {
   const { theme } = useContext(ThemeContext);
-  const { gameId, activeStock, onAddStockTicks, onSetGameEvents } = useContext(
-    GameContext,
-  );
+  const {
+    gameId,
+    activeStock,
+    onAddStockTicks,
+    onSetGameEvents,
+    gameEvents,
+  } = useContext(GameContext);
   const { onPortfolioUpdate } = useContext(PortfolioContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   const [data, setData] = useState<IPoint[]>([]);
+
+  // TODO win/lose logic [blocked by ui for now]
+  // const { level } = gameEvents;
 
   useEffect(() => {
     if (!gameId || !activeStock) {
