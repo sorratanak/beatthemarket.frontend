@@ -59,11 +59,16 @@ export const getThemedStyles = (theme: ITheme) =>
       lineHeight: 35,
       marginLeft: 10,
     },
-    chartHeaderStockChangeValue: {
+    chartHeaderStockProfitLoss: {
       color: theme.GAME_SCREEN.TEXT_COLOR,
       lineHeight: 28,
       fontSize: 20,
       fontWeight: '500',
+    },
+    chartHeaderCashBalance: {
+      color: theme.GAME_SCREEN.TEXT_COLOR,
+      lineHeight: 20,
+      fontSize: 14,
     },
     chartHeaderStockChangePositivePercent: {
       color: theme.GAME_SCREEN.NUMBER_INDICATOR_UP,

@@ -39,7 +39,7 @@ export interface IPoint {
 
 export interface IStockChange {
   percent: number;
-  type: 'fall' | 'rise';
+  type: 'sell' | 'buy';
   currentValue: number;
   difference: number;
 }
@@ -59,12 +59,26 @@ export interface IBuySellStockInput {
   tickPrice: number;
 }
 
-export interface IPortfolio {
+export type IPortfolioUpdateType = 'ProfitLoss' | 'AccountBalance';
+
+export interface IPortfolioProfit {
   gameId: string;
   profitLoss: number;
   profitLossType: string;
   stockId: string;
+  __typename: IPortfolioUpdateType;
 }
+
+export interface IPortfolioBalance {
+  id: string;
+  name: string;
+  amount: number;
+  balance: number;
+  counterParty: string | null;
+  __typename: IPortfolioUpdateType;
+}
+
+export type IPortfolio = IPortfolioProfit & IPortfolioBalance;
 
 /* ------ Requests ------ */
 

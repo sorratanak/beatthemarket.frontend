@@ -15,7 +15,6 @@ import { COLORS } from '../../themes/colors';
 import { IPoint } from '../../types';
 import { ANIMATION_OPTIONS, getThemedAxises } from './config';
 import { GameContext, ThemeContext } from '../../contexts';
-import { styles } from '../Container/styles';
 
 const WINDOW = Dimensions.get('window');
 const CHART_HEIGHT = WINDOW.height * 0.6;
