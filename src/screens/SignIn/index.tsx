@@ -37,21 +37,24 @@ export function SignIn() {
             secureTextEntry
           />
           <View style={themedStyles.forgotPasswordContainer}>
-            <Text>Forgot your password?</Text>
+            <Text style={themedStyles.forgotPassword}>Forgot password?</Text>
             <TouchableOpacity>
-              <Text style={themedStyles.restorePassword}> Press here</Text>
+              <Text style={themedStyles.restorePassword}> Click here</Text>
             </TouchableOpacity>
           </View>
           <View style={themedStyles.buttonContainer}>
             <TouchableOpacity
-              style={themedStyles.loginButton}
+              style={themedStyles.button}
               onPress={signInWithGoogle}>
-              <Text>Log in</Text>
+              <Text
+                style={[themedStyles.buttonText, themedStyles.loginButtonText]}>
+                Log in
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={themedStyles.signupButton}
+              style={[themedStyles.signupButton, themedStyles.button]}
               onPress={() => navigate('SignUp')}>
-              <Text>Sign Up</Text>
+              <Text style={themedStyles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
           </View>
         </View>

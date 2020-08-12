@@ -29,7 +29,13 @@ interface ISettingsScreenTheme {
 
 interface ISignInScreenTheme {
   BACKGROUND_COLOR?: string;
-  BACKGROUND_TEXT_INPUT?: string;
+  TEXT_INPUT_BACKGROUND?: string;
+  TEXT_INPUT_COLOR?: string;
+  FORGOT_PASSWORD_COLOR?: string;
+  RESTORE_PASSWORD_COLOR?: string;
+  BUTTON_BORDER_COLOR?: string;
+  LOGIN_BUTTON_TEXT_COLOR?: string;
+  SIGNUP_BUTTON_BACKGROUND_COLOR?: string;
 }
 
 export interface ITheme {
