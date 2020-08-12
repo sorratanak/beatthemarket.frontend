@@ -6,12 +6,6 @@ const GET_USERS = gql`
       userEmail
       userName
       userExternalUid
-      userAccounts {
-        accountId
-        accountName
-        accountBalance
-        accountAmount
-      }
     }
   }
 `;

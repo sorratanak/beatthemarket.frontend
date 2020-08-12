@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useMutation } from '@apollo/client';
 import _ from 'lodash';
 
-import { IStock, IStockTick } from '../types';
+import { IStock, IStockTick, IGameEvent } from '../types';
 import { getSellBuyStockRequest } from '../utils/parsing';
 import gameGraphql from '../graphql/game';
 
@@ -10,14 +10,14 @@ interface ContextProps {
   gameId: string;
   stocks: IStock[];
   activeStock: IStock;
-  gameEvents: any; // TODO typing
+  gameEvents: IGameEvent;
   onSetGameId: (gameId: string) => void;
   onSetStocks: (stocks: IStock[]) => void;
   onAddStockTicks: (ticks: IStockTick[]) => void;
   onSetActiveStock: (activeStock: IStock) => void;
   onSellStock: (stockAmount: number) => void;
   onBuyStock: (stockAmount: number) => void;
-  onSetGameEvents: (gameEvents: any) => void; // TODO typing
+  onSetGameEvents: (gameEvents: IGameEvent) => void;
 }
 
 const DEFAULT_GAME_CONTEXT: ContextProps = {
@@ -44,7 +44,7 @@ const ContextProvider = ({
   const [gameId, setGameId] = useState<string>(null);
   const [activeStock, setActiveStock] = useState<IStock>(null);
   const [stocks, setStocks] = useState<IStock[]>([]);
-  const [gameEvents, setGameEvents] = useState<any>(null); // TODO typing
+  const [gameEvents, setGameEvents] = useState<IGameEvent>(null); // TODO typing
 
   const [buyStock, { data: buyStockResponse }] = useMutation(
     gameGraphql.queries.BUY_STOCK,
@@ -116,9 +116,8 @@ const ContextProvider = ({
     [setActiveStock],
   );
 
-  // TODO typing
   const onSetGameEvents = useCallback(
-    (newGameEvents: any) => {
+    (newGameEvents: IGameEvent) => {
       setGameEvents(newGameEvents);
     },
     [setGameEvents],

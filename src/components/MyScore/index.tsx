@@ -7,9 +7,13 @@ import { styles } from './styles';
 import { IScore } from '../../types';
 import { DUMMY_DATA } from './dummy';
 
-interface Props extends IScore {}
+interface Props extends IScore {
+  users: any[];
+}
 
-export function MyScore({ percent, deposit, rate }: Props) {
+export function MyScore({ users, percent, deposit, rate }: Props) {
+  console.log(users);
+
   return (
     <View style={styles.container}>
       <ScoreRow percent={percent} deposit={deposit} rate={rate} />
