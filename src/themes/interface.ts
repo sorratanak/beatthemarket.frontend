@@ -27,8 +27,27 @@ interface ISettingsScreenTheme {
   SWITCH_TITLE_COLOR?: string;
 }
 
+interface ISignInScreenTheme {
+  BACKGROUND_COLOR?: string;
+  TEXT_INPUT_BACKGROUND?: string;
+  TEXT_INPUT_COLOR?: string;
+  FORGOT_PASSWORD_COLOR?: string;
+  RESTORE_PASSWORD_COLOR?: string;
+  BUTTON_BORDER_COLOR?: string;
+  LOGIN_BUTTON_TEXT_COLOR?: string;
+  SOCIAL_MEDIA_BUTTON_TEXT_COLOR?: string;
+  SIGNUP_BUTTON_BACKGROUND_COLOR?: string;
+  GOOGLE_BUTTON_CONTAINER_COLOR?: string;
+  GOOGLE_ICON_CONTAINER_COLOR?: string;
+  FACEBOOK_BUTTON_CONTAINER_COLOR?: string;
+  FACEBOOK_ICON_CONTAINER_COLOR?: string;
+  APPLE_BUTTON_CONTAINER_COLOR?: string;
+  APPLE_BUTTON_TEXT_COLOR?: string;
+}
+
 export interface ITheme {
   MENU?: IMenuTheme;
   GAME_SCREEN?: IGameScreenTheme;
   SETTINGS_SCREEN?: ISettingsScreenTheme;
+  SIGNIN_SCREEN?: ISignInScreenTheme;
 }
