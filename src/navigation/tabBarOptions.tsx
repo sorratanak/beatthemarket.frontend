@@ -1,8 +1,13 @@
-export const tabBarOptions = {
-  activeTintColor: 'white',
-  inactiveTintColor: 'gray',
-  style: { backgroundColor: '#242436' },
-};
+import { ITheme } from '../themes/interface';
+
+export const getThemedTabBarOptions = (theme: ITheme) => ({
+  activeTintColor: theme.MENU.ACTIVE_LABEL_COLOR,
+  inactiveTintColor: theme.MENU.INACTIVE_LABEL_COLOR,
+  labelStyle: {
+    fontSize: 10,
+  },
+  style: { backgroundColor: theme.MENU.BACKGROUND_COLOR },
+});
 
 export const commonHeaderOptions = {
   headerStyle: { backgroundColor: '#242436', borderBottomWidth: 0 },
