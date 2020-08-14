@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect, useContext } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import _ from 'lodash';
 import pickRandom from 'pick-random';
 
@@ -16,9 +16,14 @@ import { IPoint } from '../../types';
 import { ANIMATION_OPTIONS, getThemedAxises } from './config';
 import { GameContext, ThemeContext } from '../../contexts';
 
+// TODO dynamic CHART_HEIGHT & CHART_WIDTH
+
+const HEIGHT_COEF = Platform.OS === 'web' ? 0.6 : 0.5;
+const WIDTH_COEF = Platform.OS === 'web' ? 0.75 : 1;
+
 const WINDOW = Dimensions.get('window');
-const CHART_HEIGHT = WINDOW.height * 0.6;
-const CHART_WIDTH = WINDOW.width * 0.75;
+const CHART_HEIGHT = WINDOW.height * HEIGHT_COEF;
+const CHART_WIDTH = WINDOW.width * WIDTH_COEF;
 
 interface Props {
   data: IPoint[];

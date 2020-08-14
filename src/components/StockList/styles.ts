@@ -3,9 +3,24 @@ import { ITheme } from '../../themes/interface';
 
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
-    container: {},
-    contentContainer: {},
-    listItemContainer: {},
-    activeListItemContainer: {},
-    listItemTitle: {},
+    container: {
+      flex: 0,
+      flexGrow: 0,
+    },
+    contentContainer: {
+      paddingHorizontal: 16,
+    },
+    listItemContainer: {
+      backgroundColor: theme.GAME_SCREEN.VIEW_COLOR,
+      borderRadius: 20,
+      paddingHorizontal: 8,
+      paddingVertical: 3,
+      marginRight: 8,
+    },
+    activeListItemContainer: {
+      backgroundColor: theme.GAME_SCREEN.LIST_VIEW_ACTIVE_COLOR,
+    },
+    listItemTitle: {
+      color: theme.GAME_SCREEN.TEXT_COLOR,
+    },
   });

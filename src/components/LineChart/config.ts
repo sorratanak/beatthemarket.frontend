@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import { ITheme } from '../../themes/interface';
 
 export const ANIMATION_OPTIONS = {
@@ -12,8 +13,7 @@ export const getThemedAxises = (theme: ITheme) => ({
     axis: { stroke: theme.GAME_SCREEN.TEXT_COLOR },
     tickLabels: {
       fill: theme.GAME_SCREEN.TEXT_COLOR,
-      fontFamily: 'inherit',
-      fontSize: 16,
+      fontSize: Platform.OS === 'web' ? 16 : 13,
     },
   },
 });

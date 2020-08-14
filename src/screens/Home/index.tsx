@@ -42,7 +42,7 @@ export function Home({ navigation }: ScreenProps) {
   }, [startGameResponse]);
 
   const onCreateGamePress = useCallback(() => {
-    createGame({ variables: { gameLevel: 'one' } });
+    createGame({ variables: { gameLevel: 1 } });
   }, []);
 
   return (

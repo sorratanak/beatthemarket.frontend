@@ -5,14 +5,14 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
 import _ from 'lodash';
 
 import { IPoint, IStockChange } from '../../types';
 import { LineChart } from '../LineChart';
 import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
-import { getThemedStyles } from './styles';
+import { getThemedStyles } from './styles.web';
 import { getStockChanges } from '../../utils/parsing';
 import { StockList } from '../StockList';
 import { COLORS } from '../../themes/colors';
@@ -53,9 +53,15 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
 
   return (
     <View style={themedStyles.chartHeaderContainer}>
-      <Text style={themedStyles.chartHeaderTitleAbbr}>
-        {activeStock?.symbol}
-      </Text>
+      <View style={themedStyles.chartHeaderSubcontainer}>
+        <View style={themedStyles.chartHeaderImageContainer}>
+          <Text>Image here</Text>
+        </View>
+        <Text style={themedStyles.chartHeaderTitle}>{activeStock?.name} </Text>
+        <Text style={themedStyles.chartHeaderTitleAbbr}>
+          ({activeStock?.symbol})
+        </Text>
+      </View>
       {stockChange && (
         <View style={themedStyles.chartHeaderSubcontainer}>
           <Text style={themedStyles.chartHeaderStockProfitLoss}>
@@ -69,6 +75,7 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
                 : themedStyles.chartHeaderStockChangeNegativePercent
             }>
             {stockChange.difference}
+            {`    `}({stockChange.percent}%)
           </Text>
         </View>
       )}
@@ -118,13 +125,10 @@ function ChartFooter({ themedStyles }: ChartFooterProps) {
       <View style={themedStyles.chartFooterCell}>
         <TouchableOpacity
           onPress={() => onChangeSliderByButton(STOCK_CHANGE_TYPE.SELL)}
-          style={[
-            themedStyles.chartFooterSliderButtonContainer,
-            themedStyles.ml16,
-          ]}>
+          style={themedStyles.chartFooterSliderButtonContainer}>
           <Text style={themedStyles.chartFooterSliderButtonTitle}>-</Text>
         </TouchableOpacity>
-        <View style={themedStyles.chartFooterSliderArea}>
+        <View>
           <Text style={themedStyles.chartFooterSharesTitle}>
             {Math.round(sliderValue)} shares
           </Text>
@@ -141,10 +145,7 @@ function ChartFooter({ themedStyles }: ChartFooterProps) {
         </View>
         <TouchableOpacity
           onPress={() => onChangeSliderByButton(STOCK_CHANGE_TYPE.BUY)}
-          style={[
-            themedStyles.chartFooterSliderButtonContainer,
-            themedStyles.mr16,
-          ]}>
+          style={themedStyles.chartFooterSliderButtonContainer}>
           <Text style={themedStyles.chartFooterSliderButtonTitle}>+</Text>
         </TouchableOpacity>
       </View>
@@ -186,23 +187,21 @@ export function GameChartBoard({ chartData }: Props) {
   }, [activeStock]);
 
   return (
-    <SafeAreaView style={themedStyles.container}>
+    <View style={themedStyles.container}>
       <View style={themedStyles.chartArea}>
         <ChartHeader themedStyles={themedStyles} data={chartData} />
+        <View style={themedStyles.chartContainer}>
+          {isChart && <LineChart data={chartData} />}
+        </View>
+      </View>
+      <View style={themedStyles.infoArea}>
+        <ChartFooter themedStyles={themedStyles} />
         <StockList
           data={stocks}
           activeStock={activeStock}
           onItemPress={onSetActiveStock}
         />
-        <View style={themedStyles.chartContainer}>
-          <View style={themedStyles.chartView}>
-            {isChart && <LineChart data={chartData} />}
-          </View>
-        </View>
       </View>
-      <View style={themedStyles.infoArea}>
-        <ChartFooter themedStyles={themedStyles} />
-      </View>
-    </SafeAreaView>
+    </View>
   );
 }

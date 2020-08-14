@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 const CREATE_GAME = gql`
-  mutation CreateGame($gameLevel: String!) {
+  mutation CreateGame($gameLevel: Int!) {
     createGame(gameLevel: $gameLevel) {
       id
       stocks {
