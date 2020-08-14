@@ -142,4 +142,7 @@ export const getThemedStyles = (theme: ITheme) =>
     chartFooterButtonText: {
       color: COLORS.WHITE,
     },
+    chartFooterSharesTitle: {
+      color: theme.GAME_SCREEN.TEXT_COLOR,
+    },
   });
