@@ -1,4 +1,4 @@
-package com.beatthemarket;
+package com.beatthemarket.beatthemarket;
 
 import com.facebook.react.ReactActivity;
 
