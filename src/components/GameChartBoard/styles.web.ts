@@ -143,6 +143,8 @@ export const getThemedStyles = (theme: ITheme) =>
       color: COLORS.WHITE,
     },
     chartFooterSharesTitle: {
+      textAlign: 'center',
+      marginBottom: 9,
       color: theme.GAME_SCREEN.TEXT_COLOR,
     },
   });

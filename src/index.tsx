@@ -16,9 +16,9 @@ export function App() {
   );
 }
 
-AppRegistry.registerComponent('example', () => App);
+AppRegistry.registerComponent('BeatTheMarket', () => App);
 if (Platform.OS === 'web') {
-  AppRegistry.runApplication('example', {
+  AppRegistry.runApplication('BeatTheMarket', {
     rootTag: document.getElementById('root'),
   });
 }
