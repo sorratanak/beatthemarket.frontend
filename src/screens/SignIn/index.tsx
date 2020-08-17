@@ -8,6 +8,7 @@ import { ThemeContext, UserContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 import { IMAGES } from '../../assets';
 import { DefaultInput } from '../../components/DefaultInput';
+import { DefaultButton } from '../../components/DefaultButton';
 
 type NavigationProps = StackNavigationProp<StackParams, 'SignIn'>;
 
@@ -43,19 +44,10 @@ export function SignIn() {
             </TouchableOpacity>
           </View>
           <View style={themedStyles.buttonContainer}>
-            <TouchableOpacity
-              style={themedStyles.button}
-              onPress={signInWithGoogle}>
-              <Text
-                style={[themedStyles.buttonText, themedStyles.loginButtonText]}>
-                Log in
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[themedStyles.signupButton, themedStyles.button]}
-              onPress={() => navigate('SignUp')}>
-              <Text style={themedStyles.buttonText}>Sign Up</Text>
-            </TouchableOpacity>
+            <DefaultButton onPress={signInWithGoogle}>Log In</DefaultButton>
+            <DefaultButton onPress={() => navigate('SignUp')} withBg>
+              Sign Up
+            </DefaultButton>
           </View>
         </View>
         <View style={themedStyles.socialMediaContainer}>

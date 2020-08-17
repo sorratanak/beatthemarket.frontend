@@ -36,26 +36,6 @@ export const getThemedStyles = (theme: ITheme) =>
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
-    button: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: 257,
-      height: 60,
-      borderWidth: 1,
-      borderRadius: 7,
-      borderColor: theme.SIGNIN_SCREEN.BUTTON_BORDER_COLOR,
-    },
-    buttonText: {
-      fontWeight: '300',
-      fontSize: 20,
-    },
-    loginButtonText: {
-      color: theme.SIGNIN_SCREEN.LOGIN_BUTTON_TEXT_COLOR,
-    },
-    signupButton: {
-      backgroundColor: theme.SIGNIN_SCREEN.SIGNUP_BUTTON_BACKGROUND_COLOR,
-    },
     socialMediaContainer: {
       display: 'flex',
       flexDirection: 'row',
