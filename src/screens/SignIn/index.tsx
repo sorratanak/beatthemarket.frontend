@@ -44,8 +44,17 @@ export function SignIn() {
             </TouchableOpacity>
           </View>
           <View style={themedStyles.buttonContainer}>
-            <DefaultButton onPress={signInWithGoogle}>Log In</DefaultButton>
-            <DefaultButton onPress={() => navigate('SignUp')} withBg>
+            <DefaultButton
+              onPress={signInWithGoogle}
+              textColor={theme.SIGNIN_SCREEN.LOGIN_BUTTON_TEXT_COLOR}
+              style={{ button: { marginRight: 11 } }}>
+              Log In
+            </DefaultButton>
+            <DefaultButton
+              onPress={() => navigate('SignUp')}
+              backgroundColor={
+                theme.SIGNIN_SCREEN.SIGNUP_BUTTON_BACKGROUND_COLOR
+              }>
               Sign Up
             </DefaultButton>
           </View>

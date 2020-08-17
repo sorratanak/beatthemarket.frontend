@@ -39,7 +39,7 @@ export const getThemedStyles = (theme: ITheme) =>
       justifyContent: 'space-between',
     },
     socialMediaContainer: {
-      display: 'flex',
+      flex: 1,
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'center',
@@ -47,7 +47,7 @@ export const getThemedStyles = (theme: ITheme) =>
       marginBottom: 32,
     },
     socialMediaButton: {
-      display: 'flex',
+      flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
       overflow: 'hidden',
@@ -61,7 +61,7 @@ export const getThemedStyles = (theme: ITheme) =>
       color: theme.SIGNIN_SCREEN.SOCIAL_MEDIA_BUTTON_TEXT_COLOR,
     },
     socialMediaIconContainer: {
-      display: 'flex',
+      flex: 1,
       justifyContent: 'center',
       borderRadius: 7,
       height: 40,

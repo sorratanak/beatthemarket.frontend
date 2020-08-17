@@ -1,27 +1,47 @@
 import React, { useContext } from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, ViewStyle, TextStyle } from 'react-native';
 import { ThemeContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 
 interface Props {
   children: string;
-  withBg?: boolean;
+  backgroundColor?: string;
+  textColor?: string;
   onPress: () => void;
+  style?: {
+    button?: ViewStyle;
+    text?: TextStyle;
+  };
 }
 
-export function DefaultButton({ children, withBg, onPress }: Props) {
+export function DefaultButton({
+  children,
+  backgroundColor,
+  textColor,
+  style: propsStyle,
+  ...props
+}: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = getThemedStyles(theme);
-  const buttonStyle = withBg
-    ? [themedStyles.buttonBg, themedStyles.button]
+
+  const buttonStyle = backgroundColor
+    ? [themedStyles.button, { backgroundColor }]
     : themedStyles.button;
-  const textStyle = withBg
-    ? themedStyles.buttonText
-    : [themedStyles.buttonText, themedStyles.buttonTextColor];
+
+  const textStyle = textColor
+    ? [themedStyles.buttonText, { color: textColor }]
+    : themedStyles.buttonText;
 
   return (
-    <TouchableOpacity style={buttonStyle} onPress={onPress}>
-      <Text style={textStyle}>{children}</Text>
+    <TouchableOpacity {...props} style={[buttonStyle, propsStyle.button]}>
+      <Text style={[textStyle, propsStyle.text]}>{children}</Text>
     </TouchableOpacity>
   );
 }
+
+DefaultButton.defaultProps = {
+  style: {
+    button: {},
+    text: {},
+  },
+};

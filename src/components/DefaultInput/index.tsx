@@ -1,31 +1,15 @@
 import React, { useContext } from 'react';
-import { TextInput } from 'react-native';
+import { TextInput, TextInputProps } from 'react-native';
 import { ThemeContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 
-interface Props {
-  placeholder: string;
-  value: string;
-  onChangeText: (string) => void;
-  secureTextEntry?: boolean;
-}
+interface Props extends TextInputProps {}
 
-export function DefaultInput({
-  placeholder,
-  value,
-  onChangeText,
-  secureTextEntry,
-}: Props) {
+export function DefaultInput(props: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = getThemedStyles(theme);
 
   return (
-    <TextInput
-      style={themedStyles.textInputStyle}
-      placeholder={placeholder}
-      value={value}
-      onChangeText={onChangeText}
-      secureTextEntry={secureTextEntry}
-    />
+    <TextInput {...props} style={[themedStyles.textInputStyle, props.style]} />
   );
 }
