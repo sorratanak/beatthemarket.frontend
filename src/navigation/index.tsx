@@ -1,47 +1,30 @@
 import './GestureHandler';
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
 
 import { MainNavigator, MainNavigatorWrapper } from './MainNavigator';
-import { Home, Game, SignIn, SignUp } from '../screens';
+import { AuthStack, SettingsStack, HomeStack, GameStack } from './stacks';
 import { tabOptions } from './tabBarOptions';
-import { Settings } from '../screens/Settings';
-
-export type StackParams = {
-  Home: undefined;
-  Game: undefined;
-  Settings: undefined;
-  SignIn: undefined;
-  SignUp: undefined;
-};
-
-const AuthStack = createStackNavigator<StackParams>();
-
-export const AuthStackComponent = () => (
-  <AuthStack.Navigator>
-    <AuthStack.Screen name="SignIn" component={SignIn} />
-    <AuthStack.Screen name="SignUp" component={SignUp} />
-  </AuthStack.Navigator>
-);
 
 export function MainNavComponent() {
   return (
     <MainNavigatorWrapper>
       <MainNavigator.Screen
-        name="Home"
-        component={Home}
+        name="HomeStack"
+        component={HomeStack}
         options={tabOptions.main}
       />
       <MainNavigator.Screen
-        name="Game"
-        component={Game}
+        name="GamStack"
+        component={GameStack}
         options={tabOptions.game}
       />
       <MainNavigator.Screen
-        name="Settings"
-        component={Settings}
+        name="SettingsStack"
+        component={SettingsStack}
         options={tabOptions.settings}
       />
     </MainNavigatorWrapper>
   );
 }
+
+export { AuthStack };
