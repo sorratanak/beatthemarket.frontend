@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+
 import { ITheme } from '../../themes/interface';
 import { LIGHT_THEME } from '../../themes';
 
