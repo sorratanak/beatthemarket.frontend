@@ -130,7 +130,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.beatthemarket.beatthemarket"
+        applicationId "com.beatthemarket"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
