@@ -21,6 +21,7 @@
 		7721D4403F8B95B1A1F8A10C /* libPods-BeatTheMarket-BeatTheMarketTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 489D30C40D26F69F07596E5F /* libPods-BeatTheMarket-BeatTheMarketTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		AC8B559124EA80BF009B8D75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC8B559024EA80BF009B8D75 /* GoogleService-Info.plist */; };
+		AC8C947A24EA9B5C00A8A368 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8C947924EA9B5C00A8A368 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = BeatTheMarket/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9934CBC51A8D1FAF2D388E61 /* Pods-BeatTheMarket-BeatTheMarketTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeatTheMarket-BeatTheMarketTests.debug.xcconfig"; path = "Target Support Files/Pods-BeatTheMarket-BeatTheMarketTests/Pods-BeatTheMarket-BeatTheMarketTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AC8B559024EA80BF009B8D75 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AC8C947924EA9B5C00A8A368 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BCF16AAC54FA84D51EA6C45C /* Pods-BeatTheMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeatTheMarket.release.xcconfig"; path = "Target Support Files/Pods-BeatTheMarket/Pods-BeatTheMarket.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -85,6 +87,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D7766631D38F2F5928290FE /* libPods-BeatTheMarket.a in Frameworks */,
+				AC8C947A24EA9B5C00A8A368 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +159,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AC8C947924EA9B5C00A8A368 /* StoreKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				7984A3D6478B8E1905DAEE02 /* libPods-BeatTheMarket.a */,
@@ -674,6 +678,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = BeatTheMarket/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -697,6 +702,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BeatTheMarket/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

@@ -44,7 +44,7 @@ const ContextProvider = ({
   const [gameId, setGameId] = useState<string>(null);
   const [activeStock, setActiveStock] = useState<IStock>(null);
   const [stocks, setStocks] = useState<IStock[]>([]);
-  const [gameEvents, setGameEvents] = useState<IGameEvent>(null); // TODO typing
+  const [gameEvents, setGameEvents] = useState<IGameEvent>(null);
 
   const [buyStock, { data: buyStockResponse }] = useMutation(
     gameGraphql.queries.BUY_STOCK,
