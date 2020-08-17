@@ -7,7 +7,6 @@ export const getThemedStyles = (theme: ITheme) =>
     signinContainer: {},
     signinSubcontainer: {},
     signinInputContainer: {},
-    textInputStyle: {},
     forgotPasswordContainer: {},
     forgotPassword: {},
     restorePassword: {},

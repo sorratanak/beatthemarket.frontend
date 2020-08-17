@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { StackParams } from '../../navigation';
@@ -7,6 +7,7 @@ import { Container } from '../../components';
 import { ThemeContext, UserContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 import { IMAGES } from '../../assets';
+import { DefaultInput } from '../../components/DefaultInput';
 
 type NavigationProps = StackNavigationProp<StackParams, 'SignIn'>;
 
@@ -24,14 +25,12 @@ export function SignIn() {
     <Container style={themedStyles.signinContainer}>
       <View style={themedStyles.signinSubcontainer}>
         <View style={themedStyles.signinInputContainer}>
-          <TextInput
-            style={themedStyles.textInputStyle}
+          <DefaultInput
             placeholder="Name"
             value={name}
             onChangeText={setName}
           />
-          <TextInput
-            style={themedStyles.textInputStyle}
+          <DefaultInput
             placeholder="Password"
             value={password}
             onChangeText={setPassword}
