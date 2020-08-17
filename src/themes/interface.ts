@@ -25,6 +25,7 @@ interface IGameScreenTheme {
 interface ISettingsScreenTheme {
   BACKGROUND_COLOR?: string;
   SWITCH_TITLE_COLOR?: string;
+  VIEW_COLOR?: string;
 }
 
 interface ISignInScreenTheme {

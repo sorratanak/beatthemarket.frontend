@@ -6,3 +6,5 @@ export * from './ScoreBoard';
 export * from './ScoreList';
 export * from './ScoreRow';
 export * from './StockList';
+export * from './TilesList';
+export * from './TouchableTile';
