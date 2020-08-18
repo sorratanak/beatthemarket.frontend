@@ -2,7 +2,13 @@ import './GestureHandler';
 import React from 'react';
 
 import { MainNavigator, MainNavigatorWrapper } from './MainNavigator';
-import { AuthStack, SettingsStack, HomeStack, GameStack } from './stacks';
+import {
+  AuthStack,
+  SettingsStack,
+  HomeStack,
+  GameStack,
+  RulesStack,
+} from './stacks';
 import { tabOptions } from './tabBarOptions';
 
 export function MainNavComponent() {
@@ -17,6 +23,11 @@ export function MainNavComponent() {
         name="GameStack"
         component={GameStack}
         options={tabOptions.game}
+      />
+      <MainNavigator.Screen
+        name="RulesStack"
+        component={RulesStack}
+        options={tabOptions.rules}
       />
       <MainNavigator.Screen
         name="SettingsStack"
