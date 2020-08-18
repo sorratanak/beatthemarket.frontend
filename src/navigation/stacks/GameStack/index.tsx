@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Game } from '../../../screens';
 
-type StackParams = {
+export type StackParams = {
   Game: undefined;
 };
 

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
-import { StackParams } from '../../navigation';
+import { StackParams } from '../../navigation/stacks/AuthStack';
 import { Container } from '../../components';
 import { ThemeContext, UserContext } from '../../contexts';
 import { getThemedStyles } from './styles';

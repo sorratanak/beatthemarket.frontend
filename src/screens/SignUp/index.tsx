@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Text, Button, TextInput } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { StackParams } from '../../navigation';
+import { StackParams } from '../../navigation/stacks/AuthStack';
 import { Container } from '../../components';
 import { UserContext } from '../../contexts/userContext';
 import { styles } from './styles';

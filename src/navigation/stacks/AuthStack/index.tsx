@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SignIn, SignUp } from '../../../screens';
 
-type StackParams = {
+export type StackParams = {
   SignIn: undefined;
   SignUp: undefined;
 };

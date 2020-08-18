@@ -2,8 +2,12 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   listContainer: {
-    flex: 0,
-    flexGrow: 0,
+    flex: 1,
+    width: '100%',
   },
-  contentListContainer: {},
+  contentListContainer: {
+    flex: 1,
+    paddingHorizontal: 8,
+    justifyContent: 'center',
+  },
 });

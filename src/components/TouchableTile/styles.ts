@@ -9,5 +9,7 @@ export const getThemedStyles = (theme: ITheme) =>
       alignItems: 'center',
       backgroundColor: theme.SETTINGS_SCREEN.VIEW_COLOR,
       borderRadius: 7,
+      marginVertical: 8,
+      marginHorizontal: 8,
     },
   });

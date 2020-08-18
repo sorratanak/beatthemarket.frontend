@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, FlatListProps } from 'react-native';
+import { FlatList, FlatListProps, View } from 'react-native';
 
 import { TouchableTile } from '..';
 import { styles } from './styles';
@@ -26,8 +26,11 @@ export function TilesList({
           {renderItem({ item, ...renderItemProps })}
         </TouchableTile>
       )}
-      contentContainerStyle={[styles.contentListContainer, style]}
-      style={[styles.listContainer, contentContainerStyle]}
+      contentContainerStyle={[
+        styles.contentListContainer,
+        contentContainerStyle,
+      ]}
+      style={[styles.listContainer, style]}
     />
   );
 }

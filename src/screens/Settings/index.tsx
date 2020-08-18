@@ -1,26 +1,43 @@
 import React, { useContext, useCallback, useMemo } from 'react';
-import { Switch, Text } from 'react-native';
+import { Switch, Text, Image } from 'react-native';
 
-import { Container } from '../../components';
+import { Container, TilesList } from '../../components';
 import { LIGHT_THEME } from '../../themes/index.web';
 import { DARK_THEME } from '../../themes';
 import { COLORS } from '../../themes/colors';
 import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
+import { ScreenProps } from './props';
+import { SETTINGS_TILES } from './tiles';
 
-export function Settings() {
+export function Settings({ navigation }: ScreenProps) {
   const { theme, switchTheme } = useContext(ThemeContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
+
+  const isLightTheme = theme === LIGHT_THEME;
+
+  const onNavigateTile = useCallback((item: any) => {
+    const { nav } = item;
+    if (nav) {
+      navigation.navigate(nav);
+    }
+  }, []);
 
   const onSwitchTheme = useCallback(() => {
     switchTheme(theme === LIGHT_THEME ? DARK_THEME : LIGHT_THEME);
   }, [theme]);
 
-  const isLightTheme = theme === LIGHT_THEME;
-
   return (
     <Container style={themedStyles.container}>
+      <TilesList
+        onTilePress={onNavigateTile}
+        data={SETTINGS_TILES}
+        keyExtractor={(item) => `${item.id}`}
+        renderItem={({ item }) => (
+          <Image source={item.source} style={themedStyles.tileImage} />
+        )}
+      />
       <Text style={themedStyles.title}>
         {isLightTheme ? 'Light' : 'Dark'} theme
       </Text>
