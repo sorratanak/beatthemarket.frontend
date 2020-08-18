@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   imageTile: {
+    alignItems: 'center',
     flex: 0,
     flexGrow: 0,
     marginVertical: 16,

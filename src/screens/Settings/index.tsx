@@ -31,6 +31,7 @@ export function Settings({ navigation }: ScreenProps) {
     <Container style={themedStyles.container}>
       <TilesList
         onTilePress={onNavigateTile}
+        tileStyle={themedStyles.tileContainer}
         data={SETTINGS_TILES}
         keyExtractor={(item) => `${item.id}`}
         renderItem={({ item }) => (

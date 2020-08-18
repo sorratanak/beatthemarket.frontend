@@ -1,14 +1,14 @@
-import React, { useContext, useCallback, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { Text, View } from 'react-native';
 
 import {
-  Container,
-  TilesList,
   SettingsNestedScreenWrapper,
+  SubscriptionsList,
 } from '../../components';
 import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
 import { IMAGES } from '../../assets';
+import { SUBSCRIPTIONS } from './subscriptions';
 
 export function Subscriptions() {
   const { theme } = useContext(ThemeContext);
@@ -19,14 +19,12 @@ export function Subscriptions() {
     <SettingsNestedScreenWrapper
       imageSource={IMAGES.FLAG}
       style={themedStyles.container}>
-      <Text>Subscriptions</Text>
-      <View style={themedStyles.flexContainer} />
-      {/* <TilesList
-        keyExtractor={(item) => `${item.id}`}
-        renderItem={({ item }) => (
-          <Image source={item.source} style={themedStyles.tileImage} />
-        )}
-      /> */}
+      <View style={themedStyles.flexContainer}>
+        <SubscriptionsList
+          subscriptions={SUBSCRIPTIONS}
+          onSubscriptionPress={() => {}}
+        />
+      </View>
     </SettingsNestedScreenWrapper>
   );
 }

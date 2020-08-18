@@ -18,4 +18,7 @@ export const getThemedStyles = (theme: ITheme) =>
       width: 50,
       height: 50,
     },
+    tileContainer: {
+      alignItems: 'center',
+    },
   });

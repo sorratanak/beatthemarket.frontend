@@ -6,7 +6,6 @@ export const getThemedStyles = (theme: ITheme) =>
     container: {
       flex: 1,
       paddingVertical: 31,
-      alignItems: 'center',
       backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
       borderRadius: 7,
       marginVertical: 8,

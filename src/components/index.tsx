@@ -7,5 +7,6 @@ export * from './ScoreList';
 export * from './ScoreRow';
 export * from './SettingsNestedScreenWrapper';
 export * from './StockList';
+export * from './SubscriptionsList';
 export * from './TilesList';
 export * from './TouchableTile';

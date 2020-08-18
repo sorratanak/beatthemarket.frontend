@@ -96,7 +96,11 @@ const ContextProvider = ({
 
   return (
     <IapContext.Provider
-      value={{ isProcessing, activeSubscription, onRequestSubscription }}>
+      value={{
+        isProcessing,
+        activeSubscription,
+        onRequestSubscription,
+      }}>
       {children}
     </IapContext.Provider>
   );

@@ -16,13 +16,13 @@ export function SettingsNestedScreenWrapper({
   children,
 }: Props) {
   return (
-    <Container style={style}>
+    <View style={[styles.container, style]}>
       <View style={styles.imageContainer}>
         <TouchableTile disabled style={styles.imageTile}>
           <Image source={imageSource} style={styles.image} />
         </TouchableTile>
       </View>
       <View style={styles.contentContainer}>{children}</View>
-    </Container>
+    </View>
   );
 }
