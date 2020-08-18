@@ -4,6 +4,6 @@ import { ITheme } from '../../themes/interface';
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
-      backgroundColor: theme.MENU.BACKGROUND_COLOR,
+      backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
     },
   });

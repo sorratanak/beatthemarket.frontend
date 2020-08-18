@@ -22,7 +22,7 @@ export function SettingsNestedScreenWrapper({
           <Image source={imageSource} style={styles.image} />
         </TouchableTile>
       </View>
-      {children}
+      <View style={styles.contentContainer}>{children}</View>
     </Container>
   );
 }

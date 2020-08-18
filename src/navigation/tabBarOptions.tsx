@@ -6,7 +6,7 @@ export const getThemedTabBarOptions = (theme: ITheme) => ({
   labelStyle: {
     fontSize: 10,
   },
-  style: { backgroundColor: theme.MENU.BACKGROUND_COLOR },
+  style: { backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR },
 });
 
 export const commonHeaderOptions = {

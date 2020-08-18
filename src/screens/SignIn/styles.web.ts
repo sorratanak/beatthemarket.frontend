@@ -8,7 +8,7 @@ export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     signinContainer: {},
     signinSubcontainer: {
-      backgroundColor: theme.SIGNIN_SCREEN.BACKGROUND_COLOR,
+      backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
       borderRadius: 7,
     },
     signinInputContainer: {

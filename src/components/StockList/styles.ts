@@ -11,7 +11,7 @@ export const getThemedStyles = (theme: ITheme) =>
       paddingHorizontal: 16,
     },
     listItemContainer: {
-      backgroundColor: theme.GAME_SCREEN.VIEW_COLOR,
+      backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
       borderRadius: 20,
       paddingHorizontal: 8,
       paddingVertical: 3,
@@ -21,6 +21,6 @@ export const getThemedStyles = (theme: ITheme) =>
       backgroundColor: theme.GAME_SCREEN.LIST_VIEW_ACTIVE_COLOR,
     },
     listItemTitle: {
-      color: theme.GAME_SCREEN.TEXT_COLOR,
+      color: theme.DEFAULT.TEXT_COLOR,
     },
   });

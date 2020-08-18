@@ -1,14 +1,16 @@
+interface IDefaultTheme {
+  PRIMARY_BACKGROUND_COLOR?: string;
+  SECONDARY_BACKGROUND_COLOR?: string;
+  TEXT_COLOR?: string;
+}
+
 interface IMenuTheme {
-  BACKGROUND_COLOR?: string;
   TITLE_COLOR?: string;
   ACTIVE_LABEL_COLOR?: string;
   INACTIVE_LABEL_COLOR?: string;
 }
 
 interface IGameScreenTheme {
-  BACKGROUND_COLOR?: string;
-  VIEW_COLOR?: string;
-  TEXT_COLOR?: string;
   HEADER_IMAGE_BACKGROUND_COLOR?: string;
   NUMBER_INDICATOR_UP?: string;
   NUMBER_INDICATOR_DOWN?: string;
@@ -22,14 +24,11 @@ interface IGameScreenTheme {
   LIST_VIEW_INDICATOR_TEXT_COLOR?: string;
 }
 
-interface ISettingsScreenTheme {
-  BACKGROUND_COLOR?: string;
-  SWITCH_TITLE_COLOR?: string;
-  VIEW_COLOR?: string;
-}
+interface ISettingsScreenTheme {}
+
+interface ISubscriptionsScreenTheme {}
 
 interface ISignInScreenTheme {
-  BACKGROUND_COLOR?: string;
   TEXT_INPUT_BACKGROUND?: string;
   TEXT_INPUT_COLOR?: string;
   FORGOT_PASSWORD_COLOR?: string;
@@ -46,12 +45,8 @@ interface ISignInScreenTheme {
   APPLE_BUTTON_TEXT_COLOR?: string;
 }
 
-interface ISubscriptionsScreenTheme {
-  BACKGROUND_COLOR?: string;
-  VIEW_COLOR?: string;
-}
-
 export interface ITheme {
+  DEFAULT?: IDefaultTheme;
   MENU?: IMenuTheme;
   GAME_SCREEN?: IGameScreenTheme;
   SETTINGS_SCREEN?: ISettingsScreenTheme;

@@ -6,6 +6,9 @@ export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: theme.SUBSCRIPTIONS_SCREEN.BACKGROUND_COLOR,
+      backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
+    },
+    flexContainer: {
+      flex: 1,
     },
   });

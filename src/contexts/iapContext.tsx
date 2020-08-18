@@ -12,15 +12,16 @@ import {
   finishTransaction,
 } from 'react-native-iap';
 import _ from 'lodash';
+import { ISubscriptionPlan } from '../types';
 
 interface ContextProps {
-  activePlan: string;
+  activeSubscription: ISubscriptionPlan;
   isProcessing: boolean;
   onRequestSubscription: (subscriptionId: string) => void;
 }
 
 const DEFAULT_IAP_CONTEXT: ContextProps = {
-  activePlan: null,
+  activeSubscription: null,
   isProcessing: false,
   onRequestSubscription: _.noop,
 };
@@ -33,7 +34,9 @@ const ContextProvider = ({
   children: React.ReactNode | React.ReactNode[];
 }) => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [activePlan, setActivePlan] = useState<string>(null);
+  const [activeSubscription, setActiveSubscription] = useState<
+    ISubscriptionPlan
+  >(null);
 
   const purchaseUpdatedListenerRef = useRef(null);
   const purchaseErrorListenerRef = useRef(null);
@@ -83,6 +86,7 @@ const ContextProvider = ({
       try {
         setIsProcessing(true);
         await requestSubscription(subscriptionId, false);
+        setIsProcessing(false);
       } catch (err) {
         setIsProcessing(false);
       }
@@ -92,7 +96,7 @@ const ContextProvider = ({
 
   return (
     <IapContext.Provider
-      value={{ isProcessing, activePlan, onRequestSubscription }}>
+      value={{ isProcessing, activeSubscription, onRequestSubscription }}>
       {children}
     </IapContext.Provider>
   );

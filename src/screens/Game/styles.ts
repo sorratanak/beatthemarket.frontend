@@ -6,6 +6,6 @@ export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: theme.GAME_SCREEN.BACKGROUND_COLOR,
+      backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
     },
   });

@@ -100,6 +100,12 @@ export interface IGameEvent {
   __typename: 'LevelTimer';
 }
 
+export interface ISubscriptionPlan {
+  id: string;
+  balance: number;
+  price: number;
+}
+
 /* ------ Requests ------ */
 
 export interface IGraphqlVariableRequest<VariablesObj> {

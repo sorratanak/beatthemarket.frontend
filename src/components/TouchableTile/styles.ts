@@ -7,7 +7,7 @@ export const getThemedStyles = (theme: ITheme) =>
       flex: 1,
       paddingVertical: 31,
       alignItems: 'center',
-      backgroundColor: theme.SETTINGS_SCREEN.VIEW_COLOR,
+      backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
       borderRadius: 7,
       marginVertical: 8,
       marginHorizontal: 8,

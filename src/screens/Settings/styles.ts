@@ -6,12 +6,12 @@ export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: theme.SETTINGS_SCREEN.BACKGROUND_COLOR,
+      backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
     },
     title: {
       textAlign: 'center',
       fontSize: 28,
-      color: theme.SETTINGS_SCREEN.SWITCH_TITLE_COLOR,
+      color: theme.DEFAULT.TEXT_COLOR,
       marginVertical: 90,
     },
     tileImage: {

@@ -10,9 +10,9 @@ export const ANIMATION_OPTIONS = {
 
 export const getThemedAxises = (theme: ITheme) => ({
   container: {
-    axis: { stroke: theme.GAME_SCREEN.TEXT_COLOR },
+    axis: { stroke: theme.DEFAULT.TEXT_COLOR },
     tickLabels: {
-      fill: theme.GAME_SCREEN.TEXT_COLOR,
+      fill: theme.DEFAULT.TEXT_COLOR,
       fontSize: Platform.OS === 'web' ? 16 : 13,
     },
   },

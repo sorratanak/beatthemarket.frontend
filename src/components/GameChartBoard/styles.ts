@@ -23,7 +23,7 @@ export const getThemedStyles = (theme: ITheme) =>
       paddingVertical: 9,
       borderRadius: 7,
       flexDirection: 'row',
-      backgroundColor: theme.GAME_SCREEN.VIEW_COLOR,
+      backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
     },
     chartHeaderSubcontainer: {
       flex: 1,
@@ -31,17 +31,17 @@ export const getThemedStyles = (theme: ITheme) =>
     },
     chartHeaderImageContainer: {},
     chartHeaderTitleAbbr: {
-      color: theme.GAME_SCREEN.TEXT_COLOR,
+      color: theme.DEFAULT.TEXT_COLOR,
       fontSize: 26,
       marginRight: 16,
       justifyContent: 'center',
       textAlign: 'center',
     },
     chartHeaderStockProfitLoss: {
-      color: theme.GAME_SCREEN.TEXT_COLOR,
+      color: theme.DEFAULT.TEXT_COLOR,
     },
     chartHeaderCashBalance: {
-      color: theme.GAME_SCREEN.TEXT_COLOR,
+      color: theme.DEFAULT.TEXT_COLOR,
     },
     chartHeaderStockChangePositivePercent: {
       color: theme.GAME_SCREEN.NUMBER_INDICATOR_UP,
@@ -57,14 +57,14 @@ export const getThemedStyles = (theme: ITheme) =>
       justifyContent: 'center',
     },
     chartView: {
-      backgroundColor: theme.GAME_SCREEN.VIEW_COLOR,
+      backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
     },
 
     /* Footer */
     infoArea: {
       maxHeight: 150,
       flex: 1,
-      backgroundColor: theme.GAME_SCREEN.VIEW_COLOR,
+      backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
       marginHorizontal: 16,
       marginVertical: 8,
       borderRadius: 7,
@@ -81,14 +81,14 @@ export const getThemedStyles = (theme: ITheme) =>
     chartFooterSliderButtonContainer: {
       paddingHorizontal: 12,
       borderRadius: 10,
-      backgroundColor: theme.GAME_SCREEN.BACKGROUND_COLOR,
+      backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
       justifyContent: 'center',
       alignItems: 'center',
       marginBottom: 10,
     },
     chartFooterSliderButtonTitle: {
       fontSize: 25,
-      color: theme.GAME_SCREEN.TEXT_COLOR,
+      color: theme.DEFAULT.TEXT_COLOR,
     },
     chartFooterSliderArea: {
       flex: 1,
@@ -118,7 +118,7 @@ export const getThemedStyles = (theme: ITheme) =>
     chartFooterSharesTitle: {
       textAlign: 'center',
       marginBottom: 9,
-      color: theme.GAME_SCREEN.TEXT_COLOR,
+      color: theme.DEFAULT.TEXT_COLOR,
     },
     ml16: {
       marginLeft: 16,

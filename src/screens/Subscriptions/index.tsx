@@ -8,10 +8,9 @@ import {
 } from '../../components';
 import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
-import { ScreenProps } from './props';
 import { IMAGES } from '../../assets';
 
-export function Subscriptions({ navigation }: ScreenProps) {
+export function Subscriptions() {
   const { theme } = useContext(ThemeContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
@@ -21,7 +20,7 @@ export function Subscriptions({ navigation }: ScreenProps) {
       imageSource={IMAGES.FLAG}
       style={themedStyles.container}>
       <Text>Subscriptions</Text>
-      <View style={{ flex: 1 }}></View>
+      <View style={themedStyles.flexContainer} />
       {/* <TilesList
         keyExtractor={(item) => `${item.id}`}
         renderItem={({ item }) => (

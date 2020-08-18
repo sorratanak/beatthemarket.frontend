@@ -5,7 +5,7 @@ import { COMMON_STYLES } from '../../themes/commonStyles';
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
-      backgroundColor: theme.MENU.BACKGROUND_COLOR,
+      backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
       borderRightWidth: undefined,
       ...COMMON_STYLES.SHADOW_BOX,
     },
