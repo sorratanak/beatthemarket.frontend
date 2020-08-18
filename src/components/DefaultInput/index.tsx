@@ -9,7 +9,5 @@ export function DefaultInput(props: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = getThemedStyles(theme);
 
-  return (
-    <TextInput {...props} style={[themedStyles.textInputStyle, props.style]} />
-  );
+  return <TextInput {...props} style={[themedStyles.textInput, props.style]} />;
 }

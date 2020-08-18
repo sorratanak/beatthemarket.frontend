@@ -5,8 +5,6 @@ import { getThemedStyles } from './styles';
 
 interface Props {
   children: string;
-  backgroundColor?: string;
-  textColor?: string;
   onPress: () => void;
   style?: {
     button?: ViewStyle;
@@ -16,25 +14,17 @@ interface Props {
 
 export function DefaultButton({
   children,
-  backgroundColor,
-  textColor,
   style: propsStyle,
   ...props
 }: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = getThemedStyles(theme);
 
-  const buttonStyle = backgroundColor
-    ? [themedStyles.button, { backgroundColor }]
-    : themedStyles.button;
-
-  const textStyle = textColor
-    ? [themedStyles.buttonText, { color: textColor }]
-    : themedStyles.buttonText;
-
   return (
-    <TouchableOpacity {...props} style={[buttonStyle, propsStyle.button]}>
-      <Text style={[textStyle, propsStyle.text]}>{children}</Text>
+    <TouchableOpacity
+      {...props}
+      style={[themedStyles.button, propsStyle.button]}>
+      <Text style={[themedStyles.buttonText, propsStyle.text]}>{children}</Text>
     </TouchableOpacity>
   );
 }

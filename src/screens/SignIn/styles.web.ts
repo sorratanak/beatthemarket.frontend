@@ -10,6 +10,7 @@ export const getThemedStyles = (theme: ITheme) =>
     signinSubcontainer: {
       backgroundColor: theme.SIGNIN_SCREEN.BACKGROUND_COLOR,
       borderRadius: 7,
+      width: 800,
     },
     signinInputContainer: {
       paddingHorizontal: 140,
@@ -51,10 +52,13 @@ export const getThemedStyles = (theme: ITheme) =>
       borderRadius: 7,
       height: 40,
     },
+    socialButtonTextContainer: {
+      flex: 1,
+      alignItems: 'center',
+    },
     socialMediaButtonText: {
       fontSize: 15,
       fontWeight: '500',
-      paddingHorizontal: 20,
       color: theme.SIGNIN_SCREEN.SOCIAL_MEDIA_BUTTON_TEXT_COLOR,
     },
     socialMediaIconContainer: {
@@ -70,25 +74,29 @@ export const getThemedStyles = (theme: ITheme) =>
       height: 30,
     },
     googleButtonContainer: {
+      flex: 1,
+      marginRight: 20,
       backgroundColor: theme.SIGNIN_SCREEN.GOOGLE_BUTTON_CONTAINER_COLOR,
     },
     googleIconContainer: {
       backgroundColor: theme.SIGNIN_SCREEN.GOOGLE_ICON_CONTAINER_COLOR,
     },
     facebookButtonContainer: {
+      flex: 1,
+      marginRight: 20,
       backgroundColor: theme.SIGNIN_SCREEN.FACEBOOK_BUTTON_CONTAINER_COLOR,
     },
     facebookIconContainer: {
       backgroundColor: theme.SIGNIN_SCREEN.FACEBOOK_ICON_CONTAINER_COLOR,
     },
     appleButtonContainer: {
+      flex: 1.5,
       backgroundColor: theme.SIGNIN_SCREEN.APPLE_BUTTON_CONTAINER_COLOR,
       borderWidth: theme === LIGHT_THEME ? 1 : 0,
     },
     appleButtonText: {
       fontSize: 15,
       fontWeight: '500',
-      paddingHorizontal: 20,
       color: theme.SIGNIN_SCREEN.APPLE_BUTTON_TEXT_COLOR,
     },
   });

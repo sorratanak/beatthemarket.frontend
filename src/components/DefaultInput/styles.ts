@@ -5,7 +5,7 @@ import { LIGHT_THEME } from '../../themes';
 
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
-    textInputStyle: {
+    textInput: {
       backgroundColor: theme.SIGNIN_SCREEN.TEXT_INPUT_BACKGROUND,
       color: theme.SIGNIN_SCREEN.TEXT_INPUT_COLOR,
       fontSize: 12,

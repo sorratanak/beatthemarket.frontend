@@ -10,7 +10,7 @@ export const getThemedStyles = (theme: ITheme) =>
     signinSubcontainer: {
       backgroundColor: theme.SIGNIN_SCREEN.BACKGROUND_COLOR,
       borderRadius: 7,
-      width: '90%',
+      marginHorizontal: 16,
     },
     signinInputContainer: {
       paddingHorizontal: 24,
@@ -26,11 +26,13 @@ export const getThemedStyles = (theme: ITheme) =>
     forgotPassword: {
       fontWeight: '200',
       fontSize: 13,
+      lineHeight: 16,
       color: theme.SIGNIN_SCREEN.FORGOT_PASSWORD_COLOR,
     },
     restorePassword: {
       fontWeight: 'normal',
       fontSize: 13,
+      lineHeight: 16,
       color: theme.SIGNIN_SCREEN.RESTORE_PASSWORD_COLOR,
     },
     buttonContainer: {
@@ -47,25 +49,27 @@ export const getThemedStyles = (theme: ITheme) =>
       marginBottom: 32,
     },
     socialMediaButton: {
-      flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
       overflow: 'hidden',
       borderRadius: 7,
-      height: 34,
+    },
+    socialButtonTextContainer: {
+      flex: 1,
+      alignItems: 'center',
     },
     socialMediaButtonText: {
       fontSize: 13,
+      lineHeight: 16,
       fontWeight: 'normal',
-      marginHorizontal: 'auto',
       color: theme.SIGNIN_SCREEN.SOCIAL_MEDIA_BUTTON_TEXT_COLOR,
     },
     socialMediaIconContainer: {
-      flex: 1,
-      justifyContent: 'center',
+      alignItems: 'center',
       borderRadius: 7,
-      height: 40,
+      paddingVertical: 7,
       paddingHorizontal: 10,
+      height: '100%',
       ...COMMON_STYLES.SHADOW_BOX,
     },
     socialMediaIcon: {
@@ -73,15 +77,15 @@ export const getThemedStyles = (theme: ITheme) =>
       height: 20,
     },
     googleButtonContainer: {
-      width: '48%',
-      marginRight: '4%',
+      width: '47%',
+      marginRight: 11,
       backgroundColor: theme.SIGNIN_SCREEN.GOOGLE_BUTTON_CONTAINER_COLOR,
     },
     googleIconContainer: {
       backgroundColor: theme.SIGNIN_SCREEN.GOOGLE_ICON_CONTAINER_COLOR,
     },
     facebookButtonContainer: {
-      width: '48%',
+      width: '47%',
       backgroundColor: theme.SIGNIN_SCREEN.FACEBOOK_BUTTON_CONTAINER_COLOR,
     },
     facebookIconContainer: {
@@ -95,8 +99,8 @@ export const getThemedStyles = (theme: ITheme) =>
     },
     appleButtonText: {
       fontSize: 13,
+      lineHeight: 16,
       fontWeight: 'normal',
-      marginHorizontal: 'auto',
       color: theme.SIGNIN_SCREEN.APPLE_BUTTON_TEXT_COLOR,
     },
   });

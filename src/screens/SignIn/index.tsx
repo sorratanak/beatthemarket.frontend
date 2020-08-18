@@ -46,15 +46,20 @@ export function SignIn() {
           <View style={themedStyles.buttonContainer}>
             <DefaultButton
               onPress={signInWithGoogle}
-              textColor={theme.SIGNIN_SCREEN.LOGIN_BUTTON_TEXT_COLOR}
-              style={{ button: { marginRight: 11 } }}>
+              style={{
+                button: { marginRight: 11 },
+                text: { color: theme.SIGNIN_SCREEN.LOGIN_BUTTON_TEXT_COLOR },
+              }}>
               Log In
             </DefaultButton>
             <DefaultButton
               onPress={() => navigate('SignUp')}
-              backgroundColor={
-                theme.SIGNIN_SCREEN.SIGNUP_BUTTON_BACKGROUND_COLOR
-              }>
+              style={{
+                button: {
+                  backgroundColor:
+                    theme.SIGNIN_SCREEN.SIGNUP_BUTTON_BACKGROUND_COLOR,
+                },
+              }}>
               Sign Up
             </DefaultButton>
           </View>
@@ -75,7 +80,9 @@ export function SignIn() {
                 style={themedStyles.socialMediaIcon}
               />
             </View>
-            <Text style={themedStyles.socialMediaButtonText}>Google</Text>
+            <View style={themedStyles.socialButtonTextContainer}>
+              <Text style={themedStyles.socialMediaButtonText}>Google</Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity
             style={[
@@ -92,7 +99,9 @@ export function SignIn() {
                 style={themedStyles.socialMediaIcon}
               />
             </View>
-            <Text style={themedStyles.socialMediaButtonText}>Facebook</Text>
+            <View style={themedStyles.socialButtonTextContainer}>
+              <Text style={themedStyles.socialMediaButtonText}>Facebook</Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity
             style={[
@@ -105,7 +114,11 @@ export function SignIn() {
                 style={themedStyles.socialMediaIcon}
               />
             </View>
-            <Text style={themedStyles.appleButtonText}>Sign in with Apple</Text>
+            <View style={themedStyles.socialButtonTextContainer}>
+              <Text style={themedStyles.appleButtonText}>
+                Sign in with Apple
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
