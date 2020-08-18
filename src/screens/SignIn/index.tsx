@@ -2,13 +2,12 @@ import React, { useContext, useState, useMemo } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+
 import { StackParams } from '../../navigation/stacks/AuthStack';
-import { Container } from '../../components';
+import { Container, DefaultInput, DefaultButton } from '../../components';
 import { ThemeContext, UserContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 import { IMAGES } from '../../assets';
-import { DefaultInput } from '../../components/DefaultInput';
-import { DefaultButton } from '../../components/DefaultButton';
 
 type NavigationProps = StackNavigationProp<StackParams, 'SignIn'>;
 
@@ -45,27 +44,23 @@ export function SignIn() {
           </View>
           <View style={themedStyles.buttonContainer}>
             <DefaultButton
-              onPress={signInWithGoogle}
+              onPress={() => {}}
               style={{
-                button: { marginRight: 11 },
-                text: { color: theme.SIGNIN_SCREEN.LOGIN_BUTTON_TEXT_COLOR },
+                container: themedStyles.loginButtonContainer,
+                text: themedStyles.loginButtonText,
               }}>
               Log In
             </DefaultButton>
             <DefaultButton
               onPress={() => navigate('SignUp')}
-              style={{
-                button: {
-                  backgroundColor:
-                    theme.SIGNIN_SCREEN.SIGNUP_BUTTON_BACKGROUND_COLOR,
-                },
-              }}>
+              style={{ container: themedStyles.signUpButtonContainer }}>
               Sign Up
             </DefaultButton>
           </View>
         </View>
         <View style={themedStyles.socialMediaContainer}>
           <TouchableOpacity
+            onPress={signInWithGoogle}
             style={[
               themedStyles.socialMediaButton,
               themedStyles.googleButtonContainer,

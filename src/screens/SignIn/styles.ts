@@ -6,9 +6,14 @@ import { COMMON_STYLES } from '../../themes/commonStyles';
 
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
-    signinContainer: {},
+    signinContainer: {
+      flex: 1,
+      backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     signinSubcontainer: {
-      backgroundColor: theme.SIGNIN_SCREEN.BACKGROUND_COLOR,
+      backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
       borderRadius: 7,
       marginHorizontal: 16,
     },
@@ -18,7 +23,6 @@ export const getThemedStyles = (theme: ITheme) =>
       paddingBottom: 20,
     },
     forgotPasswordContainer: {
-      flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
       marginBottom: 30,
@@ -36,12 +40,19 @@ export const getThemedStyles = (theme: ITheme) =>
       color: theme.SIGNIN_SCREEN.RESTORE_PASSWORD_COLOR,
     },
     buttonContainer: {
-      flex: 1,
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
+    loginButtonContainer: {
+      marginRight: 11,
+    },
+    loginButtonText: {
+      color: theme.SIGNIN_SCREEN.LOGIN_BUTTON_TEXT_COLOR,
+    },
+    signUpButtonContainer: {
+      backgroundColor: theme.SIGNIN_SCREEN.SIGNUP_BUTTON_BACKGROUND_COLOR,
+    },
     socialMediaContainer: {
-      flex: 1,
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'center',
@@ -55,11 +66,11 @@ export const getThemedStyles = (theme: ITheme) =>
       borderRadius: 7,
     },
     socialButtonTextContainer: {
-      flex: 1,
       alignItems: 'center',
     },
     socialMediaButtonText: {
       fontSize: 13,
+      marginLeft: 6,
       lineHeight: 16,
       fontWeight: 'normal',
       color: theme.SIGNIN_SCREEN.SOCIAL_MEDIA_BUTTON_TEXT_COLOR,

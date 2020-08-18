@@ -7,14 +7,14 @@ interface Props {
   children: string;
   onPress: () => void;
   style?: {
-    button?: ViewStyle;
+    container?: ViewStyle;
     text?: TextStyle;
   };
 }
 
 export function DefaultButton({
   children,
-  style: propsStyle,
+  style: propStyle = {},
   ...props
 }: Props) {
   const { theme } = useContext(ThemeContext);
@@ -23,15 +23,8 @@ export function DefaultButton({
   return (
     <TouchableOpacity
       {...props}
-      style={[themedStyles.button, propsStyle.button]}>
-      <Text style={[themedStyles.buttonText, propsStyle.text]}>{children}</Text>
+      style={[themedStyles.container, propStyle.container]}>
+      <Text style={[themedStyles.buttonText, propStyle.text]}>{children}</Text>
     </TouchableOpacity>
   );
 }
-
-DefaultButton.defaultProps = {
-  style: {
-    button: {},
-    text: {},
-  },
-};

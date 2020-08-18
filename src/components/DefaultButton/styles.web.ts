@@ -4,7 +4,7 @@ import { ITheme } from '../../themes/interface';
 
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
-    button: {
+    container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',

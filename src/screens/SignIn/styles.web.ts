@@ -52,6 +52,15 @@ export const getThemedStyles = (theme: ITheme) =>
       borderRadius: 7,
       height: 40,
     },
+    loginButtonContainer: {
+      marginRight: 11,
+    },
+    loginButtonText: {
+      color: theme.SIGNIN_SCREEN.LOGIN_BUTTON_TEXT_COLOR,
+    },
+    signUpButtonContainer: {
+      backgroundColor: theme.SIGNIN_SCREEN.SIGNUP_BUTTON_BACKGROUND_COLOR,
+    },
     socialButtonTextContainer: {
       flex: 1,
       alignItems: 'center',
