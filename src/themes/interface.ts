@@ -46,9 +46,15 @@ interface ISignInScreenTheme {
   APPLE_BUTTON_TEXT_COLOR?: string;
 }
 
+interface ISubscriptionsScreenTheme {
+  BACKGROUND_COLOR?: string;
+  VIEW_COLOR?: string;
+}
+
 export interface ITheme {
   MENU?: IMenuTheme;
   GAME_SCREEN?: IGameScreenTheme;
   SETTINGS_SCREEN?: ISettingsScreenTheme;
+  SUBSCRIPTIONS_SCREEN?: ISubscriptionsScreenTheme;
   SIGNIN_SCREEN?: ISignInScreenTheme;
 }

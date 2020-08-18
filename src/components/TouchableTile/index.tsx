@@ -1,18 +1,16 @@
 import React, { useContext, useMemo } from 'react';
-import { TouchableOpacity, ViewStyle } from 'react-native';
+import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { ThemeContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 
-interface Props {
-  onPress: () => void;
-  style?: ViewStyle;
+interface Props extends TouchableOpacityProps {
   children: React.ReactNode;
 }
 
 export function TouchableTile({
-  onPress,
   style: propContainerStyle,
   children,
+  ...props
 }: Props) {
   const { theme } = useContext(ThemeContext);
 
@@ -20,7 +18,7 @@ export function TouchableTile({
 
   return (
     <TouchableOpacity
-      onPress={onPress}
+      {...props}
       style={[themedStyles.container, propContainerStyle]}>
       {children}
     </TouchableOpacity>
