@@ -14,7 +14,7 @@ export function MainNavComponent() {
         options={tabOptions.main}
       />
       <MainNavigator.Screen
-        name="GamStack"
+        name="GameStack"
         component={GameStack}
         options={tabOptions.game}
       />
