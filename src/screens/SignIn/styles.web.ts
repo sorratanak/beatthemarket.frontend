@@ -10,23 +10,11 @@ export const getThemedStyles = (theme: ITheme) =>
     signinSubcontainer: {
       backgroundColor: theme.SIGNIN_SCREEN.BACKGROUND_COLOR,
       borderRadius: 7,
+      width: 800,
     },
     signinInputContainer: {
       paddingHorizontal: 140,
       paddingVertical: 40,
-    },
-    textInputStyle: {
-      backgroundColor: theme.SIGNIN_SCREEN.TEXT_INPUT_BACKGROUND,
-      color: theme.SIGNIN_SCREEN.TEXT_INPUT_COLOR,
-      fontSize: 20,
-      fontWeight: '300',
-      width: 535,
-      height: 70,
-      borderWidth: theme === LIGHT_THEME ? 1 : 0,
-      borderRadius: 7,
-      borderColor: 'rgba(126, 126, 126, 0.2)',
-      paddingLeft: 30,
-      marginBottom: 30,
     },
     forgotPasswordContainer: {
       display: 'flex',
@@ -49,26 +37,6 @@ export const getThemedStyles = (theme: ITheme) =>
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
-    button: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: 257,
-      height: 60,
-      borderWidth: 1,
-      borderRadius: 7,
-      borderColor: theme.SIGNIN_SCREEN.BUTTON_BORDER_COLOR,
-    },
-    buttonText: {
-      fontWeight: '300',
-      fontSize: 20,
-    },
-    loginButtonText: {
-      color: theme.SIGNIN_SCREEN.LOGIN_BUTTON_TEXT_COLOR,
-    },
-    signupButton: {
-      backgroundColor: theme.SIGNIN_SCREEN.SIGNUP_BUTTON_BACKGROUND_COLOR,
-    },
     socialMediaContainer: {
       display: 'flex',
       flexDirection: 'row',
@@ -84,10 +52,13 @@ export const getThemedStyles = (theme: ITheme) =>
       borderRadius: 7,
       height: 40,
     },
+    socialButtonTextContainer: {
+      flex: 1,
+      alignItems: 'center',
+    },
     socialMediaButtonText: {
       fontSize: 15,
       fontWeight: '500',
-      paddingHorizontal: 20,
       color: theme.SIGNIN_SCREEN.SOCIAL_MEDIA_BUTTON_TEXT_COLOR,
     },
     socialMediaIconContainer: {
@@ -103,25 +74,29 @@ export const getThemedStyles = (theme: ITheme) =>
       height: 30,
     },
     googleButtonContainer: {
+      flex: 1,
+      marginRight: 20,
       backgroundColor: theme.SIGNIN_SCREEN.GOOGLE_BUTTON_CONTAINER_COLOR,
     },
     googleIconContainer: {
       backgroundColor: theme.SIGNIN_SCREEN.GOOGLE_ICON_CONTAINER_COLOR,
     },
     facebookButtonContainer: {
+      flex: 1,
+      marginRight: 20,
       backgroundColor: theme.SIGNIN_SCREEN.FACEBOOK_BUTTON_CONTAINER_COLOR,
     },
     facebookIconContainer: {
       backgroundColor: theme.SIGNIN_SCREEN.FACEBOOK_ICON_CONTAINER_COLOR,
     },
     appleButtonContainer: {
+      flex: 1.5,
       backgroundColor: theme.SIGNIN_SCREEN.APPLE_BUTTON_CONTAINER_COLOR,
       borderWidth: theme === LIGHT_THEME ? 1 : 0,
     },
     appleButtonText: {
       fontSize: 15,
       fontWeight: '500',
-      paddingHorizontal: 20,
       color: theme.SIGNIN_SCREEN.APPLE_BUTTON_TEXT_COLOR,
     },
   });
