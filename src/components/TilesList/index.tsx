@@ -19,6 +19,7 @@ export function TilesList({
 }: Props) {
   return (
     <FlatList
+      scrollEnabled={false}
       numColumns={NUM_COLUMNS}
       {...props}
       renderItem={({ item, ...renderItemProps }) => (

@@ -2,8 +2,7 @@ import React, { useContext, useCallback, useMemo } from 'react';
 import { Switch, Text } from 'react-native';
 
 import { Container } from '../../components';
-import { LIGHT_THEME } from '../../themes/index.web';
-import { DARK_THEME } from '../../themes';
+import { LIGHT_THEME, DARK_THEME } from '../../themes';
 import { COLORS } from '../../themes/colors';
 import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';

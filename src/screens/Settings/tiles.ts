@@ -4,12 +4,12 @@ export const SETTINGS_TILES = [
   {
     id: 'tile-flag',
     source: IMAGES.FLAG,
-    nav: null,
+    nav: 'Subscriptions',
   },
   {
     id: 'tile-fire',
     source: IMAGES.FIRE,
-    nav: 'Subscriptions',
+    nav: null,
   },
   {
     id: 'tile-speaker',

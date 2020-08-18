@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useMemo } from 'react';
 import { Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
@@ -18,7 +18,7 @@ export function SignIn() {
   const { theme } = useContext(ThemeContext);
   const { signInWithGoogle } = useContext(UserContext);
 
-  const themedStyles = getThemedStyles(theme);
+  const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   return (
     <Container style={themedStyles.signinContainer}>
