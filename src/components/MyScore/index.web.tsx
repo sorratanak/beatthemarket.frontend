@@ -10,7 +10,6 @@ interface Props {
 }
 
 export function MyScore({ users }: Props) {
-  console.log(users);
   return (
     <View style={styles.container}>
       <ScoreList data={DUMMY_DATA} />

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { Platform } from 'react-native';
 import {
-  requestPurchase,
+  // requestPurchase,
   requestSubscription,
   InAppPurchase,
   SubscriptionPurchase,
@@ -18,12 +18,14 @@ interface ContextProps {
   activeSubscription: ISubscriptionPlan;
   isProcessing: boolean;
   onRequestSubscription: (subscriptionId: string) => void;
+  onSetActiveSubscription: (subscription: ISubscriptionPlan) => void;
 }
 
 const DEFAULT_IAP_CONTEXT: ContextProps = {
   activeSubscription: null,
   isProcessing: false,
   onRequestSubscription: _.noop,
+  onSetActiveSubscription: _.noop,
 };
 
 export const IapContext = React.createContext(DEFAULT_IAP_CONTEXT);
@@ -94,11 +96,19 @@ const ContextProvider = ({
     [setIsProcessing],
   );
 
+  const onSetActiveSubscription = useCallback(
+    (subscription: ISubscriptionPlan) => {
+      setActiveSubscription(subscription);
+    },
+    [setActiveSubscription],
+  );
+
   return (
     <IapContext.Provider
       value={{
         isProcessing,
         activeSubscription,
+        onSetActiveSubscription,
         onRequestSubscription,
       }}>
       {children}

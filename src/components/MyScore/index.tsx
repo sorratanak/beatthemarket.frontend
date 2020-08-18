@@ -12,8 +12,6 @@ interface Props extends IScore {
 }
 
 export function MyScore({ users, percent, deposit, rate }: Props) {
-  console.log(users);
-
   return (
     <View style={styles.container}>
       <ScoreRow percent={percent} deposit={deposit} rate={rate} />

@@ -69,7 +69,6 @@ const ContextProvider = ({
   const signUp = useCallback(
     (email: string, password: string) => {
       SignUp({ email, password }).then((user) => {
-        console.log('user is', user);
         // setToken(email + password);
         setLocalToken(email + password);
       });

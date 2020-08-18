@@ -24,6 +24,7 @@ export function SubscriptionsList({
     <TilesList
       onTilePress={onSubscriptionPress}
       data={subscriptions}
+      tileStyle={themedStyles.tileContainer}
       extraData={activeSubscription}
       renderItem={({ item }) => (
         <View

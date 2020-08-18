@@ -6,12 +6,13 @@ import {
   SubscriptionsList,
 } from '../../components';
 import { getThemedStyles } from './styles';
-import { ThemeContext } from '../../contexts';
+import { ThemeContext, IapContext } from '../../contexts';
 import { IMAGES } from '../../assets';
 import { SUBSCRIPTIONS } from './subscriptions';
 
 export function Subscriptions() {
   const { theme } = useContext(ThemeContext);
+  const { onSetActiveSubscription } = useContext(IapContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -22,7 +23,7 @@ export function Subscriptions() {
       <View style={themedStyles.flexContainer}>
         <SubscriptionsList
           subscriptions={SUBSCRIPTIONS}
-          onSubscriptionPress={() => {}}
+          onSubscriptionPress={onSetActiveSubscription}
         />
       </View>
     </SettingsNestedScreenWrapper>

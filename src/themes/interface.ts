@@ -26,7 +26,9 @@ interface IGameScreenTheme {
 
 interface ISettingsScreenTheme {}
 
-interface ISubscriptionsScreenTheme {}
+interface ISubscriptionsScreenTheme {
+  ACTIVE_SUBSCRIPTION_PLAN?: string;
+}
 
 interface ISignInScreenTheme {
   TEXT_INPUT_BACKGROUND?: string;

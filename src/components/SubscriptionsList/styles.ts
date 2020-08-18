@@ -1,19 +1,18 @@
 import { StyleSheet } from 'react-native';
 import { ITheme } from '../../themes/interface';
-import { COLORS } from '../../themes/colors';
 
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     tileContainer: {
-      // flex: 1,
-      paddingVertical: undefined,
-      // alignItems: 'center',
-      // borderRadius: 7,
-      // marginVertical: 8,
-      // marginHorizontal: 8,
+      paddingVertical: 0,
+      overflow: 'hidden',
     },
-    itemContainer: {},
-    activeItemContainer: {},
+    itemContainer: {
+      paddingVertical: 16,
+    },
+    activeItemContainer: {
+      backgroundColor: theme.SUBSCRIPTIONS_SCREEN.ACTIVE_SUBSCRIPTION_PLAN,
+    },
     itemPriceText: {
       fontSize: 15,
       lineHeight: 18,
