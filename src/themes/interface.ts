@@ -24,7 +24,9 @@ interface IGameScreenTheme {
   LIST_VIEW_INDICATOR_TEXT_COLOR?: string;
 }
 
-interface ISettingsScreenTheme {}
+interface ISettingsScreenTheme {
+  BUY_BUTTON_COLOR?: string;
+}
 
 interface ISubscriptionsScreenTheme {
   ACTIVE_SUBSCRIPTION_PLAN?: string;

@@ -11,7 +11,8 @@ const RootNavigation = () => {
   return (
     <View style={styles.containerStyle}>
       <NavigationContainer>
-        {user ? <MainNavComponent /> : <AuthStack />}
+        {/* {user ? <MainNavComponent /> : <AuthStack />} */}
+        <MainNavComponent />
       </NavigationContainer>
     </View>
   );

@@ -1,16 +1,14 @@
 import { StyleSheet } from 'react-native';
-
 import { ITheme } from '../../themes/interface';
 
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
+      paddingVertical: 31,
+      backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
+      borderRadius: 7,
+      marginVertical: 8,
+      marginHorizontal: 8,
     },
-    flexContainer: {
-      flex: 1,
-    },
-    description: {},
-    buttonContainer: {},
   });
