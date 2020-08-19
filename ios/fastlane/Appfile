@@ -1,5 +1,5 @@
 app_identifier("com.beatthemarket.beatthemarket") # The bundle identifier of your app
-apple_id("timothy.washington2796@gmail.com") # Your Apple email address
+apple_id("arte.tkachuk@gmail.com") # Your Apple email address
 
 itc_team_id("121890387") # App Store Connect Team ID
 team_id("PAJM63M8SZ") # Developer Portal Team ID

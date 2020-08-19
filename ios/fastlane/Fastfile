@@ -1,25 +1,21 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
-
 default_platform(:ios)
 
+def beta(scheme, bundleID)
+  match(git_url: "git@github.com:twashing/beatTheMarketIosCerts.git",
+      readonly: true,
+      type: "appstore",
+      app_identifier: [
+        bundleID
+    ])
+    build_app(scheme: scheme)
+end
+
 platform :ios do
-  desc "Push a new beta build to TestFlight"
-  lane :beta do
-    increment_build_number(xcodeproj: "example.xcodeproj")
-    build_app(workspace: "example.xcworkspace", scheme: "example")
-    upload_to_testflight
+  
+  desc "Push a new staging alpha build to TestFlight"
+  lane :alphaBuild do
+    app_identifier = "com.beatthemarket.beatthemarket"
+    beta("BeatTheMarket", app_identifier)
+    upload_to_testflight(app_identifier: app_identifier)
   end
 end
