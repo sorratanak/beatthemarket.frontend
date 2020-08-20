@@ -5,7 +5,6 @@ import { ITheme } from '../../themes/interface';
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
-      flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       width: '100%',

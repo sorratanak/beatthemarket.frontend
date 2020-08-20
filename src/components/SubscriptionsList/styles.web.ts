@@ -6,7 +6,6 @@ export const getThemedStyles = (theme: ITheme) =>
     tileContainer: {
       paddingVertical: 0,
       overflow: 'hidden',
-      backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
     },
     itemContainer: {
       paddingTop: 12,

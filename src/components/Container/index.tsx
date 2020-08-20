@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { View, ViewStyle } from 'react-native';
+import { SafeAreaView, ViewStyle } from 'react-native';
 import { styles } from './styles';
 
 interface Props {
@@ -10,8 +10,8 @@ interface Props {
 
 export function Container({ children, style: propStyle, testID }: Props) {
   return (
-    <View style={[styles.center, propStyle]} testID={testID}>
+    <SafeAreaView style={[styles.center, propStyle]} testID={testID}>
       {children}
-    </View>
+    </SafeAreaView>
   );
 }

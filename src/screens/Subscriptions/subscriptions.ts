@@ -2,7 +2,7 @@ import { ISubscriptionPlan } from '../../types';
 
 export const SUBSCRIPTIONS: ISubscriptionPlan[] = [
   {
-    id: 'additional_balance_100k',
+    id: 'ADDITIONAL_BALANCE_100K',
     price: 1,
     balance: 100000,
   },
