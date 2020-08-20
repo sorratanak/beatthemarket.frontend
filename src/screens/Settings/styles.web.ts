@@ -6,7 +6,9 @@ export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
+      flexDirection: 'row',
       backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
+      padding: 40,
     },
     title: {
       textAlign: 'center',
@@ -19,9 +21,20 @@ export const getThemedStyles = (theme: ITheme) =>
       height: 50,
     },
     tileContainer: {
+      alignItems: 'flex-start',
+      backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
+    },
+    tileContentContainer: {
+      flexDirection: 'row',
       alignItems: 'center',
     },
-    tileContentContainer: {},
-    tileTitle: {},
-    settingsContainer: {},
+    tileTitle: {
+      fontWeight: '600',
+      fontSize: 20,
+      lineHeight: 24,
+      paddingLeft: 20,
+    },
+    settingsContainer: {
+      flex: 2.5,
+    },
   });

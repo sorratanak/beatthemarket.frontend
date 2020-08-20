@@ -11,4 +11,6 @@ export const getThemedStyles = (theme: ITheme) =>
     flexContainer: {
       flex: 1,
     },
+    description: {},
+    buttonContainer: {},
   });

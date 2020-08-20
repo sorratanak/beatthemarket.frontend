@@ -22,4 +22,10 @@ export const IMAGES = {
   SPEAKER: require('./settings/speaker.png'),
   HEADPHONES: require('./settings/headphones.png'),
   USER: require('./settings/user.png'),
+
+  /* End Game Modal */
+  WIN_GAME_LEFT: require('./endGameModal/winGameLeft.png'),
+  WIN_GAME_RIGHT: require('./endGameModal/winGameRight.png'),
+  LOSE_GAME_LEFT: require('./endGameModal/loseGameLeft.png'),
+  LOSE_GAME_RIGHT: require('./endGameModal/loseGameRight.png'),
 };
