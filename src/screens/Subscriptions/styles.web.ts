@@ -6,7 +6,7 @@ export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
+      backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
       borderRadius: 7,
     },
     flexContainer: {

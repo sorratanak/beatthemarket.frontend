@@ -3,6 +3,8 @@ import { Image, StyleSheet } from 'react-native';
 import { ITheme } from '../themes/interface';
 import { IMAGES } from '../assets';
 
+export const withoutHeaderOptions = { headerShown: false };
+
 export const getThemedTabBarOptions = (theme: ITheme) => ({
   activeTintColor: theme.MENU.ACTIVE_LABEL_COLOR,
   inactiveTintColor: theme.MENU.INACTIVE_LABEL_COLOR,

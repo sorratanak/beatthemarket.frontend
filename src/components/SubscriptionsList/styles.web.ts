@@ -6,14 +6,14 @@ export const getThemedStyles = (theme: ITheme) =>
     tileContainer: {
       paddingVertical: 0,
       overflow: 'hidden',
-      backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
     },
     itemContainer: {
       paddingTop: 12,
       paddingBottom: 44,
     },
     activeItemContainer: {
-      backgroundColor: theme.SUBSCRIPTIONS_SCREEN.ACTIVE_SUBSCRIPTION_PLAN,
+      backgroundColor:
+        theme.SUBSCRIPTIONS_SCREEN.ACTIVE_SUBSCRIPTION_PLAN_COLOR,
     },
     itemPriceText: {
       fontSize: 30,
