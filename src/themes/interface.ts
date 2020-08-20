@@ -49,6 +49,12 @@ interface ISignInScreenTheme {
   APPLE_BUTTON_TEXT_COLOR?: string;
 }
 
+interface IEndGameModal {
+  USER_LVL_TEXT_BACKGROUND?: string;
+  LOSE_MESSAGE_COLOR?: string;
+  FINISH_BUTTON_BACKGROUND?: string;
+}
+
 export interface ITheme {
   DEFAULT?: IDefaultTheme;
   MENU?: IMenuTheme;
@@ -56,4 +62,5 @@ export interface ITheme {
   SETTINGS_SCREEN?: ISettingsScreenTheme;
   SUBSCRIPTIONS_SCREEN?: ISubscriptionsScreenTheme;
   SIGNIN_SCREEN?: ISignInScreenTheme;
+  END_GAME_MODAL?: IEndGameModal;
 }

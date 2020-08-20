@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, FlatList } from 'react-native';
 import { useQuery } from '@apollo/client';
 import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
 import { IMAGES } from '../../assets';
 import usersGraphql from '../../graphql/users';
 import { ScoreBoard } from '../ScoreBoard';
+import { DefaultButton } from '../DefaultButton';
 
 export function EndGameModal() {
   const { theme } = useContext(ThemeContext);
@@ -16,6 +17,14 @@ export function EndGameModal() {
   const { data: users, loading: usersLoading, error: usersError } = useQuery(
     usersGraphql.queries.GET_USERS,
   );
+
+  const PROFITS = [
+    'lorem ipsum (+5464.78436)',
+    'lorem ipsum (+5.7%)',
+    'lorem ipsum (-6.3%)',
+    'lorem ipsum (+654.76$)',
+  ];
+  const BALANCE = '$54296,543';
 
   return (
     <View style={themedStyles.container}>
@@ -36,7 +45,27 @@ export function EndGameModal() {
             </View>
           </View>
           <View style={themedStyles.resultInfo}>
-            <Text style={themedStyles.subTitle}>Cris Brown</Text>
+            <View style={themedStyles.userInfoContainer}>
+              <Text style={themedStyles.subTitle}>Cris Brown</Text>
+              <Text style={themedStyles.userLvl}>Level 3</Text>
+            </View>
+            <Text style={themedStyles.loseMessage}>Lost at level 2</Text>
+            <View style={themedStyles.profitsContainer}>
+              <Text style={themedStyles.profitsTitle}>Profits:</Text>
+              <FlatList
+                data={PROFITS}
+                renderItem={({ item }) => (
+                  <Text style={themedStyles.profitItem}>{`- ${item}`}</Text>
+                )}
+                keyExtractor={(item) => item}
+              />
+            </View>
+            <Text style={themedStyles.balanceText}>Balance {BALANCE}</Text>
+            <DefaultButton
+              onPress={() => {}}
+              style={{ container: themedStyles.buttonContainer }}>
+              Finish
+            </DefaultButton>
           </View>
         </View>
       </View>

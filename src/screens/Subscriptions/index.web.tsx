@@ -1,6 +1,6 @@
 import React, { useContext, useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
-import Modal from 'modal-react-native-web'; //del
+import Modal from 'modal-react-native-web';
 import {
   SettingsNestedScreenWrapper,
   SubscriptionsList,
