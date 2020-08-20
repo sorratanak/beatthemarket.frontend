@@ -1,9 +1,11 @@
-import React, { useContext, useMemo } from 'react';
-import { Text, View } from 'react-native';
+import React, { useContext, useMemo, useCallback } from 'react';
+import { View } from 'react-native';
+import { requestSubscription, getProducts } from 'react-native-iap';
 
 import {
   SettingsNestedScreenWrapper,
   SubscriptionsList,
+  DefaultButton,
 } from '../../components';
 import { getThemedStyles } from './styles';
 import { ThemeContext, IapContext } from '../../contexts';
@@ -12,9 +14,16 @@ import { SUBSCRIPTIONS } from './subscriptions';
 
 export function Subscriptions() {
   const { theme } = useContext(ThemeContext);
-  const { onSetActiveSubscription } = useContext(IapContext);
+  const { activeSubscription, onSetActiveSubscription } = useContext(
+    IapContext,
+  );
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
+
+  const onSubscriptionPurchase = useCallback(() => {
+    getProducts([activeSubscription.id]).then(console.log);
+    requestSubscription(activeSubscription.id);
+  }, [activeSubscription]);
 
   return (
     <SettingsNestedScreenWrapper
@@ -26,6 +35,14 @@ export function Subscriptions() {
           onSubscriptionPress={onSetActiveSubscription}
         />
       </View>
+      <DefaultButton
+        onPress={onSubscriptionPurchase}
+        style={{
+          container: themedStyles.buttonContainer,
+          text: themedStyles.buttonText,
+        }}>
+        Purchase
+      </DefaultButton>
     </SettingsNestedScreenWrapper>
   );
 }

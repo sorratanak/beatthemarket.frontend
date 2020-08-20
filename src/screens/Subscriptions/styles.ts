@@ -11,4 +11,12 @@ export const getThemedStyles = (theme: ITheme) =>
     flexContainer: {
       flex: 1,
     },
+    buttonContainer: {
+      alignSelf: 'center',
+      backgroundColor: theme.SUBSCRIPTIONS_SCREEN.BUTTON_BACKGROUND_COLOR,
+    },
+    buttonText: {
+      fontWeight: 'bold',
+      color: theme.SUBSCRIPTIONS_SCREEN.BUTTON_TEXT_COLOR,
+    },
   });

@@ -27,7 +27,9 @@ interface IGameScreenTheme {
 interface ISettingsScreenTheme {}
 
 interface ISubscriptionsScreenTheme {
-  ACTIVE_SUBSCRIPTION_PLAN?: string;
+  ACTIVE_SUBSCRIPTION_PLAN_COLOR?: string;
+  BUTTON_BACKGROUND_COLOR?: string;
+  BUTTON_TEXT_COLOR?: string;
 }
 
 interface ISignInScreenTheme {
