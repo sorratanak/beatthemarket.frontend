@@ -9,12 +9,11 @@ interface Props extends FlatListProps<any> {
   tileStyle?: ViewStyle;
 }
 
-const NUM_COLUMNS = 2;
-
 export function TilesList({
   onTilePress,
   renderItem,
   tileStyle = null,
+  numColumns = 2,
   style,
   contentContainerStyle,
   ...props
@@ -22,7 +21,7 @@ export function TilesList({
   return (
     <FlatList
       scrollEnabled={false}
-      numColumns={NUM_COLUMNS}
+      numColumns={numColumns}
       {...props}
       renderItem={({ item, ...renderItemProps }) => (
         <TouchableTile onPress={() => onTilePress(item)} style={tileStyle}>

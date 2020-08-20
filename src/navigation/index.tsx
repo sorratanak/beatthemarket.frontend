@@ -14,23 +14,24 @@ import { tabOptions } from './tabBarOptions';
 export function MainNavComponent() {
   return (
     <MainNavigatorWrapper>
+      {/* TODO Fix stack name */}
       <MainNavigator.Screen
-        name="HomeStack"
+        name="Home"
         component={HomeStack}
         options={tabOptions.main}
       />
       <MainNavigator.Screen
-        name="GameStack"
+        name="Game"
         component={GameStack}
         options={tabOptions.game}
       />
       <MainNavigator.Screen
-        name="RulesStack"
+        name="Rules"
         component={RulesStack}
         options={tabOptions.rules}
       />
       <MainNavigator.Screen
-        name="SettingsStack"
+        name="Settings"
         component={SettingsStack}
         options={tabOptions.settings}
       />

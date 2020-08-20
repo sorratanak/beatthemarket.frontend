@@ -19,4 +19,5 @@ export const getThemedStyles = (theme: ITheme) =>
       fontWeight: 'bold',
       color: theme.SUBSCRIPTIONS_SCREEN.BUTTON_TEXT_COLOR,
     },
+    description: {},
   });
