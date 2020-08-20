@@ -1,5 +1,6 @@
 import { COLORS } from './colors';
 import { ITheme } from './interface';
+import { THEME_KEYS } from '../constants';
 
 const COMMON_THEME: ITheme = {
   DEFAULT: {},
@@ -38,6 +39,7 @@ const COMMON_THEME: ITheme = {
 };
 
 export const LIGHT_THEME: ITheme = {
+  _KEY: THEME_KEYS.LIGHT_THEME,
   DEFAULT: {
     ...COMMON_THEME.DEFAULT,
     PRIMARY_BACKGROUND_COLOR: COLORS.ALMOST_WHITE,
@@ -70,6 +72,7 @@ export const LIGHT_THEME: ITheme = {
 };
 
 export const DARK_THEME: ITheme = {
+  _KEY: THEME_KEYS.DARK_THEME,
   DEFAULT: {
     PRIMARY_BACKGROUND_COLOR: COLORS.MIRAGE,
     SECONDARY_BACKGROUND_COLOR: COLORS.EBONY_CLAY,
@@ -99,3 +102,5 @@ export const DARK_THEME: ITheme = {
     LOGIN_BUTTON_TEXT_COLOR: COLORS.VIKING,
   },
 };
+
+export const THEMES = [LIGHT_THEME, DARK_THEME];

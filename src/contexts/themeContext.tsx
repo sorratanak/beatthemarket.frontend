@@ -1,18 +1,21 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import noop from 'lodash/noop';
+import _ from 'lodash';
 
-import { setThemeToStorage, getThemeFromStorage } from '../utilities';
-import { ITheme } from '../themes/interface';
-import { LIGHT_THEME } from '../themes';
+import { setThemeKeyToStorage, getThemeKeyFromStorage } from '../utilities';
+import { ITheme, TThemeKey } from '../themes/interface';
+import { LIGHT_THEME, THEMES } from '../themes';
+import { THEME_KEYS } from '../constants';
 
 interface ContextProps {
   theme: ITheme;
-  switchTheme: (theme: ITheme) => void;
+  themeKey: TThemeKey;
+  switchTheme: (themeKey: TThemeKey) => void;
 }
 
 const DEFAULT_THEME_CONTEXT: ContextProps = {
   theme: null,
-  switchTheme: noop,
+  themeKey: null,
+  switchTheme: _.noop,
 };
 
 export const ThemeContext = React.createContext(DEFAULT_THEME_CONTEXT);
@@ -22,28 +25,39 @@ const ContextProvider = ({
 }: {
   children: React.ReactNode | React.ReactNode[];
 }) => {
+  const [themeKey, setThemeKey] = useState<TThemeKey>(THEME_KEYS.LIGHT_THEME);
   const [theme, setTheme] = useState<ITheme>(LIGHT_THEME);
 
+  const findTheme = useCallback(
+    (desiredThemeKey: TThemeKey) =>
+      _.find(THEMES, (someTheme) => someTheme._KEY === desiredThemeKey) ||
+      THEMES[0],
+    [],
+  );
+
   useEffect(() => {
-    getThemeFromStorage().then((storageTheme) => {
-      if (storageTheme) {
-        setTheme(storageTheme);
+    getThemeKeyFromStorage().then((storageThemeKey: TThemeKey) => {
+      if (storageThemeKey) {
+        setTheme(findTheme(storageThemeKey));
+        setThemeKey(storageThemeKey);
       }
     });
-  }, [getThemeFromStorage, setTheme]);
+  }, [getThemeKeyFromStorage, setTheme]);
 
   const switchTheme = useCallback(
-    (someTheme: ITheme) => {
-      setTheme(someTheme);
-      setThemeToStorage(someTheme);
+    (newThemeKey: TThemeKey) => {
+      setTheme(findTheme(newThemeKey));
+      setThemeKey(newThemeKey);
+      setThemeKeyToStorage(newThemeKey);
     },
-    [setTheme, setThemeToStorage],
+    [setTheme, setThemeKeyToStorage],
   );
 
   return (
     <ThemeContext.Provider
       value={{
         theme,
+        themeKey,
         switchTheme,
       }}>
       {children}
