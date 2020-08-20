@@ -30,6 +30,7 @@
     "firebase": "^7.17.1",
     "graphql": "^15.3.0",
     "lodash": "^4.17.19",
+    "modal-react-native-web": "^0.2.0",
     "moment": "^2.27.0",
     "pick-random": "^2.0.0",
     "react": "^16.13.1",
