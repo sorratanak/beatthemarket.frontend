@@ -1,6 +1,6 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
-
+import Modal from 'modal-react-native-web'; //del
 import {
   SettingsNestedScreenWrapper,
   SubscriptionsList,
@@ -10,12 +10,15 @@ import { getThemedStyles } from './styles';
 import { ThemeContext, IapContext } from '../../contexts';
 import { IMAGES } from '../../assets';
 import { SUBSCRIPTIONS } from './subscriptions';
+import { EndGameModal } from '../../components/EndGameModal';
 
 export function Subscriptions() {
   const { theme } = useContext(ThemeContext);
   const { onSetActiveSubscription } = useContext(IapContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   return (
     <SettingsNestedScreenWrapper
@@ -34,12 +37,21 @@ export function Subscriptions() {
         asperiores!
       </Text>
       <DefaultButton
-        onPress={() => {}}
+        onPress={() => {
+          setIsModalVisible(false);
+        }}
         style={{
           container: themedStyles.buttonContainer,
         }}>
         Buy
       </DefaultButton>
+      <Modal
+        animationType="slide"
+        presentationStyle="FormSheet"
+        transparent
+        visible={isModalVisible}>
+        <EndGameModal />
+      </Modal>
     </SettingsNestedScreenWrapper>
   );
 }
