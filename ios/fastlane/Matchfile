@@ -1,4 +1,4 @@
-git_url("git@github.com:dekameron22/beatTheMarketIosCerts.git")
+git_url("git@github.com:twashing/beatTheMarketIosCerts.git")
 
 storage_mode("git")
 
