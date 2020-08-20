@@ -44,12 +44,14 @@ export const getThemedStyles = (theme: ITheme) =>
       justifyContent: 'space-between',
     },
     loginButtonContainer: {
+      flex: 1,
       marginRight: 11,
     },
     loginButtonText: {
       color: theme.SIGNIN_SCREEN.LOGIN_BUTTON_TEXT_COLOR,
     },
     signUpButtonContainer: {
+      flex: 1,
       backgroundColor: theme.SIGNIN_SCREEN.SIGNUP_BUTTON_BACKGROUND_COLOR,
     },
     socialMediaContainer: {
