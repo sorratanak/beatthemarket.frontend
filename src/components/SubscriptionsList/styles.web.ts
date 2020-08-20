@@ -13,7 +13,8 @@ export const getThemedStyles = (theme: ITheme) =>
       paddingBottom: 44,
     },
     activeItemContainer: {
-      backgroundColor: theme.SUBSCRIPTIONS_SCREEN.ACTIVE_SUBSCRIPTION_PLAN,
+      backgroundColor:
+        theme.SUBSCRIPTIONS_SCREEN.ACTIVE_SUBSCRIPTION_PLAN_COLOR,
     },
     itemPriceText: {
       fontSize: 30,
