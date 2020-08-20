@@ -8,6 +8,7 @@ export const getThemedStyles = (theme: ITheme) =>
       flex: 1,
       flexDirection: 'row',
       backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
+      padding: 40,
     },
     title: {
       textAlign: 'center',
