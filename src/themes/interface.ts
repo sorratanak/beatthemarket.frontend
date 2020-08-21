@@ -51,10 +51,17 @@ interface ISignInScreenTheme {
   APPLE_BUTTON_TEXT_COLOR?: string;
 }
 
-interface IEndGameModal {
+interface IEndGameModalTheme {
   USER_LVL_TEXT_BACKGROUND?: string;
   LOSE_MESSAGE_COLOR?: string;
   FINISH_BUTTON_BACKGROUND?: string;
+}
+
+interface IRulesTheme {
+  FIRST_RULE_BACKGROUND_COLOR?: string;
+  SECOND_RULE_BACKGROUND_COLOR?: string;
+  THIRD_RULE_BACKGROUND_COLOR?: string;
+  FOURTH_RULE_BACKGROUND_COLOR?: string;
 }
 
 export type TThemeKey = 'LIGHT_THEME' | 'DARK_THEME';
@@ -67,5 +74,6 @@ export interface ITheme {
   SETTINGS_SCREEN?: ISettingsScreenTheme;
   SUBSCRIPTIONS_SCREEN?: ISubscriptionsScreenTheme;
   SIGNIN_SCREEN?: ISignInScreenTheme;
-  END_GAME_MODAL?: IEndGameModal;
+  END_GAME_MODAL?: IEndGameModalTheme;
+  RULES?: IRulesTheme;
 }

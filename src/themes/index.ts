@@ -41,6 +41,7 @@ const COMMON_THEME: ITheme = {
     LOSE_MESSAGE_COLOR: COLORS.PUNCH,
     FINISH_BUTTON_BACKGROUND: COLORS.VIKING,
   },
+  RULES: {},
 };
 
 export const LIGHT_THEME: ITheme = {
@@ -77,6 +78,7 @@ export const LIGHT_THEME: ITheme = {
   END_GAME_MODAL: {
     ...COMMON_THEME.END_GAME_MODAL,
   },
+  RULES: { ...COMMON_THEME.RULES },
 };
 
 export const DARK_THEME: ITheme = {
@@ -112,6 +114,7 @@ export const DARK_THEME: ITheme = {
   END_GAME_MODAL: {
     ...COMMON_THEME.END_GAME_MODAL,
   },
+  RULES: { ...COMMON_THEME.RULES },
 };
 
 export const THEMES = [LIGHT_THEME, DARK_THEME];
