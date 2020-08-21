@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { auth as firebaseAuth } from './firebase/helper';
 import { USER_KEY, THEME_KEY } from './constants';
 import { IUser } from './types';
-import { ITheme } from './themes/interface';
+import { TThemeKey } from './themes/interface';
 
 /* ------ User ------ */
 
@@ -23,14 +23,13 @@ export function removeUserFromStorage(): void {
 
 /* ------ Theme ------ */
 
-export function setThemeToStorage(theme: ITheme): void {
-  AsyncStorage.setItem(THEME_KEY, JSON.stringify(theme));
+export function setThemeKeyToStorage(themeKey: TThemeKey): void {
+  AsyncStorage.setItem(THEME_KEY, themeKey);
 }
 
-export async function getThemeFromStorage(): Promise<ITheme> {
-  const stringifiedTheme: string = await AsyncStorage.getItem(THEME_KEY);
-  const theme: ITheme = JSON.parse(stringifiedTheme);
-  return theme;
+export async function getThemeKeyFromStorage(): Promise<string> {
+  const themeKey = await AsyncStorage.getItem(THEME_KEY);
+  return themeKey;
 }
 
 export function removeThemeFromStorage(): void {

@@ -1,7 +1,9 @@
+import { TThemeKey } from '../themes/interface';
+
 export * from './keys';
 
 export const USER_KEY = '_user';
-export const THEME_KEY = '_theme';
+export const THEME_KEY = '_themeKey';
 
 export const STOCK_CHANGE_TYPE = {
   BUY: 'buy',
@@ -22,4 +24,9 @@ export const SUBSCRIPTION_TYPE = {
     APPLE_PRODUCT_ID: 'additional_balance_100k',
     STRIPE_PRODUCT_ID: 'prod_HrvyV6uaKEFvHd',
   },
+};
+
+export const THEME_KEYS: { [keyName: string]: TThemeKey } = {
+  LIGHT_THEME: 'LIGHT_THEME',
+  DARK_THEME: 'DARK_THEME',
 };

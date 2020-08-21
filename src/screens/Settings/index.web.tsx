@@ -1,5 +1,5 @@
 import React, { useContext, useCallback, useMemo } from 'react';
-import { Text, Image, View } from 'react-native';
+import { Text, Image, View, Switch } from 'react-native';
 
 import { Container, TilesList } from '../../components';
 import { getThemedStyles } from './styles';
@@ -7,9 +7,11 @@ import { ThemeContext } from '../../contexts';
 import { ScreenProps } from './props';
 import { SETTINGS_TILES } from './tiles';
 import { Subscriptions } from '../Subscriptions';
+import { THEME_KEYS } from '../../constants';
+import { COLORS } from '../../themes/colors';
 
 export function Settings({ navigation }: ScreenProps) {
-  const { theme } = useContext(ThemeContext);
+  const { theme, themeKey, switchTheme } = useContext(ThemeContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -19,6 +21,16 @@ export function Settings({ navigation }: ScreenProps) {
       navigation.navigate(nav);
     }
   }, []);
+
+  const isLightTheme = themeKey === THEME_KEYS.LIGHT_THEME;
+
+  const onSwitchTheme = useCallback(() => {
+    switchTheme(
+      themeKey === THEME_KEYS.LIGHT_THEME
+        ? THEME_KEYS.DARK_THEME
+        : THEME_KEYS.LIGHT_THEME,
+    );
+  }, [themeKey]);
 
   return (
     <Container style={themedStyles.container}>
@@ -38,6 +50,15 @@ export function Settings({ navigation }: ScreenProps) {
       <View style={themedStyles.settingsContainer}>
         <Subscriptions />
       </View>
+      <Text style={themedStyles.title}>
+        {isLightTheme ? 'Light' : 'Dark'} theme
+      </Text>
+      <Switch
+        trackColor={{ false: COLORS.GRAY, true: COLORS.VIKING }}
+        thumbColor={isLightTheme ? COLORS.SILVER : COLORS.GRAY}
+        onValueChange={onSwitchTheme}
+        value={isLightTheme}
+      />
     </Container>
   );
 }

@@ -51,7 +51,10 @@ interface ISignInScreenTheme {
   APPLE_BUTTON_TEXT_COLOR?: string;
 }
 
+export type TThemeKey = 'LIGHT_THEME' | 'DARK_THEME';
+
 export interface ITheme {
+  _KEY?: TThemeKey;
   DEFAULT?: IDefaultTheme;
   MENU?: IMenuTheme;
   GAME_SCREEN?: IGameScreenTheme;
