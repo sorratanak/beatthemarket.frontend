@@ -40,7 +40,7 @@ export function SubscriptionsList({
           </Text>
         </View>
       )}
-      keyExtractor={(item) => `radio-subscription-${item.id}`}
+      keyExtractor={(item, index) => `radio-subscription-${item.id}-${index}`}
     />
   );
 }

@@ -29,7 +29,9 @@ interface ISettingsScreenTheme {
 }
 
 interface ISubscriptionsScreenTheme {
-  ACTIVE_SUBSCRIPTION_PLAN?: string;
+  ACTIVE_SUBSCRIPTION_PLAN_COLOR?: string;
+  BUTTON_BACKGROUND_COLOR?: string;
+  BUTTON_TEXT_COLOR?: string;
 }
 
 interface ISignInScreenTheme {
@@ -55,7 +57,10 @@ interface IEndGameModal {
   FINISH_BUTTON_BACKGROUND?: string;
 }
 
+export type TThemeKey = 'LIGHT_THEME' | 'DARK_THEME';
+
 export interface ITheme {
+  _KEY?: TThemeKey;
   DEFAULT?: IDefaultTheme;
   MENU?: IMenuTheme;
   GAME_SCREEN?: IGameScreenTheme;

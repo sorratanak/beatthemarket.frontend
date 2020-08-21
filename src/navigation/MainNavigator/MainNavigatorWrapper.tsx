@@ -2,7 +2,7 @@ import '../GestureHandler';
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { getThemedTabBarOptions } from '../tabBarOptions';
+import { getThemedTabBarOptions } from '../routesOptions';
 import { ThemeContext } from '../../contexts';
 
 export const MainNavigator = createBottomTabNavigator();

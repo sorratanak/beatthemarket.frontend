@@ -9,7 +9,7 @@ import {
   GameStack,
   RulesStack,
 } from './stacks';
-import { tabOptions } from './tabBarOptions';
+import { tabOptions } from './routesOptions';
 
 export function MainNavComponent() {
   return (

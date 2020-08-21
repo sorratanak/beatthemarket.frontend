@@ -11,7 +11,8 @@ export const getThemedStyles = (theme: ITheme) =>
       paddingVertical: 16,
     },
     activeItemContainer: {
-      backgroundColor: theme.SUBSCRIPTIONS_SCREEN.ACTIVE_SUBSCRIPTION_PLAN,
+      backgroundColor:
+        theme.SUBSCRIPTIONS_SCREEN.ACTIVE_SUBSCRIPTION_PLAN_COLOR,
     },
     itemPriceText: {
       fontSize: 15,
