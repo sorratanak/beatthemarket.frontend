@@ -1,9 +1,10 @@
-import React, { useContext, useMemo, useCallback } from 'react';
+import React, { useContext, useMemo, useCallback, useEffect } from 'react';
 import { View } from 'react-native';
 import {
   requestSubscription,
   getProducts,
   getSubscriptions,
+  initConnection,
 } from 'react-native-iap';
 
 import {
@@ -28,8 +29,16 @@ export function Subscriptions() {
     getProducts(['additional_balance_100k']).then((result) =>
       console.log('getProducts', result),
     );
-    requestSubscription(activeSubscription.id);
+    // requestSubscription(activeSubscription.id);
   }, [activeSubscription]);
+
+  useEffect(() => {
+    initConnection().then(() => {
+      getProducts(['additional_balance_100k']).then((result) =>
+        console.log('getProducts', result),
+      );
+    });
+  }, []);
 
   return (
     <SettingsNestedScreenWrapper
