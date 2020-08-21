@@ -13,6 +13,7 @@ export const getThemedStyles = (theme: ITheme) =>
       flex: 1,
     },
     description: {
+      color: theme.DEFAULT.TEXT_COLOR,
       fontSize: 15,
       lineHeight: 20,
       textAlign: 'justify',
