@@ -38,7 +38,7 @@ export function Subscriptions() {
       </Text>
       <DefaultButton
         onPress={() => {
-          setIsModalVisible(false);
+          setIsModalVisible(true);
         }}
         style={{
           container: themedStyles.buttonContainer,
@@ -50,7 +50,7 @@ export function Subscriptions() {
         presentationStyle="FormSheet"
         transparent
         visible={isModalVisible}>
-        <EndGameModal />
+        <EndGameModal setIsModalVisible={setIsModalVisible} />
       </Modal>
     </SettingsNestedScreenWrapper>
   );

@@ -17,6 +17,7 @@ export const getThemedStyles = (theme: ITheme) =>
     userInfoContainer: {},
     userLvl: {},
     loseMessage: {},
+    hidden: {},
     profitsContainer: {},
     profitsTitle: {},
     profitItem: {},

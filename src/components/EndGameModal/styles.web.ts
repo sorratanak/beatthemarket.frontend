@@ -68,6 +68,7 @@ export const getThemedStyles = (theme: ITheme) =>
       color: theme.END_GAME_MODAL.LOSE_MESSAGE_COLOR,
       marginBottom: 30,
     },
+    hidden: { opacity: 0 },
     profitsContainer: {
       marginBottom: 50,
     },
