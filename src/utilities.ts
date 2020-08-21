@@ -7,7 +7,6 @@ import { TThemeKey } from './themes/interface';
 /* ------ User ------ */
 
 export function setUserToStorage(user: IUser) {
-  console.log('setUserToStorage', user);
   AsyncStorage.setItem(USER_KEY, JSON.stringify(user));
 }
 
@@ -40,6 +39,6 @@ export function removeThemeFromStorage(): void {
 
 export async function getFirebaseToken() {
   const firebaseToken = await firebaseAuth?.currentUser?.getIdToken();
-  console.log('New firebaseToken:', firebaseToken);
+
   return firebaseToken;
 }

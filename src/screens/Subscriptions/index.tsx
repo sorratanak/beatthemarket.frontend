@@ -32,14 +32,6 @@ export function Subscriptions() {
     // requestSubscription(activeSubscription.id);
   }, [activeSubscription]);
 
-  useEffect(() => {
-    initConnection().then(() => {
-      getProducts(['additional_balance_100k']).then((result) =>
-        console.log('getProducts', result),
-      );
-    });
-  }, []);
-
   return (
     <SettingsNestedScreenWrapper
       imageSource={IMAGES.FLAG}
