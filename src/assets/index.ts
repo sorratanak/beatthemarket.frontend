@@ -28,4 +28,14 @@ export const IMAGES = {
   WIN_GAME_RIGHT: require('./endGameModal/winGameRight.png'),
   LOSE_GAME_LEFT: require('./endGameModal/loseGameLeft.png'),
   LOSE_GAME_RIGHT: require('./endGameModal/loseGameRight.png'),
+
+  /* Rules */
+  ONE: require('./rules/numbers/one.png'),
+  TWO: require('./rules/numbers/two.png'),
+  THREE: require('./rules/numbers/three.png'),
+  FOUR: require('./rules/numbers/four.png'),
+  LEVEL_UP: require('./rules/levelUp.png'),
+  REVIEW: require('./rules/review.png'),
+  RULES: require('./rules/rules.png'),
+  ROCKET: require('./rules/springSwingRocket.png'),
 };

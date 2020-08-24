@@ -14,4 +14,13 @@ export const getThemedStyles = (theme: ITheme) =>
     resultInfo: {},
     subTitle: {},
     scoreBoardContainer: {},
+    userInfoContainer: {},
+    userLvl: {},
+    loseMessage: {},
+    hidden: {},
+    profitsContainer: {},
+    profitsTitle: {},
+    profitItem: {},
+    balanceText: {},
+    buttonContainer: {},
   });

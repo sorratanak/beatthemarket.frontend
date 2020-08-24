@@ -1,5 +1,5 @@
 import React, { useContext, useCallback, useEffect } from 'react';
-import { Button } from 'react-native';
+import { Button, View } from 'react-native';
 import { useMutation, useQuery } from '@apollo/client';
 
 import { ScreenProps } from './props';
@@ -8,6 +8,8 @@ import { UserContext } from '../../contexts/userContext';
 import { GameContext } from '../../contexts/gameContext';
 import gameGraphql from '../../graphql/game';
 import usersGraphql from '../../graphql/users';
+import { getThemedStyles } from './styles';
+import { ThemeContext } from '../../contexts';
 
 export function Home({ navigation }: ScreenProps) {
   const { logout } = useContext(UserContext);
@@ -45,9 +47,14 @@ export function Home({ navigation }: ScreenProps) {
     createGame({ variables: { gameLevel: 1 } });
   }, []);
 
+  const { theme } = useContext(ThemeContext);
+  const themedStyles = getThemedStyles(theme);
+
   return (
     <Container>
-      <ScoreBoard users={users} />
+      <View style={themedStyles.scoreBoardContainer}>
+        <ScoreBoard users={users} isTabsVisible />
+      </View>
       <Button
         testID="Create Game"
         title="Create Game"

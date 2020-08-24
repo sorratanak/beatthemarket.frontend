@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import { CardElement } from '@stripe/react-stripe-js';
 
 import { Container, DefaultButton } from '../../components';
@@ -7,6 +7,8 @@ import { SUBSCRIPTION_TYPE } from '../../constants';
 import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
 import { IapContext } from '../../contexts/iapContext.web';
+import { RULES_TILES } from './tiles';
+import { RuleBlock } from '../../components/RuleBlock';
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -34,7 +36,12 @@ export function Rules() {
 
   return (
     <Container style={themedStyles.container}>
-      <Text style={themedStyles.title}>Rules</Text>
+      <FlatList
+        data={RULES_TILES}
+        numColumns={2}
+        renderItem={({ item }) => <RuleBlock item={item} />}
+        keyExtractor={(item) => item.id}
+      />
       <Text>Card details</Text>
       <View style={{ width: '100%' }}>
         <CardElement options={CARD_ELEMENT_OPTIONS} />

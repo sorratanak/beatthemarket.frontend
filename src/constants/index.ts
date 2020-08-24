@@ -30,3 +30,8 @@ export const THEME_KEYS: { [keyName: string]: TThemeKey } = {
   LIGHT_THEME: 'LIGHT_THEME',
   DARK_THEME: 'DARK_THEME',
 };
+
+export const DEVELOPMENT_SERVER_BASE_IP =
+  'beatthemarket5-env.eba-42mjkwti.us-east-1.elasticbeanstalk.com';
+
+export const DEVELOPMENT_SERVER_PORT = '80';

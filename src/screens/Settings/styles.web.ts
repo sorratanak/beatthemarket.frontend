@@ -29,6 +29,7 @@ export const getThemedStyles = (theme: ITheme) =>
       alignItems: 'center',
     },
     tileTitle: {
+      color: theme.DEFAULT.TEXT_COLOR,
       fontWeight: '600',
       fontSize: 20,
       lineHeight: 24,

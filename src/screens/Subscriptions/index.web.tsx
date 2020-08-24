@@ -1,6 +1,6 @@
 import React, { useContext, useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
-import Modal from 'modal-react-native-web'; //del
+import Modal from 'modal-react-native-web';
 import {
   SettingsNestedScreenWrapper,
   SubscriptionsList,
@@ -38,7 +38,7 @@ export function Subscriptions() {
       </Text>
       <DefaultButton
         onPress={() => {
-          setIsModalVisible(false);
+          setIsModalVisible(true);
         }}
         style={{
           container: themedStyles.buttonContainer,
@@ -50,7 +50,7 @@ export function Subscriptions() {
         presentationStyle="FormSheet"
         transparent
         visible={isModalVisible}>
-        <EndGameModal />
+        <EndGameModal setIsModalVisible={setIsModalVisible} />
       </Modal>
     </SettingsNestedScreenWrapper>
   );
