@@ -11,9 +11,10 @@ const TAB_NAMES = {
 
 interface Props {
   users: any[];
+  isTabsVisible?: boolean;
 }
 
-export function ScoreBoard({ users }: Props) {
+export function ScoreBoard({ users, isTabsVisible }: Props) {
   const [currentTab, setCurrentTab] = useState(TAB_NAMES.SINGLE_PLAYER);
 
   const renderTabs = useCallback(() => {
@@ -47,7 +48,7 @@ export function ScoreBoard({ users }: Props) {
 
   return (
     <View style={styles.container}>
-      {renderTabs()}
+      {isTabsVisible && renderTabs()}
       <MyScore users={users} percent="75%" deposit="$133.55" rate="+13.76%" />
     </View>
   );
