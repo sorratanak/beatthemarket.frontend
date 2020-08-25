@@ -14,7 +14,7 @@ interface Props {
   isTabsVisible?: boolean;
 }
 
-export function ScoreBoard({ users, isTabsVisible }: Props) {
+export function ScoreBoard({ users, isTabsVisible = true }: Props) {
   const [currentTab, setCurrentTab] = useState(TAB_NAMES.SINGLE_PLAYER);
 
   const renderTabs = useCallback(() => {

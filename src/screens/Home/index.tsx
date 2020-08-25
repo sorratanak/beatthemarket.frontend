@@ -53,7 +53,7 @@ export function Home({ navigation }: ScreenProps) {
   return (
     <Container>
       <View style={themedStyles.scoreBoardContainer}>
-        <ScoreBoard users={users} isTabsVisible />
+        <ScoreBoard users={users} />
       </View>
       <Button
         testID="Create Game"

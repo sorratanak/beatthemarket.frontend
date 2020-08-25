@@ -7,6 +7,7 @@ import { IMAGES } from '../../assets';
 import usersGraphql from '../../graphql/users';
 import { ScoreBoard } from '../ScoreBoard';
 import { DefaultButton } from '../DefaultButton';
+import { PROFITS, BALANCE } from './dummyData';
 
 interface Props {
   isLoseGame?: boolean;
@@ -22,14 +23,6 @@ export function EndGameModal({ isLoseGame, setIsModalVisible }: Props) {
   const { data: users, loading: usersLoading, error: usersError } = useQuery(
     usersGraphql.queries.GET_USERS,
   );
-
-  const PROFITS = [
-    'lorem ipsum (+5464.78436)',
-    'lorem ipsum (+5.7%)',
-    'lorem ipsum (-6.3%)',
-    'lorem ipsum (+654.76$)',
-  ];
-  const BALANCE = '$54296,543';
 
   return (
     <View style={themedStyles.container}>
@@ -64,7 +57,7 @@ export function EndGameModal({ isLoseGame, setIsModalVisible }: Props) {
           <View style={themedStyles.rankInfo}>
             <Text style={themedStyles.subTitle}>Lorem ipsum</Text>
             <View style={themedStyles.scoreBoardContainer}>
-              <ScoreBoard users={users} />
+              <ScoreBoard users={users} isTabsVisible={false} />
             </View>
           </View>
           <View style={themedStyles.resultInfo}>
@@ -87,7 +80,7 @@ export function EndGameModal({ isLoseGame, setIsModalVisible }: Props) {
                 renderItem={({ item }) => (
                   <Text style={themedStyles.profitItem}>{`- ${item}`}</Text>
                 )}
-                keyExtractor={(item) => item}
+                keyExtractor={(item) => `end-game-profit-${item}`}
               />
             </View>
             <Text style={themedStyles.balanceText}>Balance {BALANCE}</Text>

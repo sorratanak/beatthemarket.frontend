@@ -37,7 +37,7 @@ export function Settings({ navigation }: ScreenProps) {
         onTilePress={onNavigateTile}
         tileStyle={themedStyles.tileContainer}
         data={SETTINGS_TILES}
-        keyExtractor={(item) => `${item.id}`}
+        keyExtractor={(item) => `navigate-${item.id}`}
         renderItem={({ item }) => (
           <Image source={item.source} style={themedStyles.tileImage} />
         )}

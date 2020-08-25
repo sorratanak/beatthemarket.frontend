@@ -39,7 +39,7 @@ export function Settings({ navigation }: ScreenProps) {
         numColumns={1}
         tileStyle={themedStyles.tileContainer}
         data={SETTINGS_TILES}
-        keyExtractor={(item) => `${item.id}`}
+        keyExtractor={(item) => `navigate-${item.id}`}
         renderItem={({ item }) => (
           <View style={themedStyles.tileContentContainer}>
             <Image source={item.source} style={themedStyles.tileImage} />

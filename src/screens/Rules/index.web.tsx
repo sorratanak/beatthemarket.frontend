@@ -7,8 +7,8 @@ import { SUBSCRIPTION_TYPE } from '../../constants';
 import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
 import { IapContext } from '../../contexts/iapContext.web';
-import { RULES_TILES } from './tiles';
 import { RuleBlock } from '../../components/RuleBlock';
+import { getRulesInfo } from './tiles';
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -33,14 +33,15 @@ export function Rules() {
   const { onRequestSubscription } = useContext(IapContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
+  const rulesInfo = getRulesInfo(theme);
 
   return (
     <Container style={themedStyles.container}>
       <FlatList
-        data={RULES_TILES}
+        data={rulesInfo}
         numColumns={2}
         renderItem={({ item }) => <RuleBlock item={item} />}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => `rule-info-${item.id}`}
       />
       <Text>Card details</Text>
       <View style={{ width: '100%' }}>
