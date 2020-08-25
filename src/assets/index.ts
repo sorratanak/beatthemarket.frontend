@@ -38,4 +38,8 @@ export const IMAGES = {
   REVIEW: require('./rules/review.png'),
   RULES: require('./rules/rules.png'),
   ROCKET: require('./rules/springSwingRocket.png'),
+
+  /* Info Modal */
+  ERROR: require('./infoModal/error.png'),
+  WARNING: require('./infoModal/warning.png'),
 };

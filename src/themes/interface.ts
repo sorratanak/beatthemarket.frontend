@@ -64,6 +64,11 @@ interface IRulesTheme {
   FOURTH_RULE_BACKGROUND_COLOR?: string;
 }
 
+interface IInfoModalTheme {
+  FIRST_BUTTON_ACCENT_BORDER_COLOR?: string;
+  SECOND_BUTTON_ACCENT_BACKGROUND_COLOR?: string;
+}
+
 export type TThemeKey = 'LIGHT_THEME' | 'DARK_THEME';
 
 export interface ITheme {
@@ -76,4 +81,5 @@ export interface ITheme {
   SIGNIN_SCREEN?: ISignInScreenTheme;
   END_GAME_MODAL?: IEndGameModalTheme;
   RULES?: IRulesTheme;
+  INFO_MODAL?: IInfoModalTheme;
 }
