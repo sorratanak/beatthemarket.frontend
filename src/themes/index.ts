@@ -42,6 +42,7 @@ const COMMON_THEME: ITheme = {
     FINISH_BUTTON_BACKGROUND: COLORS.VIKING,
   },
   RULES: {},
+  INFO_MODAL: {},
 };
 
 export const LIGHT_THEME: ITheme = {
@@ -79,6 +80,7 @@ export const LIGHT_THEME: ITheme = {
     ...COMMON_THEME.END_GAME_MODAL,
   },
   RULES: { ...COMMON_THEME.RULES },
+  INFO_MODAL: { ...COMMON_THEME.INFO_MODAL },
 };
 
 export const DARK_THEME: ITheme = {
@@ -115,6 +117,7 @@ export const DARK_THEME: ITheme = {
     ...COMMON_THEME.END_GAME_MODAL,
   },
   RULES: { ...COMMON_THEME.RULES },
+  INFO_MODAL: { ...COMMON_THEME.INFO_MODAL },
 };
 
 export const THEMES = [LIGHT_THEME, DARK_THEME];

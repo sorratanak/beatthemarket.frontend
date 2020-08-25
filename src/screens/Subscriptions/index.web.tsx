@@ -10,7 +10,7 @@ import { getThemedStyles } from './styles';
 import { ThemeContext, IapContext } from '../../contexts';
 import { IMAGES } from '../../assets';
 import { SUBSCRIPTIONS } from './subscriptions';
-import { EndGameModal } from '../../components/EndGameModal';
+import { InfoModal } from '../../components/InfoModal';
 
 export function Subscriptions() {
   const { theme } = useContext(ThemeContext);
@@ -50,7 +50,19 @@ export function Subscriptions() {
         presentationStyle="FormSheet"
         transparent
         visible={isModalVisible}>
-        <EndGameModal setIsModalVisible={setIsModalVisible} />
+        <InfoModal
+          onClosePress={() => setIsModalVisible(false)}
+          title={{ text: 'Pause' }}
+          infoText="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+          firstButton={{
+            text: 'Lorem',
+            onPress: () => console.log('all good'),
+          }}
+          secondButton={{
+            text: 'Finish',
+            onPress: () => console.log('all good!!!'),
+          }}
+        />
       </Modal>
     </SettingsNestedScreenWrapper>
   );
