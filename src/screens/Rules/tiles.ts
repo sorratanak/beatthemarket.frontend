@@ -1,12 +1,6 @@
 import { IMAGES } from '../../assets';
 import { ITheme } from '../../themes/interface';
-
-const RULES_ID = {
-  FIRST_BLOCK: 'h3exl8p0mge',
-  SECOND_BLOCK: 'hne1l8p0mge',
-  THIRD_BLOCK: 'h3e3lup7mge',
-  FOURTH_BLOCK: 'h3exl5p5m2e',
-};
+import { RULES_ID } from '../../constants';
 
 export const getRulesInfo = (theme: ITheme) => {
   const RULES_TILES = [
