@@ -1,5 +1,5 @@
 import React, { useContext, useCallback, useEffect } from 'react';
-import { Button, View } from 'react-native';
+import { Button } from 'react-native';
 import { useMutation, useQuery } from '@apollo/client';
 
 import { ScreenProps } from './props';
@@ -52,9 +52,7 @@ export function Home({ navigation }: ScreenProps) {
 
   return (
     <Container>
-      <View style={themedStyles.scoreBoardContainer}>
-        <ScoreBoard users={users} />
-      </View>
+      <ScoreBoard users={users} style={themedStyles.scoreBoardContainer} />
       <Button
         testID="Create Game"
         title="Create Game"

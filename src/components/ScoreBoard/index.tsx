@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, ViewProps } from 'react-native';
 
 import { MyScore } from '../MyScore';
 import { styles } from './styles';
@@ -9,12 +9,16 @@ const TAB_NAMES = {
   MULTIPLAYER: 'Multi player',
 };
 
-interface Props {
+interface Props extends ViewProps {
   users: any[];
   isTabsVisible?: boolean;
 }
 
-export function ScoreBoard({ users, isTabsVisible = true }: Props) {
+export function ScoreBoard({
+  users,
+  isTabsVisible = true,
+  style: propsStyle,
+}: Props) {
   const [currentTab, setCurrentTab] = useState(TAB_NAMES.SINGLE_PLAYER);
 
   const renderTabs = useCallback(() => {
@@ -47,7 +51,7 @@ export function ScoreBoard({ users, isTabsVisible = true }: Props) {
   }, [currentTab]);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, propsStyle]}>
       {isTabsVisible && renderTabs()}
       <MyScore users={users} percent="75%" deposit="$133.55" rate="+13.76%" />
     </View>
