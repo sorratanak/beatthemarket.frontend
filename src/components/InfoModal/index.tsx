@@ -34,10 +34,10 @@ export function InfoModal({
     <View style={themedStyles.container}>
       <View style={themedStyles.subContainer}>
         <View style={themedStyles.titleContainer}>
-          {title.text && (
+          {title?.text && (
             <Text style={themedStyles.titleText}>{title.text}</Text>
           )}
-          {title.img && (
+          {title?.img && (
             <Image style={themedStyles.titleImg} source={title.img} />
           )}
         </View>

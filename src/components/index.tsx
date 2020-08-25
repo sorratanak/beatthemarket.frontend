@@ -1,6 +1,7 @@
 export * from './Container';
 export * from './DefaultButton';
 export * from './DefaultInput';
+export * from './DefaultModal';
 export * from './GameChartBoard';
 export * from './LineChart';
 export * from './MyScore';

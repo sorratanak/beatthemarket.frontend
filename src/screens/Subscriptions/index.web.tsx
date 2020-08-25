@@ -1,10 +1,10 @@
 import React, { useContext, useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
-import Modal from 'modal-react-native-web';
 import {
   SettingsNestedScreenWrapper,
   SubscriptionsList,
   DefaultButton,
+  DefaultModal,
 } from '../../components';
 import { getThemedStyles } from './styles';
 import { ThemeContext, IapContext } from '../../contexts';
@@ -37,19 +37,13 @@ export function Subscriptions() {
         asperiores!
       </Text>
       <DefaultButton
-        onPress={() => {
-          setIsModalVisible(true);
-        }}
+        onPress={() => setIsModalVisible(true)}
         style={{
           container: themedStyles.buttonContainer,
         }}>
         Buy
       </DefaultButton>
-      <Modal
-        animationType="slide"
-        presentationStyle="FormSheet"
-        transparent
-        visible={isModalVisible}>
+      <DefaultModal isVisible={isModalVisible}>
         <InfoModal
           onClosePress={() => setIsModalVisible(false)}
           title={{ text: 'Pause' }}
@@ -63,7 +57,7 @@ export function Subscriptions() {
             onPress: () => console.log('all good!!!'),
           }}
         />
-      </Modal>
+      </DefaultModal>
     </SettingsNestedScreenWrapper>
   );
 }

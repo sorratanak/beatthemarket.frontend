@@ -1,5 +1,5 @@
-import React, { useContext, useMemo, useCallback, useEffect } from 'react';
-import { View } from 'react-native';
+import React, { useContext, useMemo, useCallback, useState } from 'react';
+import { View, Text } from 'react-native';
 import {
   requestSubscription,
   getProducts,
@@ -11,6 +11,7 @@ import {
   SettingsNestedScreenWrapper,
   SubscriptionsList,
   DefaultButton,
+  DefaultModal,
 } from '../../components';
 import { getThemedStyles } from './styles';
 import { ThemeContext, IapContext } from '../../contexts';
@@ -25,11 +26,18 @@ export function Subscriptions() {
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const onCloseModal = useCallback(() => {
+    setIsModalVisible(false);
+  }, [setIsModalVisible]);
+
   const onSubscriptionPurchase = useCallback(() => {
-    getProducts(['additional_balance_100k']).then((result) =>
-      console.log('getProducts', result),
-    );
+    // getProducts(['additional_balance_100k']).then((result) =>
+    //   console.log('getProducts', result),
+    // );
     // requestSubscription(activeSubscription.id);
+    setIsModalVisible(true);
   }, [activeSubscription]);
 
   return (
@@ -50,6 +58,20 @@ export function Subscriptions() {
         }}>
         Purchase
       </DefaultButton>
+
+      <DefaultModal isVisible={isModalVisible}>
+        <View style={themedStyles.modalContainer}>
+          <Text>Some text</Text>
+          <DefaultButton
+            onPress={onCloseModal}
+            style={{
+              container: themedStyles.buttonContainer,
+              text: themedStyles.buttonText,
+            }}>
+            Purchase
+          </DefaultButton>
+        </View>
+      </DefaultModal>
     </SettingsNestedScreenWrapper>
   );
 }

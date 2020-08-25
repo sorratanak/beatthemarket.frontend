@@ -20,4 +20,7 @@ export const getThemedStyles = (theme: ITheme) =>
       color: theme.SUBSCRIPTIONS_SCREEN.BUTTON_TEXT_COLOR,
     },
     description: {},
+    modalContainer: {
+      backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
+    },
   });
