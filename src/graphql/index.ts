@@ -12,11 +12,15 @@ import { onError } from '@apollo/client/link/error';
 import { Platform } from 'react-native';
 
 import { getFirebaseToken } from '../utilities';
+import {
+  DEVELOPMENT_SERVER_BASE_IP,
+  DEVELOPMENT_SERVER_PORT,
+} from '../constants';
 
-const ip = Platform.OS === 'android' ? '10.0.2.2' : '127.0.0.1';
+const ip = Platform.OS === 'android' ? '10.0.2.2' : '192.168.31.224';
 
-export const SERVER_API_URL = `http://${ip}:8080/api`;
-export const SERVER_WS_URL = `ws://${ip}:8080/ws`;
+export const SERVER_API_URL = `http://${DEVELOPMENT_SERVER_BASE_IP}:${DEVELOPMENT_SERVER_PORT}/api`;
+export const SERVER_WS_URL = `ws://${DEVELOPMENT_SERVER_BASE_IP}:${DEVELOPMENT_SERVER_PORT}/ws`;
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)

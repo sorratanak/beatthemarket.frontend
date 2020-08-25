@@ -37,3 +37,8 @@ export const RULES_ID = {
   THIRD_BLOCK: 'h3e3lup7mge',
   FOURTH_BLOCK: 'h3exl5p5m2e',
 };
+
+export const DEVELOPMENT_SERVER_BASE_IP =
+  'beatthemarket5-env.eba-42mjkwti.us-east-1.elasticbeanstalk.com';
+
+export const DEVELOPMENT_SERVER_PORT = '80';

@@ -1,6 +1,11 @@
-import React, { useContext, useMemo, useCallback } from 'react';
+import React, { useContext, useMemo, useCallback, useEffect } from 'react';
 import { View } from 'react-native';
-import { requestSubscription, getProducts } from 'react-native-iap';
+import {
+  requestSubscription,
+  getProducts,
+  getSubscriptions,
+  initConnection,
+} from 'react-native-iap';
 
 import {
   SettingsNestedScreenWrapper,
@@ -21,8 +26,10 @@ export function Subscriptions() {
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   const onSubscriptionPurchase = useCallback(() => {
-    getProducts([activeSubscription.id]).then(console.log);
-    requestSubscription(activeSubscription.id);
+    getProducts(['additional_balance_100k']).then((result) =>
+      console.log('getProducts', result),
+    );
+    // requestSubscription(activeSubscription.id);
   }, [activeSubscription]);
 
   return (
