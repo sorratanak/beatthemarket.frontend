@@ -50,6 +50,15 @@ export const getThemedStyles = (theme: ITheme) =>
       color: theme.GAME_SCREEN.NUMBER_INDICATOR_DOWN,
     },
     userBalanceContainer: {},
+    expandedStocksContainer: {
+      margin: 0,
+      justifyContent: 'flex-end',
+    },
+    expandedStocksSubcontainer: {
+      height: '75%',
+      paddingHorizontal: 16,
+      backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
+    },
 
     /* Chart */
     chartContainer: {

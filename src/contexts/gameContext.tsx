@@ -80,11 +80,7 @@ const ContextProvider = ({
           (stock) => stock.id === tick.stockId,
         );
         if (currentStock) {
-          if (!currentStock.ticks) {
-            currentStock.ticks = [tick];
-          } else {
-            currentStock.ticks.push(tick);
-          }
+          currentStock.ticks = [...(currentStock.ticks || []), tick];
         }
       });
 

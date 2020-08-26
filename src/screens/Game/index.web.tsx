@@ -7,7 +7,7 @@ import {
   StockTicksSubscriber,
   GameEventsSubscriber,
 } from '../../graphql/subscribers';
-import { Container, GameChartBoard, GameHeader } from '../../components';
+import { Container, GameChartBoard } from '../../components';
 import { IPoint } from '../../types';
 import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
 import { getThemedStyles } from './styles';
@@ -45,7 +45,6 @@ export function Game() {
 
   return (
     <Container style={themedStyles.container}>
-      <GameHeader />
       <GameChartBoard chartData={data} />
       {gameId && (
         <>
