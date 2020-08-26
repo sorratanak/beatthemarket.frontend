@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect, useMemo } from 'react';
+import { Platform } from 'react-native';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -7,7 +8,7 @@ import {
   StockTicksSubscriber,
   GameEventsSubscriber,
 } from '../../graphql/subscribers';
-import { Container, GameChartBoard } from '../../components';
+import { Container, GameChartBoard, GameHeader } from '../../components';
 import { IPoint } from '../../types';
 import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
 import { getThemedStyles } from './styles';
@@ -49,6 +50,7 @@ export function Game() {
 
   return (
     <Container style={themedStyles.container}>
+      {Platform.OS !== 'web' && <GameHeader />}
       <GameChartBoard chartData={data} />
       {gameId && (
         <>

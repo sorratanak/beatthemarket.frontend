@@ -22,6 +22,9 @@ interface IGameScreenTheme {
   LIST_VIEW_INDICATOR_POSITIVE_COLOR?: string;
   LIST_VIEW_INDICATOR_NEGATIVE_COLOR?: string;
   LIST_VIEW_INDICATOR_TEXT_COLOR?: string;
+  HEADER_USERNAME_COLOR?: string;
+  HEADER_TIMER_CELL_COLOR?: string;
+  HEADER_TIMER_COLON_COLOR?: string;
 }
 
 interface ISettingsScreenTheme {

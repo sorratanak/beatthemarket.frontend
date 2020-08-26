@@ -17,7 +17,7 @@ export function GameEventsSubscriber({ gameId, callback }: Props) {
 
   useEffect(() => {
     if (data) {
-      callback(data);
+      callback(data.gameEvents);
     }
   }, [data]);
 

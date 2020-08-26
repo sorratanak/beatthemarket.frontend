@@ -3,6 +3,7 @@ export * from './DefaultButton';
 export * from './DefaultInput';
 export * from './DefaultModal';
 export * from './GameChartBoard';
+export * from './GameHeader';
 export * from './LineChart';
 export * from './MyScore';
 export * from './ScoreBoard';
