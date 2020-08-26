@@ -1,8 +1,8 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { auth as firebaseAuth } from './firebase/helper';
-import { USER_KEY, THEME_KEY } from './constants';
-import { IUser } from './types';
-import { TThemeKey } from './themes/interface';
+import { auth as firebaseAuth } from '../firebase/helper';
+import { USER_KEY, THEME_KEY } from '../constants';
+import { IUser } from '../types';
+import { TThemeKey } from '../themes/interface';
 
 /* ------ User ------ */
 

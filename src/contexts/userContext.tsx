@@ -6,10 +6,9 @@ import {
   setUserToStorage,
   removeUserFromStorage,
   getUserFromStorage,
-} from '../utilities';
+} from '../utils/storage';
 import { SignUp, SignIn } from '../firebase/firebase';
 import { IUser } from '../types';
-import { ITheme } from '../themes/interface';
 
 interface ContextProps {
   token: string | null;
