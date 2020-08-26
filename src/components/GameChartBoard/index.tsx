@@ -9,14 +9,17 @@ import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import Slider from '@react-native-community/slider';
 import _ from 'lodash';
 
-import { IPoint, IStockChange } from '../../types';
+import { IPoint, IStockChange, IStock } from '../../types';
 import { LineChart } from '../LineChart';
 import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
 import { getThemedStyles } from './styles';
-import { getStockChanges } from '../../utils/parsing';
+import { getStockChanges, getLastAndPrelast } from '../../utils/parsing';
 import { StockList } from '../StockList';
 import { COLORS } from '../../themes/colors';
 import { STOCK_CHANGE_TYPE, ACCOUNT_BALANCE_TYPE } from '../../constants';
+import { DefaultModal } from '../DefaultModal';
+import { ExpandedStockList } from '../ExpandedStockList';
+import { styles } from '../Container/styles';
 
 interface ChartHeaderProps {
   themedStyles: any;
@@ -40,10 +43,9 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
     [balance],
   );
 
-  const [prelastItem, lastItem] = useMemo(() => {
-    const [prelast, last] = data.slice(-2);
-    return !last ? [null, prelast] : [prelast, last];
-  }, [data]);
+  const [prelastItem, lastItem] = useMemo(() => getLastAndPrelast(data), [
+    data,
+  ]);
 
   const [stockChange, setStockChange] = useState<IStockChange>(null);
 
@@ -185,6 +187,18 @@ export function GameChartBoard({ chartData }: Props) {
     setTimeout(() => setIsChart(true), 50);
   }, [activeStock]);
 
+  const [isStockListExpanded, setIsStockListExpanded] = useState<boolean>(
+    false,
+  );
+
+  const onStockPress = useCallback(
+    (item: IStock) => {
+      setIsStockListExpanded(false);
+      onSetActiveStock(item);
+    },
+    [onSetActiveStock, setIsStockListExpanded],
+  );
+
   return (
     <SafeAreaView style={themedStyles.container}>
       <View style={themedStyles.chartArea}>
@@ -192,7 +206,7 @@ export function GameChartBoard({ chartData }: Props) {
         <StockList
           data={stocks}
           activeStock={activeStock}
-          onItemPress={onSetActiveStock}
+          onItemPress={() => setIsStockListExpanded(true)}
         />
         <View style={themedStyles.chartContainer}>
           <View style={themedStyles.chartView}>
@@ -203,6 +217,19 @@ export function GameChartBoard({ chartData }: Props) {
       <View style={themedStyles.infoArea}>
         <ChartFooter themedStyles={themedStyles} />
       </View>
+
+      <DefaultModal
+        isVisible={isStockListExpanded}
+        onBackdropPress={() => setIsStockListExpanded(false)}
+        style={themedStyles.expandedStocksContainer}>
+        <View style={themedStyles.expandedStocksSubcontainer}>
+          <ExpandedStockList
+            data={stocks}
+            activeStock={activeStock}
+            onItemPress={onStockPress}
+          />
+        </View>
+      </DefaultModal>
     </SafeAreaView>
   );
 }

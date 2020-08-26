@@ -44,3 +44,8 @@ export function getSellBuyStockRequest(
 
   return requestBody;
 }
+
+export function getLastAndPrelast(data: any[]) {
+  const [prelast, last] = data.slice(-2);
+  return !last ? [null, prelast] : [prelast, last];
+}

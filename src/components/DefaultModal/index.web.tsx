@@ -6,13 +6,14 @@ interface Props {
   children: React.ReactNode;
 }
 
-export function DefaultModal({ isVisible, children }: Props) {
+export function DefaultModal({ isVisible, children, ...props }: Props) {
   return (
     <Modal
       animationType="slide"
       presentationStyle="FormSheet"
       transparent
-      visible={isVisible}>
+      visible={isVisible}
+      {...props}>
       {children}
     </Modal>
   );

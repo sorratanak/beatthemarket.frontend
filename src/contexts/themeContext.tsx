@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import _ from 'lodash';
 
-import { setThemeKeyToStorage, getThemeKeyFromStorage } from '../utilities';
+import { setThemeKeyToStorage, getThemeKeyFromStorage } from '../utils/storage';
 import { ITheme, TThemeKey } from '../themes/interface';
 import { LIGHT_THEME, THEMES } from '../themes';
 import { THEME_KEYS } from '../constants';

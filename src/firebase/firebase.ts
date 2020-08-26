@@ -1,6 +1,6 @@
 import { auth, authGoogle } from './helper';
 import loginGraphql from '../graphql/login';
-import { getFirebaseToken } from '../utilities';
+import { getFirebaseToken } from '../utils/storage';
 
 export const SignUp = async ({
   email,

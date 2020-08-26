@@ -82,6 +82,8 @@ export const getThemedStyles = (theme: ITheme) =>
       justifyContent: 'center',
       alignItems: 'center',
     },
+    expandedStocksContainer: {},
+    expandedStocksSubcontainer: {},
 
     /* Chart */
     chartContainer: {
