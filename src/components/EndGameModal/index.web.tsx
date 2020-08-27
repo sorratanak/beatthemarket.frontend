@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { View, Text, Image, FlatList } from 'react-native';
 import { useQuery } from '@apollo/client';
 import { getThemedStyles } from './styles';
@@ -16,7 +16,7 @@ interface Props {
 
 export function EndGameModal({ isLoseGame, setIsModalVisible }: Props) {
   const { theme } = useContext(ThemeContext);
-  const themedStyles = getThemedStyles(theme);
+  const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   // Query
   // eslint-disable-next-line no-unused-vars

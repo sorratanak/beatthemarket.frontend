@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { TouchableOpacity, Text, ViewStyle, TextStyle } from 'react-native';
 import { ThemeContext } from '../../contexts';
 import { getThemedStyles } from './styles';
@@ -18,7 +18,7 @@ export function DefaultButton({
   ...props
 }: Props) {
   const { theme } = useContext(ThemeContext);
-  const themedStyles = getThemedStyles(theme);
+  const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   return (
     <TouchableOpacity

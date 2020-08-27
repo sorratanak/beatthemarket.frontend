@@ -1,18 +1,14 @@
-import React, { useContext, useCallback, useEffect } from 'react';
-import { Button } from 'react-native';
+import React, { useContext, useCallback, useEffect, useMemo } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 
 import { ScreenProps } from './props';
-import { Container, ScoreBoard } from '../../components';
-import { UserContext } from '../../contexts/userContext';
-import { GameContext } from '../../contexts/gameContext';
+import { Container, ScoreBoard, DefaultButton } from '../../components';
+import { GameContext, ThemeContext } from '../../contexts';
 import gameGraphql from '../../graphql/game';
 import usersGraphql from '../../graphql/users';
 import { getThemedStyles } from './styles';
-import { ThemeContext } from '../../contexts';
 
 export function Home({ navigation }: ScreenProps) {
-  const { logout } = useContext(UserContext);
   const { onSetGameId, onSetStocks } = useContext(GameContext);
 
   /* Mutations */
@@ -48,17 +44,19 @@ export function Home({ navigation }: ScreenProps) {
   }, []);
 
   const { theme } = useContext(ThemeContext);
-  const themedStyles = getThemedStyles(theme);
+  const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   return (
-    <Container>
+    <Container style={themedStyles.container}>
       <ScoreBoard users={users} style={themedStyles.scoreBoardContainer} />
-      <Button
-        testID="Create Game"
-        title="Create Game"
+      <DefaultButton
         onPress={onCreateGamePress}
-      />
-      <Button testID="logout" title="Logout" onPress={logout} />
+        style={{
+          container: themedStyles.playButtonContainer,
+        }}>
+        Play
+      </DefaultButton>
+      {/* <Button testID="logout" title="Logout" onPress={logout} /> */}
     </Container>
   );
 }

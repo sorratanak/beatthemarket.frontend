@@ -3,7 +3,9 @@
 
 export const COLORS = {
   BLACK: '#000000',
+  OUTER_SPACE: '#333B42',
   GRAY: '#7E7E7E',
+  SCORPION: '#595959',
   SILVER_LIGHT: '#CACACA',
   SILVER: '#C4C4C4',
   MERCURY: '#E5E5E5',

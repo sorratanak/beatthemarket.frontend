@@ -21,7 +21,7 @@ interface Props {
 
 export function EndGameModal({ headerType, onFinishPress }: Props) {
   const { theme } = useContext(ThemeContext);
-  const themedStyles = getThemedStyles(theme);
+  const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   const {
     user: { userName },
