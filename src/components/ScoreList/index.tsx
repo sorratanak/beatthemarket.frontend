@@ -1,19 +1,29 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import { FlatList, View, Text } from 'react-native';
 
-import { styles } from './styles';
+import { getThemedStyles } from './styles';
 import { IScoreRecord } from '../../types';
+import { ThemeContext } from '../../contexts';
 
 interface Props {
   data: IScoreRecord[];
 }
 export function ScoreList({ data }: Props) {
+  const { theme } = useContext(ThemeContext);
+  const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
+
   const renderListHeader = useCallback(() => {
     return (
-      <View style={styles.rowContainer}>
-        <Text style={[styles.flexContainer, styles.title]}>Rank</Text>
-        <Text style={[styles.flex3Container, styles.title]}>Username</Text>
-        <Text style={[styles.flex2Container, styles.title]}>Score</Text>
+      <View style={themedStyles.rowContainer}>
+        <Text style={[themedStyles.flexContainer, themedStyles.title]}>
+          Rank
+        </Text>
+        <Text style={[themedStyles.flex3Container, themedStyles.title]}>
+          Username
+        </Text>
+        <Text style={[themedStyles.flex2Container, themedStyles.title]}>
+          Score
+        </Text>
       </View>
     );
   }, []);
@@ -21,29 +31,36 @@ export function ScoreList({ data }: Props) {
   return (
     <FlatList
       data={data}
-      renderItem={({ item }) => <ScoreListItem item={item} />}
+      renderItem={({ item }) => (
+        <ScoreListItem item={item} themedStyles={themedStyles} />
+      )}
       ListHeaderComponent={renderListHeader()}
       keyExtractor={(item) => `score-record-${item.id}`}
-      contentContainerStyle={styles.listContentContainer}
-      style={styles.flexContainer}
+      contentContainerStyle={themedStyles.listContentContainer}
+      style={themedStyles.flexContainer}
     />
   );
 }
 
 interface ScoreListItemProps {
   item: IScoreRecord;
+  themedStyles: any;
 }
 
-function ScoreListItem({ item }: ScoreListItemProps) {
+function ScoreListItem({ item, themedStyles }: ScoreListItemProps) {
   return (
-    <View style={styles.listItemContainer}>
-      <View style={styles.flexContainer}>
-        <View style={styles.rankContainer}>
-          <Text style={styles.rankText}>{item.rank}</Text>
+    <View style={themedStyles.listItemContainer}>
+      <View style={themedStyles.flexContainer}>
+        <View style={themedStyles.rankContainer}>
+          <Text style={themedStyles.rankText}>{item.rank}</Text>
         </View>
       </View>
-      <Text style={[styles.flex3Container, styles.text]}>{item.username}</Text>
-      <Text style={[styles.flex2Container, styles.text]}>{item.score}</Text>
+      <Text style={[themedStyles.flex3Container, themedStyles.text]}>
+        {item.username}
+      </Text>
+      <Text style={[themedStyles.flex2Container, themedStyles.text]}>
+        {item.score}
+      </Text>
     </View>
   );
 }

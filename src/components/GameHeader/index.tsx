@@ -1,4 +1,10 @@
-import React, { useContext, useCallback, useEffect, useState } from 'react';
+import React, {
+  useContext,
+  useCallback,
+  useEffect,
+  useState,
+  useMemo,
+} from 'react';
 import { View, Text, ViewStyle, TextStyle } from 'react-native';
 import randomString from 'random-string';
 import moment from 'moment';
@@ -54,7 +60,7 @@ export function GameHeader({ style: propStyle = {} }: Props) {
   const { gameEvents } = useContext(GameContext);
 
   const { theme } = useContext(ThemeContext);
-  const themedStyles = getThemedStyles(theme);
+  const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   const [timeRemaining, setTimeRemaining] = useState<string>(EMPTY_TIMER);
 

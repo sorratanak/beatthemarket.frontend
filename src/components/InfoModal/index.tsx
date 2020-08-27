@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext, useCallback, useMemo } from 'react';
 import { View, Text, Image } from 'react-native';
 import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
@@ -20,7 +20,7 @@ export function InfoModal({
   secondButton,
 }: Props) {
   const { theme } = useContext(ThemeContext);
-  const themedStyles = getThemedStyles(theme);
+  const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   const onButtonPress = useCallback(
     (onPress: () => void) => {
