@@ -19,7 +19,6 @@ import { COLORS } from '../../themes/colors';
 import { STOCK_CHANGE_TYPE, ACCOUNT_BALANCE_TYPE } from '../../constants';
 import { DefaultModal } from '../DefaultModal';
 import { ExpandedStockList } from '../ExpandedStockList';
-import { styles } from '../Container/styles';
 
 interface ChartHeaderProps {
   themedStyles: any;

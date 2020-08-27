@@ -25,6 +25,8 @@ const WINDOW = Dimensions.get('window');
 const CHART_HEIGHT = WINDOW.height * HEIGHT_COEF;
 const CHART_WIDTH = WINDOW.width * WIDTH_COEF;
 
+const MAX_POINTS_NUMBER = 8;
+
 interface Props {
   data: IPoint[];
 }
@@ -67,7 +69,12 @@ export function LineChart({ data }: Props) {
           allowZoom={false}
           ouiaSafe
           zoomDomain={{
-            x: [data.length > 8 ? data.length - 8 : 1, data.length + 1],
+            x: [
+              data.length > MAX_POINTS_NUMBER
+                ? data.length - MAX_POINTS_NUMBER
+                : 1,
+              data.length + 1,
+            ],
             y:
               dynamicYDomainMin && dynamicYDomainMax
                 ? [dynamicYDomainMin, dynamicYDomainMax]
