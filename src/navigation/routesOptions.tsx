@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 import { ITheme } from '../themes/interface';
 import { IMAGES } from '../assets';
 
@@ -23,30 +23,38 @@ export const commonHeaderOptions = {
   headerBackTitleVisible: false,
 };
 
-interface TabBarIconProps {
+interface IconProps {
   inactiveSource: any;
   activeSource: any;
   isSelected: boolean;
 }
-function TabBarIcon({
-  inactiveSource,
-  activeSource,
-  isSelected,
-}: TabBarIconProps) {
+function TabBarIcon({ inactiveSource, activeSource, isSelected }: IconProps) {
+  return <Image source={isSelected ? activeSource : inactiveSource} />;
+}
+
+function DrawerIcon({ inactiveSource, activeSource, isSelected }: IconProps) {
   const styles = StyleSheet.create({
-    iconContainer: {},
+    iconContainer: {
+      width: 26,
+      height: inactiveSource === IMAGES.JOYSTICK_INACTIVE ? 19 : 26,
+      marginRight: -20,
+    },
   });
 
   return (
-    <Image
-      source={isSelected ? activeSource : inactiveSource}
-      style={styles.iconContainer}
-    />
+    <View style={styles.iconContainer}>
+      <Image
+        source={isSelected ? activeSource : inactiveSource}
+        style={{ flex: 1 }}
+      />
+    </View>
   );
 }
 
-const getRenderTabBarIcon = (activeSource, inactiveSource) => ({ focused }) => (
-  <TabBarIcon
+const getRenderIcon = (activeSource, inactiveSource, IconComponent) => ({
+  focused,
+}) => (
+  <IconComponent
     activeSource={activeSource}
     inactiveSource={inactiveSource}
     isSelected={focused}
@@ -55,22 +63,58 @@ const getRenderTabBarIcon = (activeSource, inactiveSource) => ({ focused }) => (
 
 export const tabOptions = {
   main: {
+    labelStyle: {
+      backgroundColor: 'red',
+    },
     tabBarLabel: 'Main',
-    tabBarIcon: getRenderTabBarIcon(IMAGES.HOME_ACTIVE, IMAGES.HOME_INACTIVE),
+    tabBarIcon: getRenderIcon(
+      IMAGES.HOME_ACTIVE,
+      IMAGES.HOME_INACTIVE,
+      TabBarIcon,
+    ),
+    drawerIcon: getRenderIcon(
+      IMAGES.HOME_ACTIVE,
+      IMAGES.HOME_INACTIVE,
+      DrawerIcon,
+    ),
   },
   game: {
     tabBarLabel: 'Game',
-    tabBarIcon: getRenderTabBarIcon(
+    tabBarIcon: getRenderIcon(
       IMAGES.JOYSTICK_ACTIVE,
       IMAGES.JOYSTICK_INACTIVE,
+      TabBarIcon,
+    ),
+    drawerIcon: getRenderIcon(
+      IMAGES.JOYSTICK_ACTIVE,
+      IMAGES.JOYSTICK_INACTIVE,
+      DrawerIcon,
     ),
   },
   rules: {
     tabBarLabel: 'Rules',
-    tabBarIcon: getRenderTabBarIcon(IMAGES.RULES_ACTIVE, IMAGES.RULES_INACTIVE),
+    tabBarIcon: getRenderIcon(
+      IMAGES.RULES_ACTIVE,
+      IMAGES.RULES_INACTIVE,
+      TabBarIcon,
+    ),
+    drawerIcon: getRenderIcon(
+      IMAGES.RULES_ACTIVE,
+      IMAGES.RULES_INACTIVE,
+      DrawerIcon,
+    ),
   },
   settings: {
     tabBarLabel: 'Settings',
-    tabBarIcon: getRenderTabBarIcon(IMAGES.GEAR_ACTIVE, IMAGES.GEAR_INACTIVE),
+    tabBarIcon: getRenderIcon(
+      IMAGES.GEAR_ACTIVE,
+      IMAGES.GEAR_INACTIVE,
+      TabBarIcon,
+    ),
+    drawerIcon: getRenderIcon(
+      IMAGES.GEAR_ACTIVE,
+      IMAGES.GEAR_INACTIVE,
+      DrawerIcon,
+    ),
   },
 };
