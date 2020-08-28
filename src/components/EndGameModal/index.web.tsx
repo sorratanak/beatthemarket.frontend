@@ -9,12 +9,17 @@ import { ScoreBoard } from '../ScoreBoard';
 import { DefaultButton } from '../DefaultButton';
 import { PROFITS, BALANCE } from './dummyData';
 
+const HEADER_TYPES = {
+  LOSE: 'lose',
+  WIN: 'win',
+};
+
 interface Props {
-  isLoseGame?: boolean;
-  setIsModalVisible: (isModalVisible: boolean) => void;
+  headerType: 'lose' | 'win';
+  onFinishPress: () => void;
 }
 
-export function EndGameModal({ isLoseGame, setIsModalVisible }: Props) {
+export function EndGameModal({ headerType, onFinishPress }: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -24,34 +29,25 @@ export function EndGameModal({ isLoseGame, setIsModalVisible }: Props) {
     usersGraphql.queries.GET_USERS,
   );
 
+  const [leftImageSource, title, rightImageSource] = useMemo(() => {
+    switch (headerType) {
+      case HEADER_TYPES.LOSE:
+        return [IMAGES.LOSE_GAME_LEFT, 'Game over', IMAGES.LOSE_GAME_RIGHT];
+      case HEADER_TYPES.WIN:
+        return [IMAGES.WIN_GAME_LEFT, 'End of game', IMAGES.WIN_GAME_RIGHT];
+      default:
+        return [];
+    }
+  }, [headerType]);
+
   return (
     <View style={themedStyles.container}>
       <View style={themedStyles.subContainer}>
-        {isLoseGame ? (
-          <View style={themedStyles.titleContainer}>
-            <Image
-              source={IMAGES.LOSE_GAME_LEFT}
-              style={themedStyles.titleIcon}
-            />
-            <Text style={themedStyles.title}>Game over</Text>
-            <Image
-              source={IMAGES.LOSE_GAME_RIGHT}
-              style={themedStyles.titleIcon}
-            />
-          </View>
-        ) : (
-          <View style={themedStyles.titleContainer}>
-            <Image
-              source={IMAGES.WIN_GAME_LEFT}
-              style={themedStyles.titleIcon}
-            />
-            <Text style={themedStyles.title}>End of game</Text>
-            <Image
-              source={IMAGES.WIN_GAME_RIGHT}
-              style={themedStyles.titleIcon}
-            />
-          </View>
-        )}
+        <View style={themedStyles.titleContainer}>
+          <Image source={leftImageSource} style={themedStyles.titleIcon} />
+          <Text style={themedStyles.title}>{title}</Text>
+          <Image source={rightImageSource} style={themedStyles.titleIcon} />
+        </View>
 
         <View style={themedStyles.contentContainer}>
           <View style={themedStyles.rankInfo}>
@@ -67,7 +63,7 @@ export function EndGameModal({ isLoseGame, setIsModalVisible }: Props) {
             </View>
             <Text
               style={
-                isLoseGame
+                headerType === 'lose'
                   ? themedStyles.loseMessage
                   : [themedStyles.loseMessage, themedStyles.hidden]
               }>
@@ -85,9 +81,7 @@ export function EndGameModal({ isLoseGame, setIsModalVisible }: Props) {
             </View>
             <Text style={themedStyles.balanceText}>Balance {BALANCE}</Text>
             <DefaultButton
-              onPress={() => {
-                setIsModalVisible(false);
-              }}
+              onPress={onFinishPress}
               style={{ container: themedStyles.buttonContainer }}>
               Finish
             </DefaultButton>
