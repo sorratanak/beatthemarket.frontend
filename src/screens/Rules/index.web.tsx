@@ -1,14 +1,15 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { CardElement } from '@stripe/react-stripe-js';
 
-import { Container, DefaultButton } from '../../components';
+import { Container, DefaultButton, DefaultModal } from '../../components';
 import { SUBSCRIPTION_TYPE } from '../../constants';
 import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
 import { IapContext } from '../../contexts/iapContext.web';
 import { RuleBlock } from '../../components/RuleBlock';
 import { getRulesInfo } from './tiles';
+import { EndGameModal } from '../../components/EndGameModal';
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -31,6 +32,7 @@ const CARD_ELEMENT_OPTIONS = {
 export function Rules() {
   const { theme } = useContext(ThemeContext);
   const { onRequestSubscription } = useContext(IapContext);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
   const rulesInfo = getRulesInfo(theme);
@@ -48,14 +50,18 @@ export function Rules() {
         <CardElement options={CARD_ELEMENT_OPTIONS} />
         {/* <button type="submit">Confirm order</button> */}
         <DefaultButton
-          onPress={() =>
-            onRequestSubscription(
-              SUBSCRIPTION_TYPE.ADDITIONAL_BALANCE_100K.STRIPE_PRODUCT_ID,
-            )
+          onPress={
+            () => setIsModalVisible(true)
+            // onRequestSubscription(
+            //   SUBSCRIPTION_TYPE.ADDITIONAL_BALANCE_100K.STRIPE_PRODUCT_ID,
+            // )
           }>
           Confirm order
         </DefaultButton>
       </View>
+      <DefaultModal isVisible={isModalVisible}>
+        <EndGameModal setIsModalVisible={setIsModalVisible} />
+      </DefaultModal>
     </Container>
   );
 }
