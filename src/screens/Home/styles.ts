@@ -15,4 +15,12 @@ export const getThemedStyles = (theme: ITheme) =>
       marginVertical: 28,
       backgroundColor: theme.HOME_SCREEN.PLAY_BUTTON_BACKGROUND_COLOR,
     },
+    headerContainer: {},
+    greetContainer: {},
+    greetUserName: {},
+    greetText: {},
+    profileInfoContainer: {},
+    profileTitleContainer: {},
+    profileTitle: {},
+    profileLvl: {},
   });
