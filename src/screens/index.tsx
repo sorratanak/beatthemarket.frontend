@@ -5,3 +5,4 @@ export * from './Settings';
 export * from './SignIn';
 export * from './SignUp';
 export * from './Subscriptions';
+export * from './UserSettings';

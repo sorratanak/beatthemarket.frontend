@@ -1,4 +1,10 @@
-import React, { useMemo, useState, useEffect, useContext } from 'react';
+import React, {
+  useMemo,
+  useState,
+  useEffect,
+  useContext,
+  useCallback,
+} from 'react';
 import { Dimensions, Platform } from 'react-native';
 import _ from 'lodash';
 import pickRandom from 'pick-random';
@@ -36,12 +42,25 @@ export function LineChart({ data }: Props) {
 
   const themedAxises = getThemedAxises(theme);
 
-  const [dynamicYDomainMin, dynamicYDomainMax] = useMemo(() => {
-    return [
-      _.minBy(data, (el) => el.y)?.y - 0.5,
-      _.maxBy(data, (el) => el.y)?.y + 0.5,
-    ];
+  const domainData = useMemo(() => {
+    return data.slice(-10);
   }, [data]);
+
+  const [currentYDomainMin, currentYDomainMax] = useMemo(() => {
+    return [
+      _.minBy(domainData, (el) => el.y)?.y - 0.5,
+      _.maxBy(domainData, (el) => el.y)?.y + 0.5,
+    ];
+  }, [domainData]);
+
+  const [currentXDomainMin, currentXDomainMax] = useMemo(() => {
+    return [
+      domainData.length > MAX_POINTS_NUMBER
+        ? domainData.length - MAX_POINTS_NUMBER
+        : 1,
+      domainData.length + 1,
+    ];
+  }, [domainData]);
 
   const [chartColor, setChartColor] = useState(null);
 
@@ -69,15 +88,13 @@ export function LineChart({ data }: Props) {
           allowZoom={false}
           ouiaSafe
           zoomDomain={{
-            x: [
-              data.length > MAX_POINTS_NUMBER
-                ? data.length - MAX_POINTS_NUMBER
-                : 1,
-              data.length + 1,
-            ],
+            x:
+              currentXDomainMin && currentXDomainMax
+                ? [currentXDomainMin, currentXDomainMax]
+                : undefined,
             y:
-              dynamicYDomainMin && dynamicYDomainMax
-                ? [dynamicYDomainMin, dynamicYDomainMax]
+              currentYDomainMin && currentYDomainMax
+                ? [currentYDomainMin, currentYDomainMax]
                 : undefined,
           }}
         />
@@ -91,16 +108,16 @@ export function LineChart({ data }: Props) {
       <VictoryAxis standalone={false} style={themedAxises.container} />
       <VictoryLine
         // TODO dynamic getData by zoom domain
-        data={data}
+        data={domainData}
         style={{ data: { stroke: chartColor } }}
         interpolation="cardinal"
-        animate={ANIMATION_OPTIONS}
+        // animate={ANIMATION_OPTIONS}
       />
       <VictoryScatter
-        data={data}
+        data={domainData}
         style={{ data: { fill: chartColor } }}
         size={3}
-        animate={ANIMATION_OPTIONS}
+        // animate={ANIMATION_OPTIONS}
       />
     </VictoryChart>
   );

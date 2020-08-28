@@ -12,10 +12,10 @@ import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 
 import { getFirebaseToken } from '../utils/storage';
-import {
-  DEVELOPMENT_SERVER_BASE_IP,
-  DEVELOPMENT_SERVER_PORT,
-} from '../constants';
+// import {
+//   DEVELOPMENT_SERVER_BASE_IP,
+//   DEVELOPMENT_SERVER_PORT,
+// } from '../constants';
 
 const ip = Platform.OS === 'android' ? '10.0.2.2' : '127.0.0.1';
 
