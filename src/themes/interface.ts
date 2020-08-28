@@ -10,6 +10,14 @@ interface IMenuTheme {
   INACTIVE_LABEL_COLOR?: string;
 }
 
+interface IHomeScreenTheme {
+  PLAY_BUTTON_BACKGROUND_COLOR?: string;
+  SCORE_LIST_ITEM_TEXT_COLOR?: string;
+  SCORE_LIST_ITEM_RANK_COLOR?: string;
+  SCORE_ROW_ITEM_BACKGROUND_COLOR?: string;
+  SCORE_ROW_PERCENT_COLOR?: string;
+}
+
 interface IGameScreenTheme {
   HEADER_IMAGE_BACKGROUND_COLOR?: string;
   NUMBER_INDICATOR_UP?: string;
@@ -82,6 +90,7 @@ export interface ITheme {
   _KEY?: TThemeKey;
   DEFAULT?: IDefaultTheme;
   MENU?: IMenuTheme;
+  HOME_SCREEN: IHomeScreenTheme;
   GAME_SCREEN?: IGameScreenTheme;
   SETTINGS_SCREEN?: ISettingsScreenTheme;
   SUBSCRIPTIONS_SCREEN?: ISubscriptionsScreenTheme;

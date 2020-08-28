@@ -1,8 +1,9 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext, useMemo } from 'react';
 import { View, Text, TouchableOpacity, ViewProps } from 'react-native';
 
 import { MyScore } from '../MyScore';
-import { styles } from './styles';
+import { ThemeContext } from '../../contexts';
+import { getThemedStyles } from './styles';
 
 const TAB_NAMES = {
   SINGLE_PLAYER: 'Single player',
@@ -19,39 +20,42 @@ export function ScoreBoard({
   isTabsVisible = true,
   style: propsStyle,
 }: Props) {
+  const { theme } = useContext(ThemeContext);
+  const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
+
   const [currentTab, setCurrentTab] = useState(TAB_NAMES.SINGLE_PLAYER);
 
   const renderTabs = useCallback(() => {
     return (
-      <View style={styles.tabsRow}>
+      <View style={themedStyles.tabsRow}>
         <TouchableOpacity
           style={[
-            styles.tabContainer,
+            themedStyles.tabContainer,
             currentTab === TAB_NAMES.SINGLE_PLAYER
-              ? styles.tabActiveContainer
+              ? themedStyles.tabActiveContainer
               : null,
           ]}
           disabled={currentTab === TAB_NAMES.SINGLE_PLAYER}
           onPress={() => setCurrentTab(TAB_NAMES.SINGLE_PLAYER)}>
-          <Text style={styles.tabTitle}>{TAB_NAMES.SINGLE_PLAYER}</Text>
+          <Text style={themedStyles.tabTitle}>{TAB_NAMES.SINGLE_PLAYER}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
-            styles.tabContainer,
+            themedStyles.tabContainer,
             currentTab === TAB_NAMES.MULTIPLAYER
-              ? styles.tabActiveContainer
+              ? themedStyles.tabActiveContainer
               : null,
           ]}
           disabled={currentTab === TAB_NAMES.MULTIPLAYER}
           onPress={() => setCurrentTab(TAB_NAMES.MULTIPLAYER)}>
-          <Text style={styles.tabTitle}>{TAB_NAMES.MULTIPLAYER}</Text>
+          <Text style={themedStyles.tabTitle}>{TAB_NAMES.MULTIPLAYER}</Text>
         </TouchableOpacity>
       </View>
     );
-  }, [currentTab]);
+  }, [currentTab, themedStyles]);
 
   return (
-    <View style={[styles.container, propsStyle]}>
+    <View style={[themedStyles.container, propsStyle]}>
       {isTabsVisible && renderTabs()}
       <MyScore users={users} percent="75%" deposit="$133.55" rate="+13.76%" />
     </View>

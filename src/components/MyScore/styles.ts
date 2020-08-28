@@ -1,11 +1,13 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { ITheme } from '../../themes/interface';
 
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: -10,
-    borderRadius: 14,
-    backgroundColor: Platform.OS === 'web' ? 'lightgray' : '#E0E0E0',
-    overflow: 'hidden',
-  },
-});
+export const getThemedStyles = (theme: ITheme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      marginTop: -10,
+      borderRadius: 14,
+      backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
+      overflow: 'hidden',
+    },
+  });
