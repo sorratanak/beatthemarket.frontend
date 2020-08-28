@@ -28,7 +28,7 @@ export const SETTINGS_TILES = [
   {
     id: 'tile-user',
     source: IMAGES.USER,
-    nav: null,
+    nav: 'UserSettings',
     title: 'Profile',
   },
 ];
