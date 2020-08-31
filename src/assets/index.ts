@@ -10,6 +10,7 @@ export const IMAGES = {
   RULES_INACTIVE: require('./navigation/rulesInactive.png'),
   GEAR_ACTIVE: require('./navigation/gearActive.png'),
   GEAR_INACTIVE: require('./navigation/gearInactive.png'),
+  PAUSE_BUTTON: require('./navigation/pause.png'),
 
   /* Logos */
   GOOGLE: require('./logo/google.png'),

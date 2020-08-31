@@ -75,6 +75,24 @@ const SUBSCRIBE_GAME_EVENTS = gql`
   }
 `;
 
+const PAUSE_GAME = gql`
+  mutation PauseGame($gameId: String!) {
+    pauseGame(gameId: $gameId) {
+      event
+      gameId
+    }
+  }
+`;
+
+const RESUME_GAME = gql`
+  mutation ResumeGame($gameId: String!) {
+    resumeGame(gameId: $gameId) {
+      event
+      gameId
+    }
+  }
+`;
+
 const queries = {
   CREATE_GAME,
   START_GAME,
@@ -82,6 +100,8 @@ const queries = {
   BUY_STOCK,
   SELL_STOCK,
   SUBSCRIBE_GAME_EVENTS,
+  PAUSE_GAME,
+  RESUME_GAME,
 };
 
 export default { queries };

@@ -9,6 +9,11 @@ export const getThemedStyles = (theme: ITheme) =>
       borderRightWidth: undefined,
       ...COMMON_STYLES.SHADOW_BOX,
     },
+    flexContainer: {
+      display: 'flex',
+      flex: 1,
+      flexGrow: 1,
+    },
     title: {
       textAlign: 'center',
       fontSize: 28,
@@ -22,5 +27,15 @@ export const getThemedStyles = (theme: ITheme) =>
     },
     itemLabel: {
       fontSize: 20,
+    },
+    pauseButtonContainer: {
+      marginTop: '100%',
+      margin: 'auto',
+      alignItems: 'center',
+    },
+    pauseButtonImage: {
+      flex: 1,
+      width: 125,
+      height: 150,
     },
   });

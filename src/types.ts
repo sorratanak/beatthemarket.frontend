@@ -117,4 +117,7 @@ export interface IGraphqlVariableRequest<VariablesObj> {
 export interface IBuySellStockRequest
   extends IGraphqlVariableRequest<{ input: IBuySellStockInput }> {}
 
+export interface IPauseResumeGameRequest
+  extends IGraphqlVariableRequest<{ gameId: string }> {}
+
 /* ---------------------- */

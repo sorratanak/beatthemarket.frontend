@@ -1,4 +1,10 @@
-import { IPoint, IStockChange, IStock, IBuySellStockRequest } from '../types';
+import {
+  IPoint,
+  IStockChange,
+  IStock,
+  IBuySellStockRequest,
+  IPauseResumeGameRequest,
+} from '../types';
 
 export function getStockChanges(prelastItem: IPoint, lastItem: IPoint) {
   const currentValue: number = lastItem?.y;
@@ -39,6 +45,16 @@ export function getSellBuyStockRequest(
         tickId: lastTick.stockTickId,
         tickPrice: lastTick.stockTickClose,
       },
+    },
+  };
+
+  return requestBody;
+}
+
+export function getPauseResumeGameRequest(gameId: string) {
+  const requestBody: IPauseResumeGameRequest = {
+    variables: {
+      gameId,
     },
   };
 

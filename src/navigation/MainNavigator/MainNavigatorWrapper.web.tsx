@@ -1,6 +1,6 @@
 import '../GestureHandler';
 import React, { ReactNode, useContext, useMemo } from 'react';
-import { Text } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import {
   createDrawerNavigator,
   DrawerContentComponentProps,
@@ -9,7 +9,8 @@ import {
 } from '@react-navigation/drawer';
 
 import { getThemedStyles } from './styles.web';
-import { ThemeContext } from '../../contexts';
+import { ThemeContext, GameContext } from '../../contexts';
+import { IMAGES } from '../../assets';
 
 export const MainNavigator = createDrawerNavigator();
 
@@ -19,10 +20,22 @@ interface CustomDrawerContentProps extends DrawerContentComponentProps {
 function CustomDrawerContent(props: CustomDrawerContentProps) {
   const { themedStyles } = props;
 
+  const { gameId, onPauseGame, onResumeGame } = useContext(GameContext);
+
   return (
     <DrawerContentScrollView {...props}>
       <Text style={themedStyles.title}>Beat the Market</Text>
       <DrawerItemList {...props} />
+      {gameId && (
+        <TouchableOpacity
+          onPress={onPauseGame}
+          style={themedStyles.pauseButtonContainer}>
+          <Image
+            source={IMAGES.PAUSE_BUTTON}
+            style={themedStyles.pauseButtonImage}
+          />
+        </TouchableOpacity>
+      )}
     </DrawerContentScrollView>
   );
 }

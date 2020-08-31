@@ -3,7 +3,10 @@ import { useMutation } from '@apollo/client';
 import _ from 'lodash';
 
 import { IStock, IStockTick, IGameEvent, IGameEventScore } from '../types';
-import { getSellBuyStockRequest } from '../utils/parsing';
+import {
+  getSellBuyStockRequest,
+  getPauseResumeGameRequest,
+} from '../utils/parsing';
 import gameGraphql from '../graphql/game';
 import { START_GAME_LEVEL } from '../constants';
 
@@ -23,6 +26,8 @@ interface ContextProps {
   onSetGameEvents: (gameEvents: IGameEvent) => void;
   onSetGameScore: (gameScore: IGameEventScore) => void;
   setWins: (count: number) => void;
+  onPauseGame: () => void;
+  onResumeGame: () => void;
 }
 
 const DEFAULT_GAME_CONTEXT: ContextProps = {
@@ -41,6 +46,8 @@ const DEFAULT_GAME_CONTEXT: ContextProps = {
   onSetGameEvents: _.noop,
   onSetGameScore: _.noop,
   setWins: _.noop,
+  onPauseGame: _.noop,
+  onResumeGame: _.noop,
 };
 
 export const GameContext = React.createContext(DEFAULT_GAME_CONTEXT);
@@ -64,11 +71,17 @@ const ContextProvider = ({
     gameGraphql.queries.SELL_STOCK,
   );
 
+  const [pauseGame, { data: pauseGameResponse }] = useMutation(
+    gameGraphql.queries.PAUSE_GAME,
+  );
+  const [resumeGame, { data: resumeGameResponse }] = useMutation(
+    gameGraphql.queries.RESUME_GAME,
+  );
+
   const onSetGameId = useCallback(
     (newGameId: string) => {
       setGameId(newGameId);
       setWins(START_GAME_LEVEL);
-      console.log('ON SET GAME ID', newGameId);
     },
     [setGameId],
   );
@@ -139,6 +152,13 @@ const ContextProvider = ({
     [setGameScore],
   );
 
+  const onPauseGame = useCallback(() => {
+    pauseGame(getPauseResumeGameRequest(gameId));
+  }, [pauseGame]);
+  const onResumeGame = useCallback(() => {
+    resumeGame(getPauseResumeGameRequest(gameId));
+  }, [resumeGame]);
+
   return (
     <GameContext.Provider
       value={{
@@ -157,6 +177,8 @@ const ContextProvider = ({
         onSetGameEvents,
         onSetGameScore,
         setWins,
+        onPauseGame,
+        onResumeGame,
       }}>
       {children}
     </GameContext.Provider>
