@@ -58,7 +58,9 @@ export function Game() {
 
       const newData: IPoint[] = _.map(ticks, (tick) => {
         return {
-          x: moment(Number(tick.stockTickTime)).format('mm:ss'),
+          x: moment(
+            Number(tick.stockTickTime) - Number(ticks[0].stockTickTime),
+          ).format('mm:ss'),
           y: tick.stockTickClose,
         };
       });
