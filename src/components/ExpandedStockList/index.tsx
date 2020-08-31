@@ -103,6 +103,11 @@ export function ExpandedStockList({ data, activeStock, onItemPress }: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
+  // TODO maybe refactor this
+  if (_.some(data, (el) => !el.ticks)) {
+    return null;
+  }
+
   return (
     <FlatList
       showsVerticalScrollIndicator={false}

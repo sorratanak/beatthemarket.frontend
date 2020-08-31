@@ -24,7 +24,6 @@ export function GameEventsSubscriber({
   );
 
   useEffect(() => {
-    console.log('data is', data);
     if (data) {
       switch (data?.gameEvents?.__typename) {
         default:
