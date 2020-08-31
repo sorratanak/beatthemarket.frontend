@@ -47,9 +47,6 @@ export function Subscriptions() {
         }}>
         Buy
       </DefaultButton>
-      <DefaultModal isVisible={isModalVisible}>
-        <EndGameModal headerType="lose" onFinishPress={onCloseModal} />
-      </DefaultModal>
     </SettingsNestedScreenWrapper>
   );
 }

@@ -59,12 +59,6 @@ export function Rules() {
           Confirm order
         </DefaultButton>
       </View>
-      {/* <DefaultModal isVisible={isModalVisible}>
-        <EndGameModal
-          headerType="win"
-          onFinishPress={() => setIsModalVisible(false)}
-        />
-      </DefaultModal> */}
     </Container>
   );
 }

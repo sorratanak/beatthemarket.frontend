@@ -7,13 +7,20 @@ import React, {
 } from 'react';
 import { View, Text, ViewStyle, TextStyle, FlatList } from 'react-native';
 import moment from 'moment';
+import _ from 'lodash';
 
-import { ThemeContext, GameContext, UserContext } from '../../contexts';
+import {
+  ThemeContext,
+  GameContext,
+  UserContext,
+  PortfolioContext,
+} from '../../contexts';
 import { getThemedStyles } from './styles';
 import { GameTimer } from '../GameTimer';
 import { userInfo, userScore, statistics } from './dummy';
 import { ExpandedStockList } from '../ExpandedStockList';
 import { IStock } from '../../types';
+import { ACCOUNT_BALANCE_TYPE } from '../../constants';
 
 interface Props {
   style?: {
@@ -30,11 +37,24 @@ export function GameSideBar({ style: propStyle = {} }: Props) {
   const {
     user: { userName },
   } = useContext(UserContext);
-
+  const { balance, profit } = useContext(PortfolioContext);
   const { gameEvents } = useContext(GameContext);
 
   const [timeRemaining, setTimeRemaining] = useState<string>(EMPTY_TIMER);
   const { onSetActiveStock, stocks, activeStock } = useContext(GameContext);
+
+  const activeProfit = useMemo(() => profit[activeStock?.id], [
+    profit,
+    activeStock,
+  ]);
+  const activeBalance = useMemo(
+    () =>
+      _.find(
+        Object.values(balance),
+        (someBalance) => someBalance.name === ACCOUNT_BALANCE_TYPE.CASH,
+      ),
+    [balance],
+  );
 
   useEffect(() => {
     setTimeRemaining(
@@ -61,13 +81,23 @@ export function GameSideBar({ style: propStyle = {} }: Props) {
         </Text>
         <View style={themedStyles.userInfoContainer}>
           <View style={themedStyles.userLvlContainer}>
-            <Text style={themedStyles.userLvl}>Level {userInfo.lvl}</Text>
+            <Text style={themedStyles.userLvl}>
+              Level {gameEvents?.level || ''}
+            </Text>
           </View>
 
           <View style={themedStyles.scoreContainer}>
-            <Text style={themedStyles.totalScore}>{userScore.total}</Text>
-            <Text style={themedStyles.scorePlus}>{userScore.scorePlus}</Text>
-            <Text style={themedStyles.scoreMinus}>{userScore.scoreMinus}</Text>
+            <Text style={themedStyles.totalScore}>
+              $ {activeBalance?.balance?.toFixed(2)}
+            </Text>
+            <Text
+              style={
+                activeProfit?.profitLoss > 0
+                  ? themedStyles.scorePlus
+                  : themedStyles.scoreMinus
+              }>
+              {activeProfit?.profitLoss?.toFixed(2)}
+            </Text>
           </View>
         </View>
         <View style={themedStyles.timerContainer}>
