@@ -49,6 +49,7 @@ const ContextProvider = ({
 
   const logout = useCallback(() => {
     removeUserFromStorage();
+    // TODO reset navigation state
     setLocalUser(null);
     setLocalToken(null);
   }, [removeUserFromStorage, setLocalUser, setLocalToken]);
