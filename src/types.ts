@@ -80,24 +80,26 @@ export interface IPortfolioBalance {
 
 export type IPortfolio = IPortfolioProfit & IPortfolioBalance;
 
-export type ILevelString =
-  | 'one'
-  | 'two'
-  | 'three'
-  | 'four'
-  | 'five'
-  | 'six'
-  | 'seven'
-  | 'eight'
-  | 'nine'
-  | 'ten';
-
 export interface IGameEvent {
   gameId: string;
-  level: ILevelString;
+  level: number;
   minutesRemaining: number;
   secondsRemaining: number;
   __typename: 'LevelTimer';
+}
+
+export interface IGameEventScore {
+  event: 'lose' | 'win';
+  gameId: string;
+  profitLoss: string;
+  level: number;
+  __typename: 'LevelStatus';
+}
+
+export interface IGameEventExit {
+  event: 'exit';
+  gameId: string;
+  __typename: 'ControlEvent';
 }
 
 export interface ISubscriptionPlan {

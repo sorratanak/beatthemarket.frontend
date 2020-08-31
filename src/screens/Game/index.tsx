@@ -21,31 +21,32 @@ import { getThemedStyles } from './styles';
 
 export function Game() {
   const { theme } = useContext(ThemeContext);
-  const { gameId, activeStock, onAddStockTicks, onSetGameEvents } = useContext(
-    GameContext,
-  );
+  const {
+    gameId,
+    activeStock,
+    onAddStockTicks,
+    onSetGameEvents,
+    onSetGameScore,
+    gameScore,
+  } = useContext(GameContext);
   const { onPortfolioUpdate } = useContext(PortfolioContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   const [data, setData] = useState<IPoint[]>([]);
-
-  const [endGameModalType] = useState<'lose' | 'win'>(
-    pickRandom(['lose', 'win'])[0],
+  const [endGameModalType, setEndGameModalType] = useState<'lose' | 'win'>(
+    null,
   );
-
   const [isEndGameModalVisible, setIsEndGameModalVisible] = useState<boolean>(
     false,
   );
 
-  // TODO win/lose logic [blocked by ui for now]
-  // const { level } = gameEvents;
-
   useEffect(() => {
-    if (gameId) {
-      setTimeout(() => setIsEndGameModalVisible(true), 2000);
+    if (gameScore) {
+      setEndGameModalType(gameScore.event);
+      setIsEndGameModalVisible(true);
     }
-  }, [gameId]);
+  }, [gameScore]);
 
   useEffect(() => {
     if (!gameId || !activeStock) {
@@ -74,14 +75,21 @@ export function Game() {
         <>
           <StockTicksSubscriber gameId={gameId} callback={onAddStockTicks} />
           <PortfolioSubscriber gameId={gameId} callback={onPortfolioUpdate} />
-          <GameEventsSubscriber gameId={gameId} callback={onSetGameEvents} />
+          <GameEventsSubscriber
+            gameId={gameId}
+            levelTimerCallback={onSetGameEvents}
+            levelStatusCallback={onSetGameScore}
+          />
         </>
       )}
 
       <DefaultModal isVisible={isEndGameModalVisible}>
         <EndGameModal
           headerType={endGameModalType}
-          onFinishPress={() => setIsEndGameModalVisible(false)}
+          onFinishPress={() => {
+            setIsEndGameModalVisible(false);
+            onSetGameScore(null);
+          }}
         />
       </DefaultModal>
     </Container>

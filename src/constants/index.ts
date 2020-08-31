@@ -38,6 +38,12 @@ export const RULES_ID = {
   FOURTH_BLOCK: 'h3exl5p5m2e',
 };
 
+export const GAME_EVENT_TYPENAMES = {
+  LEVEL_TIMER: 'LevelTimer',
+  LEVEL_STATUS: 'LevelStatus',
+  CONTROL_EVENT: 'ControlEvent',
+};
+
 export const DEVELOPMENT_SERVER_BASE_IP =
   'beatthemarket5-env.eba-42mjkwti.us-east-1.elasticbeanstalk.com';
 

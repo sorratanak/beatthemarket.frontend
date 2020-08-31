@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useMutation } from '@apollo/client';
 import _ from 'lodash';
 
-import { IStock, IStockTick, IGameEvent } from '../types';
+import { IStock, IStockTick, IGameEvent, IGameEventScore } from '../types';
 import { getSellBuyStockRequest } from '../utils/parsing';
 import gameGraphql from '../graphql/game';
 
@@ -11,6 +11,7 @@ interface ContextProps {
   stocks: IStock[];
   activeStock: IStock;
   gameEvents: IGameEvent;
+  gameScore: IGameEventScore;
   onSetGameId: (gameId: string) => void;
   onSetStocks: (stocks: IStock[]) => void;
   onAddStockTicks: (ticks: IStockTick[]) => void;
@@ -18,6 +19,7 @@ interface ContextProps {
   onSellStock: (stockAmount: number) => void;
   onBuyStock: (stockAmount: number) => void;
   onSetGameEvents: (gameEvents: IGameEvent) => void;
+  onSetGameScore: (gameScore: IGameEventScore) => void;
 }
 
 const DEFAULT_GAME_CONTEXT: ContextProps = {
@@ -25,6 +27,7 @@ const DEFAULT_GAME_CONTEXT: ContextProps = {
   stocks: null,
   activeStock: null,
   gameEvents: null,
+  gameScore: null,
   onSetGameId: _.noop,
   onSetStocks: _.noop,
   onAddStockTicks: _.noop,
@@ -32,6 +35,7 @@ const DEFAULT_GAME_CONTEXT: ContextProps = {
   onSellStock: _.noop,
   onBuyStock: _.noop,
   onSetGameEvents: _.noop,
+  onSetGameScore: _.noop,
 };
 
 export const GameContext = React.createContext(DEFAULT_GAME_CONTEXT);
@@ -45,6 +49,7 @@ const ContextProvider = ({
   const [activeStock, setActiveStock] = useState<IStock>(null);
   const [stocks, setStocks] = useState<IStock[]>([]);
   const [gameEvents, setGameEvents] = useState<IGameEvent>(null);
+  const [gameScore, setGameScore] = useState<IGameEventScore>(null);
 
   const [buyStock, { data: buyStockResponse }] = useMutation(
     gameGraphql.queries.BUY_STOCK,
@@ -54,8 +59,9 @@ const ContextProvider = ({
   );
 
   const onSetGameId = useCallback(
-    (someGameId: string) => {
-      setGameId(someGameId);
+    (newGameId: string) => {
+      setGameId(newGameId);
+      console.log('ON SET GAME ID', newGameId);
     },
     [setGameId],
   );
@@ -115,8 +121,17 @@ const ContextProvider = ({
   const onSetGameEvents = useCallback(
     (newGameEvents: IGameEvent) => {
       setGameEvents(newGameEvents);
+      console.log('SET GAME EVENTS', newGameEvents);
     },
     [setGameEvents],
+  );
+
+  const onSetGameScore = useCallback(
+    (newGameScore: IGameEventScore) => {
+      setGameScore(newGameScore);
+      console.log('SET GAME SCORE', newGameScore);
+    },
+    [setGameScore],
   );
 
   return (
@@ -126,6 +141,7 @@ const ContextProvider = ({
         stocks,
         activeStock,
         gameEvents,
+        gameScore,
         onSetStocks,
         onSetActiveStock,
         onAddStockTicks,
@@ -133,6 +149,7 @@ const ContextProvider = ({
         onSellStock,
         onBuyStock,
         onSetGameEvents,
+        onSetGameScore,
       }}>
       {children}
     </GameContext.Provider>
