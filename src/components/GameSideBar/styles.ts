@@ -23,6 +23,7 @@ export const getThemedStyles = (theme: ITheme) =>
       lineHeight: 37,
       marginBottom: 20,
       marginHorizontal: 60,
+      width: 170,
     },
     userInfoContainer: {
       flex: 1,
