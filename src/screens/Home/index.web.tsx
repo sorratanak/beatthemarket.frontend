@@ -9,14 +9,16 @@ import {
   DefaultButton,
   ScoreRow,
 } from '../../components';
-import { GameContext, ThemeContext } from '../../contexts';
+import { GameContext, ThemeContext, UserContext } from '../../contexts';
 import gameGraphql from '../../graphql/game';
 import usersGraphql from '../../graphql/users';
 import { getThemedStyles } from './styles';
 
 export function Home({ navigation }: ScreenProps) {
   const { onSetGameId, onSetStocks } = useContext(GameContext);
-
+  const {
+    user: { userName },
+  } = useContext(UserContext);
   /* Mutations */
   const [createGame, { data: createGameResponse }] = useMutation(
     gameGraphql.queries.CREATE_GAME,
@@ -56,7 +58,7 @@ export function Home({ navigation }: ScreenProps) {
     <Container style={themedStyles.container}>
       <View style={themedStyles.headerContainer}>
         <View style={themedStyles.greetContainer}>
-          <Text style={themedStyles.greetUserName}>Hello, Cris Brown</Text>
+          <Text style={themedStyles.greetUserName}>Hello, {userName}</Text>
           <Text style={themedStyles.greetText}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod
