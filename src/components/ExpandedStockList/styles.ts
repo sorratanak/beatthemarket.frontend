@@ -60,4 +60,5 @@ export const getThemedStyles = (theme: ITheme) =>
     negativeStockChange: {
       backgroundColor: theme.GAME_SCREEN.NEGATIVE_STOCK_CHANGE_BACKGROUND_COLOR,
     },
+    stockInfoText: {},
   });

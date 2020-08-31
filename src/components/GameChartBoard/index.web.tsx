@@ -128,12 +128,11 @@ function ChartFooter({ themedStyles }: ChartFooterProps) {
           style={themedStyles.chartFooterSliderButtonContainer}>
           <Text style={themedStyles.chartFooterSliderButtonTitle}>-</Text>
         </TouchableOpacity>
-        <View>
+        <View style={themedStyles.chartFooterSliderContainer}>
           <Text style={themedStyles.chartFooterSharesTitle}>
             {Math.round(sliderValue)} shares
           </Text>
           <Slider
-            style={themedStyles.chartFooterSliderContainer}
             value={sliderValue}
             onValueChange={setSliderValue}
             minimumValue={SLIDER_MIN_VALUE}

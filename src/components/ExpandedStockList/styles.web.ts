@@ -1,31 +1,69 @@
 import { StyleSheet } from 'react-native';
 import { ITheme } from '../../themes/interface';
-// import { COMMON_STYLES } from '../../themes/commonStyles';
+import { COLORS } from '../../themes/colors';
+import { COMMON_STYLES } from '../../themes/commonStyles';
 
 export const getThemedStyles = (theme: ITheme) => {
   return StyleSheet.create({
     container: {},
-    contentContainer: {},
+    contentContainer: {
+      paddingVertical: 16,
+      ...COMMON_STYLES.SHADOW_BOX,
+    },
+    hugeFlexContainer: {
+      flex: 3,
+      flexDirection: 'row',
+    },
     listItemContainer: {
-      // backgroundColor: theme.GAME_SCREEN.LIST_VIEW_COLOR,
-      // height: 125,
-      // width: 250,
-      // borderRadius: 10,
-      // justifyContent: 'center',
-      // alignItems: 'center',
-      // marginHorizontal: 10,
-      // ...COMMON_STYLES.SHADOW_BOX,
+      backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
+      borderRadius: 10,
+      paddingHorizontal: 8,
+      paddingVertical: 3,
+      marginTop: 8,
     },
     activeListItemContainer: {
-      // backgroundColor: theme.GAME_SCREEN.LIST_VIEW_ACTIVE_COLOR,
+      backgroundColor: theme.GAME_SCREEN.LIST_VIEW_ACTIVE_COLOR,
     },
     listItemTitle: {
-      // color: theme.DEFAULT.TEXT_COLOR,
+      flex: 1,
+      color: theme.DEFAULT.TEXT_COLOR,
+      fontSize: 10,
+      lineHeight: 13,
     },
-    rowContainer: {},
-    listItemStockChangeContainer: {},
-    listItemStockChangeDifference: {},
-    listItemStockAgoTime: {},
+    rowContainer: {
+      width: '100%',
+      alignItems: 'center',
+      flexDirection: 'row',
+      paddingVertical: 9,
+    },
+    listItemStockChangeContainer: {
+      borderRadius: 100,
+      paddingHorizontal: 10,
+      paddingVertical: 3,
+    },
+    listItemStockChangeDifference: {
+      color: COLORS.BLACK,
+      fontSize: 12,
+      lineHeight: 13,
+    },
+    listItemStockAgoTime: {
+      color: theme.GAME_SCREEN.LIST_ITEM_STOCK_AGO_TIME_COLOR,
+    },
     listItemDifferenceLine: {},
+    positiveDifferenceLine: {
+      marginRight: 14,
+      color: theme.GAME_SCREEN.POSITIVE_DIFFERENCE_LINE_COLOR,
+    },
+    negativeDifferenceLine: {
+      marginRight: 8,
+      color: theme.GAME_SCREEN.NEGATIVE_DIFFERENCE_LINE_COLOR,
+    },
+    positiveStockChange: {
+      backgroundColor: theme.GAME_SCREEN.POSITIVE_STOCK_CHANGE_BACKGROUND_COLOR,
+    },
+    negativeStockChange: {
+      backgroundColor: theme.GAME_SCREEN.NEGATIVE_STOCK_CHANGE_BACKGROUND_COLOR,
+    },
+    stockInfoText: { color: theme.DEFAULT.TEXT_COLOR },
   });
 };

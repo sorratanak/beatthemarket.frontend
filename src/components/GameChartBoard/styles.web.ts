@@ -8,6 +8,7 @@ export const getThemedStyles = (theme: ITheme) =>
     container: {
       flex: 1,
       width: '100%',
+      height: '100%',
       justifyContent: 'center',
       alignItems: 'center',
     },
@@ -123,17 +124,15 @@ export const getThemedStyles = (theme: ITheme) =>
       color: theme.DEFAULT.TEXT_COLOR,
     },
     chartFooterSliderContainer: {
-      flex: 0,
-      flexGrow: 0,
-      width: 300,
-      height: 20,
+      flex: 1,
     },
     chartFooterButtonContainer: {
-      width: 257,
+      flex: 1,
       paddingVertical: 16,
       borderRadius: 10,
       alignItems: 'center',
       justifyContent: 'center',
+      marginLeft: 20,
     },
     chartFooterButtonRise: {
       backgroundColor: theme.GAME_SCREEN.BUTTON_UP_COLOR,

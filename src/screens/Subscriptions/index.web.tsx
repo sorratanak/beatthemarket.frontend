@@ -1,16 +1,16 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState, useCallback } from 'react';
 import { Text, View } from 'react-native';
 import {
   SettingsNestedScreenWrapper,
   SubscriptionsList,
   DefaultButton,
   DefaultModal,
+  EndGameModal,
 } from '../../components';
 import { getThemedStyles } from './styles';
 import { ThemeContext, IapContext } from '../../contexts';
 import { IMAGES } from '../../assets';
 import { SUBSCRIPTIONS } from './subscriptions';
-import { InfoModal } from '../../components/InfoModal';
 
 export function Subscriptions() {
   const { theme } = useContext(ThemeContext);
@@ -19,6 +19,10 @@ export function Subscriptions() {
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const onCloseModal = useCallback(() => {
+    setIsModalVisible(false);
+  }, [setIsModalVisible]);
 
   return (
     <SettingsNestedScreenWrapper
@@ -44,19 +48,7 @@ export function Subscriptions() {
         Buy
       </DefaultButton>
       <DefaultModal isVisible={isModalVisible}>
-        <InfoModal
-          onClosePress={() => setIsModalVisible(false)}
-          title={{ text: 'Pause' }}
-          infoText="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-          firstButton={{
-            text: 'Lorem',
-            onPress: () => console.log('all good'),
-          }}
-          secondButton={{
-            text: 'Finish',
-            onPress: () => console.log('all good!!!'),
-          }}
-        />
+        <EndGameModal headerType="lose" onFinishPress={onCloseModal} />
       </DefaultModal>
     </SettingsNestedScreenWrapper>
   );

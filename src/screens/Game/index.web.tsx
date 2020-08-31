@@ -12,6 +12,7 @@ import {
   GameChartBoard,
   DefaultModal,
   EndGameModal,
+  GameSideBar,
 } from '../../components';
 import { IPoint, IGameEventScore } from '../../types';
 import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
@@ -69,6 +70,7 @@ export function Game() {
   return (
     <Container style={themedStyles.container}>
       <GameChartBoard chartData={data} />
+      <GameSideBar />
       {gameId && (
         <>
           <StockTicksSubscriber gameId={gameId} callback={onAddStockTicks} />
