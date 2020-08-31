@@ -5,6 +5,10 @@ export * from './keys';
 export const USER_KEY = '_user';
 export const THEME_KEY = '_themeKey';
 
+export const MAX_GAME_LEVEL = 10;
+export const START_GAME_LEVEL = 1;
+export const LEVEL_WIN_STEP = 1;
+
 export const STOCK_CHANGE_TYPE = {
   BUY: 'buy',
   SELL: 'sell',

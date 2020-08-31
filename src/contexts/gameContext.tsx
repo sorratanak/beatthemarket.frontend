@@ -5,8 +5,10 @@ import _ from 'lodash';
 import { IStock, IStockTick, IGameEvent, IGameEventScore } from '../types';
 import { getSellBuyStockRequest } from '../utils/parsing';
 import gameGraphql from '../graphql/game';
+import { START_GAME_LEVEL } from '../constants';
 
 interface ContextProps {
+  wins: number;
   gameId: string;
   stocks: IStock[];
   activeStock: IStock;
@@ -20,9 +22,11 @@ interface ContextProps {
   onBuyStock: (stockAmount: number) => void;
   onSetGameEvents: (gameEvents: IGameEvent) => void;
   onSetGameScore: (gameScore: IGameEventScore) => void;
+  setWins: (count: number) => void;
 }
 
 const DEFAULT_GAME_CONTEXT: ContextProps = {
+  wins: null,
   gameId: null,
   stocks: null,
   activeStock: null,
@@ -36,6 +40,7 @@ const DEFAULT_GAME_CONTEXT: ContextProps = {
   onBuyStock: _.noop,
   onSetGameEvents: _.noop,
   onSetGameScore: _.noop,
+  setWins: _.noop,
 };
 
 export const GameContext = React.createContext(DEFAULT_GAME_CONTEXT);
@@ -50,6 +55,7 @@ const ContextProvider = ({
   const [stocks, setStocks] = useState<IStock[]>([]);
   const [gameEvents, setGameEvents] = useState<IGameEvent>(null);
   const [gameScore, setGameScore] = useState<IGameEventScore>(null);
+  const [wins, setWins] = useState<number>(START_GAME_LEVEL);
 
   const [buyStock, { data: buyStockResponse }] = useMutation(
     gameGraphql.queries.BUY_STOCK,
@@ -61,6 +67,7 @@ const ContextProvider = ({
   const onSetGameId = useCallback(
     (newGameId: string) => {
       setGameId(newGameId);
+      setWins(START_GAME_LEVEL);
       console.log('ON SET GAME ID', newGameId);
     },
     [setGameId],
@@ -121,7 +128,6 @@ const ContextProvider = ({
   const onSetGameEvents = useCallback(
     (newGameEvents: IGameEvent) => {
       setGameEvents(newGameEvents);
-      console.log('SET GAME EVENTS', newGameEvents);
     },
     [setGameEvents],
   );
@@ -129,7 +135,6 @@ const ContextProvider = ({
   const onSetGameScore = useCallback(
     (newGameScore: IGameEventScore) => {
       setGameScore(newGameScore);
-      console.log('SET GAME SCORE', newGameScore);
     },
     [setGameScore],
   );
@@ -137,6 +142,7 @@ const ContextProvider = ({
   return (
     <GameContext.Provider
       value={{
+        wins,
         gameId,
         stocks,
         activeStock,
@@ -150,6 +156,7 @@ const ContextProvider = ({
         onBuyStock,
         onSetGameEvents,
         onSetGameScore,
+        setWins,
       }}>
       {children}
     </GameContext.Provider>

@@ -15,9 +15,10 @@ import {
   DefaultModal,
   EndGameModal,
 } from '../../components';
-import { IPoint } from '../../types';
+import { IPoint, IGameEventScore } from '../../types';
 import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
 import { getThemedStyles } from './styles';
+import { MAX_GAME_LEVEL, LEVEL_WIN_STEP } from '../../constants';
 
 export function Game() {
   const { theme } = useContext(ThemeContext);
@@ -28,6 +29,8 @@ export function Game() {
     onSetGameEvents,
     onSetGameScore,
     gameScore,
+    wins,
+    setWins,
   } = useContext(GameContext);
   const { onPortfolioUpdate } = useContext(PortfolioContext);
 
@@ -78,7 +81,14 @@ export function Game() {
           <GameEventsSubscriber
             gameId={gameId}
             levelTimerCallback={onSetGameEvents}
-            levelStatusCallback={onSetGameScore}
+            // TODO its temporary solution
+            levelStatusCallback={(newGameScore: IGameEventScore) => {
+              if (newGameScore.event === 'win' && wins !== MAX_GAME_LEVEL) {
+                setWins(wins + LEVEL_WIN_STEP);
+              } else {
+                onSetGameScore(newGameScore);
+              }
+            }}
           />
         </>
       )}
