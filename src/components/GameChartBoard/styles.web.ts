@@ -148,4 +148,10 @@ export const getThemedStyles = (theme: ITheme) =>
       marginBottom: 9,
       color: theme.DEFAULT.TEXT_COLOR,
     },
+
+    chartHeaderSymbolContainer: {
+      justifyContent: 'center',
+      height: '100%',
+      marginRight: 20,
+    },
   });

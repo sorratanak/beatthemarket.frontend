@@ -58,6 +58,8 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
           <Text>Image here</Text>
         </View>
         <Text style={themedStyles.chartHeaderTitle}>{activeStock?.name} </Text>
+      </View>
+      <View style={themedStyles.chartHeaderSymbolContainer}>
         <Text style={themedStyles.chartHeaderTitleAbbr}>
           ({activeStock?.symbol})
         </Text>
