@@ -11,6 +11,7 @@ import { Container, GameChartBoard } from '../../components';
 import { IPoint } from '../../types';
 import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
 import { getThemedStyles } from './styles';
+import { GameSideBar } from '../../components/GameSideBar';
 
 export function Game() {
   const { theme } = useContext(ThemeContext);
@@ -46,6 +47,7 @@ export function Game() {
   return (
     <Container style={themedStyles.container}>
       <GameChartBoard chartData={data} />
+      <GameSideBar />
       {gameId && (
         <>
           <StockTicksSubscriber gameId={gameId} callback={onAddStockTicks} />

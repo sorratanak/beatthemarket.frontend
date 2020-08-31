@@ -86,7 +86,9 @@ function ExpandedStockListItem({
             {stockChange.difference > 0 ? 'In height' : 'In decline'}
           </Text>
         )}
-        <Text>Lorem ipsum dolor sit amet</Text>
+        <Text style={themedStyles.stockInfoText}>
+          Lorem ipsum dolor sit amet
+        </Text>
       </View>
     </TouchableOpacity>
   );

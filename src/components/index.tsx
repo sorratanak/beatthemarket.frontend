@@ -17,3 +17,5 @@ export * from './StockList';
 export * from './SubscriptionsList';
 export * from './TilesList';
 export * from './TouchableTile';
+export * from './GameTimer';
+export * from './GameSideBar';
