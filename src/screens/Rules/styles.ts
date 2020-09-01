@@ -7,11 +7,14 @@ export const getThemedStyles = (theme: ITheme) =>
     container: {
       flex: 1,
       backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
+      paddingHorizontal: 16,
     },
     title: {
-      textAlign: 'center',
-      fontSize: 28,
+      fontSize: 34,
+      lineHeight: 41,
+      letterSpacing: 0.41,
+      fontWeight: 'bold',
       color: theme.DEFAULT.TEXT_COLOR,
-      marginVertical: 90,
+      marginVertical: 46,
     },
   });

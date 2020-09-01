@@ -32,9 +32,13 @@ export const IMAGES = {
 
   /* Rules */
   ONE: require('./rules/numbers/one.png'),
+  PURPLE_ONE: require('./rules/purpleNumbers/purpleOne.png'),
   TWO: require('./rules/numbers/two.png'),
+  PURPLE_TWO: require('./rules/purpleNumbers/purpleTwo.png'),
   THREE: require('./rules/numbers/three.png'),
+  PURPLE_THREE: require('./rules/purpleNumbers/purpleThree.png'),
   FOUR: require('./rules/numbers/four.png'),
+  PURPLE_FOUR: require('./rules/purpleNumbers/purpleFour.png'),
   LEVEL_UP: require('./rules/levelUp.png'),
   REVIEW: require('./rules/review.png'),
   RULES: require('./rules/rules.png'),

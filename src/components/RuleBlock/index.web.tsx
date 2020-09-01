@@ -18,8 +18,16 @@ export function RuleBlock({ item }: Props) {
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   return (
-    <View style={themedStyles.tilesContainer}>
+    <View
+      style={[themedStyles.tilesContainer, { backgroundColor: item.bgColor }]}>
       <Image source={item.number} style={themedStyles.numberImg} />
+      <View style={themedStyles.mainImgContainer}>
+        <Image
+          source={item.image}
+          style={themedStyles.mainImg}
+          resizeMode="contain"
+        />
+      </View>
       <Text style={themedStyles.descriptionRules}>{item.text}</Text>
     </View>
   );
