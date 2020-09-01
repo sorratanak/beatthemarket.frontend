@@ -48,6 +48,14 @@ export const GAME_EVENT_TYPENAMES = {
   CONTROL_EVENT: 'ControlEvent',
 };
 
+export const STATUS_BAR_STYLES: {
+  [key: string]: 'dark-content' | 'light-content' | 'default';
+} = {
+  LIGHT_CONTENT: 'light-content',
+  DARK_CONTENT: 'dark-content',
+  DEFAULT: 'default',
+};
+
 export const DEVELOPMENT_SERVER_BASE_IP =
   'beatthemarket5-env.eba-42mjkwti.us-east-1.elasticbeanstalk.com';
 
