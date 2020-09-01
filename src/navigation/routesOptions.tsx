@@ -25,7 +25,7 @@ export const getThemedTabBarOptions = (theme: ITheme) => ({
   },
   style: {
     borderTopWidth: theme === LIGHT_THEME ? 1.5 : 0,
-    backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
+    backgroundColor: theme.MENU.BACKGROUND_COLOR,
   },
 });
 
