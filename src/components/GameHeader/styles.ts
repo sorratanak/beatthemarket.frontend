@@ -21,6 +21,12 @@ export const getThemedStyles = (theme: ITheme) =>
     cellContainer: {
       flex: 1,
     },
+    pauseText: {
+      textAlign: 'right',
+      marginRight: 8,
+      fontSize: 14,
+      color: theme.DEFAULT.TEXT_COLOR,
+    },
     username: {
       color: theme.GAME_SCREEN.HEADER_USERNAME_COLOR,
       fontSize: 14,

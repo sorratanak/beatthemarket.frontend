@@ -20,7 +20,9 @@ interface CustomDrawerContentProps extends DrawerContentComponentProps {
 function CustomDrawerContent(props: CustomDrawerContentProps) {
   const { themedStyles } = props;
 
-  const { gameId, onPauseGame, onResumeGame } = useContext(GameContext);
+  const { gameId, isGamePaused, onPauseGame, onResumeGame } = useContext(
+    GameContext,
+  );
 
   return (
     <DrawerContentScrollView {...props}>
@@ -28,7 +30,7 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
       <DrawerItemList {...props} />
       {gameId && (
         <TouchableOpacity
-          onPress={onPauseGame}
+          onPress={isGamePaused ? onResumeGame : onPauseGame}
           style={themedStyles.pauseButtonContainer}>
           <Image
             source={IMAGES.PAUSE_BUTTON}

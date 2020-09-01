@@ -1,5 +1,11 @@
 import React, { useContext, useEffect, useState, useMemo } from 'react';
-import { View, Text, ViewStyle, TextStyle } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ViewStyle,
+  TextStyle,
+} from 'react-native';
 import moment from 'moment';
 
 import { ThemeContext, UserContext, GameContext } from '../../contexts';
@@ -19,7 +25,13 @@ export function GameHeader({ style: propStyle = {} }: Props) {
   const {
     user: { userName },
   } = useContext(UserContext);
-  const { gameEvents } = useContext(GameContext);
+  const {
+    gameEvents,
+    gameId,
+    isGamePaused,
+    onResumeGame,
+    onPauseGame,
+  } = useContext(GameContext);
 
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
@@ -46,7 +58,16 @@ export function GameHeader({ style: propStyle = {} }: Props) {
       <View style={themedStyles.cellContainer}>
         {timeRemaining !== EMPTY_TIMER && <GameTimer time={timeRemaining} />}
       </View>
-      <View style={themedStyles.cellContainer} />
+      <View style={themedStyles.cellContainer}>
+        {gameId && (
+          // TODO temporary solution
+          <TouchableOpacity onPress={isGamePaused ? onResumeGame : onPauseGame}>
+            <Text style={themedStyles.pauseText}>
+              {isGamePaused ? 'Resume' : 'Pause'}
+            </Text>
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 }

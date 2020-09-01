@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect, useMemo } from 'react';
 import _ from 'lodash';
-import pickRandom from 'pick-random';
 import moment from 'moment';
 
 import {

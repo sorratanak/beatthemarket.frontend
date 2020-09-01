@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import _ from 'lodash';
 
@@ -17,6 +17,7 @@ interface ContextProps {
   activeStock: IStock;
   gameEvents: IGameEvent;
   gameScore: IGameEventScore;
+  isGamePaused: boolean;
   onSetGameId: (gameId: string) => void;
   onSetStocks: (stocks: IStock[]) => void;
   onAddStockTicks: (ticks: IStockTick[]) => void;
@@ -37,6 +38,7 @@ const DEFAULT_GAME_CONTEXT: ContextProps = {
   activeStock: null,
   gameEvents: null,
   gameScore: null,
+  isGamePaused: null,
   onSetGameId: _.noop,
   onSetStocks: _.noop,
   onAddStockTicks: _.noop,
@@ -57,13 +59,16 @@ const ContextProvider = ({
 }: {
   children: React.ReactNode | React.ReactNode[];
 }) => {
+  /* ------ State ------ */
   const [gameId, setGameId] = useState<string>(null);
   const [activeStock, setActiveStock] = useState<IStock>(null);
   const [stocks, setStocks] = useState<IStock[]>([]);
   const [gameEvents, setGameEvents] = useState<IGameEvent>(null);
   const [gameScore, setGameScore] = useState<IGameEventScore>(null);
   const [wins, setWins] = useState<number>(START_GAME_LEVEL);
+  const [isGamePaused, setIsGamePaused] = useState<boolean>(false);
 
+  /* ------ Mutations ------ */
   const [buyStock, { data: buyStockResponse }] = useMutation(
     gameGraphql.queries.BUY_STOCK,
   );
@@ -78,10 +83,12 @@ const ContextProvider = ({
     gameGraphql.queries.RESUME_GAME,
   );
 
+  /* ------ Callbacks ------ */
   const onSetGameId = useCallback(
     (newGameId: string) => {
       setGameId(newGameId);
       setWins(START_GAME_LEVEL);
+      setIsGamePaused(false);
     },
     [setGameId],
   );
@@ -154,10 +161,13 @@ const ContextProvider = ({
 
   const onPauseGame = useCallback(() => {
     pauseGame(getPauseResumeGameRequest(gameId));
-  }, [pauseGame]);
+    setIsGamePaused(true);
+  }, [gameId, pauseGame]);
+
   const onResumeGame = useCallback(() => {
     resumeGame(getPauseResumeGameRequest(gameId));
-  }, [resumeGame]);
+    setIsGamePaused(false);
+  }, [gameId, resumeGame]);
 
   return (
     <GameContext.Provider
@@ -168,6 +178,7 @@ const ContextProvider = ({
         activeStock,
         gameEvents,
         gameScore,
+        isGamePaused,
         onSetStocks,
         onSetActiveStock,
         onAddStockTicks,
