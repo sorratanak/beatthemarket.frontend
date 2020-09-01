@@ -26,7 +26,7 @@ export function ScoreList({ data }: Props) {
         </Text>
       </View>
     );
-  }, []);
+  }, [themedStyles]);
 
   return (
     <FlatList
