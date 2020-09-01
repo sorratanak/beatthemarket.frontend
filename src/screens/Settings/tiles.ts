@@ -16,13 +16,13 @@ export const SETTINGS_TILES = [
   {
     id: 'tile-speaker',
     source: IMAGES.SPEAKER,
-    nav: null,
+    nav: 'SoundEffects',
     title: 'Sounds effects',
   },
   {
     id: 'tile-headphones',
     source: IMAGES.HEADPHONES,
-    nav: null,
+    nav: 'Music',
     title: 'Music',
   },
   {

@@ -2,16 +2,17 @@ import React from 'react';
 import { View, Image, ViewStyle } from 'react-native';
 import { TouchableTile } from '../TouchableTile';
 import { styles } from './styles';
-import { Container } from '../Container';
 
 interface Props {
   imageSource: any;
   children: React.ReactNode;
+  contentContainerStyle?: ViewStyle;
   style?: ViewStyle;
 }
 
 export function SettingsNestedScreenWrapper({
-  style,
+  style = {},
+  contentContainerStyle = {},
   imageSource,
   children,
 }: Props) {
@@ -22,7 +23,9 @@ export function SettingsNestedScreenWrapper({
           <Image source={imageSource} style={styles.image} />
         </TouchableTile>
       </View>
-      <View style={styles.contentContainer}>{children}</View>
+      <View style={[styles.contentContainer, contentContainerStyle]}>
+        {children}
+      </View>
     </View>
   );
 }

@@ -10,6 +10,7 @@ export const getThemedStyles = (theme: ITheme) =>
       backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
       paddingHorizontal: 16,
       paddingVertical: 6,
+      alignItems: 'center',
     },
     title: {
       fontSize: 17,

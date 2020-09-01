@@ -1,11 +1,19 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Settings, Subscriptions, UserSettings } from '../../../screens';
+import {
+  Settings,
+  Subscriptions,
+  SoundEffects,
+  Music,
+  UserSettings,
+} from '../../../screens';
 import { withoutHeaderOptions } from '../../routesOptions';
 
 export type StackParams = {
   Settings: undefined;
   Subscriptions: undefined;
+  SoundEffects: undefined;
+  Music: undefined;
   UserSettings: undefined;
 };
 
@@ -19,6 +27,8 @@ export const SettingsStack = () => (
       options={withoutHeaderOptions}
     />
     <Stack.Screen name="Subscriptions" component={Subscriptions} />
+    <Stack.Screen name="SoundEffects" component={SoundEffects} />
+    <Stack.Screen name="Music" component={Music} />
     <Stack.Screen name="UserSettings" component={UserSettings} />
   </Stack.Navigator>
 );
