@@ -10,7 +10,7 @@ export const SETTINGS_TILES = [
   {
     id: 'tile-fire',
     source: IMAGES.FIRE,
-    nav: null,
+    nav: 'ExtraSubscriptions',
     title: 'Extra subscription',
   },
   {
