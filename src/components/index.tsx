@@ -16,6 +16,7 @@ export * from './ScoreRow';
 export * from './SettingsNestedScreenWrapper';
 export * from './StockList';
 export * from './SubscriptionsList';
+export * from './SwitchRow';
 export * from './TilesList';
 export * from './TouchableTile';
 export * from './GameTimer';

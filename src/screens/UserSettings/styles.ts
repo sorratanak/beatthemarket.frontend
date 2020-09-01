@@ -12,6 +12,7 @@ export const getThemedStyles = (theme: ITheme) =>
       flex: 1,
     },
     buttonContainer: {
+      marginTop: 20,
       alignSelf: 'center',
       backgroundColor: theme.SUBSCRIPTIONS_SCREEN.BUTTON_BACKGROUND_COLOR,
     },

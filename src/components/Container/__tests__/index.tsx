@@ -1,7 +1,7 @@
 import React from 'react';
-import {Container} from '..';
 import renderer from 'react-test-renderer';
-import {Text} from 'react-native';
+import { Text } from 'react-native';
+import { Container } from '..';
 
 it('should render correctly', () => {
   const component = renderer.create(

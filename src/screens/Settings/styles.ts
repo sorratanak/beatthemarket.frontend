@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { ITheme } from '../../themes/interface';
+import { COMMON_STYLES } from '../../themes/commonStyles';
 
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
@@ -8,7 +9,7 @@ export const getThemedStyles = (theme: ITheme) =>
       flex: 1,
       backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
     },
-    title: {
+    switchTitle: {
       textAlign: 'center',
       fontSize: 28,
       color: theme.DEFAULT.TEXT_COLOR,
@@ -21,7 +22,13 @@ export const getThemedStyles = (theme: ITheme) =>
     tileContainer: {
       alignItems: 'center',
     },
-    tileContentContainer: {},
+    tileContentContainer: {
+      justifyContent: 'flex-start',
+    },
     tileTitle: {},
     settingsContainer: {},
+    title: {
+      paddingHorizontal: 16,
+      ...COMMON_STYLES.SCREEN_TITLE(theme),
+    },
   });

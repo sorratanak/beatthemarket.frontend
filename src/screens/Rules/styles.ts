@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { ITheme } from '../../themes/interface';
+import { COMMON_STYLES } from '../../themes/commonStyles';
 
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
@@ -10,11 +11,6 @@ export const getThemedStyles = (theme: ITheme) =>
       paddingHorizontal: 16,
     },
     title: {
-      fontSize: 34,
-      lineHeight: 41,
-      letterSpacing: 0.41,
-      fontWeight: 'bold',
-      color: theme.DEFAULT.TEXT_COLOR,
-      marginVertical: 46,
+      ...COMMON_STYLES.SCREEN_TITLE(theme),
     },
   });
