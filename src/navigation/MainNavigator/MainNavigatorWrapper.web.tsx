@@ -1,6 +1,12 @@
 import '../GestureHandler';
 import React, { ReactNode, useContext, useMemo } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  useWindowDimensions,
+} from 'react-native';
 import {
   createDrawerNavigator,
   DrawerContentComponentProps,
@@ -46,13 +52,17 @@ interface Props {
   children: ReactNode[];
 }
 export const MainNavigatorWrapper = ({ children }: Props) => {
-  const { theme } = useContext(ThemeContext);
+  const dimensions = useWindowDimensions();
 
+  const isLargeScreen = dimensions.width > 1024;
+
+  const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   return (
     <MainNavigator.Navigator
-      drawerType="permanent"
+      drawerType={isLargeScreen ? 'permanent' : 'front'}
+      openByDefault
       drawerContent={(props: CustomDrawerContentProps) => (
         <CustomDrawerContent themedStyles={themedStyles} {...props} />
       )}
@@ -63,7 +73,10 @@ export const MainNavigatorWrapper = ({ children }: Props) => {
         labelStyle: themedStyles.itemLabel,
         itemStyle: themedStyles.itemContainer,
       }}
-      drawerStyle={themedStyles.container}>
+      drawerStyle={[
+        themedStyles.container,
+        isLargeScreen ? null : { width: '20%' },
+      ]}>
       {children}
     </MainNavigator.Navigator>
   );

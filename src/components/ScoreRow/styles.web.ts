@@ -8,7 +8,6 @@ export const getThemedStyles = (theme: ITheme) =>
       paddingVertical: 20,
       backgroundColor: theme.HOME_SCREEN.SECONDARY_BACKGROUND_COLOR,
       borderRadius: 14,
-      marginRight: 140,
       paddingHorizontal: 20,
     },
     scoreLabelContainer: {
