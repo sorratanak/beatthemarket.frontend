@@ -44,6 +44,7 @@ const wsLink = new WebSocketLink({
     lazy: true,
     connectionParams: async () => {
       const token = await getFirebaseToken();
+      // TO DO send a device id -> client-id
       return {
         token: token ? `Bearer ${token}` : '',
       };
