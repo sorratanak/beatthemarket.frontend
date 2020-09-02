@@ -120,4 +120,7 @@ export interface IBuySellStockRequest
 export interface IPauseResumeGameRequest
   extends IGraphqlVariableRequest<{ gameId: string }> {}
 
+export interface IGetAccountBalancesRequest
+  extends IGraphqlVariableRequest<{ gameId: string; email: string }> {}
+
 /* ---------------------- */

@@ -32,7 +32,9 @@ export function Game() {
     setWins,
     gameScore,
   } = useContext(GameContext);
-  const { onPortfolioUpdate } = useContext(PortfolioContext);
+  const { onPortfolioUpdate, onGetAccountBalances } = useContext(
+    PortfolioContext,
+  );
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -43,6 +45,10 @@ export function Game() {
   const [isEndGameModalVisible, setIsEndGameModalVisible] = useState<boolean>(
     false,
   );
+
+  useEffect(() => {
+    onGetAccountBalances();
+  }, [gameId]);
 
   useEffect(() => {
     if (gameScore) {

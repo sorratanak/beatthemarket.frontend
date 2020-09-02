@@ -4,6 +4,7 @@ import {
   IStock,
   IBuySellStockRequest,
   IPauseResumeGameRequest,
+  IGetAccountBalancesRequest,
 } from '../types';
 
 export function getStockChanges(prelastItem: IPoint, lastItem: IPoint) {
@@ -45,6 +46,20 @@ export function getSellBuyStockRequest(
         tickId: lastTick.stockTickId,
         tickPrice: lastTick.stockTickClose,
       },
+    },
+  };
+
+  return requestBody;
+}
+
+export function getAccountBalancesRequest(
+  gameId: string,
+  email: string,
+): IGetAccountBalancesRequest {
+  const requestBody: IGetAccountBalancesRequest = {
+    variables: {
+      gameId,
+      email,
     },
   };
 

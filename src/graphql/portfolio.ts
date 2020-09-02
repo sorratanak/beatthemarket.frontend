@@ -20,7 +20,20 @@ const SUBSCRIBE_PORTFOLIO = gql`
   }
 `;
 
+const GET_ACCOUNT_BALANCES = gql`
+  query AccountBalances($gameId: String!, $email: String!) {
+    accountBalances(gameId: $gameId, email: $email) {
+      id
+      name
+      balance
+      counterParty
+      amount
+    }
+  }
+`;
+
 const queries = {
+  GET_ACCOUNT_BALANCES,
   SUBSCRIBE_PORTFOLIO,
 };
 

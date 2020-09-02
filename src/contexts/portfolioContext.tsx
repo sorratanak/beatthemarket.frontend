@@ -1,19 +1,26 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
+import { useLazyQuery } from '@apollo/client';
 import _ from 'lodash';
 
 import { IPortfolio, IPortfolioProfit, IPortfolioBalance } from '../types';
 import { PORTFOLIO_UPDATE_TYPE } from '../constants';
+import portfolioGraphql from '../graphql/portfolio';
+import { GameContext } from './gameContext';
+import { UserContext } from './userContext';
+import { getAccountBalancesRequest } from '../utils/parsing';
 
 interface ContextProps {
   profit: { [stockId: string]: IPortfolioProfit };
   balance: { [balanceId: string]: IPortfolioBalance };
   onPortfolioUpdate: (updates: IPortfolio[] | any[]) => void;
+  onGetAccountBalances: () => void;
 }
 
 const DEFAULT_PORTFOLIO_CONTEXT: ContextProps = {
   profit: null,
   balance: null,
   onPortfolioUpdate: _.noop,
+  onGetAccountBalances: _.noop,
 };
 
 export const PortfolioContext = React.createContext(DEFAULT_PORTFOLIO_CONTEXT);
@@ -23,6 +30,20 @@ const ContextProvider = ({
 }: {
   children: React.ReactNode | React.ReactNode[];
 }) => {
+  /* ------ Lazy Query ------ */
+  const [getAccountBalances, { data: accountBalancesResponse }] = useLazyQuery(
+    portfolioGraphql.queries.GET_ACCOUNT_BALANCES,
+  );
+
+  useEffect(() => {
+    if (accountBalancesResponse) {
+      console.log('accountBalancesResponse!!!', accountBalancesResponse);
+    }
+  }, [accountBalancesResponse]);
+
+  const { user } = useContext(UserContext);
+  const { gameId } = useContext(GameContext);
+
   const [profit, setProfit] = useState<{ [stockId: string]: IPortfolioProfit }>(
     {},
   );
@@ -85,12 +106,21 @@ const ContextProvider = ({
     [onUpdateProfit, onUpdateBalance],
   );
 
+  const onGetAccountBalances = useCallback(() => {
+    console.log(
+      'onGetAccountBalances',
+      getAccountBalancesRequest(gameId, user?.userEmail),
+    );
+    getAccountBalances(getAccountBalancesRequest(gameId, user?.userEmail));
+  }, [getAccountBalances, gameId, user]);
+
   return (
     <PortfolioContext.Provider
       value={{
         profit,
         balance,
         onPortfolioUpdate,
+        onGetAccountBalances,
       }}>
       {children}
     </PortfolioContext.Provider>
