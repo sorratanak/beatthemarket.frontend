@@ -15,7 +15,7 @@ interface Props extends ViewProps {
   children: ReactNode;
 }
 
-export function ContainerWithBurgerMenu({ children, ...props }: Props) {
+export function ContainerWithBurgerMenu({ children, style }: Props) {
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
 
   const navigation = useNavigation();
@@ -35,7 +35,7 @@ export function ContainerWithBurgerMenu({ children, ...props }: Props) {
   const isBurgerMenu = !isLargeScreen && !isDrawerOpen;
 
   return (
-    <View {...props}>
+    <View style={style}>
       {isBurgerMenu && (
         <TouchableOpacity
           onPress={() => {

@@ -1,7 +1,7 @@
 import React, { useContext, useCallback, useMemo } from 'react';
 import { Text, Image, View, Switch } from 'react-native';
 
-import { Container, TilesList } from '../../components';
+import { TilesList, ContainerWithBurgerMenu } from '../../components';
 import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
 import { ScreenProps } from './props';
@@ -33,7 +33,7 @@ export function Settings({ navigation }: ScreenProps) {
   }, [themeKey]);
 
   return (
-    <Container style={themedStyles.container}>
+    <ContainerWithBurgerMenu style={themedStyles.container}>
       <TilesList
         onTilePress={onNavigateTile}
         numColumns={1}
@@ -59,6 +59,6 @@ export function Settings({ navigation }: ScreenProps) {
         onValueChange={onSwitchTheme}
         value={isLightTheme}
       />
-    </Container>
+    </ContainerWithBurgerMenu>
   );
 }

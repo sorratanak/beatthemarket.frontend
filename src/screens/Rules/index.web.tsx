@@ -2,7 +2,11 @@ import React, { useContext, useMemo } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { CardElement } from '@stripe/react-stripe-js';
 
-import { Container, DefaultButton, RuleBlock } from '../../components';
+import {
+  DefaultButton,
+  RuleBlock,
+  ContainerWithBurgerMenu,
+} from '../../components';
 import { SUBSCRIPTION_TYPE } from '../../constants';
 import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
@@ -37,7 +41,7 @@ export function Rules() {
   const themedRules = useMemo(() => getThemedRules(theme), [theme]);
 
   return (
-    <Container style={themedStyles.container}>
+    <ContainerWithBurgerMenu style={themedStyles.container}>
       <FlatList
         data={themedRules}
         numColumns={2}
@@ -57,6 +61,6 @@ export function Rules() {
           Confirm order
         </DefaultButton>
       </View>
-    </Container>
+    </ContainerWithBurgerMenu>
   );
 }
