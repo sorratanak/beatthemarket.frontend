@@ -7,6 +7,7 @@ import { GameContext, ThemeContext } from '../../contexts';
 import gameGraphql from '../../graphql/game';
 import usersGraphql from '../../graphql/users';
 import { getThemedStyles } from './styles';
+import { START_GAME_LEVEL } from '../../constants';
 
 export function Home({ navigation }: ScreenProps) {
   const { onSetGameId, onSetStocks } = useContext(GameContext);
@@ -40,7 +41,7 @@ export function Home({ navigation }: ScreenProps) {
   }, [startGameResponse]);
 
   const onCreateGamePress = useCallback(() => {
-    createGame({ variables: { gameLevel: 1 } });
+    createGame({ variables: { gameLevel: START_GAME_LEVEL } });
   }, []);
 
   const { theme } = useContext(ThemeContext);

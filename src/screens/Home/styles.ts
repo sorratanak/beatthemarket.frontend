@@ -22,5 +22,6 @@ export const getThemedStyles = (theme: ITheme) =>
     profileInfoContainer: {},
     profileTitleContainer: {},
     profileTitle: {},
+    profileLvlContainer: {},
     profileLvl: {},
   });

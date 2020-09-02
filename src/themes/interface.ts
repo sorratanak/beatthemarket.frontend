@@ -12,11 +12,14 @@ interface IMenuTheme {
 }
 
 interface IHomeScreenTheme {
+  PRIMARY_BACKGROUND_COLOR?: string;
+  SECONDARY_BACKGROUND_COLOR?: string;
   PLAY_BUTTON_BACKGROUND_COLOR?: string;
   SCORE_LIST_ITEM_TEXT_COLOR?: string;
   SCORE_LIST_ITEM_RANK_COLOR?: string;
   SCORE_ROW_ITEM_BACKGROUND_COLOR?: string;
   SCORE_ROW_PERCENT_COLOR?: string;
+  PROFILE_LEVEL_BACKGROUND_COLOR?: string;
 }
 
 interface IGameScreenTheme {
