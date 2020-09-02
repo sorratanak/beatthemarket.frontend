@@ -30,8 +30,10 @@ interface ScoreLabelProps {
 function ScoreLabel({ title, value, themedStyles }: ScoreLabelProps) {
   return (
     <View style={themedStyles.scoreLabelContainer}>
-      <Text style={themedStyles.title}>{title}</Text>
-      <Text style={themedStyles.label}>{value}</Text>
+      <View style={themedStyles.valueContainer}>
+        <Text style={themedStyles.title}>{title}</Text>
+        <Text style={themedStyles.label}>{value}</Text>
+      </View>
     </View>
   );
 }

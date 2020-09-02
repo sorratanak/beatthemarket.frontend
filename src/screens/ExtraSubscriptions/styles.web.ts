@@ -9,5 +9,12 @@ export const getThemedStyles = (theme: ITheme) =>
       backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
       borderRadius: 7,
     },
+    description: {
+      marginTop: 24,
+    },
     contentContainer: {},
+    buttonContainer: {},
+    selectedContainer: {},
+    selectedValue: {},
+    selectedDescription: {},
   });

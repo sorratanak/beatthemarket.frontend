@@ -2,8 +2,20 @@ import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { ITheme } from '../themes/interface';
 import { IMAGES } from '../assets';
+import { LIGHT_THEME } from '../themes';
 
 export const withoutHeaderOptions = { headerShown: false };
+
+export const getThemedHeaderOptions = (theme: ITheme) => ({
+  headerStyle: {
+    backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
+    shadowRadius: 0,
+    shadowOffset: {
+      height: 0,
+    },
+  },
+  headerTintColor: theme.DEFAULT.TEXT_COLOR,
+});
 
 export const getThemedTabBarOptions = (theme: ITheme) => ({
   activeTintColor: theme.MENU.ACTIVE_LABEL_COLOR,
@@ -12,7 +24,8 @@ export const getThemedTabBarOptions = (theme: ITheme) => ({
     fontSize: 10,
   },
   style: {
-    backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
+    borderTopWidth: theme === LIGHT_THEME ? 1.5 : 0,
+    backgroundColor: theme.MENU.BACKGROUND_COLOR,
   },
 });
 

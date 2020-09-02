@@ -13,12 +13,14 @@ import { GameContext, ThemeContext, UserContext } from '../../contexts';
 import gameGraphql from '../../graphql/game';
 import usersGraphql from '../../graphql/users';
 import { getThemedStyles } from './styles';
+import { START_GAME_LEVEL } from '../../constants';
 
 export function Home({ navigation }: ScreenProps) {
   const { onSetGameId, onSetStocks } = useContext(GameContext);
   const {
     user: { userName },
   } = useContext(UserContext);
+
   /* Mutations */
   const [createGame, { data: createGameResponse }] = useMutation(
     gameGraphql.queries.CREATE_GAME,
@@ -48,14 +50,14 @@ export function Home({ navigation }: ScreenProps) {
   }, [startGameResponse]);
 
   const onCreateGamePress = useCallback(() => {
-    createGame({ variables: { gameLevel: 1 } });
+    createGame({ variables: { gameLevel: START_GAME_LEVEL } });
   }, []);
 
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   return (
-    <Container style={themedStyles.container}>
+    <View style={themedStyles.container}>
       <View style={themedStyles.headerContainer}>
         <View style={themedStyles.greetContainer}>
           <Text style={themedStyles.greetUserName}>Hello, {userName}</Text>
@@ -67,7 +69,9 @@ export function Home({ navigation }: ScreenProps) {
         <View style={themedStyles.profileInfoContainer}>
           <View style={themedStyles.profileTitleContainer}>
             <Text style={themedStyles.profileTitle}>Profile</Text>
-            <Text style={themedStyles.profileLvl}>Level 3</Text>
+            <View style={themedStyles.profileLvlContainer}>
+              <Text style={themedStyles.profileLvl}>Level 3</Text>
+            </View>
           </View>
           <ScoreRow percent="75%" deposit="$123.64" rate="+13.76%" />
         </View>
@@ -79,9 +83,9 @@ export function Home({ navigation }: ScreenProps) {
         style={{
           container: themedStyles.playButtonContainer,
         }}>
-        Play
+        Start
       </DefaultButton>
       {/* <Button testID="logout" title="Logout" onPress={logout} /> */}
-    </Container>
+    </View>
   );
 }

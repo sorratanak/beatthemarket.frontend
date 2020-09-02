@@ -4,22 +4,29 @@ import { ITheme } from '../../themes/interface';
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
-      paddingTop: 30,
       flexDirection: 'row',
-      width: '100%',
       paddingVertical: 20,
-      backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
+      backgroundColor: theme.HOME_SCREEN.SECONDARY_BACKGROUND_COLOR,
       borderRadius: 14,
+      marginRight: 140,
+      paddingHorizontal: 20,
     },
     scoreLabelContainer: {
       flex: 1,
       justifyContent: 'center',
     },
+    valueContainer: {
+      borderRadius: 7,
+      marginLeft: 20,
+      paddingHorizontal: 10,
+      paddingVertical: 8,
+      backgroundColor: theme.HOME_SCREEN.SCORE_ROW_ITEM_BACKGROUND_COLOR,
+    },
     title: {
       color: theme.DEFAULT.TEXT_COLOR,
       fontWeight: 'bold',
-      fontSize: 16,
-      textAlign: 'center',
+      fontSize: 18,
+      lineHeight: 22,
     },
     percentLabel: {
       fontSize: 16,
@@ -28,7 +35,7 @@ export const getThemedStyles = (theme: ITheme) =>
     },
     label: {
       color: theme.DEFAULT.TEXT_COLOR,
-      fontSize: 16,
-      textAlign: 'center',
+      fontSize: 15,
+      lineHeight: 18,
     },
   });

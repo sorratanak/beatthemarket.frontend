@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react';
-import { Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
-import { SettingsNestedScreenWrapper } from '../../components';
+import { SettingsNestedScreenWrapper, DefaultButton } from '../../components';
 import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
 import { IMAGES } from '../../assets';
@@ -15,7 +15,27 @@ export function ExtraSubscriptions() {
       imageSource={IMAGES.FIRE}
       contentContainerStyle={themedStyles.contentContainer}
       style={themedStyles.container}>
-      <Text />
+      <TouchableOpacity
+        onPress={() => {}}
+        style={themedStyles.selectedContainer}>
+        <Text style={themedStyles.selectedValue}>5$</Text>
+        <Text style={themedStyles.selectedDescription}>
+          Extra subscription buys margin trading
+        </Text>
+      </TouchableOpacity>
+      <Text style={themedStyles.description}>
+        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsumLorem
+        ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
+        ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
+        ipsumLorem ipsumLorem ipsumLorem ipsum
+      </Text>
+      <DefaultButton
+        onPress={() => {}}
+        style={{
+          container: themedStyles.buttonContainer,
+        }}>
+        Buy
+      </DefaultButton>
     </SettingsNestedScreenWrapper>
   );
 }

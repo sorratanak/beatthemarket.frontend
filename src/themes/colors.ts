@@ -3,6 +3,7 @@
 
 export const COLORS = {
   BLACK: '#000000',
+  CINDER: '#12131B',
   OUTER_SPACE: '#333B42',
   GRAY: '#7E7E7E',
   SCORPION: '#595959',

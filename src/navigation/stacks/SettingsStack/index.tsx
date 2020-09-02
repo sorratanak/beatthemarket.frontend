@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useCallback, useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
   Settings,
@@ -8,7 +8,11 @@ import {
   UserSettings,
   ExtraSubscriptions,
 } from '../../../screens';
-import { withoutHeaderOptions } from '../../routesOptions';
+import {
+  withoutHeaderOptions,
+  getThemedHeaderOptions,
+} from '../../routesOptions';
+import { ThemeContext } from '../../../contexts';
 
 export type StackParams = {
   Settings: undefined;
@@ -21,17 +25,52 @@ export type StackParams = {
 
 const Stack = createStackNavigator<StackParams>();
 
-export const SettingsStack = () => (
-  <Stack.Navigator>
-    <Stack.Screen
-      name="Settings"
-      component={Settings}
-      options={withoutHeaderOptions}
-    />
-    <Stack.Screen name="Subscriptions" component={Subscriptions} />
-    <Stack.Screen name="ExtraSubscriptions" component={ExtraSubscriptions} />
-    <Stack.Screen name="SoundEffects" component={SoundEffects} />
-    <Stack.Screen name="Music" component={Music} />
-    <Stack.Screen name="UserSettings" component={UserSettings} />
-  </Stack.Navigator>
-);
+export const SettingsStack = () => {
+  const { theme } = useContext(ThemeContext);
+  const themedHeaderOptions = useMemo(() => getThemedHeaderOptions(theme), [
+    theme,
+  ]);
+
+  const getThemedTitledHeaderOptions = useCallback(
+    (title?: string): any => ({
+      title,
+      ...themedHeaderOptions,
+    }),
+    [themedHeaderOptions],
+  );
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={withoutHeaderOptions}
+      />
+      <Stack.Screen
+        name="Subscriptions"
+        component={Subscriptions}
+        options={themedHeaderOptions}
+      />
+      <Stack.Screen
+        name="ExtraSubscriptions"
+        component={ExtraSubscriptions}
+        options={getThemedTitledHeaderOptions('Extra Subscriptions')}
+      />
+      <Stack.Screen
+        name="SoundEffects"
+        component={SoundEffects}
+        options={getThemedTitledHeaderOptions('Sound Effects')}
+      />
+      <Stack.Screen
+        name="Music"
+        component={Music}
+        options={themedHeaderOptions}
+      />
+      <Stack.Screen
+        name="UserSettings"
+        component={UserSettings}
+        options={getThemedTitledHeaderOptions('Profile')}
+      />
+    </Stack.Navigator>
+  );
+};
