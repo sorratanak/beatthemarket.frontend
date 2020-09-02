@@ -1,11 +1,17 @@
 import '../GestureHandler';
-import React, { ReactNode, useContext, useMemo } from 'react';
+import React, {
+  ReactNode,
+  useContext,
+  useMemo,
+  useEffect,
+  useState,
+} from 'react';
 import {
   Text,
-  View,
+  Dimensions,
   TouchableOpacity,
   Image,
-  useWindowDimensions,
+  ScaledSize,
 } from 'react-native';
 import {
   createDrawerNavigator,
@@ -17,6 +23,7 @@ import {
 import { getThemedStyles } from './styles.web';
 import { ThemeContext, GameContext } from '../../contexts';
 import { IMAGES } from '../../assets';
+import { WEB_SCREEN_WIDTH_POINT } from '../../constants';
 
 export const MainNavigator = createDrawerNavigator();
 
@@ -52,9 +59,19 @@ interface Props {
   children: ReactNode[];
 }
 export const MainNavigatorWrapper = ({ children }: Props) => {
-  const dimensions = useWindowDimensions();
+  const [dimensions, setDimensions] = useState(Dimensions.get('window'));
 
-  const isLargeScreen = dimensions.width > 1024;
+  useEffect(() => {
+    const onDimensionsChange = ({ window }: { window: ScaledSize }) => {
+      setDimensions(window);
+    };
+
+    Dimensions.addEventListener('change', onDimensionsChange);
+
+    return () => Dimensions.removeEventListener('change', onDimensionsChange);
+  }, []);
+
+  const isLargeScreen = dimensions.width >= WEB_SCREEN_WIDTH_POINT;
 
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
@@ -62,7 +79,6 @@ export const MainNavigatorWrapper = ({ children }: Props) => {
   return (
     <MainNavigator.Navigator
       drawerType={isLargeScreen ? 'permanent' : 'front'}
-      openByDefault
       drawerContent={(props: CustomDrawerContentProps) => (
         <CustomDrawerContent themedStyles={themedStyles} {...props} />
       )}
@@ -75,7 +91,7 @@ export const MainNavigatorWrapper = ({ children }: Props) => {
       }}
       drawerStyle={[
         themedStyles.container,
-        isLargeScreen ? null : { width: '20%' },
+        !isLargeScreen ? themedStyles.containerMiniScreen : null,
       ]}>
       {children}
     </MainNavigator.Navigator>

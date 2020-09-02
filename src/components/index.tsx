@@ -1,4 +1,5 @@
 export * from './Container';
+export * from './ContainerWithBurgerMenu';
 export * from './DefaultButton';
 export * from './DefaultInput';
 export * from './DefaultModal';

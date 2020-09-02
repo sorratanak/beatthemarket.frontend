@@ -7,7 +7,12 @@ export const getThemedStyles = (theme: ITheme) =>
     container: {
       backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
       borderRightWidth: undefined,
+      width: '20%',
+      zIndex: 20,
       ...COMMON_STYLES.SHADOW_BOX,
+    },
+    containerMiniScreen: {
+      width: 300,
     },
     flexContainer: {
       display: 'flex',

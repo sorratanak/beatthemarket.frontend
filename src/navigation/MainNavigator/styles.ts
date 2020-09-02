@@ -6,6 +6,7 @@ export const getThemedStyles = (theme: ITheme) =>
     container: {
       backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
     },
+    containerMiniScreen: {},
     flexContainer: {},
     pauseButtonContainer: {},
     pauseButtonImage: {},

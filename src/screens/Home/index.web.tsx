@@ -8,6 +8,7 @@ import {
   ScoreBoard,
   DefaultButton,
   ScoreRow,
+  ContainerWithBurgerMenu,
 } from '../../components';
 import { GameContext, ThemeContext, UserContext } from '../../contexts';
 import gameGraphql from '../../graphql/game';
@@ -57,7 +58,7 @@ export function Home({ navigation }: ScreenProps) {
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   return (
-    <View style={themedStyles.container}>
+    <ContainerWithBurgerMenu style={themedStyles.container}>
       <View style={themedStyles.headerContainer}>
         <View style={themedStyles.greetContainer}>
           <Text style={themedStyles.greetUserName}>Hello, {userName}</Text>
@@ -86,6 +87,6 @@ export function Home({ navigation }: ScreenProps) {
         Start
       </DefaultButton>
       {/* <Button testID="logout" title="Logout" onPress={logout} /> */}
-    </View>
+    </ContainerWithBurgerMenu>
   );
 }

@@ -13,6 +13,7 @@ import {
   DefaultModal,
   EndGameModal,
   GameSideBar,
+  ContainerWithBurgerMenu,
 } from '../../components';
 import { IPoint, IGameEventScore } from '../../types';
 import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
@@ -70,7 +71,7 @@ export function Game() {
   }, [gameId, activeStock, activeStock?.ticks?.length]);
 
   return (
-    <Container style={themedStyles.container}>
+    <ContainerWithBurgerMenu style={themedStyles.container}>
       <GameChartBoard chartData={data} />
       <GameSideBar />
       {gameId && (
@@ -101,6 +102,6 @@ export function Game() {
           }}
         />
       </DefaultModal>
-    </Container>
+    </ContainerWithBurgerMenu>
   );
 }
