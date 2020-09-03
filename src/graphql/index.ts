@@ -68,10 +68,12 @@ const splitLink = split(
 
 const authLink = setContext(async (_, { headers }) => {
   const token = await getFirebaseToken();
+  const deviceId = await getDeviceUniqueId();
 
   return {
     headers: {
       ...headers,
+      'client-id': deviceId,
       authorization: token ? `Bearer ${token}` : '',
     },
   };
