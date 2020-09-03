@@ -4,6 +4,7 @@ export * from './keys';
 
 export const USER_KEY = '_user';
 export const THEME_KEY = '_themeKey';
+export const DEVICE_ID_KEY = '_deviceId';
 
 export const MAX_GAME_LEVEL = 10;
 export const START_GAME_LEVEL = 1;
@@ -57,8 +58,6 @@ export const STATUS_BAR_STYLES: {
   DARK_CONTENT: 'dark-content',
   DEFAULT: 'default',
 };
-
-export const WEB_CLIENT_DEVICE_ID = 'web-client';
 
 export const DEVELOPMENT_SERVER_BASE_IP =
   'beatthemarket5-env.eba-42mjkwti.us-east-1.elasticbeanstalk.com';

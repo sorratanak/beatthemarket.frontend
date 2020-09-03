@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import randomString from 'random-string';
 import { auth as firebaseAuth } from '../firebase/helper';
-import { USER_KEY, THEME_KEY } from '../constants';
+import { USER_KEY, THEME_KEY, DEVICE_ID_KEY } from '../constants';
 import { IUser } from '../types';
 import { TThemeKey } from '../themes/interface';
 
@@ -41,4 +42,18 @@ export async function getFirebaseToken() {
   const firebaseToken = await firebaseAuth?.currentUser?.getIdToken();
 
   return firebaseToken;
+}
+
+/* ------ Device ID ------ */
+
+export function generateStorageDeviceId() {
+  AsyncStorage.setItem(DEVICE_ID_KEY, randomString({ length: 16 }));
+}
+
+export async function getDeviceIdFromStorage(): Promise<string> {
+  return AsyncStorage.getItem(DEVICE_ID_KEY);
+}
+
+export function removeDeviceIdFromStorage(): void {
+  AsyncStorage.removeItem(DEVICE_ID_KEY);
 }

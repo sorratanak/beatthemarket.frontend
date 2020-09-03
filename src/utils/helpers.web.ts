@@ -1,5 +1,5 @@
-import { WEB_CLIENT_DEVICE_ID } from '../constants';
+import { getDeviceIdFromStorage } from './storage';
 
 export async function getDeviceUniqueId() {
-  return WEB_CLIENT_DEVICE_ID;
+  return getDeviceIdFromStorage();
 }
