@@ -58,6 +58,8 @@ export const STATUS_BAR_STYLES: {
   DEFAULT: 'default',
 };
 
+export const WEB_CLIENT_DEVICE_ID = 'web-client';
+
 export const DEVELOPMENT_SERVER_BASE_IP =
   'beatthemarket5-env.eba-42mjkwti.us-east-1.elasticbeanstalk.com';
 

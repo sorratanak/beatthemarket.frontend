@@ -12,6 +12,7 @@ import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 
 import { getFirebaseToken } from '../utils/storage';
+import { getDeviceUniqueId } from '../utils/helpers';
 // import {
 //   DEVELOPMENT_SERVER_BASE_IP,
 //   DEVELOPMENT_SERVER_PORT,
@@ -44,8 +45,9 @@ const wsLink = new WebSocketLink({
     lazy: true,
     connectionParams: async () => {
       const token = await getFirebaseToken();
-      // TO DO send a device id -> client-id
+      const deviceId = await getDeviceUniqueId();
       return {
+        'cliend-id': deviceId,
         token: token ? `Bearer ${token}` : '',
       };
     },
