@@ -1,31 +1,37 @@
 import React, { useContext, useMemo } from 'react';
 import { View, Text } from 'react-native';
+import _ from 'lodash';
 
 import { getThemedStyles } from './styles';
-import { IScore } from '../../types';
-import { ThemeContext } from '../../contexts';
+import { ThemeContext, PortfolioContext } from '../../contexts';
 
-interface Props extends IScore {}
-
-export function ScoreRow({ percent, deposit, rate }: Props) {
+export function ScoreRow() {
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
+
+  const { balance } = useContext(PortfolioContext);
+
+  const summBalance = useMemo(() => {
+    return _.reduce(
+      Object.values(balance),
+      (summ, someBalance) => summ + someBalance.balance,
+      0,
+    );
+  }, [balance]);
 
   return (
     <View style={themedStyles.container}>
       <View style={themedStyles.percentContainer}>
-        <Text style={themedStyles.percentLabel}>{percent}</Text>
+        {/* <Text style={themedStyles.percentLabel}>{percent}</Text> */}
       </View>
-      <ScoreLabel
-        title="Cash + Stock"
-        value={deposit}
-        themedStyles={themedStyles}
-      />
-      <ScoreLabel
-        title="Profit Margin"
-        value={rate}
-        themedStyles={themedStyles}
-      />
+      {summBalance !== 0 && (
+        <ScoreLabel
+          title="Cash + Stock"
+          value={summBalance.toFixed(2)}
+          themedStyles={themedStyles}
+        />
+      )}
+      {/* <ScoreLabel title="Profit Margin" value={0} themedStyles={themedStyles} /> */}
     </View>
   );
 }

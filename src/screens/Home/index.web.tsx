@@ -74,7 +74,7 @@ export function Home({ navigation }: ScreenProps) {
               <Text style={themedStyles.profileLvl}>Level 3</Text>
             </View>
           </View>
-          <ScoreRow percent="75%" deposit="..." rate="+13.76%" />
+          <ScoreRow />
         </View>
       </View>
 
