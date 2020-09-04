@@ -1,10 +1,4 @@
-import React, {
-  useMemo,
-  useState,
-  useEffect,
-  useContext,
-  useCallback,
-} from 'react';
+import React, { useMemo, useState, useEffect, useContext } from 'react';
 import { Dimensions, Platform } from 'react-native';
 import _ from 'lodash';
 import pickRandom from 'pick-random';
@@ -110,7 +104,6 @@ export function LineChart({ data }: Props) {
         // TODO dynamic getData by zoom domain
         data={domainData}
         style={{ data: { stroke: chartColor } }}
-        interpolation="cardinal"
         // animate={ANIMATION_OPTIONS}
       />
       <VictoryScatter
