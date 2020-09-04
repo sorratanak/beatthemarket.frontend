@@ -6,8 +6,8 @@ import {
   setUserToStorage,
   removeUserFromStorage,
   getUserFromStorage,
-  removeDeviceIdFromStorage,
-  generateStorageDeviceId,
+  removeUuidFromStorage,
+  generateStorageUuid,
 } from '../utils/storage';
 import { SignUp, SignIn } from '../firebase/firebase';
 import { IUser } from '../types';
@@ -41,7 +41,7 @@ const ContextProvider = ({
   useEffect(() => {
     getUserFromStorage().then((user) => {
       if (user) {
-        generateStorageDeviceId();
+        generateStorageUuid();
         setLocalUser(user);
         getFirebaseToken().then((accessToken) => {
           setLocalToken(accessToken);
@@ -52,7 +52,7 @@ const ContextProvider = ({
 
   const logout = useCallback(() => {
     removeUserFromStorage();
-    removeDeviceIdFromStorage();
+    removeUuidFromStorage();
     // TODO reset navigation state
     setLocalUser(null);
     setLocalToken(null);
@@ -64,7 +64,7 @@ const ContextProvider = ({
         const { accessToken, user } = response;
 
         setUserToStorage(user);
-        generateStorageDeviceId();
+        generateStorageUuid();
         setLocalUser(user);
         setLocalToken(accessToken);
       }

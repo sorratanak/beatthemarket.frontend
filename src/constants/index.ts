@@ -4,7 +4,7 @@ export * from './keys';
 
 export const USER_KEY = '_user';
 export const THEME_KEY = '_themeKey';
-export const DEVICE_ID_KEY = '_deviceId';
+export const UUID_KEY = '_uuid';
 
 export const MAX_GAME_LEVEL = 10;
 export const START_GAME_LEVEL = 1;
