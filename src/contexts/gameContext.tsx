@@ -1,14 +1,16 @@
-import React, { useState, useCallback } from 'react';
-import { useMutation } from '@apollo/client';
+import React, { useState, useCallback, useContext } from 'react';
+import { useMutation, useLazyQuery } from '@apollo/client';
 import _ from 'lodash';
 
 import { IStock, IStockTick, IGameEvent, IGameEventScore } from '../types';
 import {
   getSellBuyStockRequest,
   getPauseResumeGameRequest,
+  getUserProfitLossRequest,
 } from '../utils/parsing';
 import gameGraphql from '../graphql/game';
 import { START_GAME_LEVEL } from '../constants';
+import { UserContext } from './userContext';
 
 interface ContextProps {
   wins: number;
@@ -18,6 +20,7 @@ interface ContextProps {
   gameEvents: IGameEvent;
   gameScore: IGameEventScore;
   isGamePaused: boolean;
+  userProfitLoss: any;
   onSetGameId: (gameId: string) => void;
   onSetStocks: (stocks: IStock[]) => void;
   onAddStockTicks: (ticks: IStockTick[]) => void;
@@ -29,6 +32,7 @@ interface ContextProps {
   setWins: (count: number) => void;
   onPauseGame: () => void;
   onResumeGame: () => void;
+  onGetUserProfitLoss: () => void;
 }
 
 const DEFAULT_GAME_CONTEXT: ContextProps = {
@@ -39,6 +43,7 @@ const DEFAULT_GAME_CONTEXT: ContextProps = {
   gameEvents: null,
   gameScore: null,
   isGamePaused: null,
+  userProfitLoss: null,
   onSetGameId: _.noop,
   onSetStocks: _.noop,
   onAddStockTicks: _.noop,
@@ -50,6 +55,7 @@ const DEFAULT_GAME_CONTEXT: ContextProps = {
   setWins: _.noop,
   onPauseGame: _.noop,
   onResumeGame: _.noop,
+  onGetUserProfitLoss: _.noop,
 };
 
 export const GameContext = React.createContext(DEFAULT_GAME_CONTEXT);
@@ -59,6 +65,8 @@ const ContextProvider = ({
 }: {
   children: React.ReactNode | React.ReactNode[];
 }) => {
+  const { user } = useContext(UserContext);
+
   /* ------ State ------ */
   const [gameId, setGameId] = useState<string>(null);
   const [activeStock, setActiveStock] = useState<IStock>(null);
@@ -68,7 +76,7 @@ const ContextProvider = ({
   const [wins, setWins] = useState<number>(START_GAME_LEVEL);
   const [isGamePaused, setIsGamePaused] = useState<boolean>(false);
 
-  /* ------ Mutations ------ */
+  /* ------ Queries ------ */
   const [buyStock, { data: buyStockResponse }] = useMutation(
     gameGraphql.queries.BUY_STOCK,
   );
@@ -81,6 +89,9 @@ const ContextProvider = ({
   );
   const [resumeGame, { data: resumeGameResponse }] = useMutation(
     gameGraphql.queries.RESUME_GAME,
+  );
+  const [getUserProfitLoss, { data: userProfitLossResponse }] = useLazyQuery(
+    gameGraphql.queries.GET_USER_PROFIT_LOSS,
   );
 
   /* ------ Callbacks ------ */
@@ -169,15 +180,29 @@ const ContextProvider = ({
     setIsGamePaused(false);
   }, [gameId, resumeGame]);
 
+  const onGetUserProfitLoss = useCallback(() => {
+    console.log(
+      'onGetUserProfitLoss',
+      getUserProfitLossRequest(gameId, user?.userEmail),
+    );
+    getUserProfitLoss(getUserProfitLossRequest(gameId, user?.userEmail));
+  }, [gameId, user, getUserProfitLoss]);
+
+  console.log('userProfitLossResponse', userProfitLossResponse);
+
   return (
     <GameContext.Provider
       value={{
+        // Data
         wins,
         gameId,
         stocks,
         activeStock,
         gameEvents,
         gameScore,
+        userProfitLoss: userProfitLossResponse?.userPersonalProfitLoss,
+
+        // Functions
         isGamePaused,
         onSetStocks,
         onSetActiveStock,
@@ -190,6 +215,7 @@ const ContextProvider = ({
         setWins,
         onPauseGame,
         onResumeGame,
+        onGetUserProfitLoss,
       }}>
       {children}
     </GameContext.Provider>

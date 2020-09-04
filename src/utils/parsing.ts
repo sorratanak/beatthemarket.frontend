@@ -5,6 +5,7 @@ import {
   IBuySellStockRequest,
   IPauseResumeGameRequest,
   IGetAccountBalancesRequest,
+  IGetUserProfitLossRequest,
 } from '../types';
 
 export function getStockChanges(prelastItem: IPoint, lastItem: IPoint) {
@@ -79,4 +80,18 @@ export function getPauseResumeGameRequest(gameId: string) {
 export function getLastAndPrelast(data: any[]) {
   const [prelast, last] = data.slice(-2);
   return !last ? [null, prelast] : [prelast, last];
+}
+
+export function getUserProfitLossRequest(
+  gameId: string,
+  email: string,
+): IGetUserProfitLossRequest {
+  const requestBody: IGetUserProfitLossRequest = {
+    variables: {
+      gameId,
+      email,
+    },
+  };
+
+  return requestBody;
 }

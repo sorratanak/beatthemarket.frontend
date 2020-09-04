@@ -93,6 +93,17 @@ const RESUME_GAME = gql`
   }
 `;
 
+const GET_USER_PROFIT_LOSS = gql`
+  query UserPersonalProfitLoss($email: String!, $gameId: String!) {
+    userPersonalProfitLoss(email: $email, gameId: $gameId) {
+      profitLoss
+      stockId
+      gameId
+      profitLossType
+    }
+  }
+`;
+
 const queries = {
   CREATE_GAME,
   START_GAME,
@@ -102,6 +113,7 @@ const queries = {
   SUBSCRIBE_GAME_EVENTS,
   PAUSE_GAME,
   RESUME_GAME,
+  GET_USER_PROFIT_LOSS,
 };
 
 export default { queries };

@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, useEffect } from 'react';
 import { View, Text, Image, FlatList } from 'react-native';
 import { useQuery } from '@apollo/client';
 import _ from 'lodash';
@@ -9,7 +9,6 @@ import { IMAGES } from '../../assets';
 import usersGraphql from '../../graphql/users';
 import { ScoreBoard } from '../ScoreBoard';
 import { DefaultButton } from '../DefaultButton';
-import { PROFITS } from './dummyData';
 import { ACCOUNT_BALANCE_TYPE } from '../../constants';
 
 const HEADER_TYPES = {
@@ -20,13 +19,19 @@ const HEADER_TYPES = {
 interface Props {
   headerType: 'lose' | 'win';
   onFinishPress: () => void;
+  isVisible: boolean;
 }
 
-export function EndGameModal({ headerType, onFinishPress }: Props) {
+export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
-  const { gameEvents } = useContext(GameContext);
+  const {
+    stocks,
+    gameEvents,
+    onGetUserProfitLoss,
+    userProfitLoss,
+  } = useContext(GameContext);
   const { balance } = useContext(PortfolioContext);
 
   const activeBalance = useMemo(
@@ -43,6 +48,12 @@ export function EndGameModal({ headerType, onFinishPress }: Props) {
   const { data: users, loading: usersLoading, error: usersError } = useQuery(
     usersGraphql.queries.GET_USERS,
   );
+
+  useEffect(() => {
+    if (isVisible) {
+      onGetUserProfitLoss();
+    }
+  }, [isVisible]);
 
   const [leftImageSource, title, rightImageSource] = useMemo(() => {
     switch (headerType) {
@@ -89,9 +100,11 @@ export function EndGameModal({ headerType, onFinishPress }: Props) {
             <View style={themedStyles.profitsContainer}>
               <Text style={themedStyles.profitsTitle}>Profits:</Text>
               <FlatList
-                data={PROFITS}
+                data={userProfitLoss}
                 renderItem={({ item }) => (
-                  <Text style={themedStyles.profitItem}>{`- ${item}`}</Text>
+                  <Text style={themedStyles.profitItem}>{`- ${
+                    _.find(stocks, (stock) => stock.id === item.stockId)?.name
+                  }: (${item.profitLoss?.toFixed(2)})`}</Text>
                 )}
                 keyExtractor={(item) => `end-game-profit-${item}`}
               />

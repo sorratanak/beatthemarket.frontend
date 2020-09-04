@@ -95,6 +95,7 @@ export function Game() {
 
       <DefaultModal isVisible={isEndGameModalVisible}>
         <EndGameModal
+          isVisible={isEndGameModalVisible}
           headerType={endGameModalType}
           onFinishPress={() => {
             setIsEndGameModalVisible(false);

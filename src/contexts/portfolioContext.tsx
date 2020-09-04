@@ -107,10 +107,6 @@ const ContextProvider = ({
   );
 
   const onGetAccountBalances = useCallback(() => {
-    console.log(
-      'onGetAccountBalances',
-      getAccountBalancesRequest(gameId, user?.userEmail),
-    );
     getAccountBalances(getAccountBalancesRequest(gameId, user?.userEmail));
   }, [getAccountBalances, gameId, user]);
 

@@ -6,7 +6,7 @@ export const USER_KEY = '_user';
 export const THEME_KEY = '_themeKey';
 export const UUID_KEY = '_uuid';
 
-export const MAX_GAME_LEVEL = 10;
+export const MAX_GAME_LEVEL = 1;
 export const START_GAME_LEVEL = 1;
 export const LEVEL_WIN_STEP = 1;
 

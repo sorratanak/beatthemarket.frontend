@@ -123,4 +123,7 @@ export interface IPauseResumeGameRequest
 export interface IGetAccountBalancesRequest
   extends IGraphqlVariableRequest<{ gameId: string; email: string }> {}
 
+export interface IGetUserProfitLossRequest
+  extends IGraphqlVariableRequest<{ gameId: string; email: string }> {}
+
 /* ---------------------- */
