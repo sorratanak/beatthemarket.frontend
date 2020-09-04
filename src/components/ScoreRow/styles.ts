@@ -21,6 +21,9 @@ export const getThemedStyles = (theme: ITheme) =>
       fontSize: 16,
       textAlign: 'center',
     },
+    percentContainer: {
+      justifyContent: 'center',
+    },
     percentLabel: {
       fontSize: 16,
       textAlign: 'center',

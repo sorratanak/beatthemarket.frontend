@@ -13,11 +13,19 @@ export function ScoreRow({ percent, deposit, rate }: Props) {
 
   return (
     <View style={themedStyles.container}>
-      <View style={themedStyles.scoreLabelContainer}>
+      <View style={themedStyles.percentContainer}>
         <Text style={themedStyles.percentLabel}>{percent}</Text>
       </View>
-      <ScoreLabel title="Deposit" value={deposit} themedStyles={themedStyles} />
-      <ScoreLabel title="Rate" value={rate} themedStyles={themedStyles} />
+      <ScoreLabel
+        title="Cash + Stock"
+        value={deposit}
+        themedStyles={themedStyles}
+      />
+      <ScoreLabel
+        title="Profit Margin"
+        value={rate}
+        themedStyles={themedStyles}
+      />
     </View>
   );
 }

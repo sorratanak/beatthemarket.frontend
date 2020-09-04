@@ -53,6 +53,10 @@ function ExpandedStockListItem({
         <Text style={themedStyles.listItemTitle}>{item.symbol}</Text>
         {!!stockChange?.difference && (
           <View style={themedStyles.hugeFlexContainer}>
+            <Text>
+              {stockChange.currentValue?.toFixed(2)}
+              {'  '}
+            </Text>
             <View
               style={[
                 themedStyles.listItemStockChangeContainer,
@@ -86,9 +90,6 @@ function ExpandedStockListItem({
             {stockChange.difference > 0 ? 'In height' : 'In decline'}
           </Text>
         )}
-        <Text style={themedStyles.stockInfoText}>
-          Lorem ipsum dolor sit amet
-        </Text>
       </View>
     </TouchableOpacity>
   );

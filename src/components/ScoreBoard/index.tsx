@@ -57,7 +57,7 @@ export function ScoreBoard({
   return (
     <View style={[themedStyles.container, propsStyle]}>
       {isTabsVisible && renderTabs()}
-      <MyScore users={users} percent="75%" deposit="$133.55" rate="+13.76%" />
+      <MyScore users={users} percent="75%" deposit="..." rate="+13.76%" />
     </View>
   );
 }

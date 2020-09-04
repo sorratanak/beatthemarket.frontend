@@ -5,7 +5,7 @@ import React, {
   useState,
   useCallback,
 } from 'react';
-import { View, Text, ViewStyle, TextStyle, FlatList } from 'react-native';
+import { View, Text, ViewStyle, TextStyle } from 'react-native';
 import moment from 'moment';
 import _ from 'lodash';
 
@@ -17,7 +17,6 @@ import {
 } from '../../contexts';
 import { getThemedStyles } from './styles';
 import { GameTimer } from '../GameTimer';
-import { userInfo, userScore, statistics } from './dummy';
 import { ExpandedStockList } from '../ExpandedStockList';
 import { IStock } from '../../types';
 import { ACCOUNT_BALANCE_TYPE } from '../../constants';
@@ -102,21 +101,6 @@ export function GameSideBar({ style: propStyle = {} }: Props) {
         </View>
         <View style={themedStyles.timerContainer}>
           {timeRemaining !== EMPTY_TIMER && <GameTimer time={timeRemaining} />}
-        </View>
-        <View style={themedStyles.statisticContainer}>
-          <FlatList
-            data={statistics}
-            renderItem={({ item }) => (
-              <View style={themedStyles.statisticItemContainer}>
-                <Text style={themedStyles.statisticItemText}>{item.name}</Text>
-                <Text style={themedStyles.statisticItemText}>{item.value}</Text>
-              </View>
-            )}
-            keyExtractor={(item, index) =>
-              `statistic-item-${item.name}-${index}`
-            }
-            extraData={themedStyles}
-          />
         </View>
       </View>
       <View style={themedStyles.expandedStockListContainer}>
