@@ -47,6 +47,7 @@ export function StockList({ data, activeStock, onItemPress }: Props) {
       horizontal
       showsHorizontalScrollIndicator={false}
       data={data}
+      extraData={activeStock}
       renderItem={({ item }) => (
         <StockListItem
           item={item}

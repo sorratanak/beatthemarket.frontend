@@ -113,6 +113,7 @@ export function ExpandedStockList({ data, activeStock, onItemPress }: Props) {
     <FlatList
       showsVerticalScrollIndicator={false}
       data={data}
+      extraData={activeStock}
       renderItem={({ item }) => (
         <ExpandedStockListItem
           item={item}
