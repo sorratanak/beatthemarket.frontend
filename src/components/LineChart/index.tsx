@@ -23,7 +23,7 @@ import { GameContext, ThemeContext } from '../../contexts';
 // TODO dynamic CHART_HEIGHT & CHART_WIDTH
 
 const HEIGHT_COEF = Platform.OS === 'web' ? 0.75 : 0.5;
-const WIDTH_COEF = Platform.OS === 'web' ? 0.75 : 1;
+const WIDTH_COEF = Platform.OS === 'web' ? 0.7 : 1;
 
 const WINDOW = Dimensions.get('window');
 const CHART_HEIGHT = WINDOW.height * HEIGHT_COEF;
