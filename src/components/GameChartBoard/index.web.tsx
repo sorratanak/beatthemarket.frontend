@@ -17,6 +17,7 @@ import { getStockChanges } from '../../utils/parsing';
 import { StockList } from '../StockList';
 import { COLORS } from '../../themes/colors';
 import { STOCK_CHANGE_TYPE, ACCOUNT_BALANCE_TYPE } from '../../constants';
+import { getMoneyFormat } from '../../utils';
 
 interface ChartHeaderProps {
   themedStyles: any;
@@ -67,8 +68,7 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
       {stockChange && (
         <View style={themedStyles.chartHeaderSubcontainer}>
           <Text style={themedStyles.chartHeaderStockProfitLoss}>
-            {stockChange.currentValue && `$ `}
-            {stockChange.currentValue?.toFixed(2)}
+            {getMoneyFormat(stockChange.currentValue || 0)}
           </Text>
           <Text
             style={
@@ -83,10 +83,10 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
       )}
       <View style={themedStyles.userBalanceContainer}>
         <Text style={themedStyles.chartHeaderStockProfitLoss}>
-          $ {activeProfit?.profitLoss?.toFixed(2) || 0}
+          {getMoneyFormat(activeProfit?.profitLoss || 0)}
         </Text>
         <Text style={themedStyles.chartHeaderCashBalance}>
-          $ {activeBalance?.balance?.toFixed(2) || 0}
+          {getMoneyFormat(activeBalance?.balance || 0)}
         </Text>
       </View>
     </View>

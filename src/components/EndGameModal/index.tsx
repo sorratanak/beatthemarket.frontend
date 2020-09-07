@@ -15,6 +15,7 @@ import { IMAGES } from '../../assets';
 // import { ScoreBoard } from '../ScoreBoard';
 import { DefaultButton } from '../DefaultButton';
 import { ACCOUNT_BALANCE_TYPE } from '../../constants';
+import { getMoneyFormat } from '../../utils';
 
 const HEADER_TYPES = {
   LOSE: 'lose',
@@ -101,7 +102,7 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
 
       <View style={themedStyles.footerContainer}>
         <Text style={themedStyles.balanceText}>
-          Balance: {activeBalance?.balance?.toFixed(2)}
+          Balance: {getMoneyFormat(activeBalance?.balance)}
         </Text>
         <DefaultButton
           onPress={onFinishPress}

@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import { getThemedStyles } from './styles';
 import { ThemeContext, PortfolioContext } from '../../contexts';
+import { getMoneyFormat } from '../../utils';
 
 export function ScoreRow() {
   const { theme } = useContext(ThemeContext);
@@ -27,7 +28,7 @@ export function ScoreRow() {
       {summBalance !== 0 && (
         <ScoreLabel
           title="Cash + Stock"
-          value={summBalance.toFixed(2)}
+          value={getMoneyFormat(summBalance)}
           themedStyles={themedStyles}
         />
       )}

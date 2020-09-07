@@ -29,6 +29,7 @@
     "@stripe/react-stripe-js": "^1.1.2",
     "@stripe/stripe-js": "^1.9.0",
     "@types/lodash": "^4.14.158",
+    "currency-formatter": "^1.5.6",
     "firebase": "^7.17.1",
     "graphql": "^15.3.0",
     "lodash": "^4.17.19",

@@ -20,6 +20,7 @@ import { GameTimer } from '../GameTimer';
 import { ExpandedStockList } from '../ExpandedStockList';
 import { IStock } from '../../types';
 import { ACCOUNT_BALANCE_TYPE } from '../../constants';
+import { getMoneyFormat } from '../../utils';
 
 interface Props {
   style?: {
@@ -87,7 +88,7 @@ export function GameSideBar({ style: propStyle = {} }: Props) {
 
           <View style={themedStyles.scoreContainer}>
             <Text style={themedStyles.totalScore}>
-              $ {activeBalance?.balance?.toFixed(2)}
+              {getMoneyFormat(activeBalance?.balance || 0)}
             </Text>
             <Text
               style={
@@ -95,7 +96,7 @@ export function GameSideBar({ style: propStyle = {} }: Props) {
                   ? themedStyles.scorePlus
                   : themedStyles.scoreMinus
               }>
-              {activeProfit?.profitLoss?.toFixed(2)}
+              {getMoneyFormat(activeProfit?.profitLoss || 0)}
             </Text>
           </View>
         </View>
