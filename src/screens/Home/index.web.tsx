@@ -4,7 +4,6 @@ import { View, Text } from 'react-native';
 
 import { ScreenProps } from './props';
 import {
-  Container,
   ScoreBoard,
   DefaultButton,
   ScoreRow,

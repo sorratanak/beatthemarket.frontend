@@ -188,8 +188,6 @@ const ContextProvider = ({
     getUserProfitLoss(getUserProfitLossRequest(gameId, user?.userEmail));
   }, [gameId, user, getUserProfitLoss]);
 
-  console.log('userProfitLossResponse', userProfitLossResponse);
-
   return (
     <GameContext.Provider
       value={{

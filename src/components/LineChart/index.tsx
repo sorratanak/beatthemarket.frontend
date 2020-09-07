@@ -17,6 +17,8 @@ import {
   getThemedAxises,
   LINE_ANIMATION_OPTIONS,
   CONTAINER_ANIMATION_OPTIONS,
+  SHAPES_ANIMATION_CONFIG,
+  getShapesData,
 } from './config';
 import { GameContext, ThemeContext } from '../../contexts';
 
@@ -43,12 +45,8 @@ export function LineChart({ data }: Props) {
   const themedAxises = getThemedAxises(theme);
 
   const [domainData, setDomainData] = useState([]);
-
-  useEffect(() => {
-    const itemsToSlice = MAX_VISIBLE_POINTS + (data.length % MAX_CHART_SIZE);
-
-    setDomainData(data.slice(-itemsToSlice));
-  }, [data]);
+  // TODO optimize or remove
+  const [shapesData, setShapesData] = useState([]);
 
   const [currentYDomainMin, currentYDomainMax] = useMemo(() => {
     return [
@@ -79,6 +77,28 @@ export function LineChart({ data }: Props) {
       ])[0],
     );
   }, [activeStock, setChartColor]);
+
+  useEffect(() => {
+    const itemsToSlice = MAX_VISIBLE_POINTS + (data.length % MAX_CHART_SIZE);
+
+    const newDomainData = data.slice(-itemsToSlice);
+
+    setDomainData(newDomainData);
+    // TODO !! optimize or remove
+    setShapesData(
+      getShapesData({
+        x:
+          currentXDomainMin && currentXDomainMax
+            ? [currentXDomainMin, currentXDomainMax]
+            : [0, 10],
+        y:
+          currentYDomainMin && currentYDomainMax
+            ? [currentYDomainMin, currentYDomainMax]
+            : [0, 100],
+      }),
+    );
+    // --------
+  }, [data]);
 
   return (
     <VictoryChart
@@ -122,6 +142,17 @@ export function LineChart({ data }: Props) {
         style={{ data: { fill: chartColor } }}
         size={3}
         animate={LINE_ANIMATION_OPTIONS}
+      />
+      {/* TODO optimize or remove */}
+      <VictoryScatter
+        data={shapesData}
+        animate={SHAPES_ANIMATION_CONFIG}
+        style={{
+          data: {
+            fill: ({ datum }) => datum.fill,
+            opacity: ({ datum }) => datum.opacity,
+          },
+        }}
       />
     </VictoryChart>
   );
