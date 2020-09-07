@@ -1,7 +1,11 @@
 import { Platform } from 'react-native';
 import { ITheme } from '../../themes/interface';
 
-export const ANIMATION_OPTIONS = {
+export const CONTAINER_ANIMATION_OPTIONS = {
+  duration: 200,
+};
+
+export const LINE_ANIMATION_OPTIONS = {
   duration: 500,
   onLoad: {
     duration: 500,

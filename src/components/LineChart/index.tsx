@@ -13,7 +13,11 @@ import {
 } from './helper';
 import { COLORS } from '../../themes/colors';
 import { IPoint } from '../../types';
-import { ANIMATION_OPTIONS, getThemedAxises } from './config';
+import {
+  getThemedAxises,
+  LINE_ANIMATION_OPTIONS,
+  CONTAINER_ANIMATION_OPTIONS,
+} from './config';
 import { GameContext, ThemeContext } from '../../contexts';
 
 // TODO dynamic CHART_HEIGHT & CHART_WIDTH
@@ -25,7 +29,9 @@ const WINDOW = Dimensions.get('window');
 const CHART_HEIGHT = WINDOW.height * HEIGHT_COEF;
 const CHART_WIDTH = WINDOW.width * WIDTH_COEF;
 
-const MAX_POINTS_NUMBER = 8;
+const MAX_VISIBLE_POINTS = 8;
+const Y_VALUE_PADDING = 0.5;
+const MAX_CHART_SIZE = 150;
 
 interface Props {
   data: IPoint[];
@@ -36,21 +42,25 @@ export function LineChart({ data }: Props) {
 
   const themedAxises = getThemedAxises(theme);
 
-  const domainData = useMemo(() => {
-    return data.slice(-10);
+  const [domainData, setDomainData] = useState([]);
+
+  useEffect(() => {
+    const itemsToSlice = MAX_VISIBLE_POINTS + (data.length % MAX_CHART_SIZE);
+
+    setDomainData(data.slice(-itemsToSlice));
   }, [data]);
 
   const [currentYDomainMin, currentYDomainMax] = useMemo(() => {
     return [
-      _.minBy(domainData, (el) => el.y)?.y - 0.5,
-      _.maxBy(domainData, (el) => el.y)?.y + 0.5,
+      _.minBy(domainData, (el) => el.y)?.y - Y_VALUE_PADDING,
+      _.maxBy(domainData, (el) => el.y)?.y + Y_VALUE_PADDING,
     ];
   }, [domainData]);
 
   const [currentXDomainMin, currentXDomainMax] = useMemo(() => {
     return [
-      domainData.length > MAX_POINTS_NUMBER
-        ? domainData.length - MAX_POINTS_NUMBER
+      domainData.length > MAX_VISIBLE_POINTS
+        ? domainData.length - MAX_VISIBLE_POINTS
         : 1,
       domainData.length + 1,
     ];
@@ -75,12 +85,14 @@ export function LineChart({ data }: Props) {
       // TODO add dynamic chart width/height
       width={CHART_WIDTH}
       height={CHART_HEIGHT}
+      animate={CONTAINER_ANIMATION_OPTIONS}
       style={chartStyle}
       containerComponent={
         <VictoryZoomContainer
           allowPan={false}
           allowZoom={false}
           ouiaSafe
+          zoomDimension="x"
           zoomDomain={{
             x:
               currentXDomainMin && currentXDomainMax
@@ -101,16 +113,15 @@ export function LineChart({ data }: Props) {
       />
       <VictoryAxis standalone={false} style={themedAxises.container} />
       <VictoryLine
-        // TODO dynamic getData by zoom domain
         data={domainData}
         style={{ data: { stroke: chartColor } }}
-        // animate={ANIMATION_OPTIONS}
+        animate={LINE_ANIMATION_OPTIONS}
       />
       <VictoryScatter
         data={domainData}
         style={{ data: { fill: chartColor } }}
         size={3}
-        // animate={ANIMATION_OPTIONS}
+        animate={LINE_ANIMATION_OPTIONS}
       />
     </VictoryChart>
   );
