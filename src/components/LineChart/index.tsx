@@ -24,7 +24,7 @@ import { GameContext, ThemeContext } from '../../contexts';
 
 // TODO dynamic CHART_HEIGHT & CHART_WIDTH
 
-const HEIGHT_COEF = Platform.OS === 'web' ? 0.75 : 0.5;
+const HEIGHT_COEF = Platform.OS === 'web' ? 0.75 : 0.4;
 const WIDTH_COEF = Platform.OS === 'web' ? 0.7 : 1;
 
 const WINDOW = Dimensions.get('window');
@@ -33,7 +33,7 @@ const CHART_WIDTH = WINDOW.width * WIDTH_COEF;
 
 const MAX_VISIBLE_POINTS = 8;
 const Y_VALUE_PADDING = 0.5;
-const MAX_CHART_SIZE = 150;
+const MAX_CHART_SIZE = 100;
 
 interface Props {
   data: IPoint[];
