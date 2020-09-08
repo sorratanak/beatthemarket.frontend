@@ -35,7 +35,6 @@ export const getThemedStyles = (theme: ITheme) =>
     },
     logoutContainer: {
       width: '100%',
-      marginVertical: -3,
       alignItems: 'center',
     },
     logout: {
