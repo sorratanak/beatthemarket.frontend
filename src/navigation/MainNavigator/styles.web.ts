@@ -33,6 +33,16 @@ export const getThemedStyles = (theme: ITheme) =>
     itemLabel: {
       fontSize: 20,
     },
+    logoutContainer: {
+      width: '100%',
+      marginVertical: -3,
+      alignItems: 'center',
+    },
+    logout: {
+      fontSize: 20,
+      textAlign: 'center',
+      color: theme.DEFAULT.TEXT_COLOR,
+    },
     pauseButtonContainer: {
       marginTop: '100%',
       margin: 'auto',

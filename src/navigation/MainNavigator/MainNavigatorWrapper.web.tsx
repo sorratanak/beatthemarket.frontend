@@ -18,10 +18,11 @@ import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
   DrawerItemList,
+  DrawerItem,
 } from '@react-navigation/drawer';
 
 import { getThemedStyles } from './styles.web';
-import { ThemeContext, GameContext } from '../../contexts';
+import { ThemeContext, GameContext, UserContext } from '../../contexts';
 import { IMAGES } from '../../assets';
 import { WEB_SCREEN_WIDTH_POINT } from '../../constants';
 
@@ -31,6 +32,7 @@ interface CustomDrawerContentProps extends DrawerContentComponentProps {
   themedStyles: any;
 }
 function CustomDrawerContent(props: CustomDrawerContentProps) {
+  const { logout } = useContext(UserContext);
   const { themedStyles } = props;
 
   const { gameId, isGamePaused, onPauseGame, onResumeGame } = useContext(
@@ -41,6 +43,12 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
     <DrawerContentScrollView {...props}>
       <Text style={themedStyles.title}>Beat the Market</Text>
       <DrawerItemList {...props} />
+      <DrawerItem
+        label="Logout"
+        onPress={logout}
+        style={themedStyles.logoutContainer}
+        labelStyle={themedStyles.logout}
+      />
       {gameId && (
         <TouchableOpacity
           onPress={isGamePaused ? onResumeGame : onPauseGame}
