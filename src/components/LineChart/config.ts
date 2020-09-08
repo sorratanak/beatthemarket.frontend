@@ -50,13 +50,12 @@ export const getShapesData = (domain: { x: number[]; y: number[] }) => {
     'plus',
   ];
 
-  return _.times(15, _.constant(null)).map((index) => {
-    const scaledIndex = Math.floor(index % 7);
+  return _.times(15, _.constant(null)).map(() => {
     return {
       x: random.float(domain.x[0] || 0, domain.x[1] + 1 || 10),
       y: random.float(domain.y[0] || 0, domain.y[1] + 1 || 10),
       size: random.int(0, 8) + 3,
-      symbol: symbols[scaledIndex],
+      symbol: symbols[random.int(0, 6)],
       fill: colors[random.int(0, 6)],
       opacity: 0.3,
     };
