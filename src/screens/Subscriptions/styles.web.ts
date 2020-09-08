@@ -26,4 +26,10 @@ export const getThemedStyles = (theme: ITheme) =>
       backgroundColor: theme.SETTINGS_SCREEN.BUY_BUTTON_COLOR,
       width: 260,
     },
+    buyModalContainer: {
+      flex: 1,
+      backgroundColor: theme.DEFAULT.BACKDROP_BACKGROUND_COLOR,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   });

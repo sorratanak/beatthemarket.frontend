@@ -6,6 +6,7 @@ interface Props {
   isVisible: boolean;
   children: React.ReactNode;
   onBackdropPress?: () => void;
+  isBackdrop?: boolean;
   style?: ViewStyle;
 }
 

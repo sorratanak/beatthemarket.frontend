@@ -2,6 +2,7 @@ interface IDefaultTheme {
   PRIMARY_BACKGROUND_COLOR?: string;
   SECONDARY_BACKGROUND_COLOR?: string;
   TEXT_COLOR?: string;
+  BACKDROP_BACKGROUND_COLOR?: string;
 }
 
 interface IMenuTheme {

@@ -5,7 +5,7 @@ import {
   SubscriptionsList,
   DefaultButton,
   DefaultModal,
-  EndGameModal,
+  BuySubscriptionModal,
 } from '../../components';
 import { getThemedStyles } from './styles';
 import { ThemeContext, IapContext } from '../../contexts';
@@ -47,6 +47,14 @@ export function Subscriptions() {
         }}>
         Buy
       </DefaultButton>
+
+      <DefaultModal
+        style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        isVisible={isModalVisible}
+        isBackdrop
+        onBackdropPress={onCloseModal}>
+        <BuySubscriptionModal />
+      </DefaultModal>
     </SettingsNestedScreenWrapper>
   );
 }

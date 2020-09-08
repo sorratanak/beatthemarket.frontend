@@ -1,3 +1,4 @@
+export * from './BuySubscriptionModal';
 export * from './Container';
 export * from './ContainerWithBurgerMenu';
 export * from './DefaultButton';

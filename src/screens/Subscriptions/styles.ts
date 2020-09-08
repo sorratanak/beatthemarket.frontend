@@ -23,4 +23,5 @@ export const getThemedStyles = (theme: ITheme) =>
     modalContainer: {
       backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
     },
+    buyModalContainer: {},
   });
