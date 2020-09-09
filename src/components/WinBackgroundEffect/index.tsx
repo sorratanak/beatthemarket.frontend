@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { Animated } from 'react-native';
+import { Animated, Platform } from 'react-native';
 import { styles } from './styles';
 import { GameContext } from '../../contexts';
 
@@ -15,12 +15,12 @@ export function WinBackgroundEffect() {
       Animated.timing(backgroundAnim, {
         toValue: 1,
         duration: TICK_TIME,
-        useNativeDriver: true,
+        useNativeDriver: Platform.OS === 'web',
       }).start(() => {
         Animated.timing(backgroundAnim, {
           toValue: 0,
           duration: TICK_TIME,
-          useNativeDriver: true,
+          useNativeDriver: Platform.OS === 'web',
         }).start();
       });
     }

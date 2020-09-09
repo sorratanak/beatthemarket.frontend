@@ -58,7 +58,7 @@ export const getThemedStyles = (theme: ITheme) =>
       flexWrap: 'wrap',
       justifyContent: 'center',
       paddingHorizontal: 24,
-      marginBottom: 32,
+      marginVertical: 32,
     },
 
     googleIcon: {},
@@ -66,13 +66,16 @@ export const getThemedStyles = (theme: ITheme) =>
       backgroundColor: theme.SIGNIN_SCREEN.GOOGLE_ICON_CONTAINER_COLOR,
     },
     appleIcon: {},
-    appleIconContainer: {},
+    appleIconContainer: {
+      backgroundColor: theme.SIGNIN_SCREEN.APPLE_ICON_CONTAINER_COLOR,
+    },
     facebookIcon: {},
     facebookIconContainer: {
       backgroundColor: theme.SIGNIN_SCREEN.FACEBOOK_ICON_CONTAINER_COLOR,
     },
     microsoftIcon: {},
-    microsoftIconContainer: {},
-
+    microsoftIconContainer: {
+      backgroundColor: theme.SIGNIN_SCREEN.MICROSOFT_ICON_CONTAINER_COLOR,
+    },
     inputContainer: {},
   });
