@@ -17,6 +17,7 @@ export * from './ScoreBoard';
 export * from './ScoreList';
 export * from './ScoreRow';
 export * from './SettingsNestedScreenWrapper';
+export * from './SocialButton';
 export * from './StockList';
 export * from './SubscriptionsList';
 export * from './SwitchRow';

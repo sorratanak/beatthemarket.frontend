@@ -4,7 +4,12 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 
 import { StackParams } from '../../navigation/stacks/AuthStack';
-import { Container, DefaultInput, DefaultButton } from '../../components';
+import {
+  Container,
+  DefaultInput,
+  DefaultButton,
+  SocialButton,
+} from '../../components';
 import { ThemeContext, UserContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 import { IMAGES } from '../../assets';
@@ -24,17 +29,53 @@ export function SignIn() {
   return (
     <Container style={themedStyles.signinContainer}>
       <View style={themedStyles.signinSubcontainer}>
+        <View style={themedStyles.socialMediaContainer}>
+          <SocialButton
+            onPress={signInWithGoogle}
+            imageSource={IMAGES.GOOGLE}
+            style={{
+              container: themedStyles.googleIconContainer,
+              image: themedStyles.googleIcon,
+            }}
+          />
+          <SocialButton
+            onPress={() => {}}
+            imageSource={IMAGES.FACEBOOK}
+            style={{
+              container: themedStyles.facebookIconContainer,
+              image: themedStyles.facebookIcon,
+            }}
+          />
+          <SocialButton
+            onPress={() => {}}
+            imageSource={IMAGES.APPLE}
+            style={{
+              container: themedStyles.appleIconContainer,
+              image: themedStyles.appleIcon,
+            }}
+          />
+          <SocialButton
+            onPress={() => {}}
+            imageSource={IMAGES.MICROSOFT}
+            style={{
+              container: themedStyles.microsoftIconContainer,
+              image: themedStyles.microsoftIcon,
+            }}
+          />
+        </View>
         <View style={themedStyles.signinInputContainer}>
           <DefaultInput
             placeholder="Name"
             value={name}
             onChangeText={setName}
+            style={themedStyles.inputContainer}
           />
           <DefaultInput
             placeholder="Password"
             value={password}
             onChangeText={setPassword}
             secureTextEntry
+            style={themedStyles.inputContainer}
           />
           <View style={themedStyles.forgotPasswordContainer}>
             <Text style={themedStyles.forgotPassword}>Forgot password?</Text>
@@ -53,68 +94,13 @@ export function SignIn() {
             </DefaultButton>
             <DefaultButton
               onPress={() => navigate('SignUp')}
-              style={{ container: themedStyles.signUpButtonContainer }}>
+              style={{
+                container: themedStyles.signUpButtonContainer,
+                text: themedStyles.signUpButtonText,
+              }}>
               Sign Up
             </DefaultButton>
           </View>
-        </View>
-        <View style={themedStyles.socialMediaContainer}>
-          <TouchableOpacity
-            onPress={signInWithGoogle}
-            style={[
-              themedStyles.socialMediaButton,
-              themedStyles.googleButtonContainer,
-            ]}>
-            <View
-              style={[
-                themedStyles.socialMediaIconContainer,
-                themedStyles.googleIconContainer,
-              ]}>
-              <Image
-                source={IMAGES.GOOGLE}
-                style={themedStyles.socialMediaIcon}
-              />
-            </View>
-            <View style={themedStyles.socialButtonTextContainer}>
-              <Text style={themedStyles.socialMediaButtonText}>Google</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              themedStyles.socialMediaButton,
-              themedStyles.facebookButtonContainer,
-            ]}>
-            <View
-              style={[
-                themedStyles.socialMediaIconContainer,
-                themedStyles.facebookIconContainer,
-              ]}>
-              <Image
-                source={IMAGES.FACEBOOK}
-                style={themedStyles.socialMediaIcon}
-              />
-            </View>
-            <View style={themedStyles.socialButtonTextContainer}>
-              <Text style={themedStyles.socialMediaButtonText}>Facebook</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              themedStyles.socialMediaButton,
-              themedStyles.appleButtonContainer,
-            ]}>
-            <View style={themedStyles.socialMediaIconContainer}>
-              <Image
-                source={IMAGES.APPLE}
-                style={themedStyles.socialMediaIcon}
-              />
-            </View>
-            <View style={themedStyles.socialButtonTextContainer}>
-              <Text style={themedStyles.appleButtonText}>
-                Sign in with Apple
-              </Text>
-            </View>
-          </TouchableOpacity>
         </View>
       </View>
     </Container>

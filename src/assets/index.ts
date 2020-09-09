@@ -17,6 +17,7 @@ export const IMAGES = {
   FACEBOOK: require('./logo/facebook.png'),
   APPLE: require('./logo/apple.png'),
   WHITE_APPLE: require('./logo/whiteApple.png'),
+  MICROSOFT: require('./logo/microsoft.png'),
 
   /* Settings */
   FLAG: require('./settings/redFlag.png'),
