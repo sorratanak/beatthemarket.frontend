@@ -16,6 +16,7 @@ export const IMAGES = {
   GOOGLE: require('./logo/google.png'),
   FACEBOOK: require('./logo/facebook.png'),
   APPLE: require('./logo/apple.png'),
+  WHITE_APPLE: require('./logo/whiteApple.png'),
 
   /* Settings */
   FLAG: require('./settings/redFlag.png'),
@@ -47,4 +48,8 @@ export const IMAGES = {
   /* Info Modal */
   ERROR: require('./infoModal/error.png'),
   WARNING: require('./infoModal/warning.png'),
+
+  /* Buy Modal */
+  YELLOW_CREDIT_CARD: require('./buyModal/yellowCreditCard.png'),
+  GRAY_CREDIT_CARD: require('./buyModal/grayCreditCard.png'),
 };

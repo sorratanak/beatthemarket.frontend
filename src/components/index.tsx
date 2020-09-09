@@ -11,6 +11,7 @@ export * from './GameHeader';
 export * from './InfoModal';
 export * from './LineChart';
 export * from './MyScore';
+export * from './PayButton';
 export * from './RuleBlock';
 export * from './ScoreBoard';
 export * from './ScoreList';

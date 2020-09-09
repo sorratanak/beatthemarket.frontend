@@ -56,6 +56,8 @@ interface ISubscriptionsScreenTheme {
   ACTIVE_SUBSCRIPTION_PLAN_COLOR?: string;
   BUTTON_BACKGROUND_COLOR?: string;
   BUTTON_TEXT_COLOR?: string;
+  PAY_BUTTONS_BACKGROUND_COLOR?: string;
+  PAY_BUTTONS_TEXT_COLOR?: string;
 }
 
 interface ISignInScreenTheme {
