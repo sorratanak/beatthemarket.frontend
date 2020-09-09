@@ -13,6 +13,7 @@ import {
   EndGameModal,
   GameSideBar,
   ContainerWithBurgerMenu,
+  WinBackgroundEffect,
 } from '../../components';
 import { IPoint, IGameEventScore } from '../../types';
 import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
@@ -97,6 +98,8 @@ export function Game() {
           />
         </>
       )}
+
+      <WinBackgroundEffect />
 
       <DefaultModal isVisible={isEndGameModalVisible}>
         <EndGameModal

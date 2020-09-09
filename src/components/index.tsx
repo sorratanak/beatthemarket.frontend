@@ -25,3 +25,4 @@ export * from './TilesList';
 export * from './TouchableTile';
 export * from './GameTimer';
 export * from './GameSideBar';
+export * from './WinBackgroundEffect';
