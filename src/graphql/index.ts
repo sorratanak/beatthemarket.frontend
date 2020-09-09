@@ -81,4 +81,7 @@ const authLink = setContext(async (_, { headers }) => {
 export const graphqlApi = new ApolloClient({
   link: ApolloLink.from([authLink, errorLink, splitLink]),
   cache: new InMemoryCache(),
+  defaultOptions: {
+    mutate: { errorPolicy: 'ignore' },
+  },
 });

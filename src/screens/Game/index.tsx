@@ -13,12 +13,12 @@ import {
   GameHeader,
   DefaultModal,
   EndGameModal,
+  WinBackgroundEffect,
 } from '../../components';
 import { IPoint, IGameEventScore } from '../../types';
 import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 import { MAX_WINS_COUNT, LEVEL_WIN_STEP } from '../../constants';
-import { useLazyQuery } from '@apollo/client';
 
 export function Game() {
   const { theme } = useContext(ThemeContext);
@@ -92,6 +92,8 @@ export function Game() {
           />
         </>
       )}
+
+      <WinBackgroundEffect />
 
       <DefaultModal isVisible={isEndGameModalVisible}>
         <EndGameModal
