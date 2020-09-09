@@ -17,7 +17,7 @@ import {
 import { IPoint, IGameEventScore } from '../../types';
 import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
 import { getThemedStyles } from './styles';
-import { MAX_GAME_LEVEL, LEVEL_WIN_STEP } from '../../constants';
+import { MAX_WINS_COUNT, LEVEL_WIN_STEP } from '../../constants';
 import { useLazyQuery } from '@apollo/client';
 
 export function Game() {
@@ -83,7 +83,7 @@ export function Game() {
             levelTimerCallback={onSetGameEvents}
             // TODO its temporary solution
             levelStatusCallback={(newGameScore: IGameEventScore) => {
-              if (newGameScore.event === 'win' && wins !== MAX_GAME_LEVEL) {
+              if (newGameScore.event === 'win' && wins !== MAX_WINS_COUNT) {
                 setWins(wins + LEVEL_WIN_STEP);
               } else {
                 onSetGameScore(newGameScore);
