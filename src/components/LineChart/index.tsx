@@ -33,7 +33,7 @@ const CHART_WIDTH = WINDOW.width * WIDTH_COEF;
 
 const MAX_VISIBLE_POINTS = 8;
 const Y_VALUE_PADDING = 0.5;
-const MAX_CHART_SIZE = 100;
+const MAX_CHART_SIZE = 50;
 
 interface Props {
   data: IPoint[];
