@@ -6,6 +6,7 @@ import {
   IPauseResumeGameRequest,
   IGetAccountBalancesRequest,
   IGetUserProfitLossRequest,
+  IVerifyPaymentRequest,
 } from '../types';
 
 export function getStockChanges(prelastItem: IPoint, lastItem: IPoint) {
@@ -90,6 +91,22 @@ export function getUserProfitLossRequest(
     variables: {
       gameId,
       email,
+    },
+  };
+
+  return requestBody;
+}
+
+export function getVerifyPaymentRequest(
+  productId: string,
+  provider: string,
+  token: string,
+): IVerifyPaymentRequest {
+  const requestBody: IVerifyPaymentRequest = {
+    variables: {
+      productId,
+      provider,
+      token,
     },
   };
 

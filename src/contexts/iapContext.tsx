@@ -11,8 +11,12 @@ import {
   purchaseErrorListener,
   finishTransaction,
 } from 'react-native-iap';
+import { useMutation } from '@apollo/client';
 import _ from 'lodash';
 import { ISubscriptionPlan } from '../types';
+import iapGraphql from '../graphql/iap';
+import { getIapProvider } from '../utils';
+import { getVerifyPaymentRequest } from '../utils/parsing';
 
 interface ContextProps {
   activeSubscription: ISubscriptionPlan;
@@ -43,7 +47,14 @@ const ContextProvider = ({
   const purchaseUpdatedListenerRef = useRef(null);
   const purchaseErrorListenerRef = useRef(null);
 
-  // TODO some gql mutation to save purchase on server
+  const [
+    verifyPaymentSubscription,
+    { data: verifyPaymentSubscriptionResponse },
+  ] = useMutation(iapGraphql.queries.VERIFY_PAYMENT_SUBSCRIPTION);
+  const [
+    verifyPaymentPurchase,
+    { data: verifyPaymenPurchaseResponse },
+  ] = useMutation(iapGraphql.queries.VERIFY_PAYMENT_PURCHASE);
 
   useEffect(() => {
     purchaseUpdatedListenerRef.current = purchaseUpdatedListener(
@@ -53,10 +64,19 @@ const ContextProvider = ({
         if (receipt) {
           try {
             if (Platform.OS === 'ios') {
-              finishTransactionIOS(purchase.transactionId);
+              await finishTransactionIOS(purchase.transactionId);
             }
 
             await finishTransaction(purchase);
+
+            verifyPaymentSubscription(
+              getVerifyPaymentRequest(
+                purchase.productId,
+                getIapProvider(),
+                receipt,
+              ),
+            );
+
             // await processNewPurchase(purchase); // TODO some sql mutation call to save purchase on server
           } catch (ackErr) {
             console.log('purchaseUpdateListener', ackErr);

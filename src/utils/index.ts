@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import currencyFormatter from 'currency-formatter';
 
 export function isNumericChar(char: string) {
@@ -11,5 +12,13 @@ export function getMoneyFormat(value: number | string, precision: number = 2) {
     thousand: "'",
     precision,
     format: '%s %v', // %s is the symbol and %v is the value
+  });
+}
+
+export function getIapProvider() {
+  return Platform.select({
+    web: 'stripe',
+    ios: 'apple',
+    android: 'google',
   });
 }
