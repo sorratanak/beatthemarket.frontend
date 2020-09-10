@@ -49,6 +49,7 @@ const ContextProvider = ({
     purchaseUpdatedListenerRef.current = purchaseUpdatedListener(
       async (purchase: InAppPurchase | SubscriptionPurchase) => {
         const receipt = purchase.transactionReceipt;
+        console.log('receipet is', receipt);
         if (receipt) {
           try {
             if (Platform.OS === 'ios') {
