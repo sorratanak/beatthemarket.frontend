@@ -126,4 +126,11 @@ export interface IGetAccountBalancesRequest
 export interface IGetUserProfitLossRequest
   extends IGraphqlVariableRequest<{ gameId: string; email: string }> {}
 
+export interface IVerifyPaymentRequest
+  extends IGraphqlVariableRequest<{
+    productId: string;
+    provider: string;
+    token: string;
+  }> {}
+
 /* ---------------------- */
