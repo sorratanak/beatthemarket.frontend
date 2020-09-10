@@ -47,14 +47,9 @@ const ContextProvider = ({
   const purchaseUpdatedListenerRef = useRef(null);
   const purchaseErrorListenerRef = useRef(null);
 
-  const [
-    verifyPaymentSubscription,
-    { data: verifyPaymentSubscriptionResponse },
-  ] = useMutation(iapGraphql.queries.VERIFY_PAYMENT_SUBSCRIPTION);
-  const [
-    verifyPaymentPurchase,
-    { data: verifyPaymenPurchaseResponse },
-  ] = useMutation(iapGraphql.queries.VERIFY_PAYMENT_PURCHASE);
+  const [verifyPayment, { data: verifyPaymentResponse }] = useMutation(
+    iapGraphql.queries.VERIFY_PAYMENT,
+  );
 
   useEffect(() => {
     purchaseUpdatedListenerRef.current = purchaseUpdatedListener(
@@ -68,7 +63,7 @@ const ContextProvider = ({
 
             await finishTransaction(purchase);
 
-            verifyPaymentSubscription(
+            verifyPayment(
               getVerifyPaymentRequest(
                 purchase.productId,
                 getIapProvider(),
