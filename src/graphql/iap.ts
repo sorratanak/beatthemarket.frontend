@@ -1,16 +1,12 @@
 import { gql } from '@apollo/client';
 
 const VERIFY_PAYMENT_SUBSCRIPTION = gql`
-  mutation VerifyPaymentSubscription(
+  mutation VerifyPayment(
     $productId: String!
     $provider: String!
     $token: String!
   ) {
-    verifyPaymentSubscription(
-      productId: $productId
-      provider: $provider
-      token: $token
-    ) {
+    verifyPayment(productId: $productId, provider: $provider, token: $token) {
       paymentId
       productId
       provider
