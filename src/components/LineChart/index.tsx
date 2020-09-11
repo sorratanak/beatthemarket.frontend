@@ -1,50 +1,60 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View } from 'react-native';
 import HighchartsContainer from '@highcharts/highcharts-react-native';
+import pickRandom from 'pick-random';
 
 import { styles } from './styles';
 import { IPoint } from '../../types';
+import { DEFAULT_CHART_OPTIONS } from './config';
+import { COLORS } from '../../themes/colors';
+import { GameContext } from '../../contexts';
 
 interface Props {
   data: IPoint[];
 }
 
-const DEFAULT_CHART_OPTIONS = {
-  plotOptions: {
-    series: {
-      allowPointSelect: false,
-      // type: 'line',
-    },
-    line: {
-      allowPointSelect: false,
-    },
-  },
-  series: [
-    {
-      name: 'Value',
-      data: [],
-    },
-  ],
-  xAxis: {
-    min: 0,
-    max: 10,
-  },
-  chart: {
-    type: 'line',
-  },
-};
-const MAX_POINT_NUMBER = 10;
+const MAX_VISIBLE_POINTS = 15;
 
 export function LineChart({ data }: Props) {
   const [chartOptions, setChartOptions] = useState(DEFAULT_CHART_OPTIONS);
+  const { activeStock } = useContext(GameContext);
+
+  const [chartColor, setChartColor] = useState(null);
+
+  useEffect(() => {
+    setChartColor(
+      pickRandom([
+        COLORS.BILBAO,
+        COLORS.VIKING,
+        COLORS.CORNFLOWER_BLUE,
+        COLORS.VALENCIA,
+        COLORS.MACARONI_AND_CHEESE,
+      ])[0],
+    );
+  }, [activeStock, setChartColor]);
 
   useEffect(() => {
     setChartOptions({
-      ...DEFAULT_CHART_OPTIONS,
-      series: [{ name: 'Value', data: data.map((el) => el.y) }],
+      ...chartOptions,
+      plotOptions: {
+        ...chartOptions.plotOptions,
+        line: {
+          ...chartOptions.plotOptions.line,
+          color: chartColor,
+        },
+      },
+      series: [
+        {
+          name: 'Value',
+          data: data.map((el) => el.y),
+        },
+      ],
       xAxis: {
+        ...chartOptions.xAxis,
         min:
-          data.length > MAX_POINT_NUMBER ? data.length - MAX_POINT_NUMBER : 0,
+          data.length > MAX_VISIBLE_POINTS
+            ? data.length - MAX_VISIBLE_POINTS
+            : 0,
         max: data.length,
       },
     });

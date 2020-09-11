@@ -1,63 +1,36 @@
-import { Platform } from 'react-native';
-import random from 'random';
-import _ from 'lodash';
+import { COLORS } from '../../themes/colors';
 
-import { ITheme } from '../../themes/interface';
-
-export const CONTAINER_ANIMATION_OPTIONS = {
-  duration: 200,
-};
-
-export const LINE_ANIMATION_OPTIONS = {
-  duration: 500,
-  onLoad: {
-    duration: 500,
+export const DEFAULT_CHART_OPTIONS = {
+  title: {
+    text: '',
   },
-};
-
-export const SHAPES_ANIMATION_CONFIG: Object = {
-  duration: 300,
-  easing: 'bounce',
-};
-
-export const getThemedAxises = (theme: ITheme) => ({
-  container: {
-    axis: { stroke: theme.DEFAULT.TEXT_COLOR },
-    tickLabels: {
-      fill: theme.DEFAULT.TEXT_COLOR,
-      fontSize: Platform.OS === 'web' ? 16 : 13,
+  plotOptions: {
+    line: {
+      color: COLORS.BLACK,
+      marker: {
+        enabled: false,
+      },
     },
   },
-});
-
-export const getShapesData = (domain: { x: number[]; y: number[] }) => {
-  const colors = [
-    'violet',
-    'cornflowerblue',
-    'gold',
-    'orange',
-    'turquoise',
-    'tomato',
-    'greenyellow',
-  ];
-  const symbols = [
-    'circle',
-    'star',
-    'square',
-    'triangleUp',
-    'triangleDown',
-    'diamond',
-    'plus',
-  ];
-
-  return _.times(15, _.constant(null)).map(() => {
-    return {
-      x: random.float(domain.x[0] || 0, domain.x[1] + 1 || 10),
-      y: random.float(domain.y[0] || 0, domain.y[1] + 1 || 10),
-      size: random.int(0, 8) + 3,
-      symbol: symbols[random.int(0, 6)],
-      fill: colors[random.int(0, 6)],
-      opacity: 0.3,
-    };
-  });
+  series: [
+    {
+      name: 'Value',
+      data: [],
+    },
+  ],
+  xAxis: {
+    labels: {
+      formatter: function formatter() {
+        const minutes = this.value >= 60 ? this.value / 60 : 0;
+        const seconds = this.value % 60;
+        return `${minutes}:${seconds >= 10 ? seconds : `0${seconds}`}`;
+      },
+    },
+    gridLineWidth: 2,
+    min: 0,
+    max: 10,
+  },
+  chart: {
+    type: 'line',
+  },
 };
