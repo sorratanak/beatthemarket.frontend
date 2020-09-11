@@ -21,7 +21,8 @@ export const DEFAULT_CHART_OPTIONS = {
   xAxis: {
     labels: {
       formatter: function formatter() {
-        const minutes = this.value >= 60 ? this.value / 60 : 0;
+        // ! DO NOT use moment here
+        const minutes = this.value >= 60 ? Math.floor(this.value / 60) : 0;
         const seconds = this.value % 60;
         return `${minutes}:${seconds >= 10 ? seconds : `0${seconds}`}`;
       },
