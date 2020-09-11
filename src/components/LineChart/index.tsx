@@ -61,14 +61,14 @@ export function LineChart({ data }: Props) {
   }, [data]);
 
   return (
-    <View pointerEvents="none" style={styles.container}>
+    <View pointerEvents="none" style={styles.mainContainer}>
       <HighchartsContainer
         useCDN
         useSSL
         loader
         javaScriptEnabled
         domStorageEnabled
-        styles={styles.container}
+        styles={styles.chartContainer}
         options={chartOptions}
       />
     </View>

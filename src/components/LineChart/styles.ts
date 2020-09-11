@@ -1,9 +1,14 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
+    width: '100%',
+    justifyContent: 'center',
+  },
+  chartContainer: {
+    backgroundColor: 'transparent',
     justifyContent: 'center',
     width: '100%',
-    height: '100%',
+    height: '95%',
   },
 });
