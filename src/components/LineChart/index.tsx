@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View } from 'react-native';
-import HighchartsContainer from '@highcharts/highcharts-react-native';
 import pickRandom from 'pick-random';
 
+import { HighchartsContainer } from './helper';
 import { styles } from './styles';
 import { IPoint } from '../../types';
 import { DEFAULT_CHART_OPTIONS } from './config';

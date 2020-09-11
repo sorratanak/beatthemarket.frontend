@@ -1,4 +1,5 @@
 import { COLORS } from '../../themes/colors';
+import { Platform, Dimensions } from 'react-native';
 
 export const DEFAULT_CHART_OPTIONS = {
   title: {
@@ -41,5 +42,8 @@ export const DEFAULT_CHART_OPTIONS = {
   },
   chart: {
     type: 'line',
+    height: Platform.OS === 'web' ? '60%' : undefined,
+    width:
+      Platform.OS === 'web' ? Dimensions.get('window').width * 0.5 : undefined,
   },
 };
