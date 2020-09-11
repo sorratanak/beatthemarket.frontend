@@ -31,6 +31,14 @@ export const DEFAULT_CHART_OPTIONS = {
     min: 0,
     max: 10,
   },
+  yAxis: {
+    title: {
+      text: '',
+    },
+  },
+  legend: {
+    enabled: false,
+  },
   chart: {
     type: 'line',
   },
