@@ -100,13 +100,15 @@ export function getUserProfitLossRequest(
 export function getVerifyPaymentRequest(
   productId: string,
   provider: string,
-  token: string,
+  purchase: Object,
 ): IVerifyPaymentRequest {
+  const stringifiedPurchase: string = JSON.stringify(purchase);
+
   const requestBody: IVerifyPaymentRequest = {
     variables: {
       productId,
       provider,
-      token,
+      token: stringifiedPurchase,
     },
   };
 

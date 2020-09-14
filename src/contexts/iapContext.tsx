@@ -10,6 +10,7 @@ import {
   purchaseUpdatedListener,
   purchaseErrorListener,
   finishTransaction,
+  initConnection as iapInitConnection,
 } from 'react-native-iap';
 import { useMutation } from '@apollo/client';
 import _ from 'lodash';
@@ -31,6 +32,8 @@ const DEFAULT_IAP_CONTEXT: ContextProps = {
   onRequestSubscription: _.noop,
   onSetActiveSubscription: _.noop,
 };
+
+iapInitConnection();
 
 export const IapContext = React.createContext(DEFAULT_IAP_CONTEXT);
 
@@ -67,11 +70,9 @@ const ContextProvider = ({
               getVerifyPaymentRequest(
                 purchase.productId,
                 getIapProvider(),
-                receipt,
+                purchase,
               ),
             );
-
-            // await processNewPurchase(purchase); // TODO some sql mutation call to save purchase on server
           } catch (ackErr) {
             console.log('purchaseUpdateListener', ackErr);
           }

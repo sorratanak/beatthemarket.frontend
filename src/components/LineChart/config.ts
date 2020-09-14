@@ -1,5 +1,5 @@
-import { COLORS } from '../../themes/colors';
 import { Platform, Dimensions } from 'react-native';
+import { COLORS } from '../../themes/colors';
 
 export const DEFAULT_CHART_OPTIONS = {
   title: {

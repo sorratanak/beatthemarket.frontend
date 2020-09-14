@@ -1,11 +1,6 @@
-import React, { useContext, useMemo, useCallback, useState } from 'react';
-import { View, Text } from 'react-native';
-import {
-  requestSubscription,
-  getProducts,
-  getSubscriptions,
-  initConnection,
-} from 'react-native-iap';
+import React, { useContext, useMemo, useCallback } from 'react';
+import { View } from 'react-native';
+import { requestSubscription, getSubscriptions } from 'react-native-iap';
 
 import {
   SettingsNestedScreenWrapper,
