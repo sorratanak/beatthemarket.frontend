@@ -104,8 +104,15 @@ export interface IGameEventExit {
 
 export interface ISubscriptionPlan {
   id: string;
+  stripeId: string;
   balance: number;
   price: number;
+}
+
+export interface IStripeUserInfo {
+  name: string;
+  email: string;
+  phone: string;
 }
 
 /* ------ Requests ------ */

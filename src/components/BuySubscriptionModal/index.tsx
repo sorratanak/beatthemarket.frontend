@@ -1,26 +1,34 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState, useCallback } from 'react';
 import { View, Image } from 'react-native';
 import { CardElement } from '@stripe/react-stripe-js';
 
 import { ThemeContext, IapContext } from '../../contexts';
 import { getThemedStyles, CARD_ELEMENT_OPTIONS } from './styles';
 import { DefaultInput } from '../DefaultInput';
-import { SUBSCRIPTION_TYPE, THEME_KEYS } from '../../constants';
+import { THEME_KEYS } from '../../constants';
 import { DefaultButton } from '../DefaultButton';
 import { PayButton } from '../PayButton';
 import { IMAGES } from '../../assets';
-
-// interface Props {}
+import { IStripeUserInfo } from '../../types';
+import { getMoneyFormat } from '../../utils';
 
 export function BuySubscriptionModal() {
   const { theme, themeKey } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
-  const { onRequestSubscription } = useContext(IapContext);
+  const { activeSubscription, onRequestSubscription } = useContext(IapContext);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+
+  const getUserInfo = useCallback((): IStripeUserInfo => {
+    return {
+      name,
+      email,
+      phone,
+    };
+  }, [name, email, phone]);
 
   return (
     <View style={themedStyles.container} pointerEvents="box-none">
@@ -40,18 +48,15 @@ export function BuySubscriptionModal() {
           <View style={themedStyles.cardContainer}>
             <CardElement options={CARD_ELEMENT_OPTIONS(theme)} />
           </View>
-          {/* <button type="submit">Confirm order</button> */}
           <DefaultButton
             onPress={() =>
-              onRequestSubscription(
-                SUBSCRIPTION_TYPE.ADDITIONAL_BALANCE_100K.STRIPE_PRODUCT_ID,
-              )
+              onRequestSubscription(activeSubscription?.stripeId, getUserInfo())
             }
             style={{
               container: themedStyles.payButtonContainer,
               text: themedStyles.payButtonTitle,
             }}>
-            Pay 5$
+            {`Pay $${activeSubscription?.price}`}
           </DefaultButton>
         </View>
 

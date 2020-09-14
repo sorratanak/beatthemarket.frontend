@@ -14,7 +14,7 @@ import {
 } from 'react-native-iap';
 import { useMutation } from '@apollo/client';
 import _ from 'lodash';
-import { ISubscriptionPlan } from '../types';
+import { ISubscriptionPlan, IStripeUserInfo } from '../types';
 import iapGraphql from '../graphql/iap';
 import { getIapProvider } from '../utils';
 import { getVerifyPaymentRequest } from '../utils/parsing';
@@ -22,7 +22,10 @@ import { getVerifyPaymentRequest } from '../utils/parsing';
 interface ContextProps {
   activeSubscription: ISubscriptionPlan;
   isProcessing: boolean;
-  onRequestSubscription: (subscriptionId: string) => void;
+  onRequestSubscription: (
+    subscriptionId: string,
+    userInfo?: IStripeUserInfo,
+  ) => void;
   onSetActiveSubscription: (subscription: ISubscriptionPlan) => void;
 }
 

@@ -26,9 +26,26 @@ export const ACCOUNT_BALANCE_TYPE = {
   CASH: 'Cash',
 };
 
-export const SUBSCRIPTION_TYPE = {
+export const SUBSCRIPTION_TYPE: {
+  [key: string]: { RNIAP_PRODUCT_ID: string; STRIPE_PRODUCT_ID: string };
+} = {
   ADDITIONAL_BALANCE_100K: {
-    APPLE_PRODUCT_ID: 'additional_balance_100k',
+    RNIAP_PRODUCT_ID: 'additional_balance_100k',
+    STRIPE_PRODUCT_ID: 'prod_HrvyV6uaKEFvHd',
+  },
+  ADDITIONAL_BALANCE_200K: {
+    RNIAP_PRODUCT_ID: 'additional_balance_200k',
+    // TODO change dummy to the real one
+    STRIPE_PRODUCT_ID: 'prod_HrvyV6uaKEFvHd',
+  },
+  ADDITIONAL_BALANCE_300K: {
+    RNIAP_PRODUCT_ID: 'additional_balance_300k',
+    // TODO change dummy to the real one
+    STRIPE_PRODUCT_ID: 'prod_HrvyV6uaKEFvHd',
+  },
+  ADDITIONAL_BALANCE_500K: {
+    RNIAP_PRODUCT_ID: 'additional_balance_500k',
+    // TODO change dummy to the real one
     STRIPE_PRODUCT_ID: 'prod_HrvyV6uaKEFvHd',
   },
 };

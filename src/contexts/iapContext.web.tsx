@@ -2,12 +2,15 @@ import React, { useState, useCallback } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import _ from 'lodash';
 
-import { ISubscriptionPlan } from '../types';
+import { ISubscriptionPlan, IStripeUserInfo } from '../types';
 
 interface ContextProps {
   activeSubscription: ISubscriptionPlan;
   isProcessing: boolean;
-  onRequestSubscription: (subscriptionId: string) => void;
+  onRequestSubscription: (
+    subscriptionId: string,
+    userInfo: IStripeUserInfo,
+  ) => void;
   onSetActiveSubscription: (subscription: ISubscriptionPlan) => void;
 }
 
@@ -34,8 +37,8 @@ const ContextProvider = ({
   const elements = useElements();
 
   const onRequestSubscription = useCallback(
-    async (subscriptionId: string) => {
-      console.log(subscriptionId);
+    async (subscriptionId: string, userInfo: IStripeUserInfo) => {
+      console.log('onRequestSubscription', subscriptionId, userInfo);
 
       if (!stripe || !elements) {
         // Stripe.js has not loaded yet. Make sure to disable

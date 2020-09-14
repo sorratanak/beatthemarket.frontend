@@ -1,23 +1,28 @@
 import { ISubscriptionPlan } from '../../types';
+import { SUBSCRIPTION_TYPE } from '../../constants';
 
 export const SUBSCRIPTIONS: ISubscriptionPlan[] = [
   {
-    id: 'additional_balance_100k',
+    id: SUBSCRIPTION_TYPE.ADDITIONAL_BALANCE_100K.RNIAP_PRODUCT_ID,
+    stripeId: SUBSCRIPTION_TYPE.ADDITIONAL_BALANCE_100K.STRIPE_PRODUCT_ID,
     price: 1,
     balance: 100000,
   },
   {
-    id: 'additional_balance_200k',
+    id: SUBSCRIPTION_TYPE.ADDITIONAL_BALANCE_200K.RNIAP_PRODUCT_ID,
+    stripeId: SUBSCRIPTION_TYPE.ADDITIONAL_BALANCE_200K.STRIPE_PRODUCT_ID,
     price: 2,
     balance: 200000,
   },
   {
-    id: 'additional_balance_300k',
+    id: SUBSCRIPTION_TYPE.ADDITIONAL_BALANCE_300K.RNIAP_PRODUCT_ID,
+    stripeId: SUBSCRIPTION_TYPE.ADDITIONAL_BALANCE_300K.STRIPE_PRODUCT_ID,
     price: 3,
     balance: 300000,
   },
   {
-    id: 'additional_balance_500k',
+    id: SUBSCRIPTION_TYPE.ADDITIONAL_BALANCE_500K.RNIAP_PRODUCT_ID,
+    stripeId: SUBSCRIPTION_TYPE.ADDITIONAL_BALANCE_500K.STRIPE_PRODUCT_ID,
     price: 5,
     balance: 500000,
   },
