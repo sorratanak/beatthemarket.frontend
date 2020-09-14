@@ -3,19 +3,21 @@ import { useMutation, useQuery } from '@apollo/client';
 
 import { ScreenProps } from './props';
 import { Container, ScoreBoard, DefaultButton } from '../../components';
-import { GameContext, ThemeContext } from '../../contexts';
+import { GameContext, ThemeContext, UserContext } from '../../contexts';
 import gameGraphql from '../../graphql/game';
 import usersGraphql from '../../graphql/users';
 import { getThemedStyles } from './styles';
-import { START_GAME_LEVEL } from '../../constants';
+import { START_GAME_LEVEL, QUERY_WITH_ERRORS_OPTIONS } from '../../constants';
 
 export function Home({ navigation }: ScreenProps) {
   const { onSetGameId, onSetStocks } = useContext(GameContext);
+  const { logout } = useContext(UserContext);
 
   /* Mutations */
-  const [createGame, { data: createGameResponse }] = useMutation(
-    gameGraphql.queries.CREATE_GAME,
-  );
+  const [
+    createGame,
+    { data: createGameResponse, error: createGameError },
+  ] = useMutation(gameGraphql.queries.CREATE_GAME, QUERY_WITH_ERRORS_OPTIONS);
   const [startGame, { data: startGameResponse }] = useMutation(
     gameGraphql.queries.START_GAME,
   );
@@ -25,8 +27,15 @@ export function Home({ navigation }: ScreenProps) {
     usersGraphql.queries.GET_USERS,
   );
 
+  /* Error Handling */
   useEffect(() => {
-    if (createGameResponse) {
+    if (createGameError) {
+      logout();
+    }
+  }, [createGameError]);
+
+  useEffect(() => {
+    if (createGameResponse?.createGame) {
       startGame({ variables: { id: createGameResponse.createGame.id } });
     }
   }, [createGameResponse]);

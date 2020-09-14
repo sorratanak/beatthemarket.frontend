@@ -1,3 +1,4 @@
+import { MutationHookOptions } from '@apollo/client';
 import { TThemeKey } from '../themes/interface';
 
 export * from './keys';
@@ -74,6 +75,10 @@ export const STATUS_BAR_STYLES: {
   LIGHT_CONTENT: 'light-content',
   DARK_CONTENT: 'dark-content',
   DEFAULT: 'default',
+};
+
+export const QUERY_WITH_ERRORS_OPTIONS: MutationHookOptions = {
+  errorPolicy: 'all',
 };
 
 export const DEVELOPMENT_SERVER_BASE_IP =
