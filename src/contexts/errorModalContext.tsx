@@ -54,7 +54,7 @@ const ContextProvider = ({
         onBackdropPress={onResetErrorModal}>
         <InfoModal
           onClosePress={onResetErrorModal}
-          title={{ text: 'Something went wrong', img: IMAGES.ERROR }}
+          title={{ img: IMAGES.ERROR }}
           infoText={currentError}
           firstButton={{
             text: 'OK',
