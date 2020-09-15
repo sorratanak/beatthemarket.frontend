@@ -22,8 +22,8 @@ export const getThemedStyles = (theme: ITheme) =>
       lineHeight: 49,
     },
     titleImg: {
-      width: 60,
-      height: 60,
+      width: 50,
+      height: 50,
       marginVertical: 10,
     },
     infoContainer: {
