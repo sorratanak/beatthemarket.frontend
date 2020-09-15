@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/client';
 import _ from 'lodash';
 
@@ -9,8 +9,8 @@ import {
   getUserProfitLossRequest,
 } from '../utils/parsing';
 import gameGraphql from '../graphql/game';
-import { START_GAME_LEVEL } from '../constants';
-import { UserContext } from './userContext';
+import { START_GAME_LEVEL, QUERY_WITH_ERRORS_OPTIONS } from '../constants';
+import { ErrorModalContext, UserContext } from '.';
 
 interface ContextProps {
   wins: number;
@@ -66,6 +66,7 @@ const ContextProvider = ({
   children: React.ReactNode | React.ReactNode[];
 }) => {
   const { user } = useContext(UserContext);
+  const { onSetErrorModal } = useContext(ErrorModalContext);
 
   /* ------ State ------ */
   const [gameId, setGameId] = useState<string>(null);
@@ -77,12 +78,21 @@ const ContextProvider = ({
   const [isGamePaused, setIsGamePaused] = useState<boolean>(false);
 
   /* ------ Queries ------ */
-  const [buyStock, { data: buyStockResponse }] = useMutation(
-    gameGraphql.queries.BUY_STOCK,
-  );
-  const [sellStock, { data: sellStockResponse }] = useMutation(
-    gameGraphql.queries.SELL_STOCK,
-  );
+  const [
+    buyStock,
+    { data: buyStockResponse, error: buyStockError },
+  ] = useMutation(gameGraphql.queries.BUY_STOCK, QUERY_WITH_ERRORS_OPTIONS);
+  useEffect(() => {
+    onSetErrorModal(buyStockError?.message);
+  }, [buyStockError]);
+
+  const [
+    sellStock,
+    { data: sellStockResponse, error: sellStockError },
+  ] = useMutation(gameGraphql.queries.SELL_STOCK, QUERY_WITH_ERRORS_OPTIONS);
+  useEffect(() => {
+    onSetErrorModal(sellStockError?.message);
+  }, [sellStockError]);
 
   const [pauseGame, { data: pauseGameResponse }] = useMutation(
     gameGraphql.queries.PAUSE_GAME,
