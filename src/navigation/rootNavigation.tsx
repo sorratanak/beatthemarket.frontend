@@ -4,13 +4,14 @@ import { View } from 'react-native';
 import { UserContext } from '../contexts/userContext';
 import { MainNavComponent, AuthStack } from '.';
 import { styles } from './styles';
+import { navigationRef } from './staticNavigation';
 
 const RootNavigation = () => {
   const { user } = useContext(UserContext);
 
   return (
     <View style={styles.containerStyle}>
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
         {user ? <MainNavComponent /> : <AuthStack />}
       </NavigationContainer>
     </View>
