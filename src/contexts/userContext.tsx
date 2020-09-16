@@ -19,7 +19,7 @@ import { TIME_TO_RESET_NAVIGATION } from '../constants';
 interface ContextProps {
   token: string | null;
   user: IUser | null;
-  logout: (navigation: any) => void;
+  logout: (navigation?: any) => void;
   signInWithGoogle: () => void;
   signUp: (email: string, password: string) => void;
 }

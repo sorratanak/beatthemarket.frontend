@@ -24,11 +24,13 @@ export function getIapProvider() {
   });
 }
 
+export function getResetNavigationAction() {
+  return CommonActions.reset({
+    index: 0,
+    routes: [{ name: 'Home' }],
+  });
+}
+
 export function resetNavigation(navigation) {
-  navigation.dispatch(
-    CommonActions.reset({
-      index: 0,
-      routes: [{ name: 'Home' }],
-    }),
-  );
+  navigation.dispatch(getResetNavigationAction());
 }
