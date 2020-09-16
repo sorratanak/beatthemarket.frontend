@@ -5,9 +5,9 @@ import pickRandom from 'pick-random';
 import { HighchartsContainer } from './helper';
 import { styles } from './styles';
 import { IPoint } from '../../types';
-import { DEFAULT_CHART_OPTIONS } from './config';
+import { getThemedDefaultChartOptions } from './config';
 import { COLORS } from '../../themes/colors';
-import { GameContext } from '../../contexts';
+import { GameContext, ThemeContext } from '../../contexts';
 
 interface Props {
   data: IPoint[];
@@ -16,7 +16,22 @@ interface Props {
 const MAX_VISIBLE_POINTS = 15;
 
 export function LineChart({ data }: Props) {
-  const [chartOptions, setChartOptions] = useState(DEFAULT_CHART_OPTIONS);
+  const { theme } = useContext(ThemeContext);
+
+  const [chartOptions, setChartOptions] = useState(
+    getThemedDefaultChartOptions(theme),
+  );
+  useEffect(() => {
+    const { xAxis, yAxis, chart } = getThemedDefaultChartOptions(theme);
+
+    setChartOptions({
+      ...chartOptions,
+      xAxis,
+      yAxis,
+      chart,
+    });
+  }, [theme]);
+
   const { activeStock } = useContext(GameContext);
 
   const [chartColor, setChartColor] = useState(null);

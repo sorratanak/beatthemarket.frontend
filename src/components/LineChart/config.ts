@@ -1,7 +1,8 @@
 import { Platform, Dimensions } from 'react-native';
 import { COLORS } from '../../themes/colors';
+import { ITheme } from '../../themes/interface';
 
-export const DEFAULT_CHART_OPTIONS = {
+export const getThemedDefaultChartOptions = (theme: ITheme) => ({
   title: {
     text: '',
   },
@@ -28,11 +29,18 @@ export const DEFAULT_CHART_OPTIONS = {
         return `${minutes}:${seconds >= 10 ? seconds : `0${seconds}`}`;
       },
     },
-    gridLineWidth: 2,
+    lineColor: theme.DEFAULT.TEXT_COLOR,
+    gridLineColor: 'rgba(128,128,128,0.3)',
+    gridLineWidth: 1,
     min: 0,
     max: 10,
+    tickColor: theme.DEFAULT.TEXT_COLOR,
   },
   yAxis: {
+    tickColor: theme.DEFAULT.TEXT_COLOR,
+    lineColor: theme.DEFAULT.TEXT_COLOR,
+    lineWidth: 1,
+    gridLineColor: 'rgba(128,128,128,0.3)',
     title: {
       text: '',
     },
@@ -40,10 +48,14 @@ export const DEFAULT_CHART_OPTIONS = {
   legend: {
     enabled: false,
   },
+  colorAxis: {
+    minorGridLineColor: 'red',
+  },
   chart: {
     type: 'line',
+    backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
     height: Platform.OS === 'web' ? '60%' : undefined,
     width:
       Platform.OS === 'web' ? Dimensions.get('window').width * 0.5 : undefined,
   },
-};
+});
