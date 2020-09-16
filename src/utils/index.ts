@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 import { CommonActions, DrawerActions } from '@react-navigation/native';
 import currencyFormatter from 'currency-formatter';
 
-import { dispatch } from '../navigation/staticNavigation';
+import { navDispatch } from '../navigation/staticNavigation';
 
 export function isNumericChar(char: string) {
   return /\d/.test(char);
@@ -28,9 +28,9 @@ export function getIapProvider() {
 
 export function resetNavigation() {
   if (Platform.OS === 'web') {
-    dispatch(DrawerActions.closeDrawer());
+    navDispatch(DrawerActions.closeDrawer());
   }
-  dispatch(
+  navDispatch(
     CommonActions.reset({
       index: 0,
       routes: [{ name: 'Home' }],
