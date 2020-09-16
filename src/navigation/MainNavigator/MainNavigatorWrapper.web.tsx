@@ -20,6 +20,7 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import { useNavigation } from '@react-navigation/native';
 
 import { getThemedStyles } from './styles.web';
 import { ThemeContext, GameContext, UserContext } from '../../contexts';
@@ -35,6 +36,8 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
   const { logout } = useContext(UserContext);
   const { themedStyles } = props;
 
+  const navigation = useNavigation();
+
   const { gameId, isGamePaused, onPauseGame, onResumeGame } = useContext(
     GameContext,
   );
@@ -45,7 +48,7 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
       <DrawerItemList {...props} />
       <DrawerItem
         label="Logout"
-        onPress={logout}
+        onPress={() => logout(navigation)}
         style={themedStyles.logoutContainer}
         labelStyle={themedStyles.logout}
       />

@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Platform } from 'react-native';
+import { DrawerActions } from '@react-navigation/native';
 import noop from 'lodash/noop';
 
 import {
@@ -11,11 +13,13 @@ import {
 } from '../utils/storage';
 import { SignUp, SignIn } from '../firebase/firebase';
 import { IUser } from '../types';
+import { resetNavigation } from '../utils';
+import { TIME_TO_RESET_NAVIGATION } from '../constants';
 
 interface ContextProps {
   token: string | null;
   user: IUser | null;
-  logout: () => void;
+  logout: (navigation: any) => void;
   signInWithGoogle: () => void;
   signUp: (email: string, password: string) => void;
 }
@@ -51,13 +55,26 @@ const ContextProvider = ({
     });
   }, [getUserFromStorage, getFirebaseToken, setLocalUser, setLocalToken]);
 
-  const logout = useCallback(() => {
-    removeUserFromStorage();
-    removeUuidFromStorage();
-    // TODO reset navigation state
-    setLocalUser(null);
-    setLocalToken(null);
-  }, [removeUserFromStorage, setLocalUser, setLocalToken]);
+  const logout = useCallback(
+    (navigation?: any) => {
+      // Navigation reset
+      if (navigation) {
+        resetNavigation(navigation);
+        if (Platform.OS === 'web') {
+          navigation.dispatch(DrawerActions.closeDrawer());
+        }
+      }
+
+      // Delay before logout functions
+      setTimeout(() => {
+        removeUserFromStorage();
+        removeUuidFromStorage();
+        setLocalUser(null);
+        setLocalToken(null);
+      }, TIME_TO_RESET_NAVIGATION);
+    },
+    [removeUserFromStorage, setLocalUser, setLocalToken],
+  );
 
   const signInWithGoogle = useCallback(() => {
     SignIn().then((response) => {

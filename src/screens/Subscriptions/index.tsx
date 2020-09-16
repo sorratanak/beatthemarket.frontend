@@ -1,6 +1,10 @@
 import React, { useContext, useMemo, useCallback } from 'react';
 import { View } from 'react-native';
-import { requestSubscription, getSubscriptions } from 'react-native-iap';
+import {
+  requestSubscription,
+  getSubscriptions,
+  getProducts,
+} from 'react-native-iap';
 
 import {
   SettingsNestedScreenWrapper,
@@ -22,6 +26,9 @@ export function Subscriptions() {
 
   const onSubscriptionPurchase = useCallback(() => {
     if (activeSubscription) {
+      getProducts([]).then((result) => console.log('getProducts', result));
+      getSubscriptions([]).then((result) => console.log('empty sub', result));
+
       getSubscriptions([activeSubscription.id]).then((result) => {
         console.log('getSubscriptions', result);
 

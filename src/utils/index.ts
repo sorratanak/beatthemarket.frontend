@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+import { CommonActions } from '@react-navigation/native';
 import currencyFormatter from 'currency-formatter';
 
 export function isNumericChar(char: string) {
@@ -21,4 +22,13 @@ export function getIapProvider() {
     ios: 'apple',
     android: 'google',
   });
+}
+
+export function resetNavigation(navigation) {
+  navigation.dispatch(
+    CommonActions.reset({
+      index: 0,
+      routes: [{ name: 'Home' }],
+    }),
+  );
 }

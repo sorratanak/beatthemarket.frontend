@@ -30,7 +30,7 @@ export function Home({ navigation }: ScreenProps) {
   /* Error Handling */
   useEffect(() => {
     if (createGameError) {
-      logout();
+      logout(navigation);
     }
   }, [createGameError]);
 
@@ -66,7 +66,6 @@ export function Home({ navigation }: ScreenProps) {
         }}>
         Play
       </DefaultButton>
-      {/* <Button testID="logout" title="Logout" onPress={logout} /> */}
     </Container>
   );
 }

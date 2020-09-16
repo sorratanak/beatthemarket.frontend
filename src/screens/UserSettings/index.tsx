@@ -1,4 +1,5 @@
 import React, { useContext, useMemo, useCallback } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   SettingsNestedScreenWrapper,
@@ -15,6 +16,8 @@ export function UserSettings() {
   const { logout } = useContext(UserContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
+
+  const navigation = useNavigation();
 
   const onSwitchTheme = useCallback(() => {
     switchTheme(
@@ -36,7 +39,7 @@ export function UserSettings() {
         onSwitchValueChange={onSwitchTheme}
       />
       <DefaultButton
-        onPress={logout}
+        onPress={() => logout(navigation)}
         style={{
           container: themedStyles.buttonContainer,
           text: themedStyles.buttonText,
