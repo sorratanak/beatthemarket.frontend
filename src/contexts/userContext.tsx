@@ -44,6 +44,7 @@ const ContextProvider = ({
         generateStorageUuid();
         setLocalUser(user);
         getFirebaseToken().then((accessToken) => {
+          console.log('new accessToken', accessToken);
           setLocalToken(accessToken);
         });
       }

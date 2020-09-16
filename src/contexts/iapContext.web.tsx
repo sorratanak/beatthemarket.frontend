@@ -1,8 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useMutation } from '@apollo/client';
 import _ from 'lodash';
 
+import iapGraphql from '../graphql/iap';
 import { ISubscriptionPlan, IStripeUserInfo } from '../types';
+import { UserContext } from './userContext';
 
 interface ContextProps {
   activeSubscription: ISubscriptionPlan;
@@ -28,10 +31,19 @@ const ContextProvider = ({
 }: {
   children: React.ReactNode | React.ReactNode[];
 }) => {
+  const { user } = useContext(UserContext);
+
+  /* State */
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [activeSubscription, setActiveSubscription] = useState<
     ISubscriptionPlan
   >(null);
+
+  /* Queries */
+  const [
+    createStripeCustomer,
+    { data: stripeCustomer, error: stripeCustomerError },
+  ] = useMutation(iapGraphql.queries.CREATE_STRIPE_CUSTOMER);
 
   const stripe = useStripe();
   const elements = useElements();
@@ -60,6 +72,10 @@ const ContextProvider = ({
       if (error) {
         console.log('[error]', error);
       } else {
+        console.log(user.userEmail);
+        await createStripeCustomer({ variables: { email: user?.userEmail } });
+
+        console.log('stripeCustomer', stripeCustomer, stripeCustomerError);
         console.log('[PaymentMethod]', paymentMethod);
       }
     },

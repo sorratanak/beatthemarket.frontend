@@ -34,6 +34,15 @@ const VERIFY_PAYMENT = gql`
   }
 `;
 
-const queries = { VERIFY_PAYMENT };
+const CREATE_STRIPE_CUSTOMER = gql`
+  mutation CreateStripeCustomer($email: String!) {
+    createStripeCustomer(email: $email) {
+      id
+      email
+    }
+  }
+`;
+
+const queries = { VERIFY_PAYMENT, CREATE_STRIPE_CUSTOMER };
 
 export default { queries };
