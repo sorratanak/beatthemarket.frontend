@@ -20,14 +20,11 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
-import { DrawerActions } from '@react-navigation/native';
 
 import { getThemedStyles } from './styles.web';
 import { ThemeContext, GameContext, UserContext } from '../../contexts';
 import { IMAGES } from '../../assets';
 import { WEB_SCREEN_WIDTH_POINT } from '../../constants';
-import { dispatch } from '../staticNavigation';
-import { getResetNavigationAction } from '../../utils';
 
 export const MainNavigator = createDrawerNavigator();
 
@@ -48,11 +45,7 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
       <DrawerItemList {...props} />
       <DrawerItem
         label="Logout"
-        onPress={() => {
-          dispatch(DrawerActions.closeDrawer());
-          dispatch(getResetNavigationAction());
-          logout();
-        }}
+        onPress={logout}
         style={themedStyles.logoutContainer}
         labelStyle={themedStyles.logout}
       />

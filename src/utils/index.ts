@@ -1,6 +1,8 @@
 import { Platform } from 'react-native';
-import { CommonActions } from '@react-navigation/native';
+import { CommonActions, DrawerActions } from '@react-navigation/native';
 import currencyFormatter from 'currency-formatter';
+
+import { dispatch } from '../navigation/staticNavigation';
 
 export function isNumericChar(char: string) {
   return /\d/.test(char);
@@ -24,13 +26,14 @@ export function getIapProvider() {
   });
 }
 
-export function getResetNavigationAction() {
-  return CommonActions.reset({
-    index: 0,
-    routes: [{ name: 'Home' }],
-  });
-}
-
-export function resetNavigation(navigation) {
-  navigation.dispatch(getResetNavigationAction());
+export function resetNavigation() {
+  if (Platform.OS === 'web') {
+    dispatch(DrawerActions.closeDrawer());
+  }
+  dispatch(
+    CommonActions.reset({
+      index: 0,
+      routes: [{ name: 'Home' }],
+    }),
+  );
 }

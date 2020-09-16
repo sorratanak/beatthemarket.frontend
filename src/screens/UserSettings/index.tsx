@@ -17,8 +17,6 @@ export function UserSettings() {
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
-  const navigation = useNavigation();
-
   const onSwitchTheme = useCallback(() => {
     switchTheme(
       themeKey === THEME_KEYS.LIGHT_THEME
@@ -39,7 +37,7 @@ export function UserSettings() {
         onSwitchValueChange={onSwitchTheme}
       />
       <DefaultButton
-        onPress={() => logout(navigation)}
+        onPress={logout}
         style={{
           container: themedStyles.buttonContainer,
           text: themedStyles.buttonText,

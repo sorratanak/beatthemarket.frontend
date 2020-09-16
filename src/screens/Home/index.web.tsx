@@ -39,7 +39,7 @@ export function Home({ navigation }: ScreenProps) {
   /* Error Handling */
   useEffect(() => {
     if (createGameError) {
-      logout(navigation);
+      logout();
     }
   }, [createGameError]);
 
