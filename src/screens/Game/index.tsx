@@ -18,7 +18,11 @@ import {
 import { IPoint, IGameEventScore } from '../../types';
 import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
 import { getThemedStyles } from './styles';
-import { MAX_WINS_COUNT, LEVEL_WIN_STEP } from '../../constants';
+import {
+  MAX_WINS_COUNT,
+  LEVEL_WIN_STEP,
+  GAME_EVENT_NAMES,
+} from '../../constants';
 
 export function Game() {
   const { theme } = useContext(ThemeContext);
@@ -83,7 +87,10 @@ export function Game() {
             levelTimerCallback={onSetGameEvents}
             // TODO its temporary solution
             levelStatusCallback={(newGameScore: IGameEventScore) => {
-              if (newGameScore.event === 'win' && wins !== MAX_WINS_COUNT) {
+              if (
+                newGameScore.event === GAME_EVENT_NAMES.WIN &&
+                wins !== MAX_WINS_COUNT
+              ) {
                 setWins(wins + LEVEL_WIN_STEP);
               } else {
                 onSetGameScore(newGameScore);

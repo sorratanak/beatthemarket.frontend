@@ -71,6 +71,11 @@ export const GAME_EVENT_TYPENAMES = {
   CONTROL_EVENT: 'ControlEvent',
 };
 
+export const GAME_EVENT_NAMES = {
+  WIN: 'win',
+  LOSE: 'lose',
+};
+
 export const STATUS_BAR_STYLES: {
   [key: string]: 'dark-content' | 'light-content' | 'default';
 } = {
