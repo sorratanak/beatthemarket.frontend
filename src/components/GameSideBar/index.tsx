@@ -43,16 +43,18 @@ export function GameSideBar({ style: propStyle = {} }: Props) {
   const [timeRemaining, setTimeRemaining] = useState<string>(EMPTY_TIMER);
   const { onSetActiveStock, stocks, activeStock } = useContext(GameContext);
 
-  const activeProfit = useMemo(() => profit[activeStock?.id], [
+  const activeProfit = useMemo(() => profit?.[activeStock?.id], [
     profit,
     activeStock,
   ]);
   const activeBalance = useMemo(
     () =>
-      _.find(
-        Object.values(balance),
-        (someBalance) => someBalance.name === ACCOUNT_BALANCE_TYPE.CASH,
-      ),
+      balance
+        ? _.find(
+            Object.values(balance),
+            (someBalance) => someBalance.name === ACCOUNT_BALANCE_TYPE.CASH,
+          )
+        : null,
     [balance],
   );
 

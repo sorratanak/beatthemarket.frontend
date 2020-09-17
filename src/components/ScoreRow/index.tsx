@@ -13,11 +13,13 @@ export function ScoreRow() {
   const { balance } = useContext(PortfolioContext);
 
   const summBalance = useMemo(() => {
-    return _.reduce(
-      Object.values(balance),
-      (summ, someBalance) => summ + someBalance.balance,
-      0,
-    );
+    return balance
+      ? _.reduce(
+          Object.values(balance),
+          (summ, someBalance) => summ + someBalance.balance,
+          0,
+        )
+      : 0;
   }, [balance]);
 
   return (

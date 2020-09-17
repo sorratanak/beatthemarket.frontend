@@ -77,6 +77,19 @@ const ContextProvider = ({
   const [wins, setWins] = useState<number>(START_GAME_LEVEL);
   const [isGamePaused, setIsGamePaused] = useState<boolean>(false);
 
+  /* ------ Reset states when logout ------ */
+  useEffect(() => {
+    if (!user) {
+      setGameId(null);
+      setActiveStock(null);
+      setStocks([]);
+      setGameEvents(null);
+      setGameScore(null);
+      setWins(START_GAME_LEVEL);
+      setIsGamePaused(false);
+    }
+  }, [user]);
+
   /* ------ Queries ------ */
   const [
     buyStock,

@@ -51,6 +51,14 @@ const ContextProvider = ({
     [balanceId: string]: IPortfolioBalance;
   }>({});
 
+  /* ------ Reset states when logout ------ */
+  useEffect(() => {
+    if (!user) {
+      setProfit(null);
+      setBalance(null);
+    }
+  }, [user]);
+
   const onUpdateProfit = useCallback(
     (newProfits: IPortfolioProfit[]) => {
       const updatedProfit = { ...profit };

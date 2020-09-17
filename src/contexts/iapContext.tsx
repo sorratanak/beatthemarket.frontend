@@ -1,4 +1,10 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  useContext,
+} from 'react';
 import { Platform } from 'react-native';
 import {
   // requestPurchase,
@@ -18,6 +24,7 @@ import { ISubscriptionPlan, IStripeUserInfo } from '../types';
 import iapGraphql from '../graphql/iap';
 import { getIapProvider } from '../utils';
 import { getVerifyPaymentRequest } from '../utils/parsing';
+import { UserContext } from './userContext';
 
 interface ContextProps {
   activeSubscription: ISubscriptionPlan;
@@ -45,10 +52,20 @@ const ContextProvider = ({
 }: {
   children: React.ReactNode | React.ReactNode[];
 }) => {
+  const { user } = useContext(UserContext);
+
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [activeSubscription, setActiveSubscription] = useState<
     ISubscriptionPlan
   >(null);
+
+  /* ------ Reset states when logout ------ */
+  useEffect(() => {
+    if (!user) {
+      setIsProcessing(false);
+      setActiveSubscription(null);
+    }
+  }, [user]);
 
   const purchaseUpdatedListenerRef = useRef(null);
   const purchaseErrorListenerRef = useRef(null);

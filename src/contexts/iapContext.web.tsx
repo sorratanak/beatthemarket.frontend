@@ -33,14 +33,23 @@ const ContextProvider = ({
 }) => {
   const { user } = useContext(UserContext);
 
-  /* State */
+  /* ------ State ------ */
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [activeSubscription, setActiveSubscription] = useState<
     ISubscriptionPlan
   >(null);
 
-  /* Queries */
+  /* ------ Reset states when logout ------ */
+  useEffect(() => {
+    if (!user) {
+      setIsProcessing(false);
+      setPaymentMethod(null);
+      setActiveSubscription(null);
+    }
+  }, [user]);
+
+  /* ------ Queries ------ */
   const [
     createStripeCustomer,
     { data: stripeCustomer, error: stripeCustomerError },

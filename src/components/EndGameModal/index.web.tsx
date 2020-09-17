@@ -34,10 +34,12 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
 
   const activeBalance = useMemo(
     () =>
-      _.find(
-        Object.values(balance),
-        (someBalance) => someBalance.name === ACCOUNT_BALANCE_TYPE.CASH,
-      ),
+      balance
+        ? _.find(
+            Object.values(balance),
+            (someBalance) => someBalance.name === ACCOUNT_BALANCE_TYPE.CASH,
+          )
+        : null,
     [balance],
   );
 
