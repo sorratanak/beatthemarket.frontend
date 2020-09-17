@@ -16,7 +16,11 @@ import { getThemedStyles } from './styles';
 import { getStockChanges, getLastAndPrelast } from '../../utils/parsing';
 import { StockList } from '../StockList';
 import { COLORS } from '../../themes/colors';
-import { STOCK_CHANGE_TYPE, ACCOUNT_BALANCE_TYPE } from '../../constants';
+import {
+  STOCK_CHANGE_TYPE,
+  ACCOUNT_BALANCE_TYPE,
+  LEVEL_THRESHOLDS,
+} from '../../constants';
 import { DefaultModal } from '../DefaultModal';
 import { ExpandedStockList } from '../ExpandedStockList';
 import { getMoneyFormat } from '../../utils';
@@ -28,7 +32,7 @@ interface ChartHeaderProps {
 function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
   // const { user } = useContext(UserContext);
   const { profit, balance } = useContext(PortfolioContext);
-  const { activeStock } = useContext(GameContext);
+  const { activeStock, gameEvents } = useContext(GameContext);
 
   const activeProfit = useMemo(() => profit[activeStock?.id], [
     profit,
@@ -70,6 +74,16 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
                 : themedStyles.chartHeaderStockChangeNegativePercent
             }>
             {stockChange.difference}
+          </Text>
+        </View>
+      )}
+      {!!gameEvents?.level && !!LEVEL_THRESHOLDS[gameEvents.level] && (
+        <View style={themedStyles.chartHeaderSubcontainer}>
+          <Text style={themedStyles.chartHeaderStockChangePositivePercent}>
+            Win: {LEVEL_THRESHOLDS[gameEvents.level].win}
+          </Text>
+          <Text style={themedStyles.chartHeaderStockChangeNegativePercent}>
+            Lose: {LEVEL_THRESHOLDS[gameEvents.level].lose}
           </Text>
         </View>
       )}

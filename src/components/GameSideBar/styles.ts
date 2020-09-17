@@ -80,4 +80,7 @@ export const getThemedStyles = (theme: ITheme) =>
     expandedStockListContainer: {
       flexShrink: 1,
     },
+    mb20: {
+      marginBottom: 20,
+    },
   });

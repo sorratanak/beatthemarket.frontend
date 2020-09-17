@@ -19,7 +19,7 @@ import { getThemedStyles } from './styles';
 import { GameTimer } from '../GameTimer';
 import { ExpandedStockList } from '../ExpandedStockList';
 import { IStock } from '../../types';
-import { ACCOUNT_BALANCE_TYPE } from '../../constants';
+import { ACCOUNT_BALANCE_TYPE, LEVEL_THRESHOLDS } from '../../constants';
 import { getMoneyFormat } from '../../utils';
 
 interface Props {
@@ -100,6 +100,18 @@ export function GameSideBar({ style: propStyle = {} }: Props) {
             </Text>
           </View>
         </View>
+        {!!gameEvents?.level && !!LEVEL_THRESHOLDS[gameEvents.level] && (
+          <View style={themedStyles.mb20}>
+            <Text style={[themedStyles.scorePlus, themedStyles.mb20]}>
+              Win threshold:{' '}
+              {getMoneyFormat(LEVEL_THRESHOLDS[gameEvents.level].win)}
+            </Text>
+            <Text style={themedStyles.scoreMinus}>
+              Lose threshold:{' '}
+              {getMoneyFormat(LEVEL_THRESHOLDS[gameEvents.level].lose)}
+            </Text>
+          </View>
+        )}
         <View style={themedStyles.timerContainer}>
           {timeRemaining !== EMPTY_TIMER && <GameTimer time={timeRemaining} />}
         </View>

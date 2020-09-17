@@ -88,6 +88,51 @@ export const QUERY_WITH_ERRORS_OPTIONS: MutationHookOptions = {
   errorPolicy: 'all',
 };
 
+export const LEVEL_THRESHOLDS: {
+  [key: number]: { win: number; lose: number };
+} = {
+  1: {
+    win: 1000,
+    lose: 1000,
+  },
+  2: {
+    win: 10000,
+    lose: 2000,
+  },
+  3: {
+    win: 50000,
+    lose: 2000,
+  },
+  4: {
+    win: 100000,
+    lose: 5000,
+  },
+  5: {
+    win: 1000000,
+    lose: 10000,
+  },
+  6: {
+    win: 10000000,
+    lose: 500000,
+  },
+  7: {
+    win: 50000000,
+    lose: 500000,
+  },
+  8: {
+    win: 100000000,
+    lose: 500000,
+  },
+  9: {
+    win: 500000000,
+    lose: 500000,
+  },
+  10: {
+    win: 1000000000,
+    lose: 1000000,
+  },
+};
+
 export const DEVELOPMENT_SERVER_BASE_IP =
   'beatthemarket5-env.eba-42mjkwti.us-east-1.elasticbeanstalk.com';
 
