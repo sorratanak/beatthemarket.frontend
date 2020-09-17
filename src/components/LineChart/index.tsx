@@ -13,7 +13,7 @@ interface Props {
   data: IPoint[];
 }
 
-const MAX_VISIBLE_POINTS = 15;
+const MAX_VISIBLE_POINTS = 30;
 
 export function LineChart({ data }: Props) {
   const { theme } = useContext(ThemeContext);
