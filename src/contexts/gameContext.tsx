@@ -100,6 +100,9 @@ const ContextProvider = ({
   const [resumeGame, { data: resumeGameResponse }] = useMutation(
     gameGraphql.queries.RESUME_GAME,
   );
+  const [exitGame, { data: exitGameResponse }] = useMutation(
+    gameGraphql.queries.EXIT_GAME,
+  );
   const [getUserProfitLoss, { data: userProfitLossResponse }] = useLazyQuery(
     gameGraphql.queries.GET_USER_PROFIT_LOSS,
   );
