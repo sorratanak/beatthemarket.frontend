@@ -3,6 +3,7 @@ import { useIsDrawerOpen } from '@react-navigation/drawer';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import {
   View,
+  Image,
   TouchableOpacity,
   Dimensions,
   ScaledSize,
@@ -10,6 +11,7 @@ import {
 } from 'react-native';
 import { WEB_SCREEN_WIDTH_POINT } from '../../constants';
 import styles from './styles';
+import { IMAGES } from '../../assets';
 
 interface Props extends ViewProps {
   children: ReactNode;
@@ -41,8 +43,9 @@ export function ContainerWithBurgerMenu({ children, style }: Props) {
           onPress={() => {
             navigation.dispatch(DrawerActions.openDrawer());
           }}
-          style={styles.burgerContainer}
-        />
+          style={styles.burgerContainer}>
+          <Image source={IMAGES.BURGER_MENU} style={styles.burgerImage} />
+        </TouchableOpacity>
       )}
       {children}
     </View>
