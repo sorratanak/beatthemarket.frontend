@@ -16,7 +16,7 @@ import { getThemedStyles } from './styles';
 import { START_GAME_LEVEL, QUERY_WITH_ERRORS_OPTIONS } from '../../constants';
 
 export function Home({ navigation }: ScreenProps) {
-  const { onSetGameId, onSetStocks } = useContext(GameContext);
+  const { gameEvents, onSetGameId, onSetStocks } = useContext(GameContext);
   const {
     user: { userName },
     logout,
@@ -78,9 +78,13 @@ export function Home({ navigation }: ScreenProps) {
         <View style={themedStyles.profileInfoContainer}>
           <View style={themedStyles.profileTitleContainer}>
             <Text style={themedStyles.profileTitle}>Profile</Text>
-            <View style={themedStyles.profileLvlContainer}>
-              <Text style={themedStyles.profileLvl}>Level 3</Text>
-            </View>
+            {gameEvents?.level && (
+              <View style={themedStyles.profileLvlContainer}>
+                <Text style={themedStyles.profileLvl}>
+                  Level {gameEvents.level}
+                </Text>
+              </View>
+            )}
           </View>
           <ScoreRow />
         </View>
