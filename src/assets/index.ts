@@ -18,6 +18,8 @@ export const IMAGES = {
   APPLE: require('./logo/apple.png'),
   WHITE_APPLE: require('./logo/whiteApple.png'),
   MICROSOFT: require('./logo/microsoft.png'),
+  BACKGROUND_BEATTHEMARKET_LIGHT: require('./logo/backgroundLight.png'),
+  BACKGROUND_BEATTHEMARKET_DARK: require('./logo/backgroundDark.png'),
 
   /* Settings */
   FLAG: require('./settings/redFlag.png'),

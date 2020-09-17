@@ -61,6 +61,7 @@ interface ISubscriptionsScreenTheme {
 }
 
 interface ISignInScreenTheme {
+  BACKGROUND_COLOR?: string;
   TEXT_INPUT_BACKGROUND?: string;
   TEXT_INPUT_COLOR?: string;
   FORGOT_PASSWORD_COLOR?: string;

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useMemo } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Platform } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,6 +9,7 @@ import {
   DefaultInput,
   DefaultButton,
   SocialButton,
+  BeatTheMarketBackground,
 } from '../../components';
 import { ThemeContext, UserContext } from '../../contexts';
 import { getThemedStyles } from './styles';
@@ -28,6 +29,8 @@ export function SignIn() {
 
   return (
     <Container style={themedStyles.signinContainer}>
+      {Platform.OS === 'web' && <BeatTheMarketBackground />}
+
       <View style={themedStyles.signinSubcontainer}>
         <View style={themedStyles.socialMediaContainer}>
           <SocialButton
