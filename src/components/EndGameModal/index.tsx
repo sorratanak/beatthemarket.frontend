@@ -35,12 +35,9 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
   const {
     user: { userName },
   } = useContext(UserContext);
-  const {
-    stocks,
-    gameEvents,
-    onGetUserProfitLoss,
-    userProfitLoss,
-  } = useContext(GameContext);
+  const { stocks, gameScore, onGetUserProfitLoss, userProfitLoss } = useContext(
+    GameContext,
+  );
 
   const { balance } = useContext(PortfolioContext);
 
@@ -82,7 +79,7 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
         <View style={themedStyles.userInfoContainer}>
           <Text style={themedStyles.subTitle}>{userName}</Text>
           <View style={themedStyles.userLvlContainer}>
-            <Text style={themedStyles.userLvl}>Level {gameEvents?.level}</Text>
+            <Text style={themedStyles.userLvl}>Level {gameScore?.level}</Text>
           </View>
         </View>
 

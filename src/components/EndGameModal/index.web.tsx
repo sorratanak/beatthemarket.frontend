@@ -27,12 +27,9 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
-  const {
-    stocks,
-    gameEvents,
-    onGetUserProfitLoss,
-    userProfitLoss,
-  } = useContext(GameContext);
+  const { stocks, gameScore, onGetUserProfitLoss, userProfitLoss } = useContext(
+    GameContext,
+  );
   const { balance } = useContext(PortfolioContext);
 
   const activeBalance = useMemo(
@@ -86,9 +83,7 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
           <View style={themedStyles.resultInfo}>
             <View style={themedStyles.userInfoContainer}>
               <Text style={themedStyles.subTitle}>Cris Brown</Text>
-              <Text style={themedStyles.userLvl}>
-                Level {gameEvents?.level}
-              </Text>
+              <Text style={themedStyles.userLvl}>Level {gameScore?.level}</Text>
             </View>
             <Text
               style={
@@ -96,7 +91,7 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
                   ? themedStyles.loseMessage
                   : [themedStyles.loseMessage, themedStyles.hidden]
               }>
-              Lost at level {gameEvents?.level}
+              Lost at level {gameScore?.level}
             </Text>
             <View style={themedStyles.profitsContainer}>
               <Text style={themedStyles.profitsTitle}>Profits:</Text>

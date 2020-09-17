@@ -94,7 +94,7 @@ export const getThemedStyles = (theme: ITheme) =>
     },
     buttonContainer: {
       marginHorizontal: 80,
-      width: 330,
+      width: '50%',
       backgroundColor: theme.END_GAME_MODAL.FINISH_BUTTON_BACKGROUND,
     },
   });
