@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useMutation } from '@apollo/client';
 import _ from 'lodash';
@@ -35,6 +35,7 @@ const ContextProvider = ({
 
   /* State */
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [paymentMethod, setPaymentMethod] = useState(null);
   const [activeSubscription, setActiveSubscription] = useState<
     ISubscriptionPlan
   >(null);
@@ -44,6 +45,14 @@ const ContextProvider = ({
     createStripeCustomer,
     { data: stripeCustomer, error: stripeCustomerError },
   ] = useMutation(iapGraphql.queries.CREATE_STRIPE_CUSTOMER);
+  useEffect(() => {
+    if (paymentMethod && stripeCustomer) {
+      // TODO next step of stripe
+      console.log('success!', paymentMethod, stripeCustomer);
+    }
+  }, [stripeCustomer]);
+
+  console.log('stripeCustomer', stripeCustomer);
 
   const stripe = useStripe();
   const elements = useElements();
@@ -64,7 +73,10 @@ const ContextProvider = ({
       const cardElement = elements.getElement(CardElement);
 
       // Use your card Element with other Stripe.js APIs
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
+      const {
+        error,
+        paymentMethod: newPaymentMethod,
+      } = await stripe.createPaymentMethod({
         type: 'card',
         card: cardElement,
       });
@@ -72,11 +84,9 @@ const ContextProvider = ({
       if (error) {
         console.log('[error]', error);
       } else {
-        console.log(user.userEmail);
-        await createStripeCustomer({ variables: { email: user?.userEmail } });
-
-        console.log('stripeCustomer', stripeCustomer, stripeCustomerError);
-        console.log('[PaymentMethod]', paymentMethod);
+        console.log('email is', user?.userEmail);
+        setPaymentMethod(newPaymentMethod);
+        createStripeCustomer({ variables: { email: user?.userEmail } });
       }
     },
     [stripe, elements],
