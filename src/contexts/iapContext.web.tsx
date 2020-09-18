@@ -6,6 +6,8 @@ import _ from 'lodash';
 import iapGraphql from '../graphql/iap';
 import { ISubscriptionPlan, IStripeUserInfo } from '../types';
 import { UserContext } from './userContext';
+import { getVerifyPaymentRequest } from '../utils/parsing';
+import { getIapProvider } from '../utils';
 
 interface ContextProps {
   activeSubscription: ISubscriptionPlan;
@@ -36,6 +38,7 @@ const ContextProvider = ({
   /* ------ State ------ */
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [paymentMethod, setPaymentMethod] = useState(null);
+  const [currentProductId, setCurrentProductId] = useState(null);
   const [activeSubscription, setActiveSubscription] = useState<
     ISubscriptionPlan
   >(null);
@@ -50,14 +53,31 @@ const ContextProvider = ({
   }, [user]);
 
   /* ------ Queries ------ */
+  const [verifyPayment, { data: verifyPaymentResponse }] = useMutation(
+    iapGraphql.queries.VERIFY_PAYMENT,
+  );
+
   const [
     createStripeCustomer,
     { data: stripeCustomer, error: stripeCustomerError },
   ] = useMutation(iapGraphql.queries.CREATE_STRIPE_CUSTOMER);
   useEffect(() => {
-    if (paymentMethod && stripeCustomer) {
-      // TODO next step of stripe
-      console.log('success!', paymentMethod, stripeCustomer);
+    if (
+      currentProductId &&
+      paymentMethod &&
+      stripeCustomer?.createStripeCustomer
+    ) {
+      const {
+        createStripeCustomer: [currentStripeCustomer],
+      } = stripeCustomer;
+
+      verifyPayment(
+        getVerifyPaymentRequest(currentProductId, getIapProvider(), {
+          customerId: currentStripeCustomer?.id,
+          paymentMethodId: paymentMethod.id,
+          priceId: currentProductId,
+        }),
+      );
     }
   }, [stripeCustomer]);
 
@@ -68,6 +88,7 @@ const ContextProvider = ({
 
   const onRequestSubscription = useCallback(
     async (subscriptionId: string, userInfo: IStripeUserInfo) => {
+      setCurrentProductId(subscriptionId);
       console.log('onRequestSubscription', subscriptionId, userInfo);
 
       if (!stripe || !elements) {
