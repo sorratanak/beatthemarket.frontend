@@ -69,6 +69,8 @@ const authLink = setContext(async (_, { headers }) => {
   const token = await getFirebaseToken();
   const deviceId = await getUuidFromStorage();
 
+  console.log('Bearer', token);
+
   return {
     headers: {
       ...headers,

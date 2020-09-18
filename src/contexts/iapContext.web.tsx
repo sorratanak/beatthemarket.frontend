@@ -72,10 +72,10 @@ const ContextProvider = ({
       } = stripeCustomer;
 
       verifyPayment(
-        getVerifyPaymentRequest(currentProductId, getIapProvider(), {
+        getVerifyPaymentRequest('prod_I1RAoB8UK5GDab', getIapProvider(), {
           customerId: currentStripeCustomer?.id,
           paymentMethodId: paymentMethod.id,
-          priceId: currentProductId,
+          priceId: 'price_0HROINu4V08wojXst9HsC6Yw',
         }),
       );
     }
