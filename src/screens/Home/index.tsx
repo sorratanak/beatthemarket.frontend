@@ -58,7 +58,10 @@ export function Home({ navigation }: ScreenProps) {
 
   return (
     <Container style={themedStyles.container}>
-      <ScoreBoard users={users} style={themedStyles.scoreBoardContainer} />
+      <ScoreBoard
+        users={users?.users || []}
+        style={themedStyles.scoreBoardContainer}
+      />
       <DefaultButton
         onPress={onCreateGamePress}
         style={{

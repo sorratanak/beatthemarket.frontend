@@ -79,7 +79,7 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
           <View style={themedStyles.rankInfo}>
             <Text style={themedStyles.subTitle}>Lorem ipsum</Text>
             <View style={themedStyles.scoreBoardContainer}>
-              <ScoreBoard users={users} isTabsVisible={false} />
+              <ScoreBoard users={users?.users || []} isTabsVisible={false} />
             </View>
           </View>
           <View style={themedStyles.resultInfo}>

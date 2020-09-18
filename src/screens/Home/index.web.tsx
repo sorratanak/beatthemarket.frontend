@@ -90,7 +90,10 @@ export function Home({ navigation }: ScreenProps) {
         </View>
       </View>
 
-      <ScoreBoard users={users} style={themedStyles.scoreBoardContainer} />
+      <ScoreBoard
+        users={users?.users || []}
+        style={themedStyles.scoreBoardContainer}
+      />
       <DefaultButton
         onPress={onCreateGamePress}
         style={{

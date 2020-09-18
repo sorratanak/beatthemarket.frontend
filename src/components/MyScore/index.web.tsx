@@ -1,9 +1,10 @@
 import React, { useContext, useMemo } from 'react';
 import { View } from 'react-native';
+import randomString from 'random-string';
+import _ from 'lodash';
 
 import { ScoreList } from '..';
 import { getThemedStyles } from './styles';
-import { DUMMY_DATA } from './dummy';
 import { ThemeContext } from '../../contexts';
 
 interface Props {
@@ -16,7 +17,14 @@ export function MyScore({ users }: Props) {
 
   return (
     <View style={themedStyles.container}>
-      <ScoreList data={DUMMY_DATA} />
+      <ScoreList
+        data={_.map(users, (user, index) => ({
+          id: randomString(),
+          rank: index + 1,
+          username: user.userName,
+          score: null,
+        }))}
+      />
     </View>
   );
 }
