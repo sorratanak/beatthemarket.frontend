@@ -16,11 +16,15 @@ export const getThemedStyles = (theme: ITheme) =>
       paddingHorizontal: 8,
       paddingVertical: 3,
       marginRight: 8,
+      flexDirection: 'row',
     },
     activeListItemContainer: {
       backgroundColor: theme.GAME_SCREEN.LIST_VIEW_ACTIVE_COLOR,
     },
     listItemTitle: {
+      color: theme.DEFAULT.TEXT_COLOR,
+    },
+    listItemShares: {
       color: theme.DEFAULT.TEXT_COLOR,
     },
   });

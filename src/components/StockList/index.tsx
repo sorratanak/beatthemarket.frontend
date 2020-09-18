@@ -1,9 +1,10 @@
 import React, { useContext, useMemo } from 'react';
 import { FlatList, TouchableOpacity, Text, Platform } from 'react-native';
+import _ from 'lodash';
 
 import { getThemedStyles } from './styles';
 import { IStock } from '../../types';
-import { ThemeContext } from '../../contexts';
+import { ThemeContext, PortfolioContext } from '../../contexts';
 
 interface StockListItemProps {
   item: IStock;
@@ -17,6 +18,15 @@ function StockListItem({
   onPress,
   themedStyles,
 }: StockListItemProps) {
+  const { balance } = useContext(PortfolioContext);
+
+  const currentSharesBalance = balance
+    ? _.find(
+        Object.values(balance),
+        (someBalance) => item.name === someBalance.counterParty,
+      )
+    : null;
+
   const isActive: boolean = item.id === activeStockId;
 
   return (
@@ -28,6 +38,10 @@ function StockListItem({
       ]}>
       <Text style={themedStyles.listItemTitle}>
         {Platform.OS === 'web' ? item.name : item.symbol}
+      </Text>
+      <Text style={themedStyles.listItemShares}>
+        {Platform.OS === 'web' ? 'Shares:' : ''}{' '}
+        {currentSharesBalance?.amount || 0}
       </Text>
     </TouchableOpacity>
   );
