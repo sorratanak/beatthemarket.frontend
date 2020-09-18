@@ -14,6 +14,9 @@ export const getThemedDefaultChartOptions = (theme: ITheme) => ({
       },
     },
   },
+  credits: {
+    enabled: false,
+  },
   series: [
     {
       name: 'Value',
