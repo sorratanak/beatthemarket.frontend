@@ -115,6 +115,17 @@ export interface IStripeUserInfo {
   phone: string;
 }
 
+export type TOfferBlockPreset =
+  | 'additionalBalance'
+  | 'additionalTime'
+  | 'additionalMarginTradingAndBalance';
+
+export interface IOfferBlockItem {
+  id: string;
+  stripeId: string;
+  title: string;
+}
+
 /* ------ Requests ------ */
 
 export interface IGraphqlVariableRequest<VariablesObj> {

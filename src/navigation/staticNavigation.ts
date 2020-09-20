@@ -8,3 +8,9 @@ export function navDispatch(action) {
     navigationRef.current.dispatch(action);
   }
 }
+
+export function navigateTo(routeName: string, params?: any) {
+  if (navigationRef?.current) {
+    navigationRef.current.navigate(routeName, params);
+  }
+}

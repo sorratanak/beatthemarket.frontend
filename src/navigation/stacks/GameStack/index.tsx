@@ -5,6 +5,7 @@ import { withoutHeaderOptions } from '../../routesOptions';
 
 export type StackParams = {
   Game: undefined;
+  Subscriptions: undefined;
 };
 
 const Stack = createStackNavigator<StackParams>();
