@@ -16,6 +16,7 @@ import {
   purchaseUpdatedListener,
   purchaseErrorListener,
   finishTransaction,
+  consumeAllItemsAndroid,
   initConnection as iapInitConnection,
 } from 'react-native-iap';
 import { useMutation } from '@apollo/client';
@@ -47,6 +48,10 @@ const DEFAULT_IAP_CONTEXT: ContextProps = {
 };
 
 iapInitConnection();
+// TODO remove temporary
+if (Platform.OS === 'android') {
+  consumeAllItemsAndroid();
+}
 
 export const IapContext = React.createContext(DEFAULT_IAP_CONTEXT);
 
@@ -93,7 +98,16 @@ const ContextProvider = ({
 
             await finishTransaction(purchase);
 
-            console.log(purchase.productId, getIapProvider(), purchase);
+            console.log(
+              'verifyPaymentRequest',
+              JSON.stringify(
+                getVerifyPaymentRequest(
+                  purchase.productId,
+                  getIapProvider(),
+                  purchase,
+                ).variables,
+              ),
+            );
             verifyPayment(
               getVerifyPaymentRequest(
                 purchase.productId,

@@ -1,16 +1,22 @@
-import React, { useContext, useMemo, useCallback } from 'react';
-import { View, Text, FlatList, TouchableOpacity, Platform } from 'react-native';
+import React, { useContext, useMemo, useCallback, useState } from 'react';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import _ from 'lodash';
 
+import { DefaultModal } from '../DefaultModal';
 import { ThemeContext, IapContext } from '../../contexts';
 import { TOfferBlockPreset, IOfferBlockItem } from '../../types';
-import { getThemedStyles } from './styles';
-import { OFFER_PRESET_TYPE, ONE_TIME_PURCHASE_TYPE } from '../../constants';
+import { getThemedStyles, MODAL_CONTAINER_STYLE } from './styles';
+import {
+  OFFER_PRESET_TYPE,
+  ONE_TIME_PURCHASE_TYPE,
+  PURCHASE_TYPE,
+} from '../../constants';
 import {
   ADDITIONAL_BALANCE_PRESET_DATA,
   ADDITIONAL_MARGIN_TRADING_AND_BALANCE_PRESET_DATA,
   ADDITIONAL_TIME_PRESET_DATA,
 } from './presets';
+import { BuySubscriptionModal } from '../BuySubscriptionModal';
 
 interface Props {
   title?: string;
@@ -21,6 +27,8 @@ interface Props {
 export function OfferBlock({ title, preset, onItemPressCallback }: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
+
+  const [isPayModalVisible, setIsPayModalVisible] = useState<boolean>(false);
 
   const offerPresetData = useMemo((): IOfferBlockItem[] => {
     switch (preset) {
@@ -35,29 +43,20 @@ export function OfferBlock({ title, preset, onItemPressCallback }: Props) {
     }
   }, [preset, themedStyles]);
 
-  const { onSelectPurchase, onRequestPurchase } = useContext(IapContext);
+  const { onSelectPurchase } = useContext(IapContext);
 
   const onItemPress = useCallback(
     (item: IOfferBlockItem) => {
-      onItemPressCallback();
+      // onItemPressCallback();
 
-      switch (preset) {
-        case OFFER_PRESET_TYPE.ADDITIONAL_BALANCE:
-          onSelectPurchase(
-            _.find(
-              ONE_TIME_PURCHASE_TYPE,
-              (purch) => purch.RNIAP_PRODUCT_ID === item.id,
-            ),
-          );
-          onRequestPurchase();
-          break;
-        case OFFER_PRESET_TYPE.ADDITIONAL_TIME:
-          break;
-        case OFFER_PRESET_TYPE.ADDITIONAL_MARGIN_TRADING_AND_BALANCE:
-          break;
-        default:
-          break;
-      }
+      onSelectPurchase(
+        _.find(
+          ONE_TIME_PURCHASE_TYPE,
+          (purch) => purch.STRIPE_PRODUCT_ID === item.stripeId,
+        ),
+      );
+
+      setIsPayModalVisible(true);
     },
     [preset, onItemPressCallback],
   );
@@ -79,6 +78,14 @@ export function OfferBlock({ title, preset, onItemPressCallback }: Props) {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={themedStyles.offerListContentContainer}
       />
+
+      <DefaultModal
+        isVisible={isPayModalVisible}
+        isBackdrop
+        onBackdropPress={() => setIsPayModalVisible(false)}
+        style={MODAL_CONTAINER_STYLE}>
+        <BuySubscriptionModal purchaseType={PURCHASE_TYPE.ONE_TIME_PURCHASE} />
+      </DefaultModal>
     </View>
   );
 }
