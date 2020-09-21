@@ -102,13 +102,6 @@ export interface IGameEventExit {
   __typename: 'ControlEvent';
 }
 
-export interface ISubscriptionPlan {
-  id: string;
-  stripeId: string;
-  balance: number;
-  price: number;
-}
-
 export interface IStripeUserInfo {
   name: string;
   email: string;
@@ -124,6 +117,16 @@ export interface IOfferBlockItem {
   id: string;
   stripeId: string;
   title: string;
+}
+
+export type PurchaseType = 'subscription' | 'oneTimePurchase';
+
+export interface IPurchase {
+  TITLE: string;
+  TYPE: PurchaseType;
+  RNIAP_PRODUCT_ID: string;
+  STRIPE_PRODUCT_ID: string;
+  PRICE?: number;
 }
 
 /* ------ Requests ------ */

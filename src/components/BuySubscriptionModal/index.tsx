@@ -5,22 +5,46 @@ import { CardElement } from '@stripe/react-stripe-js';
 import { ThemeContext, IapContext } from '../../contexts';
 import { getThemedStyles, CARD_ELEMENT_OPTIONS } from './styles';
 import { DefaultInput } from '../DefaultInput';
-import { THEME_KEYS } from '../../constants';
+import { THEME_KEYS, PURCHASE_TYPE } from '../../constants';
 import { DefaultButton } from '../DefaultButton';
 import { PayButton } from '../PayButton';
 import { IMAGES } from '../../assets';
-import { IStripeUserInfo } from '../../types';
-import { getMoneyFormat } from '../../utils';
+import { IStripeUserInfo, PurchaseType } from '../../types';
 
-export function BuySubscriptionModal() {
+interface Props {
+  purchaseType: PurchaseType;
+}
+
+export function BuySubscriptionModal({ purchaseType }: Props) {
   const { theme, themeKey } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
-  const { activeSubscription, onRequestSubscription } = useContext(IapContext);
+  const {
+    selectedPurchase,
+    selectedSubscription,
+    onRequestPurchase,
+    onRequestSubscription,
+  } = useContext(IapContext);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+
+  const [currentPurchase, currentRequestPurchase] = useMemo(() => {
+    switch (purchaseType) {
+      default:
+      case PURCHASE_TYPE.ONE_TIME_PURCHASE:
+        return [selectedPurchase, onRequestPurchase];
+      case PURCHASE_TYPE.SUBSCRIPTION:
+        return [selectedSubscription, onRequestSubscription];
+    }
+  }, [
+    selectedPurchase,
+    onRequestPurchase,
+    selectedSubscription,
+    onRequestSubscription,
+    purchaseType,
+  ]);
 
   const getUserInfo = useCallback((): IStripeUserInfo => {
     return {
@@ -49,14 +73,12 @@ export function BuySubscriptionModal() {
             <CardElement options={CARD_ELEMENT_OPTIONS(theme)} />
           </View>
           <DefaultButton
-            onPress={() =>
-              onRequestSubscription(activeSubscription?.stripeId, getUserInfo())
-            }
+            onPress={() => currentRequestPurchase(getUserInfo())}
             style={{
               container: themedStyles.payButtonContainer,
               text: themedStyles.payButtonTitle,
             }}>
-            {`Pay $${activeSubscription?.price}`}
+            {`Pay $${currentPurchase?.PRICE || 0}`}
           </DefaultButton>
         </View>
 

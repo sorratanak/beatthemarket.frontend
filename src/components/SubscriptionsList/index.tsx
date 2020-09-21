@@ -4,11 +4,11 @@ import { View, Text } from 'react-native';
 import { ThemeContext, IapContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 import { TilesList } from '../TilesList';
-import { ISubscriptionPlan } from '../../types';
+import { IPurchase } from '../../types';
 
 interface Props {
-  subscriptions: ISubscriptionPlan[];
-  onSubscriptionPress: (subscription: ISubscriptionPlan) => void;
+  subscriptions: IPurchase[];
+  onSubscriptionPress: (subscription: IPurchase) => void;
 }
 
 export function SubscriptionsList({
@@ -16,7 +16,7 @@ export function SubscriptionsList({
   onSubscriptionPress,
 }: Props) {
   const { theme } = useContext(ThemeContext);
-  const { activeSubscription } = useContext(IapContext);
+  const { selectedSubscription } = useContext(IapContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -25,18 +25,18 @@ export function SubscriptionsList({
       onTilePress={onSubscriptionPress}
       data={subscriptions}
       tileStyle={themedStyles.tileContainer}
-      extraData={activeSubscription}
+      extraData={selectedSubscription}
       renderItem={({ item }) => (
         <View
           style={[
             themedStyles.itemContainer,
-            activeSubscription?.id === item.id
+            selectedSubscription?.RNIAP_PRODUCT_ID === item.RNIAP_PRODUCT_ID
               ? themedStyles.activeItemContainer
               : null,
           ]}>
-          <Text style={themedStyles.itemPriceText}>$ {item.price}</Text>
+          <Text style={themedStyles.itemPriceText}>$ {item.PRICE}</Text>
           <Text style={themedStyles.itemBalanceText}>
-            An additional ${item.balance / 1000}k balance, up to $500k
+            An additional ${item.PRICE * 100}k balance, up to $500k
           </Text>
         </View>
       )}

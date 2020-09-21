@@ -33,3 +33,9 @@ export const getThemedStyles = (theme: ITheme) =>
       alignItems: 'center',
     },
   });
+
+export const MODAL_CONTAINER_STYLE: any = {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+};

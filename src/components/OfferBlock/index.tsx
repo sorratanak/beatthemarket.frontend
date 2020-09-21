@@ -2,17 +2,15 @@ import React, { useContext, useMemo, useCallback } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Platform } from 'react-native';
 import _ from 'lodash';
 
-import { SUBSCRIPTIONS } from '../../screens/Subscriptions/subscriptions';
 import { ThemeContext, IapContext } from '../../contexts';
 import { TOfferBlockPreset, IOfferBlockItem } from '../../types';
 import { getThemedStyles } from './styles';
-import { OFFER_PRESET_TYPE } from '../../constants';
+import { OFFER_PRESET_TYPE, ONE_TIME_PURCHASE_TYPE } from '../../constants';
 import {
   ADDITIONAL_BALANCE_PRESET_DATA,
   ADDITIONAL_MARGIN_TRADING_AND_BALANCE_PRESET_DATA,
   ADDITIONAL_TIME_PRESET_DATA,
 } from './presets';
-import { navigateTo } from '../../navigation/staticNavigation';
 
 interface Props {
   title?: string;
@@ -37,7 +35,7 @@ export function OfferBlock({ title, preset, onItemPressCallback }: Props) {
     }
   }, [preset, themedStyles]);
 
-  const { onSetActiveSubscription } = useContext(IapContext);
+  const { onSelectPurchase, onRequestPurchase } = useContext(IapContext);
 
   const onItemPress = useCallback(
     (item: IOfferBlockItem) => {
@@ -51,10 +49,13 @@ export function OfferBlock({ title, preset, onItemPressCallback }: Props) {
 
       switch (preset) {
         case OFFER_PRESET_TYPE.ADDITIONAL_BALANCE:
-          onSetActiveSubscription(
-            _.find(SUBSCRIPTIONS, (sub) => sub[idField] === item[idField]),
+          onSelectPurchase(
+            _.find(
+              ONE_TIME_PURCHASE_TYPE,
+              (sub) => sub[idField] === item[idField],
+            ),
           );
-          navigateTo('Settings');
+          onRequestPurchase();
           break;
         case OFFER_PRESET_TYPE.ADDITIONAL_TIME:
           break;

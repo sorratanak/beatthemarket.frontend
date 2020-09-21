@@ -4,26 +4,29 @@ import { useMutation } from '@apollo/client';
 import _ from 'lodash';
 
 import iapGraphql from '../graphql/iap';
-import { ISubscriptionPlan, IStripeUserInfo } from '../types';
+import { IPurchase, IStripeUserInfo } from '../types';
 import { UserContext } from './userContext';
 import { getVerifyPaymentRequest } from '../utils/parsing';
 import { getIapProvider } from '../utils';
 
 interface ContextProps {
-  activeSubscription: ISubscriptionPlan;
   isProcessing: boolean;
-  onRequestSubscription: (
-    subscriptionId: string,
-    userInfo: IStripeUserInfo,
-  ) => void;
-  onSetActiveSubscription: (subscription: ISubscriptionPlan) => void;
+  selectedPurchase: IPurchase;
+  selectedSubscription: IPurchase;
+  onSelectPurchase: (purchase: IPurchase) => void;
+  onSelectSubscription: (subscription: IPurchase) => void;
+  onRequestPurchase: (userInfo: IStripeUserInfo) => void;
+  onRequestSubscription: (userInfo: IStripeUserInfo) => void;
 }
 
 const DEFAULT_IAP_CONTEXT: ContextProps = {
-  activeSubscription: null,
   isProcessing: false,
+  selectedPurchase: null,
+  selectedSubscription: null,
+  onSelectPurchase: _.noop,
+  onSelectSubscription: _.noop,
   onRequestSubscription: _.noop,
-  onSetActiveSubscription: _.noop,
+  onRequestPurchase: _.noop,
 };
 
 export const IapContext = React.createContext(DEFAULT_IAP_CONTEXT);
@@ -38,17 +41,18 @@ const ContextProvider = ({
   /* ------ State ------ */
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [paymentMethod, setPaymentMethod] = useState(null);
-  const [currentProductId, setCurrentProductId] = useState(null);
-  const [activeSubscription, setActiveSubscription] = useState<
-    ISubscriptionPlan
-  >(null);
+  const [selectedPurchase, setSelectedPurchase] = useState<IPurchase>(null);
+  const [selectedSubscription, setSelectedSubscription] = useState<IPurchase>(
+    null,
+  );
 
   /* ------ Reset states when logout ------ */
   useEffect(() => {
     if (!user) {
       setIsProcessing(false);
       setPaymentMethod(null);
-      setActiveSubscription(null);
+      setSelectedPurchase(null);
+      setSelectedSubscription(null);
     }
   }, [user]);
 
@@ -62,6 +66,8 @@ const ContextProvider = ({
     { data: stripeCustomer, error: stripeCustomerError },
   ] = useMutation(iapGraphql.queries.CREATE_STRIPE_CUSTOMER);
   useEffect(() => {
+    const currentProductId = selectedSubscription?.STRIPE_PRODUCT_ID;
+
     if (
       currentProductId &&
       paymentMethod &&
@@ -70,6 +76,12 @@ const ContextProvider = ({
       const {
         createStripeCustomer: [currentStripeCustomer],
       } = stripeCustomer;
+
+      console.log('hah', currentProductId, {
+        customerId: currentStripeCustomer?.id,
+        paymentMethodId: paymentMethod.id,
+        priceId: currentProductId,
+      });
 
       verifyPayment(
         getVerifyPaymentRequest(currentProductId, getIapProvider(), {
@@ -86,10 +98,21 @@ const ContextProvider = ({
   const stripe = useStripe();
   const elements = useElements();
 
+  const onRequestPurchase = useCallback(
+    async (userInfo: IStripeUserInfo) => {
+      // TODO
+    },
+    [stripe, elements],
+  );
+
   const onRequestSubscription = useCallback(
-    async (subscriptionId: string, userInfo: IStripeUserInfo) => {
-      setCurrentProductId(subscriptionId);
-      console.log('onRequestSubscription', subscriptionId, userInfo);
+    async (userInfo: IStripeUserInfo) => {
+      console.log(
+        'onRequestSubscription',
+        selectedSubscription,
+        selectedSubscription?.STRIPE_PRODUCT_ID,
+        userInfo,
+      );
 
       if (!stripe || !elements) {
         // Stripe.js has not loaded yet. Make sure to disable
@@ -122,19 +145,29 @@ const ContextProvider = ({
     [stripe, elements],
   );
 
-  const onSetActiveSubscription = useCallback(
-    (subscription: ISubscriptionPlan) => {
-      setActiveSubscription(subscription);
+  const onSelectPurchase = useCallback(
+    (newPurchase: IPurchase) => {
+      setSelectedPurchase(newPurchase);
     },
-    [setActiveSubscription],
+    [setSelectedPurchase],
+  );
+
+  const onSelectSubscription = useCallback(
+    (newSubscription: IPurchase) => {
+      setSelectedSubscription(newSubscription);
+    },
+    [setSelectedSubscription],
   );
 
   return (
     <IapContext.Provider
       value={{
         isProcessing,
-        activeSubscription,
-        onSetActiveSubscription,
+        selectedPurchase,
+        selectedSubscription,
+        onSelectPurchase,
+        onSelectSubscription,
+        onRequestPurchase,
         onRequestSubscription,
       }}>
       {children}

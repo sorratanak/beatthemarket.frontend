@@ -1,10 +1,6 @@
 import React, { useContext, useMemo, useCallback } from 'react';
 import { View } from 'react-native';
-import {
-  requestSubscription,
-  getSubscriptions,
-  getProducts,
-} from 'react-native-iap';
+import { getSubscriptions, requestSubscription } from 'react-native-iap';
 
 import {
   SettingsNestedScreenWrapper,
@@ -14,29 +10,26 @@ import {
 import { getThemedStyles } from './styles';
 import { ThemeContext, IapContext } from '../../contexts';
 import { IMAGES } from '../../assets';
-import { SUBSCRIPTIONS } from './subscriptions';
+import { SUBSCRIPTION_TYPE } from '../../constants';
 
 export function Subscriptions() {
   const { theme } = useContext(ThemeContext);
-  const { activeSubscription, onSetActiveSubscription } = useContext(
-    IapContext,
-  );
+  const { selectedSubscription, onSelectSubscription } = useContext(IapContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   const onSubscriptionPurchase = useCallback(() => {
-    if (activeSubscription) {
-      getProducts([]).then((result) => console.log('getProducts', result));
-      getSubscriptions([]).then((result) => console.log('empty sub', result));
+    if (selectedSubscription) {
+      getSubscriptions([selectedSubscription?.RNIAP_PRODUCT_ID]).then(
+        (result) => {
+          console.log('getSubscriptions', result);
 
-      getSubscriptions([activeSubscription.id]).then((result) => {
-        console.log('getSubscriptions', result);
-
-        const [subscription] = result;
-        requestSubscription(subscription?.productId);
-      });
+          const [subscription] = result;
+          requestSubscription(subscription?.productId);
+        },
+      );
     }
-  }, [activeSubscription]);
+  }, [selectedSubscription]);
 
   return (
     <SettingsNestedScreenWrapper
@@ -44,8 +37,8 @@ export function Subscriptions() {
       style={themedStyles.container}>
       <View style={themedStyles.flexContainer}>
         <SubscriptionsList
-          subscriptions={SUBSCRIPTIONS}
-          onSubscriptionPress={onSetActiveSubscription}
+          subscriptions={Object.values(SUBSCRIPTION_TYPE).slice(1)}
+          onSubscriptionPress={onSelectSubscription}
         />
       </View>
       <DefaultButton

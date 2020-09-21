@@ -7,14 +7,14 @@ import {
   DefaultModal,
   BuySubscriptionModal,
 } from '../../components';
-import { getThemedStyles } from './styles';
+import { getThemedStyles, MODAL_CONTAINER_STYLE } from './styles.web';
 import { ThemeContext, IapContext } from '../../contexts';
 import { IMAGES } from '../../assets';
-import { SUBSCRIPTIONS } from './subscriptions';
+import { SUBSCRIPTION_TYPE, PURCHASE_TYPE } from '../../constants';
 
 export function Subscriptions() {
   const { theme } = useContext(ThemeContext);
-  const { onSetActiveSubscription } = useContext(IapContext);
+  const { onSelectSubscription } = useContext(IapContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -30,8 +30,8 @@ export function Subscriptions() {
       style={themedStyles.container}>
       <View style={themedStyles.flexContainer}>
         <SubscriptionsList
-          subscriptions={SUBSCRIPTIONS}
-          onSubscriptionPress={onSetActiveSubscription}
+          subscriptions={Object.values(SUBSCRIPTION_TYPE).slice(1)}
+          onSubscriptionPress={onSelectSubscription}
         />
       </View>
       <Text style={themedStyles.description}>
@@ -49,11 +49,11 @@ export function Subscriptions() {
       </DefaultButton>
 
       <DefaultModal
-        style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        style={MODAL_CONTAINER_STYLE}
         isVisible={isModalVisible}
         isBackdrop
         onBackdropPress={onCloseModal}>
-        <BuySubscriptionModal />
+        <BuySubscriptionModal purchaseType={PURCHASE_TYPE.SUBSCRIPTION} />
       </DefaultModal>
     </SettingsNestedScreenWrapper>
   );
