@@ -23,9 +23,7 @@ export function Home({ navigation }: ScreenProps) {
   );
 
   /* Queries */
-  const { data: users, loading: usersLoading, error: usersError } = useQuery(
-    usersGraphql.queries.GET_USERS,
-  );
+  const { data: users } = useQuery(usersGraphql.queries.GET_USERS);
 
   /* Error Handling */
   useEffect(() => {

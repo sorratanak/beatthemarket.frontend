@@ -1,5 +1,5 @@
 import React, { useContext, useCallback, useMemo } from 'react';
-import { Text, Image, View, Switch } from 'react-native';
+import { Text, Image, View } from 'react-native';
 
 import { TilesList, ContainerWithBurgerMenu } from '../../components';
 import { getThemedStyles } from './styles';
@@ -13,12 +13,15 @@ export function Settings({ navigation }: ScreenProps) {
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
-  const onNavigateTile = useCallback((item: any) => {
-    const { nav } = item;
-    if (nav) {
-      navigation.navigate(nav);
-    }
-  }, []);
+  const onNavigateTile = useCallback(
+    (item: any) => {
+      const { nav } = item;
+      if (nav) {
+        navigation.navigate(nav);
+      }
+    },
+    [navigation],
+  );
 
   return (
     <ContainerWithBurgerMenu style={themedStyles.container}>

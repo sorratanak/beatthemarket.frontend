@@ -9,7 +9,7 @@ interface Props {
   callback: (portfolio: IPortfolio[]) => void;
 }
 export function PortfolioSubscriber({ gameId, callback }: Props) {
-  const { data, loading, error } = useSubscription(
+  const { data } = useSubscription(
     porfolioGraphql.queries.SUBSCRIBE_PORTFOLIO,
     {
       variables: { gameId },
@@ -18,7 +18,6 @@ export function PortfolioSubscriber({ gameId, callback }: Props) {
 
   useEffect(() => {
     if (data) {
-      console.log('portUpdates', data.portfolioUpdates);
       callback(data.portfolioUpdates);
     }
   }, [data]);

@@ -43,7 +43,7 @@ const ContextProvider = ({
         setThemeKey(storageThemeKey);
       }
     });
-  }, [getThemeKeyFromStorage, setTheme]);
+  }, [findTheme, getThemeKeyFromStorage, setTheme]);
 
   const switchTheme = useCallback(
     (newThemeKey: TThemeKey) => {
@@ -51,7 +51,7 @@ const ContextProvider = ({
       setThemeKey(newThemeKey);
       setThemeKeyToStorage(newThemeKey);
     },
-    [setTheme, setThemeKeyToStorage],
+    [findTheme, setTheme, setThemeKeyToStorage],
   );
 
   return (

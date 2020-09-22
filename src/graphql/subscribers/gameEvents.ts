@@ -16,12 +16,9 @@ export function GameEventsSubscriber({
   levelStatusCallback,
   exitCallback,
 }: Props) {
-  const { data, loading, error } = useSubscription(
-    gameGraphql.queries.SUBSCRIBE_GAME_EVENTS,
-    {
-      variables: { gameId },
-    },
-  );
+  const { data } = useSubscription(gameGraphql.queries.SUBSCRIBE_GAME_EVENTS, {
+    variables: { gameId },
+  });
 
   useEffect(() => {
     if (data) {

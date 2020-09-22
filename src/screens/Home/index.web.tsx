@@ -32,22 +32,20 @@ export function Home({ navigation }: ScreenProps) {
   );
 
   /* Queries */
-  const { data: users, loading: usersLoading, error: usersError } = useQuery(
-    usersGraphql.queries.GET_USERS,
-  );
+  const { data: users } = useQuery(usersGraphql.queries.GET_USERS);
 
   /* Error Handling */
   useEffect(() => {
     if (createGameError) {
       logout();
     }
-  }, [createGameError]);
+  }, [createGameError, logout]);
 
   useEffect(() => {
     if (createGameResponse?.createGame) {
       startGame({ variables: { id: createGameResponse.createGame.id } });
     }
-  }, [createGameResponse]);
+  }, [createGameResponse, startGame]);
 
   useEffect(() => {
     if (createGameResponse && startGameResponse) {
@@ -60,7 +58,7 @@ export function Home({ navigation }: ScreenProps) {
 
   const onCreateGamePress = useCallback(() => {
     createGame({ variables: { gameLevel: START_GAME_LEVEL } });
-  }, []);
+  }, [createGame]);
 
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);

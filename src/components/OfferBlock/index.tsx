@@ -33,7 +33,7 @@ export function OfferBlock({ title, preset }: Props) {
       default:
         return [];
     }
-  }, [preset, themedStyles]);
+  }, [preset]);
 
   const { onSelectPurchase } = useContext(IapContext);
 

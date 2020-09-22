@@ -32,7 +32,7 @@ function ExpandedStockListItem({
         y: tick.stockTickClose,
       };
     });
-  }, [item?.ticks]);
+  }, [item.ticks]);
 
   const [stockChange, setStockChange] = useState<IStockChange>(null);
 

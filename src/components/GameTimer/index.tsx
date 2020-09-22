@@ -23,7 +23,7 @@ export function GameTimer({ time }: GameTimerProps) {
         <Text style={themedStyles.numberCellValue}>{num}</Text>
       </View>
     ),
-    [],
+    [themedStyles],
   );
 
   return (
@@ -32,7 +32,11 @@ export function GameTimer({ time }: GameTimerProps) {
         isNumericChar(timeChar) ? (
           renderNumberCell(timeChar)
         ) : (
-          <Text style={themedStyles.colonValue}>{timeChar}</Text>
+          <Text
+            key={`number-cell-:-${randomString()}`}
+            style={themedStyles.colonValue}>
+            {timeChar}
+          </Text>
         ),
       )}
     </View>

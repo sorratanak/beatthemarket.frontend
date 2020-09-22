@@ -17,7 +17,7 @@ export function UserSettings() {
         ? THEME_KEYS.DARK_THEME
         : THEME_KEYS.LIGHT_THEME,
     );
-  }, [themeKey]);
+  }, [themeKey, switchTheme]);
 
   const isLightTheme = themeKey === THEME_KEYS.LIGHT_THEME;
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { Animated, Platform } from 'react-native';
+import { Animated } from 'react-native';
 import { styles } from './styles';
 import { GameContext } from '../../contexts';
 
@@ -15,16 +15,16 @@ export function WinBackgroundEffect() {
       Animated.timing(backgroundAnim, {
         toValue: 1,
         duration: TICK_TIME,
-        useNativeDriver: Platform.OS === 'web',
+        useNativeDriver: false,
       }).start(() => {
         Animated.timing(backgroundAnim, {
           toValue: 0,
           duration: TICK_TIME,
-          useNativeDriver: Platform.OS === 'web',
+          useNativeDriver: false,
         }).start();
       });
     }
-  }, [wins]);
+  }, [wins, backgroundAnim]);
 
   const backgroundColor = backgroundAnim.interpolate({
     inputRange: [0, 1],
