@@ -38,6 +38,7 @@ export const SUBSCRIPTION_TYPE: {
     RNIAP_PRODUCT_ID: 'margin_trading_1month.1',
     STRIPE_PRODUCT_ID: 'prod_I1RAoB8UK5GDab',
     TYPE: 'subscription',
+    PRICE: 5,
   },
   ADDITIONAL_BALANCE_100K: {
     TITLE: 'Additional balance 100k',

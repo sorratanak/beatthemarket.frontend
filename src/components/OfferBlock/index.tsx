@@ -48,7 +48,10 @@ export function OfferBlock({ title, preset }: Props) {
 
       getProducts([foundPurchase.RNIAP_PRODUCT_ID]).then((result) => {
         console.log('result', result);
-        const [purchase] = result;
+        const purchase = _.find(
+          result,
+          (el) => el.productId === foundPurchase.RNIAP_PRODUCT_ID,
+        );
         requestPurchase(purchase?.productId);
       });
     },

@@ -30,7 +30,7 @@ export function Subscriptions() {
       style={themedStyles.container}>
       <View style={themedStyles.flexContainer}>
         <SubscriptionsList
-          subscriptions={Object.values(SUBSCRIPTION_TYPE).slice(1)}
+          subscriptions={Object.values(SUBSCRIPTION_TYPE).slice(0, 1)}
           onSubscriptionPress={onSelectSubscription}
         />
       </View>
