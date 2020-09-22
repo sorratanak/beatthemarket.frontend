@@ -103,7 +103,7 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
                 renderItem={({ item }) => (
                   <Text style={themedStyles.profitItem}>{`- ${
                     _.find(stocks, (stock) => stock.id === item.stockId)?.name
-                  }: (${item.profitLoss?.toFixed(2)})`}</Text>
+                  }: (${getMoneyFormat(item.profitLoss)})`}</Text>
                 )}
                 keyExtractor={(item) => `end-game-profit-${item}`}
               />
@@ -116,7 +116,6 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
               <OfferBlock
                 title="Do you need more attempts?"
                 preset="additionalBalance"
-                onItemPressCallback={onFinishPress}
               />
             )}
 

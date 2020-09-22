@@ -4,10 +4,11 @@ import { useMutation } from '@apollo/client';
 import _ from 'lodash';
 
 import iapGraphql from '../graphql/iap';
-import { IPurchase, IStripeUserInfo } from '../types';
+import { IPurchase, IStripeUserInfo, PurchaseType } from '../types';
 import { UserContext } from './userContext';
 import { getVerifyPaymentRequest } from '../utils/parsing';
 import { getIapProvider } from '../utils';
+import { PURCHASE_TYPE } from '../constants';
 
 interface ContextProps {
   isProcessing: boolean;
@@ -40,6 +41,7 @@ const ContextProvider = ({
 
   /* ------ State ------ */
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [lastRequestType, setLastRequestType] = useState<PurchaseType>(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [selectedPurchase, setSelectedPurchase] = useState<IPurchase>(null);
   const [selectedSubscription, setSelectedSubscription] = useState<IPurchase>(
@@ -51,6 +53,7 @@ const ContextProvider = ({
     if (!user) {
       setIsProcessing(false);
       setPaymentMethod(null);
+      setLastRequestType(null);
       setSelectedPurchase(null);
       setSelectedSubscription(null);
     }
@@ -66,7 +69,12 @@ const ContextProvider = ({
     { data: stripeCustomer, error: stripeCustomerError },
   ] = useMutation(iapGraphql.queries.CREATE_STRIPE_CUSTOMER);
   useEffect(() => {
-    const currentProductId = selectedSubscription?.STRIPE_PRODUCT_ID;
+    const selectedPurchaseItem: IPurchase =
+      lastRequestType === PURCHASE_TYPE.ONE_TIME_PURCHASE
+        ? selectedPurchase
+        : selectedSubscription;
+
+    const currentProductId = selectedPurchaseItem?.STRIPE_PRODUCT_ID;
 
     if (
       currentProductId &&
@@ -76,12 +84,6 @@ const ContextProvider = ({
       const {
         createStripeCustomer: [currentStripeCustomer],
       } = stripeCustomer;
-
-      console.log('hah', currentProductId, {
-        customerId: currentStripeCustomer?.id,
-        paymentMethodId: paymentMethod.id,
-        priceId: currentProductId,
-      });
 
       verifyPayment(
         getVerifyPaymentRequest(currentProductId, getIapProvider(), {
@@ -100,32 +102,21 @@ const ContextProvider = ({
 
   const onRequestPurchase = useCallback(
     async (userInfo: IStripeUserInfo) => {
-      // TODO
-    },
-    [stripe, elements],
-  );
-
-  const onRequestSubscription = useCallback(
-    async (userInfo: IStripeUserInfo) => {
       console.log(
-        'onRequestSubscription',
-        selectedSubscription,
-        selectedSubscription?.STRIPE_PRODUCT_ID,
+        'onRequestPurchase, selectedPurchase:',
+        selectedPurchase,
+        'userInfo:',
         userInfo,
       );
 
+      setLastRequestType(PURCHASE_TYPE.ONE_TIME_PURCHASE);
+
       if (!stripe || !elements) {
-        // Stripe.js has not loaded yet. Make sure to disable
-        // form submission until Stripe.js has loaded.
         return;
       }
 
-      // Get a reference to a mounted CardElement. Elements knows how
-      // to find your CardElement because there can only ever be one of
-      // each type of element.
       const cardElement = elements.getElement(CardElement);
 
-      // Use your card Element with other Stripe.js APIs
       const {
         error,
         paymentMethod: newPaymentMethod,
@@ -142,11 +133,42 @@ const ContextProvider = ({
         createStripeCustomer({ variables: { email: user?.userEmail } });
       }
     },
-    [stripe, elements],
+    [stripe, elements, selectedPurchase, setLastRequestType],
+  );
+
+  const onRequestSubscription = useCallback(
+    async (userInfo: IStripeUserInfo) => {
+      setLastRequestType(PURCHASE_TYPE.SUBSCRIPTION);
+      console.log('onRequestSubscription', selectedSubscription, userInfo);
+
+      if (!stripe || !elements) {
+        return;
+      }
+
+      const cardElement = elements.getElement(CardElement);
+
+      const {
+        error,
+        paymentMethod: newPaymentMethod,
+      } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
+      });
+
+      if (error) {
+        console.log('[error]', error);
+      } else {
+        console.log('email is', user?.userEmail);
+        setPaymentMethod(newPaymentMethod);
+        createStripeCustomer({ variables: { email: user?.userEmail } });
+      }
+    },
+    [stripe, elements, selectedSubscription, setLastRequestType],
   );
 
   const onSelectPurchase = useCallback(
     (newPurchase: IPurchase) => {
+      console.log('newPurchase', newPurchase);
       setSelectedPurchase(newPurchase);
     },
     [setSelectedPurchase],

@@ -20,11 +20,10 @@ import { BuySubscriptionModal } from '../BuySubscriptionModal';
 
 interface Props {
   title?: string;
-  onItemPressCallback?: () => void;
   preset: TOfferBlockPreset;
 }
 
-export function OfferBlock({ title, preset, onItemPressCallback }: Props) {
+export function OfferBlock({ title, preset }: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -47,8 +46,6 @@ export function OfferBlock({ title, preset, onItemPressCallback }: Props) {
 
   const onItemPress = useCallback(
     (item: IOfferBlockItem) => {
-      // onItemPressCallback();
-
       onSelectPurchase(
         _.find(
           ONE_TIME_PURCHASE_TYPE,
@@ -58,7 +55,7 @@ export function OfferBlock({ title, preset, onItemPressCallback }: Props) {
 
       setIsPayModalVisible(true);
     },
-    [preset, onItemPressCallback],
+    [preset, setIsPayModalVisible, onSelectPurchase],
   );
 
   return (
