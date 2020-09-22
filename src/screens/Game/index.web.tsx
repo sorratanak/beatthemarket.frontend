@@ -51,7 +51,9 @@ export function Game() {
   );
 
   useEffect(() => {
-    onGetAccountBalances();
+    if (gameId) {
+      onGetAccountBalances();
+    }
   }, [gameId]);
 
   useEffect(() => {

@@ -30,17 +30,6 @@ const ContextProvider = ({
 }: {
   children: React.ReactNode | React.ReactNode[];
 }) => {
-  /* ------ Lazy Query ------ */
-  const [getAccountBalances, { data: accountBalancesResponse }] = useLazyQuery(
-    portfolioGraphql.queries.GET_ACCOUNT_BALANCES,
-  );
-
-  useEffect(() => {
-    if (accountBalancesResponse) {
-      console.log('accountBalancesResponse!!!', accountBalancesResponse);
-    }
-  }, [accountBalancesResponse]);
-
   const { user } = useContext(UserContext);
   const { gameId } = useContext(GameContext);
 
@@ -58,6 +47,17 @@ const ContextProvider = ({
       setBalance(null);
     }
   }, [user]);
+
+  /* ------ Queries ------ */
+  const [getAccountBalances, { data: accountBalancesResponse }] = useLazyQuery(
+    portfolioGraphql.queries.GET_ACCOUNT_BALANCES,
+  );
+
+  useEffect(() => {
+    if (accountBalancesResponse) {
+      setBalance(accountBalancesResponse.accountBalances);
+    }
+  }, [accountBalancesResponse]);
 
   const onUpdateProfit = useCallback(
     (newProfits: IPortfolioProfit[]) => {
