@@ -1,5 +1,6 @@
 import React, { useContext, useMemo, useCallback } from 'react';
-import { View, Text, FlatList, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { requestPurchase, getProducts } from 'react-native-iap';
 import _ from 'lodash';
 
 import { ThemeContext, IapContext } from '../../contexts';
@@ -14,11 +15,10 @@ import {
 
 interface Props {
   title?: string;
-  onItemPressCallback?: () => void;
   preset: TOfferBlockPreset;
 }
 
-export function OfferBlock({ title, preset, onItemPressCallback }: Props) {
+export function OfferBlock({ title, preset }: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -35,31 +35,24 @@ export function OfferBlock({ title, preset, onItemPressCallback }: Props) {
     }
   }, [preset, themedStyles]);
 
-  const { onSelectPurchase, onRequestPurchase } = useContext(IapContext);
+  const { onSelectPurchase } = useContext(IapContext);
 
   const onItemPress = useCallback(
     (item: IOfferBlockItem) => {
-      onItemPressCallback();
+      const foundPurchase = _.find(
+        ONE_TIME_PURCHASE_TYPE,
+        (purch) => purch.RNIAP_PRODUCT_ID === item.id,
+      );
 
-      switch (preset) {
-        case OFFER_PRESET_TYPE.ADDITIONAL_BALANCE:
-          onSelectPurchase(
-            _.find(
-              ONE_TIME_PURCHASE_TYPE,
-              (purch) => purch.RNIAP_PRODUCT_ID === item.id,
-            ),
-          );
-          onRequestPurchase();
-          break;
-        case OFFER_PRESET_TYPE.ADDITIONAL_TIME:
-          break;
-        case OFFER_PRESET_TYPE.ADDITIONAL_MARGIN_TRADING_AND_BALANCE:
-          break;
-        default:
-          break;
-      }
+      onSelectPurchase(foundPurchase);
+
+      getProducts([foundPurchase.RNIAP_PRODUCT_ID]).then((result) => {
+        console.log('result', result);
+        const [purchase] = result;
+        requestPurchase(purchase?.productId);
+      });
     },
-    [preset, onItemPressCallback],
+    [preset, onSelectPurchase],
   );
 
   return (

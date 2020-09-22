@@ -85,6 +85,16 @@ const ContextProvider = ({
         createStripeCustomer: [currentStripeCustomer],
       } = stripeCustomer;
 
+      // console.log(
+      //   JSON.stringify(
+      //     getVerifyPaymentRequest(currentProductId, getIapProvider(), {
+      //       customerId: currentStripeCustomer?.id,
+      //       paymentMethodId: paymentMethod.id,
+      //       priceId: currentProductId,
+      //     }),
+      //   ),
+      // );
+
       verifyPayment(
         getVerifyPaymentRequest(currentProductId, getIapProvider(), {
           customerId: currentStripeCustomer?.id,

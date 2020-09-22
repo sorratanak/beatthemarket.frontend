@@ -16,6 +16,7 @@ import { IMAGES } from '../../assets';
 import { DefaultButton } from '../DefaultButton';
 import { ACCOUNT_BALANCE_TYPE } from '../../constants';
 import { getMoneyFormat } from '../../utils';
+import { OfferBlock } from '../OfferBlock';
 
 const HEADER_TYPES = {
   LOSE: 'lose',
@@ -98,6 +99,13 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
           />
         </View>
       </View>
+
+      {headerType === HEADER_TYPES.LOSE && (
+        <OfferBlock
+          title="Do you need more attempts?"
+          preset="additionalBalance"
+        />
+      )}
 
       <View style={themedStyles.footerContainer}>
         <Text style={themedStyles.balanceText}>
