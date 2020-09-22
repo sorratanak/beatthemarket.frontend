@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Modal from 'modal-react-native-web';
 import { ThemeContext } from '../../contexts';
@@ -13,6 +13,8 @@ interface Props {
 
 const MAX_OPACITY_VALUE = 1;
 
+const MODAL_CLOSING_DURATION = 500;
+
 export function DefaultModal({
   isVisible,
   onBackdropPress,
@@ -22,6 +24,19 @@ export function DefaultModal({
 }: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
+
+  // Render only when modal is visible + closing animation
+  const [isRenderModalContent, setIsRenderModalContent] = useState(false);
+  useEffect(() => {
+    if (isVisible) {
+      setIsRenderModalContent(isVisible);
+    } else {
+      setTimeout(
+        () => setIsRenderModalContent(isVisible),
+        MODAL_CLOSING_DURATION,
+      );
+    }
+  }, [isVisible]);
 
   return (
     <Modal
@@ -37,7 +52,7 @@ export function DefaultModal({
           style={themedStyles.backdropContainer}
         />
       )}
-      {children}
+      {isRenderModalContent && children}
     </Modal>
   );
 }
