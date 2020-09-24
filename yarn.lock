@@ -11615,11 +11615,6 @@ react-native-get-random-values@^1.5.0:
   dependencies:
     fast-base64-decode "^1.0.0"
 
-react-native-highcharts@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-highcharts/-/react-native-highcharts-1.0.2.tgz#cb8269efc5dbd7d550d2d68b3ac008b24bfba6bb"
-  integrity sha512-Oz4nEXENg07S3l9Wo9eZvAr7WIH/Mbhjh1XQaUh19zJFWTPAmEANjlkF50xNoE3kkXXpgg5WjDE6Uge0UKhwQQ==
-
 react-native-iap@^4.5.2:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-4.5.2.tgz#323e1d8b54b3ecd8c96133c4b64b7d570e12f949"
