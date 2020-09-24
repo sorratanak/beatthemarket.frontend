@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Beat the market</string>
+    <string name="facebook_app_id">802339153927332</string>
+    <string name="fb_login_protocol_scheme">fb802339153927332</string>
 </resources>
