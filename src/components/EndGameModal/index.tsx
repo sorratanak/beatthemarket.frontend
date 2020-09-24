@@ -62,9 +62,9 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
   const [leftImageSource, title, rightImageSource] = useMemo(() => {
     switch (headerType) {
       case HEADER_TYPES.LOSE:
-        return [IMAGES.LOSE_GAME_LEFT, 'Game over', IMAGES.LOSE_GAME_RIGHT];
+        return [IMAGES.SAD_FACE, 'Game over', IMAGES.SAD_FACE];
       case HEADER_TYPES.WIN:
-        return [IMAGES.WIN_GAME_LEFT, 'End of game', IMAGES.WIN_GAME_RIGHT];
+        return [IMAGES.HAPPY_FACE, 'End of game', IMAGES.HAPPY_FACE];
       default:
         return [];
     }

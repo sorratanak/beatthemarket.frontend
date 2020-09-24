@@ -30,10 +30,8 @@ export const IMAGES = {
   USER: require('./settings/user.png'),
 
   /* End Game Modal */
-  WIN_GAME_LEFT: require('./endGameModal/winGameLeft.png'),
-  WIN_GAME_RIGHT: require('./endGameModal/winGameRight.png'),
-  LOSE_GAME_LEFT: require('./endGameModal/loseGameLeft.png'),
-  LOSE_GAME_RIGHT: require('./endGameModal/loseGameRight.png'),
+  SAD_FACE: require('./endGameModal/sadFace.png'),
+  HAPPY_FACE: require('./endGameModal/happyFace.png'),
 
   /* Rules */
   ONE: require('./rules/numbers/one.png'),
