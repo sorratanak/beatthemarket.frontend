@@ -208,6 +208,6 @@ export const PURCHASE_TYPE: {
 };
 
 export const DEVELOPMENT_SERVER_BASE_IP =
-  'beatthemarket5-env.eba-42mjkwti.us-east-1.elasticbeanstalk.com';
+  'Beatthemarket8-env.eba-nyfbvxbt.us-east-1.elasticbeanstalk.com';
 
 export const DEVELOPMENT_SERVER_PORT = '80';
