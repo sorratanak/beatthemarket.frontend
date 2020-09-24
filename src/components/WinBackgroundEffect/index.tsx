@@ -28,7 +28,7 @@ export function WinBackgroundEffect() {
 
   const backgroundColor = backgroundAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: ['rgba(0,255,128,0)', 'rgba(0,255,128,0.7)'],
+    outputRange: ['rgba(255,255,128,0)', 'rgba(255,255,128,0.7)'],
   });
 
   return (

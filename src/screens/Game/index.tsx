@@ -100,8 +100,6 @@ export function Game() {
         </>
       )}
 
-      <WinBackgroundEffect />
-
       <DefaultModal isVisible={isEndGameModalVisible}>
         <EndGameModal
           isVisible={isEndGameModalVisible}

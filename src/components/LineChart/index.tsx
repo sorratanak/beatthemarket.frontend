@@ -8,6 +8,7 @@ import { IPoint } from '../../types';
 import { getThemedDefaultChartOptions } from './config';
 import { COLORS } from '../../themes/colors';
 import { GameContext, ThemeContext } from '../../contexts';
+import { WinBackgroundEffect } from '../WinBackgroundEffect';
 
 interface Props {
   data: IPoint[];
@@ -86,6 +87,8 @@ export function LineChart({ data }: Props) {
         styles={styles.chartContainer}
         options={chartOptions}
       />
+
+      <WinBackgroundEffect />
     </View>
   );
 }
