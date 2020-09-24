@@ -1,37 +1,56 @@
-import React, { useContext, useState } from 'react';
-import { Text, Button, TextInput } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { StackParams } from '../../navigation/stacks/AuthStack';
-import { Container } from '../../components';
+import React, { useContext, useMemo, useState } from 'react';
+import { Platform, View } from 'react-native';
+import {
+  BeatTheMarketBackground,
+  Container,
+  DefaultButton,
+  DefaultInput,
+} from '../../components';
+import { ThemeContext } from '../../contexts';
 import { UserContext } from '../../contexts/userContext';
-import { styles } from './styles';
+import { getThemedStyles } from './styles';
 
-type NavigationProps = StackNavigationProp<StackParams, 'SignIn'>;
-
-export function SignUp(props: NavigationProps) {
+export function SignUp() {
   // const { navigate } = useNavigation<NavigationProps>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const { theme } = useContext(ThemeContext);
   const { signUp } = useContext(UserContext);
 
+  const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
+
   return (
-    <Container>
-      <Text>Sign UP</Text>
-      <TextInput
-        style={styles.textInputStyle}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-      />
-      <TextInput
-        style={styles.textInputStyle}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <Button title="Sign Up" onPress={() => signUp(email, password)} />
+    <Container style={themedStyles.container}>
+      {Platform.OS === 'web' && <BeatTheMarketBackground />}
+
+      <View style={themedStyles.subcontainer}>
+        <View style={themedStyles.inputsContainer}>
+          <DefaultInput
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
+            style={themedStyles.inputContainer}
+          />
+          <DefaultInput
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            style={themedStyles.inputContainer}
+          />
+          <View style={themedStyles.buttonContainer}>
+            <DefaultButton
+              onPress={() => signUp(email, password)}
+              style={{
+                container: themedStyles.signUpButtonContainer,
+                text: themedStyles.signUpButtonText,
+              }}>
+              Sign Up
+            </DefaultButton>
+          </View>
+        </View>
+      </View>
     </Container>
   );
 }
