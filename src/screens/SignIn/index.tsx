@@ -19,11 +19,13 @@ type NavigationProps = StackNavigationProp<StackParams, 'SignIn'>;
 
 export function SignIn() {
   const { navigate } = useNavigation<NavigationProps>();
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const { theme } = useContext(ThemeContext);
-  const { signInWithGoogle, signInWithFacebook } = useContext(UserContext);
+  const { signIn, signInWithGoogle, signInWithFacebook } = useContext(
+    UserContext,
+  );
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -68,9 +70,9 @@ export function SignIn() {
         </View>
         <View style={themedStyles.signinInputContainer}>
           <DefaultInput
-            placeholder="Name"
-            value={name}
-            onChangeText={setName}
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
             style={themedStyles.inputContainer}
           />
           <DefaultInput
@@ -88,7 +90,7 @@ export function SignIn() {
           </View>
           <View style={themedStyles.buttonContainer}>
             <DefaultButton
-              onPress={() => {}}
+              onPress={() => signIn(email, password)}
               style={{
                 container: themedStyles.loginButtonContainer,
                 text: themedStyles.loginButtonText,

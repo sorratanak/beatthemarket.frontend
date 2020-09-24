@@ -1,6 +1,24 @@
-import { auth, authGoogle, authFacebook, authMicrosoft } from './helper';
+import { auth, authGoogle, authFacebook } from './helper';
 import loginGraphql from '../graphql/login';
 import { getFirebaseToken } from '../utils/storage';
+
+const FirebaseAuthWithServer = async (
+  authFunction: (email?: string, password?: string) => void,
+) => {
+  try {
+    await authFunction();
+
+    const accessToken: string = await getFirebaseToken();
+
+    console.log('accessToken', accessToken);
+
+    const userResponse = await loginGraphql.requests.login();
+
+    return { accessToken, user: userResponse || null };
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const SignUp = async ({
   email,
@@ -8,29 +26,24 @@ export const SignUp = async ({
 }: {
   email: string;
   password: string;
-}) => {
-  const { user } = await auth.createUserWithEmailAndPassword(email, password);
+}) =>
+  FirebaseAuthWithServer(() =>
+    auth.createUserWithEmailAndPassword(email, password),
+  );
 
-  return user;
-};
-
-const FirebaseSocialSignIn = async (socialAuthFunction: () => void) => {
-  // const { user } = await auth.signInWithEmailAndPassword(email, password);
-  try {
-    await socialAuthFunction();
-
-    const accessToken: string = await getFirebaseToken();
-
-    const userResponse = await loginGraphql.requests.login();
-
-    return { accessToken, user: userResponse || null };
-  } catch (e) {
-    console.log(e);
-  }
-};
+export const SignIn = async ({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) =>
+  FirebaseAuthWithServer(() =>
+    auth.signInWithEmailAndPassword(email, password),
+  );
 
 export const FirebaseGoogleSignIn = async () =>
-  FirebaseSocialSignIn(authGoogle);
+  FirebaseAuthWithServer(authGoogle);
 
 export const FirebaseFacebookSignIn = async () =>
-  FirebaseSocialSignIn(authFacebook);
+  FirebaseAuthWithServer(authFacebook);

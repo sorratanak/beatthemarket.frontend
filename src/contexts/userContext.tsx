@@ -11,6 +11,7 @@ import {
 } from '../utils/storage';
 import {
   SignUp,
+  SignIn,
   FirebaseGoogleSignIn,
   FirebaseFacebookSignIn,
 } from '../firebase/firebase';
@@ -23,6 +24,7 @@ interface ContextProps {
   user: IUser | null;
   signInWithGoogle: () => void;
   signInWithFacebook: () => void;
+  signIn: (email: string, password: string) => void;
   signUp: (email: string, password: string) => void;
   logout: () => void;
 }
@@ -32,6 +34,7 @@ const DEFAULT_USER_CONTEXT: ContextProps = {
   user: null,
   signInWithGoogle: noop,
   signInWithFacebook: noop,
+  signIn: noop,
   signUp: noop,
   logout: noop,
 };
@@ -94,11 +97,24 @@ const ContextProvider = ({
     FirebaseFacebookSignIn().then(socialSignInCallback);
   }, [FirebaseFacebookSignIn, socialSignInCallback]);
 
+  const signIn = useCallback(
+    (email: string, password: string) => {
+      SignIn({ email, password }).then((user) => {
+        console.log('user', user);
+        // setToken(email + password);
+        // setLocalToken(email + password);
+      });
+    },
+    [setLocalToken],
+  );
+
   const signUp = useCallback(
     (email: string, password: string) => {
       SignUp({ email, password }).then((user) => {
+        console.log('user', user);
+
         // setToken(email + password);
-        setLocalToken(email + password);
+        // setLocalToken(email + password);
       });
     },
     [setLocalToken],
@@ -112,6 +128,7 @@ const ContextProvider = ({
         logout,
         signInWithGoogle,
         signInWithFacebook,
+        signIn,
         signUp,
       }}>
       {children}

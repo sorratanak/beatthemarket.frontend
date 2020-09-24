@@ -67,6 +67,7 @@ const splitLink = split(
 
 const authLink = setContext(async (_, { headers }) => {
   const token = await getFirebaseToken();
+  console.log('token!!!!', token);
   const deviceId = await getUuidFromStorage();
 
   return {
