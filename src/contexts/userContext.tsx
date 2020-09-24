@@ -9,7 +9,11 @@ import {
   removeUuidFromStorage,
   generateStorageUuid,
 } from '../utils/storage';
-import { SignUp, SignIn } from '../firebase/firebase';
+import {
+  SignUp,
+  FirebaseGoogleSignIn,
+  FirebaseFacebookSignIn,
+} from '../firebase/firebase';
 import { IUser } from '../types';
 import { resetNavigation } from '../utils';
 import { TIME_TO_RESET_NAVIGATION } from '../constants';
@@ -17,17 +21,19 @@ import { TIME_TO_RESET_NAVIGATION } from '../constants';
 interface ContextProps {
   token: string | null;
   user: IUser | null;
-  logout: () => void;
   signInWithGoogle: () => void;
+  signInWithFacebook: () => void;
   signUp: (email: string, password: string) => void;
+  logout: () => void;
 }
 
 const DEFAULT_USER_CONTEXT: ContextProps = {
   token: null,
   user: null,
-  logout: noop,
   signInWithGoogle: noop,
+  signInWithFacebook: noop,
   signUp: noop,
+  logout: noop,
 };
 
 export const UserContext = React.createContext(DEFAULT_USER_CONTEXT);
@@ -66,8 +72,8 @@ const ContextProvider = ({
     }, TIME_TO_RESET_NAVIGATION);
   }, [removeUserFromStorage, setLocalUser, setLocalToken]);
 
-  const signInWithGoogle = useCallback(() => {
-    SignIn().then((response) => {
+  const socialSignInCallback = useCallback(
+    (response) => {
       if (response) {
         const { accessToken, user } = response;
 
@@ -76,8 +82,17 @@ const ContextProvider = ({
         setLocalUser(user);
         setLocalToken(accessToken);
       }
-    });
-  }, [setUserToStorage, setLocalUser, setLocalToken]);
+    },
+    [setUserToStorage, setLocalToken, setLocalUser],
+  );
+
+  const signInWithGoogle = useCallback(() => {
+    FirebaseGoogleSignIn().then(socialSignInCallback);
+  }, [FirebaseGoogleSignIn, socialSignInCallback]);
+
+  const signInWithFacebook = useCallback(() => {
+    FirebaseFacebookSignIn().then(socialSignInCallback);
+  }, [FirebaseFacebookSignIn, socialSignInCallback]);
 
   const signUp = useCallback(
     (email: string, password: string) => {
@@ -96,6 +111,7 @@ const ContextProvider = ({
         user: localUser,
         logout,
         signInWithGoogle,
+        signInWithFacebook,
         signUp,
       }}>
       {children}

@@ -1,4 +1,4 @@
-import { auth, authGoogle } from './helper';
+import { auth, authGoogle, authFacebook, authMicrosoft } from './helper';
 import loginGraphql from '../graphql/login';
 import { getFirebaseToken } from '../utils/storage';
 
@@ -14,10 +14,10 @@ export const SignUp = async ({
   return user;
 };
 
-export const SignIn = async () => {
+const FirebaseSocialSignIn = async (socialAuthFunction: () => void) => {
   // const { user } = await auth.signInWithEmailAndPassword(email, password);
   try {
-    await authGoogle();
+    await socialAuthFunction();
 
     const accessToken: string = await getFirebaseToken();
 
@@ -28,3 +28,9 @@ export const SignIn = async () => {
     console.log(e);
   }
 };
+
+export const FirebaseGoogleSignIn = async () =>
+  FirebaseSocialSignIn(authGoogle);
+
+export const FirebaseFacebookSignIn = async () =>
+  FirebaseSocialSignIn(authFacebook);

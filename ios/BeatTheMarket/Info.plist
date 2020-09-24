@@ -34,9 +34,14 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.1062410862638-h3gjjoihoo45v6f1g2cfqlkpm55u43iv</string>
+				<string>fb802339153927332</string>
 			</array>
 		</dict>
 	</array>
+	<key>FacebookAppID</key>
+	<string>802339153927332</string>
+	<key>FacebookDisplayName</key>
+	<string>Beat The Market</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
