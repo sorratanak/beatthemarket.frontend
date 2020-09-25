@@ -11,6 +11,7 @@ export const IMAGES = {
   GEAR_ACTIVE: require('./navigation/gearActive.png'),
   GEAR_INACTIVE: require('./navigation/gearInactive.png'),
   PAUSE_BUTTON: require('./navigation/pause.png'),
+  PLAY_BUTTON: require('./navigation/play.png'),
   BURGER_MENU: require('./navigation/burgerMenu.png'),
 
   /* Logos */

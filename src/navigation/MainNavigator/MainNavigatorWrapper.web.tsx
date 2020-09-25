@@ -54,7 +54,7 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
           onPress={isGamePaused ? onResumeGame : onPauseGame}
           style={themedStyles.pauseButtonContainer}>
           <Image
-            source={IMAGES.PAUSE_BUTTON}
+            source={isGamePaused ? IMAGES.PLAY_BUTTON : IMAGES.PAUSE_BUTTON}
             style={themedStyles.pauseButtonImage}
           />
         </TouchableOpacity>
