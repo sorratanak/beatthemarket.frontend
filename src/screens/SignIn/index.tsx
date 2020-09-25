@@ -23,9 +23,12 @@ export function SignIn() {
   const [password, setPassword] = useState('');
 
   const { theme } = useContext(ThemeContext);
-  const { signIn, signInWithGoogle, signInWithFacebook } = useContext(
-    UserContext,
-  );
+  const {
+    signIn,
+    signInWithGoogle,
+    signInWithFacebook,
+    signInWithApple,
+  } = useContext(UserContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -52,7 +55,7 @@ export function SignIn() {
             }}
           />
           <SocialButton
-            onPress={() => {}}
+            onPress={signInWithApple}
             imageSource={IMAGES.APPLE}
             style={{
               container: themedStyles.appleIconContainer,

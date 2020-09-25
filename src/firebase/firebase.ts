@@ -1,4 +1,4 @@
-import { auth, authGoogle, authFacebook } from './helper';
+import { auth, authGoogle, authFacebook, authApple } from './helper';
 import loginGraphql from '../graphql/login';
 import { getFirebaseToken } from '../utils/storage';
 
@@ -47,3 +47,6 @@ export const FirebaseGoogleSignIn = async () =>
 
 export const FirebaseFacebookSignIn = async () =>
   FirebaseAuthWithServer(authFacebook);
+
+export const FirebaseAppleSignIn = async () =>
+  FirebaseAuthWithServer(authApple);

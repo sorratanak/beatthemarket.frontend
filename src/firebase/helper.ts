@@ -4,6 +4,7 @@ import {
   LoginManager as FBLoginManager,
   AccessToken as FBAccessToken,
 } from 'react-native-fbsdk';
+import { appleAuth } from '@invertase/react-native-apple-authentication';
 
 GoogleSignin.configure({
   webClientId:
@@ -34,6 +35,22 @@ export const authFacebook = async () => {
   } else {
     throw new Error(`FB Login failed`);
   }
+};
+
+export const authApple = async () => {
+  // performs login request
+  const { identityToken, nonce } = await appleAuth.performRequest({
+    requestedOperation: appleAuth.Operation.LOGIN,
+    requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+  });
+
+  console.log(identityToken);
+
+  const appleCredential = firebaseAuth.AppleAuthProvider.credential(
+    identityToken,
+    nonce,
+  );
+  return firebaseAuth().signInWithCredential(appleCredential);
 };
 
 export const authMicrosoft = async () => {};
