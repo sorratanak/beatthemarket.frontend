@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { MICROSOFT_HOST } from '../constants';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDe_UVKBE3N1MCwWDJvZnPGudm-5vgMTmw',
@@ -15,6 +16,9 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const googleProvider: firebase.auth.GoogleAuthProvider = new firebase.auth.GoogleAuthProvider();
 const facebookProvider: firebase.auth.FacebookAuthProvider = new firebase.auth.FacebookAuthProvider();
+const microsoftProvider: firebase.auth.OAuthProvider = new firebase.auth.OAuthProvider(
+  MICROSOFT_HOST,
+);
 // const appleProvider = () => null;
 
 export const auth = firebase.auth();
@@ -24,3 +28,5 @@ export const authGoogle = () => auth.signInWithPopup(googleProvider);
 export const authFacebook = () => auth.signInWithPopup(facebookProvider);
 
 export const authApple = () => null;
+
+export const authMicrosoft = () => auth.signInWithPopup(microsoftProvider);
