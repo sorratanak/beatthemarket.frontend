@@ -5,12 +5,14 @@ import {
   TouchableOpacity,
   ViewStyle,
   TextStyle,
+  Image,
 } from 'react-native';
 import moment from 'moment';
 
 import { ThemeContext, UserContext, GameContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 import { GameTimer } from '../GameTimer';
+import { IMAGES } from '../../assets';
 
 const EMPTY_TIMER = '00:00:00';
 
@@ -60,11 +62,13 @@ export function GameHeader({ style: propStyle = {} }: Props) {
       </View>
       <View style={themedStyles.cellContainer}>
         {gameId && (
-          // TODO temporary solution
-          <TouchableOpacity onPress={isGamePaused ? onResumeGame : onPauseGame}>
-            <Text style={themedStyles.pauseText}>
-              {isGamePaused ? 'Resume' : 'Pause'}
-            </Text>
+          <TouchableOpacity
+            style={themedStyles.pauseButtonContainer}
+            onPress={isGamePaused ? onResumeGame : onPauseGame}>
+            <Image
+              source={isGamePaused ? IMAGES.PLAY_BUTTON : IMAGES.PAUSE_BUTTON}
+              style={themedStyles.pauseButtonImage}
+            />
           </TouchableOpacity>
         )}
       </View>

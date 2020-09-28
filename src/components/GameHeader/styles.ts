@@ -31,4 +31,12 @@ export const getThemedStyles = (theme: ITheme) =>
       color: theme.GAME_SCREEN.HEADER_USERNAME_COLOR,
       fontSize: 14,
     },
+    pauseButtonContainer: {
+      alignSelf: 'center',
+      alignItems: 'center',
+    },
+    pauseButtonImage: {
+      width: 32,
+      height: 32,
+    },
   });
