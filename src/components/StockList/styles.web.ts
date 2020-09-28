@@ -27,6 +27,7 @@ export const getThemedStyles = (theme: ITheme) => {
     },
     listItemShares: {
       marginTop: 16,
+      fontSize: 24,
       color: theme.DEFAULT.TEXT_COLOR,
     },
   });

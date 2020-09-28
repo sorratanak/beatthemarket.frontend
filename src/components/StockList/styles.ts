@@ -25,6 +25,7 @@ export const getThemedStyles = (theme: ITheme) =>
       color: theme.DEFAULT.TEXT_COLOR,
     },
     listItemShares: {
+      fontSize: 24,
       color: theme.DEFAULT.TEXT_COLOR,
     },
   });

@@ -40,7 +40,6 @@ function StockListItem({
         {Platform.OS === 'web' ? item.name : item.symbol}
       </Text>
       <Text style={themedStyles.listItemShares}>
-        {Platform.OS === 'web' ? 'Shares:' : ''}{' '}
         {currentSharesBalance?.amount || 0}
       </Text>
     </TouchableOpacity>
