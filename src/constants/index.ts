@@ -207,6 +207,11 @@ export const PURCHASE_TYPE: {
   ONE_TIME_PURCHASE: 'oneTimePurchase',
 };
 
+export const PROFIT_LOSS_TYPE = {
+  RUNNING: 'running',
+  REALIZED: 'realized',
+};
+
 export const DEVELOPMENT_SERVER_BASE_IP =
   'Beatthemarket8-env.eba-nyfbvxbt.us-east-1.elasticbeanstalk.com';
 

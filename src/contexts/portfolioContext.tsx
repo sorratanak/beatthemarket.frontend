@@ -3,7 +3,7 @@ import { useLazyQuery } from '@apollo/client';
 import _ from 'lodash';
 
 import { IPortfolio, IPortfolioProfit, IPortfolioBalance } from '../types';
-import { PORTFOLIO_UPDATE_TYPE } from '../constants';
+import { PORTFOLIO_UPDATE_TYPE, PROFIT_LOSS_TYPE } from '../constants';
 import portfolioGraphql from '../graphql/portfolio';
 import { GameContext } from './gameContext';
 import { UserContext } from './userContext';
@@ -11,6 +11,7 @@ import { getAccountBalancesRequest } from '../utils/parsing';
 
 interface ContextProps {
   profit: { [stockId: string]: IPortfolioProfit };
+  profitsRealized: { [stockId: string]: IPortfolioProfit[] };
   balance: { [balanceId: string]: IPortfolioBalance };
   onPortfolioUpdate: (updates: IPortfolio[] | any[]) => void;
   onGetAccountBalances: () => void;
@@ -18,6 +19,7 @@ interface ContextProps {
 
 const DEFAULT_PORTFOLIO_CONTEXT: ContextProps = {
   profit: null,
+  profitsRealized: null,
   balance: null,
   onPortfolioUpdate: _.noop,
   onGetAccountBalances: _.noop,
@@ -36,6 +38,9 @@ const ContextProvider = ({
   const [profit, setProfit] = useState<{ [stockId: string]: IPortfolioProfit }>(
     {},
   );
+  const [profitsRealized, setProfitsRealized] = useState<{
+    [stockId: string]: IPortfolioProfit[];
+  }>({});
   const [balance, setBalance] = useState<{
     [balanceId: string]: IPortfolioBalance;
   }>({});
@@ -62,14 +67,28 @@ const ContextProvider = ({
   const onUpdateProfit = useCallback(
     (newProfits: IPortfolioProfit[]) => {
       const updatedProfit = { ...profit };
+      const updatedProfitsRealized = { ...profitsRealized };
 
       _.forEach(newProfits, (newProfit) => {
-        updatedProfit[newProfit.stockId] = newProfit;
+        switch (newProfit.profitLossType) {
+          case PROFIT_LOSS_TYPE.RUNNING:
+            updatedProfit[newProfit.stockId] = newProfit;
+            break;
+          case PROFIT_LOSS_TYPE.REALIZED:
+            updatedProfitsRealized[newProfit.stockId] = [
+              ...(updatedProfitsRealized[newProfit.stockId] || []),
+              newProfit,
+            ];
+            break;
+          default:
+            break;
+        }
       });
 
       setProfit(updatedProfit);
+      setProfitsRealized(updatedProfitsRealized);
     },
-    [profit, setProfit],
+    [profit, setProfit, profitsRealized, setProfitsRealized],
   );
 
   const onUpdateBalance = useCallback(
@@ -122,6 +141,7 @@ const ContextProvider = ({
     <PortfolioContext.Provider
       value={{
         profit,
+        profitsRealized,
         balance,
         onPortfolioUpdate,
         onGetAccountBalances,

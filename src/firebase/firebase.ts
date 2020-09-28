@@ -6,13 +6,16 @@ const FirebaseAuthWithServer = async (
   authFunction: (email?: string, password?: string) => void,
 ) => {
   try {
+    console.log('uhfaiud');
     await authFunction();
 
     const accessToken: string = await getFirebaseToken();
 
-    console.log('accessToken', accessToken);
+    console.log('accessToken111', accessToken);
 
     const userResponse = await loginGraphql.requests.login();
+
+    console.log('userResponse', userResponse);
 
     return { accessToken, user: userResponse || null };
   } catch (err) {

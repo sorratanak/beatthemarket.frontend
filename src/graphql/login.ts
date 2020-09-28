@@ -16,7 +16,6 @@ const login = async (): Promise<IUser> => {
   });
 
   const parsedUser: IUser = JSON.parse(response.data.login.user);
-
   return parsedUser;
 };
 

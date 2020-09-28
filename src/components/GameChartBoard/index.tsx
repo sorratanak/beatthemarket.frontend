@@ -31,7 +31,7 @@ interface ChartHeaderProps {
 }
 function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
   // const { user } = useContext(UserContext);
-  const { profit, balance } = useContext(PortfolioContext);
+  const { profit, profitsRealized, balance } = useContext(PortfolioContext);
   const { activeStock, gameEvents } = useContext(GameContext);
 
   const activeProfit = useMemo(() => profit?.[activeStock?.id], [
@@ -48,6 +48,17 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
         : null,
     [balance],
   );
+  const profitsRealizedValue = useMemo(
+    () =>
+      _.reduce(
+        profitsRealized?.[activeStock?.id],
+        (accum, el) => accum + el.profitLoss,
+        0,
+      ),
+    [profitsRealized, activeStock],
+  );
+
+  console.log('profits realized', profitsRealized);
 
   const [prelastItem, lastItem] = useMemo(() => getLastAndPrelast(data), [
     data,
@@ -91,7 +102,9 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
       )}
       <View style={themedStyles.userBalanceContainer}>
         <Text style={themedStyles.chartHeaderStockProfitLoss}>
-          {getMoneyFormat(activeProfit?.profitLoss || 0)}
+          {getMoneyFormat(
+            profitsRealizedValue + (activeProfit?.profitLoss || 0),
+          )}
         </Text>
         <Text style={themedStyles.chartHeaderCashBalance}>
           {getMoneyFormat(activeBalance?.balance || 0)}
