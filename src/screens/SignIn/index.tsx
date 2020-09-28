@@ -1,4 +1,4 @@
-import React, { useContext, useState, useMemo } from 'react';
+import React, { useContext, useState, useMemo, useCallback } from 'react';
 import { Text, View, TouchableOpacity, Platform } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
@@ -31,6 +31,10 @@ export function SignIn() {
   } = useContext(UserContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
+
+  const onForgotPasswordPress = useCallback(() => navigate('ForgotPassword'), [
+    navigate,
+  ]);
 
   return (
     <Container style={themedStyles.signinContainer}>
@@ -87,7 +91,7 @@ export function SignIn() {
           />
           <View style={themedStyles.forgotPasswordContainer}>
             <Text style={themedStyles.forgotPassword}>Forgot password?</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onForgotPasswordPress}>
               <Text style={themedStyles.restorePassword}> Click here</Text>
             </TouchableOpacity>
           </View>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import noop from 'lodash/noop';
 
 import {
@@ -19,6 +19,8 @@ import {
 import { IUser } from '../types';
 import { resetNavigation } from '../utils';
 import { TIME_TO_RESET_NAVIGATION } from '../constants';
+import { auth as firebaseAuth } from '../firebase/helper';
+import { ErrorModalContext } from './errorModalContext';
 
 interface ContextProps {
   token: string | null;
@@ -28,6 +30,7 @@ interface ContextProps {
   signInWithApple: () => void;
   signIn: (email: string, password: string) => void;
   signUp: (email: string, password: string) => void;
+  forgotPassword: (email: string) => void;
   logout: () => void;
 }
 
@@ -39,6 +42,7 @@ const DEFAULT_USER_CONTEXT: ContextProps = {
   signInWithApple: noop,
   signIn: noop,
   signUp: noop,
+  forgotPassword: noop,
   logout: noop,
 };
 
@@ -51,6 +55,8 @@ const ContextProvider = ({
 }) => {
   const [localUser, setLocalUser] = useState<IUser | null>(null);
   const [localToken, setLocalToken] = useState<string | null>(null);
+
+  const { onSetErrorModal } = useContext(ErrorModalContext);
 
   useEffect(() => {
     getUserFromStorage().then((user) => {
@@ -78,7 +84,7 @@ const ContextProvider = ({
     }, TIME_TO_RESET_NAVIGATION);
   }, [removeUserFromStorage, setLocalUser, setLocalToken]);
 
-  const socialSignInCallback = useCallback(
+  const signInCallback = useCallback(
     (response) => {
       if (response) {
         const { accessToken, user } = response;
@@ -93,38 +99,36 @@ const ContextProvider = ({
   );
 
   const signInWithGoogle = useCallback(() => {
-    FirebaseGoogleSignIn().then(socialSignInCallback);
-  }, [FirebaseGoogleSignIn, socialSignInCallback]);
+    FirebaseGoogleSignIn().then(signInCallback);
+  }, [FirebaseGoogleSignIn, signInCallback]);
 
   const signInWithFacebook = useCallback(() => {
-    FirebaseFacebookSignIn().then(socialSignInCallback);
-  }, [FirebaseFacebookSignIn, socialSignInCallback]);
+    FirebaseFacebookSignIn().then(signInCallback);
+  }, [FirebaseFacebookSignIn, signInCallback]);
 
   const signInWithApple = useCallback(() => {
-    FirebaseAppleSignIn().then(socialSignInCallback);
-  }, [FirebaseAppleSignIn, socialSignInCallback]);
+    FirebaseAppleSignIn().then(signInCallback);
+  }, [FirebaseAppleSignIn, signInCallback]);
 
   const signIn = useCallback(
     (email: string, password: string) => {
-      SignIn({ email, password }).then((user) => {
-        console.log('user', user);
-        // setToken(email + password);
-        // setLocalToken(email + password);
-      });
+      SignIn({ email, password }).then(signInCallback).catch(onSetErrorModal);
     },
-    [setLocalToken],
+    [signInCallback, setLocalToken],
   );
 
   const signUp = useCallback(
     (email: string, password: string) => {
-      SignUp({ email, password }).then((user) => {
-        console.log('user', user);
-
-        // setToken(email + password);
-        // setLocalToken(email + password);
-      });
+      SignUp({ email, password }).then(signInCallback);
     },
     [setLocalToken],
+  );
+
+  const forgotPassword = useCallback(
+    (email: string) => {
+      firebaseAuth.sendPasswordResetEmail(email);
+    },
+    [firebaseAuth],
   );
 
   return (
@@ -132,6 +136,7 @@ const ContextProvider = ({
       value={{
         token: localToken,
         user: localUser,
+        forgotPassword,
         logout,
         signInWithGoogle,
         signInWithFacebook,

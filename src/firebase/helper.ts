@@ -38,13 +38,10 @@ export const authFacebook = async () => {
 };
 
 export const authApple = async () => {
-  // performs login request
   const { identityToken, nonce } = await appleAuth.performRequest({
     requestedOperation: appleAuth.Operation.LOGIN,
     requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
   });
-
-  console.log(identityToken);
 
   const appleCredential = firebaseAuth.AppleAuthProvider.credential(
     identityToken,

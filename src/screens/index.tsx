@@ -1,4 +1,5 @@
 export * from './ExtraSubscriptions';
+export * from './ForgotPassword';
 export * from './Game';
 export * from './Home';
 export * from './Music';
