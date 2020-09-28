@@ -6,6 +6,7 @@ export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {},
     subcontainer: {
+      paddingTop: 40,
       backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
       borderRadius: 7,
       width: 800,
