@@ -76,10 +76,7 @@ const getRenderIcon = (activeSource, inactiveSource, IconComponent) => ({
 
 export const tabOptions = {
   main: {
-    labelStyle: {
-      backgroundColor: 'red',
-    },
-    tabBarLabel: 'Main',
+    // tabBarLabel: 'Home',
     tabBarIcon: getRenderIcon(
       IMAGES.HOME_ACTIVE,
       IMAGES.HOME_INACTIVE,
@@ -92,7 +89,7 @@ export const tabOptions = {
     ),
   },
   game: {
-    tabBarLabel: 'Game',
+    // tabBarLabel: 'Game',
     tabBarIcon: getRenderIcon(
       IMAGES.JOYSTICK_ACTIVE,
       IMAGES.JOYSTICK_INACTIVE,
@@ -105,7 +102,7 @@ export const tabOptions = {
     ),
   },
   rules: {
-    tabBarLabel: 'Rules',
+    // tabBarLabel: 'Rules',
     tabBarIcon: getRenderIcon(
       IMAGES.RULES_ACTIVE,
       IMAGES.RULES_INACTIVE,
@@ -118,7 +115,7 @@ export const tabOptions = {
     ),
   },
   settings: {
-    tabBarLabel: 'Settings',
+    // tabBarLabel: 'Settings',
     tabBarIcon: getRenderIcon(
       IMAGES.GEAR_ACTIVE,
       IMAGES.GEAR_INACTIVE,
