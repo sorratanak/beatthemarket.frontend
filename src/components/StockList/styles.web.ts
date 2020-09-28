@@ -4,16 +4,20 @@ import { COMMON_STYLES } from '../../themes/commonStyles';
 
 export const getThemedStyles = (theme: ITheme) => {
   return StyleSheet.create({
-    container: {},
+    container: {
+      flex: 1,
+    },
     contentContainer: {
       paddingHorizontal: 10,
       paddingVertical: 20,
+      justifyContent: 'space-around',
+      flex: 1,
     },
     listItemContainer: {
+      width: 200,
       backgroundColor: theme.GAME_SCREEN.LIST_VIEW_COLOR,
-      height: 125,
-      width: 250,
       borderRadius: 10,
+      paddingHorizontal: 8,
       justifyContent: 'center',
       alignItems: 'center',
       marginHorizontal: 10,

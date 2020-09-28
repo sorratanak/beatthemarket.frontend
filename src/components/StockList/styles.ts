@@ -8,6 +8,8 @@ export const getThemedStyles = (theme: ITheme) =>
       flexGrow: 0,
     },
     contentContainer: {
+      flex: 1,
+      justifyContent: 'center',
       paddingHorizontal: 16,
     },
     listItemContainer: {
@@ -25,7 +27,6 @@ export const getThemedStyles = (theme: ITheme) =>
       color: theme.DEFAULT.TEXT_COLOR,
     },
     listItemShares: {
-      fontSize: 24,
       color: theme.DEFAULT.TEXT_COLOR,
     },
   });
