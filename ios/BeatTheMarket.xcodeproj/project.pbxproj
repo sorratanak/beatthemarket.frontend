@@ -22,6 +22,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		AC8B559124EA80BF009B8D75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC8B559024EA80BF009B8D75 /* GoogleService-Info.plist */; };
 		AC8C947A24EA9B5C00A8A368 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8C947924EA9B5C00A8A368 /* StoreKit.framework */; };
+		F2A78E69251E23D800B57555 /* libswiftWebKit.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F2A78E68251E23C900B57555 /* libswiftWebKit.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		BCF16AAC54FA84D51EA6C45C /* Pods-BeatTheMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeatTheMarket.release.xcconfig"; path = "Target Support Files/Pods-BeatTheMarket/Pods-BeatTheMarket.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F2A78E68251E23C900B57555 /* libswiftWebKit.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftWebKit.tbd; path = usr/lib/swift/libswiftWebKit.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D7766631D38F2F5928290FE /* libPods-BeatTheMarket.a in Frameworks */,
+				F2A78E69251E23D800B57555 /* libswiftWebKit.tbd in Frameworks */,
 				AC8C947A24EA9B5C00A8A368 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +164,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F2A78E68251E23C900B57555 /* libswiftWebKit.tbd */,
 				AC8C947924EA9B5C00A8A368 /* StoreKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
@@ -690,6 +694,10 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = BeatTheMarket/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -714,6 +722,10 @@
 				DEVELOPMENT_TEAM = PAJM63M8SZ;
 				INFOPLIST_FILE = BeatTheMarket/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
