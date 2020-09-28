@@ -68,18 +68,13 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
   return (
     <View style={themedStyles.chartHeaderContainer}>
       <View style={themedStyles.chartHeaderSubcontainer}>
-        <View style={themedStyles.chartHeaderImageContainer}>
-          <Text>Image here</Text>
-        </View>
         <Text style={themedStyles.chartHeaderTitle}>{activeStock?.name} </Text>
-      </View>
-      <View style={themedStyles.chartHeaderSymbolContainer}>
         <Text style={themedStyles.chartHeaderTitleAbbr}>
-          ({activeStock?.symbol})
+          {activeStock?.symbol && `[${activeStock?.symbol}]`}
         </Text>
       </View>
       {stockChange && (
-        <View style={themedStyles.chartHeaderSubcontainer}>
+        <View style={themedStyles.chartHeaderNumberContainer}>
           <Text style={themedStyles.chartHeaderStockProfitLoss}>
             {getMoneyFormat(stockChange.currentValue || 0)}
           </Text>

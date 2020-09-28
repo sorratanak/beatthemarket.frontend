@@ -68,10 +68,6 @@ export function Home({ navigation }: ScreenProps) {
       <View style={themedStyles.headerContainer}>
         <View style={themedStyles.greetContainer}>
           <Text style={themedStyles.greetUserName}>Hello, {userName}</Text>
-          <Text style={themedStyles.greetText}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod
-          </Text>
         </View>
         <View style={themedStyles.profileInfoContainer}>
           <View style={themedStyles.profileTitleContainer}>

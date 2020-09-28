@@ -16,11 +16,12 @@ export const getThemedStyles = (theme: ITheme) =>
       height: 20,
       paddingTop: 2,
       marginRight: 2,
-      backgroundColor: theme.GAME_SCREEN.HEADER_TIMER_CELL_COLOR,
+      // backgroundColor: theme.GAME_SCREEN.HEADER_TIMER_CELL_COLOR,
       justifyContent: 'center',
       alignItems: 'center',
     },
     numberCellValue: {
+      color: theme.DEFAULT.TEXT_COLOR,
       fontSize: 15,
       lineHeight: 15,
     },

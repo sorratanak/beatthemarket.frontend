@@ -29,7 +29,6 @@ export const getThemedStyles = (theme: ITheme) =>
       flex: 1,
       justifyContent: 'center',
     },
-    chartHeaderImageContainer: {},
     chartHeaderTitleAbbr: {
       color: theme.DEFAULT.TEXT_COLOR,
       fontSize: 26,
