@@ -214,6 +214,8 @@ export const PROFIT_LOSS_TYPE = {
 
 export const MICROSOFT_HOST = 'microsoft.com';
 
+export const APPLE_HOST = 'apple.com';
+
 export const DEVELOPMENT_SERVER_BASE_IP =
   'Beatthemarket8-env.eba-nyfbvxbt.us-east-1.elasticbeanstalk.com';
 

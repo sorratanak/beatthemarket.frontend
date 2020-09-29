@@ -20,7 +20,10 @@ export const authGoogle = async () => {
 };
 
 export const authFacebook = async () => {
-  const result = await FBLoginManager.logInWithPermissions(['public_profile']);
+  const result = await FBLoginManager.logInWithPermissions([
+    'public_profile',
+    'email',
+  ]);
 
   if (result) {
     if (result.isCancelled) {

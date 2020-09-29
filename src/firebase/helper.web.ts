@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { MICROSOFT_HOST } from '../constants';
+import { APPLE_HOST, MICROSOFT_HOST } from '../constants';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDe_UVKBE3N1MCwWDJvZnPGudm-5vgMTmw',
@@ -14,12 +14,22 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
 const googleProvider: firebase.auth.GoogleAuthProvider = new firebase.auth.GoogleAuthProvider();
+
 const facebookProvider: firebase.auth.FacebookAuthProvider = new firebase.auth.FacebookAuthProvider();
+facebookProvider.addScope('public_profile');
+facebookProvider.addScope('email');
+
 const microsoftProvider: firebase.auth.OAuthProvider = new firebase.auth.OAuthProvider(
   MICROSOFT_HOST,
 );
-// const appleProvider = () => null;
+
+const appleProvider: firebase.auth.OAuthProvider = new firebase.auth.OAuthProvider(
+  APPLE_HOST,
+);
+appleProvider.addScope('email');
+appleProvider.addScope('name');
 
 export const auth = firebase.auth();
 
@@ -27,6 +37,6 @@ export const authGoogle = () => auth.signInWithPopup(googleProvider);
 
 export const authFacebook = () => auth.signInWithPopup(facebookProvider);
 
-export const authApple = () => null;
+export const authApple = () => auth.signInWithPopup(appleProvider);
 
 export const authMicrosoft = () => auth.signInWithPopup(microsoftProvider);
