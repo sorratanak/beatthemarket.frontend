@@ -215,6 +215,10 @@ export const PROFIT_LOSS_TYPE = {
 export const MICROSOFT_HOST = 'microsoft.com';
 
 export const APPLE_HOST = 'apple.com';
+export const APPLE_WEB_ANDROID_AUTH_SERVICE_ID = 'com.beatthemarket';
+
+export const FIREBASE_AUTH_REDIRECT_URL =
+  'https://beatthemarket-c13f8.firebaseapp.com/__/auth/handler';
 
 export const DEVELOPMENT_SERVER_BASE_IP =
   'Beatthemarket8-env.eba-nyfbvxbt.us-east-1.elasticbeanstalk.com';
