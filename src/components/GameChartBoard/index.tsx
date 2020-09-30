@@ -58,8 +58,6 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
     [profitsRealized, activeStock],
   );
 
-  console.log('profits realized', profitsRealized);
-
   const [prelastItem, lastItem] = useMemo(() => getLastAndPrelast(data), [
     data,
   ]);
