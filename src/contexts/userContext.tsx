@@ -15,7 +15,6 @@ import {
   FirebaseGoogleSignIn,
   FirebaseFacebookSignIn,
   FirebaseAppleSignIn,
-  FirebaseMicrosoftSignIn,
 } from '../firebase/firebase';
 import { IUser } from '../types';
 import { resetNavigation } from '../utils';
@@ -29,7 +28,6 @@ interface ContextProps {
   signInWithGoogle: () => void;
   signInWithFacebook: () => void;
   signInWithApple: () => void;
-  signInWithMicrosoft: () => void;
   signIn: (email: string, password: string) => void;
   signUp: (email: string, password: string) => void;
   forgotPassword: (email: string) => void;
@@ -42,7 +40,6 @@ const DEFAULT_USER_CONTEXT: ContextProps = {
   signInWithGoogle: noop,
   signInWithFacebook: noop,
   signInWithApple: noop,
-  signInWithMicrosoft: noop,
   signIn: noop,
   signUp: noop,
   forgotPassword: noop,
@@ -113,10 +110,6 @@ const ContextProvider = ({
     FirebaseAppleSignIn().then(signInCallback);
   }, [FirebaseAppleSignIn, signInCallback]);
 
-  const signInWithMicrosoft = useCallback(() => {
-    FirebaseMicrosoftSignIn().then(signInCallback);
-  }, [FirebaseMicrosoftSignIn, signInCallback]);
-
   const signIn = useCallback(
     (email: string, password: string) => {
       SignIn({ email, password }).then(signInCallback).catch(onSetErrorModal);
@@ -148,7 +141,6 @@ const ContextProvider = ({
         signInWithGoogle,
         signInWithFacebook,
         signInWithApple,
-        signInWithMicrosoft,
         signIn,
         signUp,
       }}>

@@ -26,19 +26,6 @@ const facebookProvider: firebase.auth.FacebookAuthProvider = new firebase.auth.F
 facebookProvider.addScope('public_profile');
 facebookProvider.addScope('email');
 
-const microsoftProvider: firebase.auth.OAuthProvider = new firebase.auth.OAuthProvider(
-  MICROSOFT_HOST,
-);
-microsoftProvider.setCustomParameters({
-  prompt: 'consent',
-  client_id: FIREBASE_CLIENT_ID,
-  redirect_uri: FIREBASE_AUTH_REDIRECT_URL,
-  response_type: 'code',
-  response_mode: 'query',
-  state: '12345',
-});
-microsoftProvider.addScope('mail.read');
-
 const appleProvider: firebase.auth.OAuthProvider = new firebase.auth.OAuthProvider(
   APPLE_HOST,
 );
@@ -52,5 +39,3 @@ export const authGoogle = () => auth.signInWithPopup(googleProvider);
 export const authFacebook = () => auth.signInWithPopup(facebookProvider);
 
 export const authApple = () => auth.signInWithPopup(appleProvider);
-
-export const authMicrosoft = () => auth.signInWithPopup(microsoftProvider);

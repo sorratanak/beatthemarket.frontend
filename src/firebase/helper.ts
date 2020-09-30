@@ -144,5 +144,3 @@ export const authApple = async () => {
 
   return result;
 };
-
-export const authMicrosoft = async () => {};

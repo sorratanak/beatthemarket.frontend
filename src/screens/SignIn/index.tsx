@@ -28,7 +28,6 @@ export function SignIn() {
     signInWithGoogle,
     signInWithFacebook,
     signInWithApple,
-    signInWithMicrosoft,
   } = useContext(UserContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
@@ -65,14 +64,6 @@ export function SignIn() {
             style={{
               container: themedStyles.appleIconContainer,
               image: themedStyles.appleIcon,
-            }}
-          />
-          <SocialButton
-            onPress={signInWithMicrosoft}
-            imageSource={IMAGES.MICROSOFT}
-            style={{
-              container: themedStyles.microsoftIconContainer,
-              image: themedStyles.microsoftIcon,
             }}
           />
         </View>
