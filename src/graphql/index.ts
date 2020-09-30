@@ -19,8 +19,8 @@ import { SERVER_BASE_IP, SERVER_PORT } from '../constants';
 // export const SERVER_API_URL = `http://${ip}:8080/api`;
 // export const SERVER_WS_URL = `ws://${ip}:8080/ws`;
 
-export const SERVER_API_URL = `http://${SERVER_BASE_IP}:${SERVER_PORT}/api`;
-export const SERVER_WS_URL = `ws://${SERVER_BASE_IP}:${SERVER_PORT}/ws`;
+export const SERVER_API_URL = `https://${SERVER_BASE_IP}:${SERVER_PORT}/api`;
+export const SERVER_WS_URL = `wss://${SERVER_BASE_IP}:${SERVER_PORT}/ws`;
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)

@@ -10,7 +10,6 @@ export const getThemedStyles = (theme: ITheme) => {
     contentContainer: {
       paddingHorizontal: 10,
       paddingVertical: 20,
-      justifyContent: 'space-around',
       flex: 1,
     },
     listItemContainer: {
