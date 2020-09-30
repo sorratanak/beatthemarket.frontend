@@ -61,7 +61,7 @@ export const authApple = async () => {
       nonce,
     );
 
-    return auth.signInWithCredential(appleCredential);
+    return firebaseAuth().signInWithCredential(appleCredential);
   };
 
   const androidAppleAuth = async () => {
@@ -140,11 +140,8 @@ export const authApple = async () => {
     android: androidAppleAuth,
   });
 
-  console.log('before', onAppleAuthSpecificPlatform);
-
   const result = await onAppleAuthSpecificPlatform();
 
-  console.log('result', result);
   return result;
 };
 

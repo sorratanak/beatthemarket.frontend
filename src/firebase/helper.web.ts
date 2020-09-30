@@ -1,6 +1,11 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { APPLE_HOST, MICROSOFT_HOST } from '../constants';
+import {
+  APPLE_HOST,
+  FIREBASE_AUTH_REDIRECT_URL,
+  FIREBASE_CLIENT_ID,
+  MICROSOFT_HOST,
+} from '../constants';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDe_UVKBE3N1MCwWDJvZnPGudm-5vgMTmw',
@@ -26,8 +31,13 @@ const microsoftProvider: firebase.auth.OAuthProvider = new firebase.auth.OAuthPr
 );
 microsoftProvider.setCustomParameters({
   prompt: 'consent',
-  tenant: '64fbbc6d-0696-4ab3-9511-b84081472d27',
+  client_id: FIREBASE_CLIENT_ID,
+  redirect_uri: FIREBASE_AUTH_REDIRECT_URL,
+  response_type: 'code',
+  response_mode: 'query',
+  state: '12345',
 });
+microsoftProvider.addScope('mail.read');
 
 const appleProvider: firebase.auth.OAuthProvider = new firebase.auth.OAuthProvider(
   APPLE_HOST,
