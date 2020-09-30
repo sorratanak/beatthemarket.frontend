@@ -126,6 +126,7 @@ export interface IPurchase {
   TYPE: PurchaseType;
   RNIAP_PRODUCT_ID: string;
   STRIPE_PRODUCT_ID: string;
+  STRIPE_PRICE_ID: string;
   PRICE?: number;
 }
 

@@ -75,9 +75,11 @@ const ContextProvider = ({
         : selectedSubscription;
 
     const currentProductId = selectedPurchaseItem?.STRIPE_PRODUCT_ID;
+    const currentPriceId = selectedPurchaseItem?.STRIPE_PRICE_ID;
 
     if (
       currentProductId &&
+      currentPriceId &&
       paymentMethod &&
       stripeCustomer?.createStripeCustomer
     ) {
@@ -85,22 +87,24 @@ const ContextProvider = ({
         createStripeCustomer: [currentStripeCustomer],
       } = stripeCustomer;
 
-      // console.log(
-      //   JSON.stringify(
-      //     getVerifyPaymentRequest(currentProductId, getIapProvider(), {
-      //       customerId: currentStripeCustomer?.id,
-      //       paymentMethodId: paymentMethod.id,
-      //       priceId: currentProductId,
-      //     }),
-      //   ),
-      // );
-
-      verifyPayment(
+      console.log(
         getVerifyPaymentRequest(currentProductId, getIapProvider(), {
           customerId: currentStripeCustomer?.id,
           paymentMethodId: paymentMethod.id,
-          priceId: currentProductId,
+          priceId: currentPriceId,
         }),
+      );
+
+      verifyPayment(
+        getVerifyPaymentRequest(
+          selectedPurchaseItem.STRIPE_PRODUCT_ID,
+          getIapProvider(),
+          {
+            customerId: currentStripeCustomer?.id,
+            paymentMethodId: paymentMethod.id,
+            priceId: currentPriceId,
+          },
+        ),
       );
     }
   }, [stripeCustomer]);

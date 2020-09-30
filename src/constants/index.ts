@@ -37,6 +37,7 @@ export const SUBSCRIPTION_TYPE: {
     TITLE: 'Margin trading 1 month',
     RNIAP_PRODUCT_ID: 'margin_trading_1month.1',
     STRIPE_PRODUCT_ID: 'prod_I1RAoB8UK5GDab',
+    STRIPE_PRICE_ID: 'price_0HWSA0u4V08wojXsLCpJ7JJZ',
     TYPE: 'subscription',
     PRICE: 5,
   },
@@ -44,6 +45,7 @@ export const SUBSCRIPTION_TYPE: {
     TITLE: 'Additional balance 100k',
     RNIAP_PRODUCT_ID: 'additional_balance_100k',
     STRIPE_PRODUCT_ID: null,
+    STRIPE_PRICE_ID: null,
     PRICE: 1,
     TYPE: 'subscription',
   },
@@ -51,6 +53,7 @@ export const SUBSCRIPTION_TYPE: {
     TITLE: 'Additional balance 200k',
     RNIAP_PRODUCT_ID: 'additional_balance_200k',
     STRIPE_PRODUCT_ID: null,
+    STRIPE_PRICE_ID: null,
     PRICE: 2,
     TYPE: 'subscription',
   },
@@ -58,13 +61,15 @@ export const SUBSCRIPTION_TYPE: {
     TITLE: 'Additional balance 300k',
     RNIAP_PRODUCT_ID: 'additional_balance_300k',
     STRIPE_PRODUCT_ID: null,
+    STRIPE_PRICE_ID: null,
     PRICE: 3,
     TYPE: 'subscription',
   },
-  ADDITIONAL_BALANCE_500K: {
-    TITLE: 'Additional balance 500k',
-    RNIAP_PRODUCT_ID: 'additional_balance_500k',
+  ADDITIONAL_BALANCE_400K: {
+    TITLE: 'Additional balance 400k',
+    RNIAP_PRODUCT_ID: 'additional_balance_400k',
     STRIPE_PRODUCT_ID: null,
+    STRIPE_PRICE_ID: null,
     PRICE: 4,
     TYPE: 'subscription',
   },
@@ -77,12 +82,14 @@ export const ONE_TIME_PURCHASE_TYPE: {
     TITLE: 'Additional 5 minutes',
     RNIAP_PRODUCT_ID: 'additional_5_minutes',
     STRIPE_PRODUCT_ID: 'prod_I1REIJ0bKeXG37',
+    STRIPE_PRICE_ID: 'price_0HWSALu4V08wojXsoS0hbYdR',
     TYPE: 'oneTimePurchase',
   },
   ADDITIONAL_100K: {
     TITLE: 'Additional $100k',
     RNIAP_PRODUCT_ID: 'additional_100k',
     STRIPE_PRODUCT_ID: 'prod_I1RCtpy369Bu4g',
+    STRIPE_PRICE_ID: 'price_0HWSA8u4V08wojXshFrWn24r',
     PRICE: 1,
     TYPE: 'oneTimePurchase',
   },
@@ -90,20 +97,23 @@ export const ONE_TIME_PURCHASE_TYPE: {
     TITLE: 'Additional $200k',
     RNIAP_PRODUCT_ID: 'additional_200k',
     STRIPE_PRODUCT_ID: 'prod_I1RC5THYQrZdYO',
+    STRIPE_PRICE_ID: 'price_0HWSADu4V08wojXst8yZGBYI',
     PRICE: 2,
     TYPE: 'oneTimePurchase',
   },
   ADDITIONAL_300K: {
-    TITLE: 'Additional $100k',
+    TITLE: 'Additional $300k',
     RNIAP_PRODUCT_ID: 'additional_300k',
     STRIPE_PRODUCT_ID: 'prod_I1RDVzSR4oZKJ3',
+    STRIPE_PRICE_ID: 'price_0HWSAGu4V08wojXsF4rXRExu',
     PRICE: 3,
     TYPE: 'oneTimePurchase',
   },
   ADDITIONAL_400K: {
-    TITLE: 'Additional $100k',
+    TITLE: 'Additional $400k',
     RNIAP_PRODUCT_ID: 'additional_400k',
     STRIPE_PRODUCT_ID: 'prod_I1RDqXXxLnMXdb',
+    STRIPE_PRICE_ID: 'price_0HWSAIu4V08wojXsEE9smSny',
     PRICE: 4,
     TYPE: 'oneTimePurchase',
   },
@@ -220,7 +230,6 @@ export const APPLE_WEB_ANDROID_AUTH_SERVICE_ID = 'com.beatthemarket';
 export const FIREBASE_AUTH_REDIRECT_URL =
   'https://beatthemarket-c13f8.firebaseapp.com/__/auth/handler';
 
-export const DEVELOPMENT_SERVER_BASE_IP =
-  'Beatthemarket8-env.eba-nyfbvxbt.us-east-1.elasticbeanstalk.com';
+export const DEVELOPMENT_SERVER_BASE_IP = 'https://backend.beatthemarket.io';
 
-export const DEVELOPMENT_SERVER_PORT = '80';
+export const DEVELOPMENT_SERVER_PORT = '443';
