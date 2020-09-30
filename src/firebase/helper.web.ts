@@ -24,6 +24,10 @@ facebookProvider.addScope('email');
 const microsoftProvider: firebase.auth.OAuthProvider = new firebase.auth.OAuthProvider(
   MICROSOFT_HOST,
 );
+microsoftProvider.setCustomParameters({
+  prompt: 'consent',
+  tenant: '64fbbc6d-0696-4ab3-9511-b84081472d27',
+});
 
 const appleProvider: firebase.auth.OAuthProvider = new firebase.auth.OAuthProvider(
   APPLE_HOST,
