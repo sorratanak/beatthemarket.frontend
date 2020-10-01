@@ -43,6 +43,7 @@ export function DefaultModal({
       animationType="slide"
       presentationStyle="FormSheet"
       transparent
+      ariaHideApp={false}
       visible={isVisible}
       {...props}>
       {isBackdrop && (
