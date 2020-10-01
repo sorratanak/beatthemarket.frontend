@@ -29,7 +29,6 @@ interface ContextProps {
   signInWithFacebook: () => void;
   signInWithApple: () => void;
   signIn: (email: string, password: string) => void;
-  signUp: (email: string, password: string) => void;
   forgotPassword: (email: string) => void;
   logout: () => void;
 }
@@ -41,7 +40,6 @@ const DEFAULT_USER_CONTEXT: ContextProps = {
   signInWithFacebook: noop,
   signInWithApple: noop,
   signIn: noop,
-  signUp: noop,
   forgotPassword: noop,
   logout: noop,
 };
@@ -125,13 +123,6 @@ const ContextProvider = ({
     [signInCallback, setLocalToken],
   );
 
-  const signUp = useCallback(
-    (email: string, password: string) => {
-      // SignUp({ email, password }).then(signInCallback);
-    },
-    [setLocalToken],
-  );
-
   const forgotPassword = useCallback(
     (email: string) => {
       firebaseAuth.sendPasswordResetEmail(email);
@@ -150,7 +141,6 @@ const ContextProvider = ({
         signInWithFacebook,
         signInWithApple,
         signIn,
-        signUp,
       }}>
       {children}
     </UserContext.Provider>

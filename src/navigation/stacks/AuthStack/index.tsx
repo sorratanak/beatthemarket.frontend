@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { SignIn, SignUp, ForgotPassword } from '../../../screens';
+import { SignIn, ForgotPassword } from '../../../screens';
 import { withoutHeaderOptions } from '../../routesOptions';
 
 export type StackParams = {
@@ -18,7 +18,6 @@ export const AuthStack = () => (
       component={SignIn}
       options={withoutHeaderOptions}
     />
-    <Stack.Screen name="SignUp" component={SignUp} />
     <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
   </Stack.Navigator>
 );

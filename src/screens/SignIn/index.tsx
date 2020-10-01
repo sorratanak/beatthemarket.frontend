@@ -96,14 +96,6 @@ export function SignIn() {
               }}>
               Go
             </DefaultButton>
-            {/* <DefaultButton
-              onPress={() => navigate('SignUp')}
-              style={{
-                container: themedStyles.signUpButtonContainer,
-                text: themedStyles.signUpButtonText,
-              }}>
-              Sign Up
-            </DefaultButton> */}
           </View>
         </View>
       </View>
