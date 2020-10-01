@@ -6,7 +6,7 @@ export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      paddingHorizontal: 160,
+      paddingHorizontal: '10%',
       paddingTop: 130,
       paddingBottom: 100,
       backgroundColor: theme.HOME_SCREEN.PRIMARY_BACKGROUND_COLOR,
@@ -38,8 +38,7 @@ export const getThemedStyles = (theme: ITheme) =>
       lineHeight: 18,
     },
     profileInfoContainer: {
-      flex: 2,
-      marginLeft: 200,
+      flex: 1,
     },
     profileTitleContainer: {
       flexDirection: 'row',
