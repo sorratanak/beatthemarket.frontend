@@ -6,6 +6,7 @@ export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
       flexShrink: 1,
+      maxWidth: '35%',
       alignSelf: 'flex-start',
       paddingHorizontal: 27,
       paddingTop: 20,
