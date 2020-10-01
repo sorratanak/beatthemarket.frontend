@@ -58,9 +58,22 @@ const ContextProvider = ({
     portfolioGraphql.queries.GET_ACCOUNT_BALANCES,
   );
 
+  const onUpdateBalance = useCallback(
+    (newBalances: IPortfolioBalance[]) => {
+      const updatedBalance = { ...balance };
+
+      _.forEach(newBalances, (newBalance) => {
+        updatedBalance[newBalance.id] = newBalance;
+      });
+
+      setBalance(updatedBalance);
+    },
+    [balance, setBalance],
+  );
+
   useEffect(() => {
     if (accountBalancesResponse) {
-      setBalance(accountBalancesResponse.accountBalances);
+      onUpdateBalance(accountBalancesResponse.accountBalances);
     }
   }, [accountBalancesResponse]);
 
@@ -89,19 +102,6 @@ const ContextProvider = ({
       setProfitsRealized(updatedProfitsRealized);
     },
     [profit, setProfit, profitsRealized, setProfitsRealized],
-  );
-
-  const onUpdateBalance = useCallback(
-    (newBalances: IPortfolioBalance[]) => {
-      const updatedBalance = { ...balance };
-
-      _.forEach(newBalances, (newBalance) => {
-        updatedBalance[newBalance.id] = newBalance;
-      });
-
-      setBalance(updatedBalance);
-    },
-    [balance, setBalance],
   );
 
   const onPortfolioUpdate = useCallback(
