@@ -87,6 +87,7 @@ const ContextProvider = ({
   const signInCallback = useCallback(
     (response) => {
       if (response) {
+        console.log('INSIDE SUCCES RESPONSE!');
         const { accessToken, user } = response;
 
         setUserToStorage(user);
@@ -98,28 +99,33 @@ const ContextProvider = ({
     [setUserToStorage, setLocalToken, setLocalUser],
   );
 
+  const handleSignInError = useCallback(
+    (err) => onSetErrorModal(err?.message),
+    [onSetErrorModal],
+  );
+
   const signInWithGoogle = useCallback(() => {
-    FirebaseGoogleSignIn().then(signInCallback);
+    FirebaseGoogleSignIn(handleSignInError).then(signInCallback);
   }, [FirebaseGoogleSignIn, signInCallback]);
 
   const signInWithFacebook = useCallback(() => {
-    FirebaseFacebookSignIn().then(signInCallback);
+    FirebaseFacebookSignIn(handleSignInError).then(signInCallback);
   }, [FirebaseFacebookSignIn, signInCallback]);
 
   const signInWithApple = useCallback(() => {
-    FirebaseAppleSignIn().then(signInCallback);
+    FirebaseAppleSignIn(handleSignInError).then(signInCallback);
   }, [FirebaseAppleSignIn, signInCallback]);
 
   const signIn = useCallback(
     (email: string, password: string) => {
-      SignIn({ email, password }).then(signInCallback).catch(onSetErrorModal);
+      SignIn({ email, password }, handleSignInError).then(signInCallback);
     },
     [signInCallback, setLocalToken],
   );
 
   const signUp = useCallback(
     (email: string, password: string) => {
-      SignUp({ email, password }).then(signInCallback);
+      // SignUp({ email, password }).then(signInCallback);
     },
     [setLocalToken],
   );

@@ -94,16 +94,16 @@ export function SignIn() {
                 container: themedStyles.loginButtonContainer,
                 text: themedStyles.loginButtonText,
               }}>
-              Log In
+              Go
             </DefaultButton>
-            <DefaultButton
+            {/* <DefaultButton
               onPress={() => navigate('SignUp')}
               style={{
                 container: themedStyles.signUpButtonContainer,
                 text: themedStyles.signUpButtonText,
               }}>
               Sign Up
-            </DefaultButton>
+            </DefaultButton> */}
           </View>
         </View>
       </View>

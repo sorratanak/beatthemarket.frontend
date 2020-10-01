@@ -4,6 +4,7 @@ import { getFirebaseToken } from '../utils/storage';
 
 const FirebaseAuthWithServer = async (
   authFunction: (email?: string, password?: string) => void,
+  errorCallback: (err: any) => void,
 ) => {
   try {
     console.log('uhfaiud');
@@ -20,36 +21,46 @@ const FirebaseAuthWithServer = async (
     return { accessToken, user: userResponse || null };
   } catch (err) {
     console.log(err);
+    errorCallback(err);
   }
 };
 
-export const SignUp = async ({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) =>
-  FirebaseAuthWithServer(() =>
-    auth.createUserWithEmailAndPassword(email, password),
+export const SignUp = async (
+  {
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  },
+  errorCallback: (err: any) => void,
+) =>
+  FirebaseAuthWithServer(
+    () => auth.createUserWithEmailAndPassword(email, password),
+    errorCallback,
   );
 
-export const SignIn = async ({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) =>
-  FirebaseAuthWithServer(() =>
-    auth.signInWithEmailAndPassword(email, password),
+export const SignIn = async (
+  {
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  },
+  errorCallback: (err: any) => void,
+) =>
+  FirebaseAuthWithServer(
+    () => auth.signInWithEmailAndPassword(email, password),
+    errorCallback,
   );
 
-export const FirebaseGoogleSignIn = async () =>
-  FirebaseAuthWithServer(authGoogle);
+export const FirebaseGoogleSignIn = async (errorCallback: (err: any) => void) =>
+  FirebaseAuthWithServer(authGoogle, errorCallback);
 
-export const FirebaseFacebookSignIn = async () =>
-  FirebaseAuthWithServer(authFacebook);
+export const FirebaseFacebookSignIn = async (
+  errorCallback: (err: any) => void,
+) => FirebaseAuthWithServer(authFacebook, errorCallback);
 
-export const FirebaseAppleSignIn = async () =>
-  FirebaseAuthWithServer(authApple);
+export const FirebaseAppleSignIn = async (errorCallback: (err: any) => void) =>
+  FirebaseAuthWithServer(authApple, errorCallback);
