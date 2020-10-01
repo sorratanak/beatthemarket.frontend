@@ -118,7 +118,9 @@ const ContextProvider = ({
 
   const signIn = useCallback(
     (email: string, password: string) => {
-      SignIn({ email, password }, handleSignInError).then(signInCallback);
+      SignUp({ email, password }, () =>
+        SignIn({ email, password }, handleSignInError).then(signInCallback),
+      ).then(signInCallback);
     },
     [signInCallback, setLocalToken],
   );
