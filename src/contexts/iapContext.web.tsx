@@ -43,6 +43,7 @@ const ContextProvider = ({
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [lastRequestType, setLastRequestType] = useState<PurchaseType>(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
+  const [paymentToken, setPaymentToken] = useState(null);
   const [selectedPurchase, setSelectedPurchase] = useState<IPurchase>(null);
   const [selectedSubscription, setSelectedSubscription] = useState<IPurchase>(
     null,
@@ -69,41 +70,51 @@ const ContextProvider = ({
     { data: stripeCustomer, error: stripeCustomerError },
   ] = useMutation(iapGraphql.queries.CREATE_STRIPE_CUSTOMER);
   useEffect(() => {
-    const selectedPurchaseItem: IPurchase =
-      lastRequestType === PURCHASE_TYPE.ONE_TIME_PURCHASE
-        ? selectedPurchase
-        : selectedSubscription;
-
-    const currentProductId = selectedPurchaseItem?.STRIPE_PRODUCT_ID;
-    const currentPriceId = selectedPurchaseItem?.STRIPE_PRICE_ID;
+    const isOneTimePurchase =
+      lastRequestType === PURCHASE_TYPE.ONE_TIME_PURCHASE;
+    const selectedPurchaseItem: IPurchase = isOneTimePurchase
+      ? selectedPurchase
+      : selectedSubscription;
+    const paymentItem = isOneTimePurchase ? paymentToken : paymentMethod;
 
     if (
-      currentProductId &&
-      currentPriceId &&
-      paymentMethod &&
+      selectedPurchaseItem &&
+      paymentItem &&
       stripeCustomer?.createStripeCustomer
     ) {
       const {
         createStripeCustomer: [currentStripeCustomer],
       } = stripeCustomer;
 
-      console.log(
-        getVerifyPaymentRequest(currentProductId, getIapProvider(), {
+      let tokenPayload = null;
+      if (isOneTimePurchase) {
+        tokenPayload = {
+          source: paymentItem.id,
+          customer: currentStripeCustomer?.id,
+          amount: selectedPurchaseItem.PRICE,
+          currency: 'usd',
+        };
+      } else {
+        tokenPayload = {
           customerId: currentStripeCustomer?.id,
-          paymentMethodId: paymentMethod.id,
-          priceId: currentPriceId,
-        }),
+          paymentMethodId: paymentItem.id,
+          priceId: selectedPurchaseItem.STRIPE_PRICE_ID,
+        };
+      }
+
+      console.log(
+        getVerifyPaymentRequest(
+          selectedPurchaseItem.STRIPE_PRODUCT_ID,
+          getIapProvider(),
+          tokenPayload,
+        ),
       );
 
       verifyPayment(
         getVerifyPaymentRequest(
           selectedPurchaseItem.STRIPE_PRODUCT_ID,
           getIapProvider(),
-          {
-            customerId: currentStripeCustomer?.id,
-            paymentMethodId: paymentMethod.id,
-            priceId: currentPriceId,
-          },
+          tokenPayload,
         ),
       );
     }
@@ -130,20 +141,13 @@ const ContextProvider = ({
       }
 
       const cardElement = elements.getElement(CardElement);
-
-      const {
-        error,
-        paymentMethod: newPaymentMethod,
-      } = await stripe.createPaymentMethod({
-        type: 'card',
-        card: cardElement,
-      });
+      const { token: newToken, error } = await stripe.createToken(cardElement);
 
       if (error) {
         console.log('[error]', error);
       } else {
         console.log('email is', user?.userEmail);
-        setPaymentMethod(newPaymentMethod);
+        setPaymentToken(newToken);
         createStripeCustomer({ variables: { email: user?.userEmail } });
       }
     },
