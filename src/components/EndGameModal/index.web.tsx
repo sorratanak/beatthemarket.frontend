@@ -33,14 +33,17 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
   );
   const { balance } = useContext(PortfolioContext);
 
-  const activeBalance = useMemo(
+  const balanceSumm = useMemo(
     () =>
       balance
-        ? _.find(
-            Object.values(balance),
-            (someBalance) => someBalance.name === ACCOUNT_BALANCE_TYPE.CASH,
+        ? _.reduce(
+            balance,
+            (accum, el) =>
+              accum +
+              (el.name !== ACCOUNT_BALANCE_TYPE.EQUITY ? el.balance : 0),
+            0,
           )
-        : null,
+        : 0,
     [balance],
   );
 
@@ -109,7 +112,7 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
               />
             </View>
             <Text style={themedStyles.balanceText}>
-              Balance: {getMoneyFormat(activeBalance?.balance)}
+              Balance: {getMoneyFormat(balanceSumm)}
             </Text>
 
             {headerType === HEADER_TYPES.LOSE && (

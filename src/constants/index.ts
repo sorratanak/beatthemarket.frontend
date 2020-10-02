@@ -29,6 +29,7 @@ export const PORTFOLIO_UPDATE_TYPE = {
 
 export const ACCOUNT_BALANCE_TYPE = {
   CASH: 'Cash',
+  EQUITY: 'Equity',
 };
 
 export const SUBSCRIPTION_TYPE: {
