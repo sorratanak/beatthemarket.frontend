@@ -32,6 +32,7 @@ interface ContextProps {
   setWins: (count: number) => void;
   onPauseGame: () => void;
   onResumeGame: () => void;
+  onExitGame: () => void;
   onGetUserProfitLoss: () => void;
 }
 
@@ -55,6 +56,7 @@ const DEFAULT_GAME_CONTEXT: ContextProps = {
   setWins: _.noop,
   onPauseGame: _.noop,
   onResumeGame: _.noop,
+  onExitGame: _.noop,
   onGetUserProfitLoss: _.noop,
 };
 
@@ -206,6 +208,13 @@ const ContextProvider = ({
     setIsGamePaused(false);
   }, [gameId, resumeGame]);
 
+  const onExitGame = useCallback(() => {
+    exitGame(getPauseResumeGameRequest(gameId));
+    setIsGamePaused(false);
+    setGameId(null);
+    setGameEvents(null);
+  }, [gameId, setIsGamePaused, setGameId, setGameEvents, exitGame]);
+
   const onGetUserProfitLoss = useCallback(() => {
     console.log(
       'onGetUserProfitLoss',
@@ -239,6 +248,7 @@ const ContextProvider = ({
         setWins,
         onPauseGame,
         onResumeGame,
+        onExitGame,
         onGetUserProfitLoss,
       }}>
       {children}
