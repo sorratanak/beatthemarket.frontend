@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity, ViewProps } from 'react-native';
 import { MyScore } from '../MyScore';
 import { ThemeContext } from '../../contexts';
 import { getThemedStyles } from './styles';
+import { IBoardUser } from '../../types';
 
 const TAB_NAMES = {
   SINGLE_PLAYER: 'Single player',
@@ -11,7 +12,7 @@ const TAB_NAMES = {
 };
 
 interface Props extends ViewProps {
-  users: any[];
+  users: IBoardUser[];
   isTabsVisible?: boolean;
 }
 

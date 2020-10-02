@@ -7,9 +7,11 @@ import { ScoreRow } from '../ScoreRow';
 import { ScoreList } from '../ScoreList';
 import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
+import { IBoardUser } from '../../types';
+import { selectBestUserScore } from '../../utils/parsing';
 
 interface Props {
-  users: any[];
+  users: IBoardUser[];
 }
 
 export function MyScore({ users }: Props) {
@@ -24,7 +26,7 @@ export function MyScore({ users }: Props) {
           id: randomString(),
           rank: index + 1,
           username: user.userName,
-          score: null,
+          score: selectBestUserScore(user),
         }))}
       />
     </View>

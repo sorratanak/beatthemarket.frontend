@@ -6,6 +6,16 @@ const GET_USERS = gql`
       userEmail
       userName
       userExternalUid
+      games {
+        gameId
+        status
+        profitLoss {
+          profitLoss
+          stockId
+          gameId
+          profitLossType
+        }
+      }
     }
   }
 `;

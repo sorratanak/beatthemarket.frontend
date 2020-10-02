@@ -1,3 +1,13 @@
+export type IPortfolioUpdateType = 'ProfitLoss' | 'AccountBalance';
+
+export interface IPortfolioProfit {
+  gameId: string;
+  profitLoss: number;
+  profitLossType: string;
+  stockId: string;
+  __typename: IPortfolioUpdateType;
+}
+
 export interface IUserBankAccount {
   accountId: string;
   accountName: string;
@@ -5,11 +15,25 @@ export interface IUserBankAccount {
   accountAmount: number;
 }
 
-export interface IUser {
+interface IUserBase {
   userEmail: string;
   userName: string;
   userExternalUid: string;
+}
+
+export interface IUser extends IUserBase {
   userAccounts: IUserBankAccount[];
+}
+
+export interface IUserGame {
+  gameId: string;
+  profitLoss: IPortfolioProfit[];
+  status: string;
+  __typename: 'GameStatus';
+}
+
+export interface IBoardUser extends IUserBase {
+  games: IUserGame[];
 }
 
 export interface IScore {
@@ -22,7 +46,7 @@ export interface IScoreRecord {
   id: string;
   rank: number;
   username: string;
-  score: string;
+  score: number;
 }
 
 export interface IStockTick {
@@ -57,16 +81,6 @@ export interface IBuySellStockInput {
   stockAmount: number;
   tickId: string;
   tickPrice: number;
-}
-
-export type IPortfolioUpdateType = 'ProfitLoss' | 'AccountBalance';
-
-export interface IPortfolioProfit {
-  gameId: string;
-  profitLoss: number;
-  profitLossType: string;
-  stockId: string;
-  __typename: IPortfolioUpdateType;
 }
 
 export interface IPortfolioBalance {

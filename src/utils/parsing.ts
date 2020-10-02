@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
   IPoint,
   IStockChange,
@@ -7,6 +8,7 @@ import {
   IGetAccountBalancesRequest,
   IGetUserProfitLossRequest,
   IVerifyPaymentRequest,
+  IBoardUser,
 } from '../types';
 
 export function getStockChanges(prelastItem: IPoint, lastItem: IPoint) {
@@ -30,6 +32,24 @@ export function getStockChanges(prelastItem: IPoint, lastItem: IPoint) {
   };
 
   return stockChange;
+}
+
+export function selectBestUserScore(user: IBoardUser): number {
+  let bestScore = 0;
+
+  _.forEach(user?.games, (game) => {
+    let currentGameScore = 0;
+
+    _.forEach(game?.profitLoss, (gameProfit) => {
+      currentGameScore += gameProfit.profitLoss;
+    });
+
+    if (currentGameScore > bestScore) {
+      bestScore = currentGameScore;
+    }
+  });
+
+  return bestScore;
 }
 
 export function getSellBuyStockRequest(

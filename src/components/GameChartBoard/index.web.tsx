@@ -24,7 +24,6 @@ interface ChartHeaderProps {
   data: IPoint[];
 }
 function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
-  // const { user } = useContext(UserContext);
   const { profit, profitsRealized, balance } = useContext(PortfolioContext);
   const { activeStock } = useContext(GameContext);
 
