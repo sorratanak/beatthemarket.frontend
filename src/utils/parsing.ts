@@ -49,7 +49,7 @@ export function selectBestUserScore(user: IBoardUser): number {
     }
   });
 
-  return bestScore;
+  return Math.floor(bestScore);
 }
 
 export function getSellBuyStockRequest(
