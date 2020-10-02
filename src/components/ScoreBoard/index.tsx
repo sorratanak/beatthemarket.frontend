@@ -39,7 +39,7 @@ export function ScoreBoard({
           onPress={() => setCurrentTab(TAB_NAMES.SINGLE_PLAYER)}>
           <Text style={themedStyles.tabTitle}>{TAB_NAMES.SINGLE_PLAYER}</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={[
             themedStyles.tabContainer,
             currentTab === TAB_NAMES.MULTIPLAYER
@@ -49,7 +49,7 @@ export function ScoreBoard({
           disabled={currentTab === TAB_NAMES.MULTIPLAYER}
           onPress={() => setCurrentTab(TAB_NAMES.MULTIPLAYER)}>
           <Text style={themedStyles.tabTitle}>{TAB_NAMES.MULTIPLAYER}</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     );
   }, [currentTab, themedStyles]);
