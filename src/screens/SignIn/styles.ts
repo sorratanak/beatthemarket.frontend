@@ -11,6 +11,7 @@ export const getThemedStyles = (theme: ITheme) =>
       alignItems: 'center',
     },
     signinSubcontainer: {
+      width: '80%',
       backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
       borderRadius: 7,
       marginHorizontal: 16,
@@ -42,7 +43,6 @@ export const getThemedStyles = (theme: ITheme) =>
     },
     loginButtonContainer: {
       flex: 1,
-      marginRight: 11,
     },
     loginButtonText: {
       color: theme.SIGNIN_SCREEN.LOGIN_BUTTON_TEXT_COLOR,
