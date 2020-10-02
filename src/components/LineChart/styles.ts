@@ -10,4 +10,14 @@ export const styles = StyleSheet.create({
     height: '98%',
     justifyContent: 'center',
   },
+  XbuttonContainer: {
+    zIndex: 100,
+    position: 'absolute',
+    top: 0,
+    right: 20,
+  },
+  XbuttonTitle: {
+    fontSize: 20,
+    color: 'red',
+  },
 });

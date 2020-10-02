@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import pickRandom from 'pick-random';
 
 import { HighchartsContainer } from './helper';
@@ -33,7 +33,7 @@ export function LineChart({ data }: Props) {
     });
   }, [theme]);
 
-  const { activeStock } = useContext(GameContext);
+  const { activeStock, gameId, onExitGame } = useContext(GameContext);
 
   const [chartColor, setChartColor] = useState(null);
 
@@ -77,18 +77,25 @@ export function LineChart({ data }: Props) {
   }, [data]);
 
   return (
-    <View pointerEvents="none" style={styles.mainContainer}>
-      <HighchartsContainer
-        useCDN
-        useSSL
-        loader
-        javaScriptEnabled
-        domStorageEnabled
-        styles={styles.chartContainer}
-        options={chartOptions}
-      />
+    <>
+      <View pointerEvents="none" style={styles.mainContainer}>
+        <HighchartsContainer
+          useCDN
+          useSSL
+          loader
+          javaScriptEnabled
+          domStorageEnabled
+          styles={styles.chartContainer}
+          options={chartOptions}
+        />
 
-      <WinBackgroundEffect />
-    </View>
+        <WinBackgroundEffect />
+      </View>
+      {gameId && (
+        <TouchableOpacity style={styles.XbuttonContainer} onPress={onExitGame}>
+          <Text style={styles.XbuttonTitle}>X</Text>
+        </TouchableOpacity>
+      )}
+    </>
   );
 }
