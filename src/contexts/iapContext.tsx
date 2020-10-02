@@ -5,7 +5,6 @@ import React, {
   useRef,
   useContext,
 } from 'react';
-import { Platform } from 'react-native';
 import {
   requestPurchase,
   requestSubscription,
@@ -23,7 +22,7 @@ import { useMutation } from '@apollo/client';
 import _ from 'lodash';
 import { IPurchase, IStripeUserInfo } from '../types';
 import iapGraphql from '../graphql/iap';
-import { getIapProvider } from '../utils';
+import { getIapProvider, isAndroid, isIOS } from '../utils';
 import { getVerifyPaymentRequest } from '../utils/parsing';
 import { UserContext } from './userContext';
 
@@ -49,7 +48,7 @@ const DEFAULT_IAP_CONTEXT: ContextProps = {
 
 iapInitConnection();
 // TODO remove temporary
-if (Platform.OS === 'android') {
+if (isAndroid) {
   consumeAllItemsAndroid();
 }
 
@@ -92,7 +91,7 @@ const ContextProvider = ({
         const receipt = purchase.transactionReceipt;
         if (receipt) {
           try {
-            if (Platform.OS === 'ios') {
+            if (isIOS) {
               await finishTransactionIOS(purchase.transactionId);
             }
 

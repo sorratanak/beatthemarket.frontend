@@ -4,6 +4,15 @@ import currencyFormatter from 'currency-formatter';
 
 import { navDispatch } from '../navigation/staticNavigation';
 
+export const isAndroid = Platform.OS === 'android';
+export const isNotAndroid = Platform.OS !== 'android';
+
+export const isIOS = Platform.OS === 'ios';
+export const isNotIOS = Platform.OS !== 'ios';
+
+export const isWeb = Platform.OS === 'web';
+export const isNotWeb = Platform.OS !== 'web';
+
 export function isNumericChar(char: string) {
   return /\d/.test(char);
 }
@@ -27,7 +36,7 @@ export function getIapProvider() {
 }
 
 export function resetNavigation() {
-  if (Platform.OS === 'web') {
+  if (isWeb) {
     navDispatch(DrawerActions.closeDrawer());
   }
   navDispatch(

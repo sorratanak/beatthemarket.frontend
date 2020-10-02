@@ -1,5 +1,5 @@
 import React, { useContext, useState, useMemo, useCallback } from 'react';
-import { Text, View, TouchableOpacity, Platform } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 
@@ -14,6 +14,7 @@ import {
 import { ThemeContext, UserContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 import { IMAGES } from '../../assets';
+import { isNotAndroid, isWeb } from '../../utils';
 
 type NavigationProps = StackNavigationProp<StackParams, 'SignIn'>;
 
@@ -38,7 +39,7 @@ export function SignIn() {
 
   return (
     <Container style={themedStyles.signinContainer}>
-      {Platform.OS === 'web' && <BeatTheMarketBackground />}
+      {isWeb && <BeatTheMarketBackground />}
 
       <View style={themedStyles.signinSubcontainer}>
         <View style={themedStyles.socialMediaContainer}>
@@ -58,14 +59,16 @@ export function SignIn() {
               image: themedStyles.facebookIcon,
             }}
           />
-          <SocialButton
-            onPress={signInWithApple}
-            imageSource={IMAGES.APPLE}
-            style={{
-              container: themedStyles.appleIconContainer,
-              image: themedStyles.appleIcon,
-            }}
-          />
+          {isNotAndroid && (
+            <SocialButton
+              onPress={signInWithApple}
+              imageSource={IMAGES.APPLE}
+              style={{
+                container: themedStyles.appleIconContainer,
+                image: themedStyles.appleIcon,
+              }}
+            />
+          )}
         </View>
         <View style={themedStyles.signinInputContainer}>
           <DefaultInput

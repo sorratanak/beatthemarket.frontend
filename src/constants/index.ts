@@ -1,7 +1,7 @@
 import { MutationHookOptions } from '@apollo/client';
-import { Platform } from 'react-native';
 import { TThemeKey } from '../themes/interface';
 import { TOfferBlockPreset, IPurchase, PurchaseType } from '../types';
+import { isAndroid } from '../utils';
 
 export * from './keys';
 
@@ -36,10 +36,9 @@ export const SUBSCRIPTION_TYPE: {
 } = {
   MARGIN_TRADING: {
     TITLE: 'Margin trading 1 month',
-    RNIAP_PRODUCT_ID:
-      Platform.OS === 'android'
-        ? 'margin_trading_1month'
-        : 'margin_trading_1month.1',
+    RNIAP_PRODUCT_ID: isAndroid
+      ? 'margin_trading_1month'
+      : 'margin_trading_1month.1',
     STRIPE_PRODUCT_ID: 'prod_I1RAoB8UK5GDab',
     STRIPE_PRICE_ID: 'price_0HWSA0u4V08wojXsLCpJ7JJZ',
     TYPE: 'subscription',

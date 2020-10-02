@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { StatusBar, Platform } from 'react-native';
+import { StatusBar } from 'react-native';
 import _ from 'lodash';
 
 import { setThemeKeyToStorage, getThemeKeyFromStorage } from '../utils/storage';
 import { ITheme, TThemeKey } from '../themes/interface';
 import { LIGHT_THEME, THEMES } from '../themes';
 import { THEME_KEYS, STATUS_BAR_STYLES } from '../constants';
+import { isNotWeb } from '../utils';
 
 interface ContextProps {
   theme: ITheme;
@@ -61,7 +62,7 @@ const ContextProvider = ({
         themeKey,
         switchTheme,
       }}>
-      {Platform.OS !== 'web' && (
+      {isNotWeb && (
         <StatusBar
           barStyle={
             themeKey === THEME_KEYS.LIGHT_THEME

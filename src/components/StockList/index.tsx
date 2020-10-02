@@ -1,10 +1,11 @@
 import React, { useContext, useMemo } from 'react';
-import { FlatList, TouchableOpacity, Text, Platform } from 'react-native';
+import { FlatList, TouchableOpacity, Text } from 'react-native';
 import _ from 'lodash';
 
 import { getThemedStyles } from './styles';
 import { IStock } from '../../types';
 import { ThemeContext, PortfolioContext } from '../../contexts';
+import { isWeb } from '../../utils';
 
 interface StockListItemProps {
   item: IStock;
@@ -37,7 +38,7 @@ function StockListItem({
         isActive ? themedStyles.activeListItemContainer : null,
       ]}>
       <Text style={themedStyles.listItemTitle}>
-        {Platform.OS === 'web' ? item.name : item.symbol}
+        {isWeb ? item.name : item.symbol}
       </Text>
       <Text style={themedStyles.listItemShares}>
         {' '}

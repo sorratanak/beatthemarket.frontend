@@ -1,12 +1,12 @@
-import { Platform } from 'react-native';
 import { IMAGES } from '../../assets';
+import { isWeb } from '../../utils';
 
 export const SETTINGS_TILES = [
   {
     id: 'tile-flag',
     source: IMAGES.FLAG,
     // TODO fix temporary crutch
-    nav: Platform.OS === 'web' ? null : 'Subscriptions',
+    nav: isWeb ? null : 'Subscriptions',
     title: 'Subscription',
   },
   {

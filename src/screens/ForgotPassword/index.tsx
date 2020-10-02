@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useMemo, useState } from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import {
   BeatTheMarketBackground,
   Container,
@@ -10,6 +10,7 @@ import { ThemeContext } from '../../contexts';
 import { UserContext } from '../../contexts/userContext';
 import { getThemedStyles } from './styles';
 import { ScreenProps } from './props';
+import { isWeb } from '../../utils';
 
 export function ForgotPassword({ navigation }: ScreenProps) {
   const [email, setEmail] = useState('');
@@ -26,7 +27,7 @@ export function ForgotPassword({ navigation }: ScreenProps) {
 
   return (
     <Container style={themedStyles.container}>
-      {Platform.OS === 'web' && <BeatTheMarketBackground />}
+      {isWeb && <BeatTheMarketBackground />}
 
       <View style={themedStyles.subcontainer}>
         <View style={themedStyles.inputsContainer}>

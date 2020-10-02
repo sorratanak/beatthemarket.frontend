@@ -1,10 +1,11 @@
 import React from 'react';
-import { AppRegistry, Platform } from 'react-native';
+import { AppRegistry } from 'react-native';
 import { ApolloProvider } from '@apollo/client';
 
 import { graphqlApi } from './graphql';
 import RootNavigation from './navigation/rootNavigation';
 import MultipleContextProvider from './contexts';
+import { isWeb } from './utils';
 
 export const stripePromise = null;
 
@@ -19,7 +20,7 @@ export function App() {
 }
 
 AppRegistry.registerComponent('BeatTheMarket', () => App);
-if (Platform.OS === 'web') {
+if (isWeb) {
   AppRegistry.runApplication('BeatTheMarket', {
     rootTag: document.getElementById('root'),
   });

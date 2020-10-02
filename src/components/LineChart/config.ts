@@ -1,6 +1,7 @@
-import { Platform, Dimensions } from 'react-native';
+import { Dimensions } from 'react-native';
 import { COLORS } from '../../themes/colors';
 import { ITheme } from '../../themes/interface';
+import { isWeb } from '../../utils';
 
 export const getThemedDefaultChartOptions = (theme: ITheme) => ({
   title: {
@@ -57,9 +58,8 @@ export const getThemedDefaultChartOptions = (theme: ITheme) => ({
   chart: {
     type: 'line',
     backgroundColor: theme.DEFAULT.SECONDARY_BACKGROUND_COLOR,
-    height: Platform.OS === 'web' ? '60%' : undefined,
-    width:
-      Platform.OS === 'web' ? Dimensions.get('window').width * 0.5 : undefined,
+    height: isWeb ? '60%' : undefined,
+    width: isWeb ? Dimensions.get('window').width * 0.5 : undefined,
   },
   responsive: {
     rules: [

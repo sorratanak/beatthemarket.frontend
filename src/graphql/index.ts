@@ -5,16 +5,16 @@ import {
   ApolloLink,
   split,
 } from '@apollo/client';
-import { Platform } from 'react-native';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 
 import { getFirebaseToken, getUuidFromStorage } from '../utils/storage';
+import { isAndroid } from '../utils';
 // import { SERVER_BASE_IP, SERVER_PORT } from '../constants';
 
-const ip = Platform.OS === 'android' ? '10.0.2.2' : '127.0.0.1';
+const ip = isAndroid ? '10.0.2.2' : '127.0.0.1';
 
 export const SERVER_API_URL = `http://${ip}:5000/api`;
 export const SERVER_WS_URL = `ws://${ip}:5000/ws`;
