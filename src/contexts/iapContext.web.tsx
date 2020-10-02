@@ -91,7 +91,7 @@ const ContextProvider = ({
         tokenPayload = {
           source: paymentItem.id,
           customer: currentStripeCustomer?.id,
-          amount: selectedPurchaseItem.PRICE,
+          amount: selectedPurchaseItem.PRICE * 100,
           currency: 'usd',
         };
       } else {
