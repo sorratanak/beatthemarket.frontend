@@ -13,7 +13,6 @@ import {
   GameHeader,
   DefaultModal,
   EndGameModal,
-  WinBackgroundEffect,
 } from '../../components';
 import { IPoint, IGameEventScore } from '../../types';
 import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
@@ -22,6 +21,7 @@ import {
   MAX_WINS_COUNT,
   LEVEL_WIN_STEP,
   GAME_EVENT_NAMES,
+  START_GAME_LEVEL,
 } from '../../constants';
 
 export function Game() {
@@ -107,6 +107,7 @@ export function Game() {
           onFinishPress={() => {
             setIsEndGameModalVisible(false);
             onSetGameScore(null);
+            setWins(START_GAME_LEVEL);
           }}
         />
       </DefaultModal>
