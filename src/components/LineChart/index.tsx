@@ -7,7 +7,7 @@ import { styles } from './styles';
 import { IPoint } from '../../types';
 import { getThemedDefaultChartOptions } from './config';
 import { COLORS } from '../../themes/colors';
-import { GameContext, ThemeContext } from '../../contexts';
+import { GameContext, PortfolioContext, ThemeContext } from '../../contexts';
 import { WinBackgroundEffect } from '../WinBackgroundEffect';
 
 interface Props {
@@ -33,6 +33,9 @@ export function LineChart({ data }: Props) {
     });
   }, [theme]);
 
+  const { resetState: portfolioContextResetState } = useContext(
+    PortfolioContext,
+  );
   const { activeStock, gameId, onExitGame } = useContext(GameContext);
 
   const [chartColor, setChartColor] = useState(null);
@@ -92,7 +95,12 @@ export function LineChart({ data }: Props) {
         <WinBackgroundEffect />
       </View>
       {gameId && (
-        <TouchableOpacity style={styles.XbuttonContainer} onPress={onExitGame}>
+        <TouchableOpacity
+          style={styles.XbuttonContainer}
+          onPress={() => {
+            onExitGame();
+            portfolioContextResetState();
+          }}>
           <Text style={styles.XbuttonTitle}>X</Text>
         </TouchableOpacity>
       )}

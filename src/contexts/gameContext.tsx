@@ -224,10 +224,8 @@ const ContextProvider = ({
 
   const onExitGame = useCallback(() => {
     exitGame(getPauseResumeGameRequest(gameId));
-    setIsGamePaused(false);
-    setGameId(null);
-    setGameEvents(null);
-  }, [gameId, setIsGamePaused, setGameId, setGameEvents, exitGame]);
+    resetState();
+  }, [gameId, exitGame, resetState]);
 
   const onGetUserProfitLoss = useCallback(() => {
     console.log(
