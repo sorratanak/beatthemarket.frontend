@@ -31,8 +31,12 @@ export function ScoreList({ data }: Props) {
   return (
     <FlatList
       data={data}
-      renderItem={({ item }) => (
-        <ScoreListItem item={item} themedStyles={themedStyles} />
+      renderItem={({ item, index }) => (
+        <ScoreListItem
+          item={item}
+          rank={index + 1}
+          themedStyles={themedStyles}
+        />
       )}
       ListHeaderComponent={renderListHeader()}
       keyExtractor={(item) => `score-record-${item.id}`}
@@ -44,15 +48,16 @@ export function ScoreList({ data }: Props) {
 
 interface ScoreListItemProps {
   item: IScoreRecord;
+  rank: number;
   themedStyles: any;
 }
 
-function ScoreListItem({ item, themedStyles }: ScoreListItemProps) {
+function ScoreListItem({ item, rank, themedStyles }: ScoreListItemProps) {
   return (
     <View style={themedStyles.listItemContainer}>
       <View style={themedStyles.flexContainer}>
         <View style={themedStyles.rankContainer}>
-          <Text style={themedStyles.rankText}>{item.rank}</Text>
+          <Text style={themedStyles.rankText}>{rank}</Text>
         </View>
       </View>
       <Text style={[themedStyles.flex3Container, themedStyles.text]}>

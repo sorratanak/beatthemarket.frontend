@@ -227,6 +227,8 @@ export const PROFIT_LOSS_TYPE = {
   REALIZED: 'realized',
 };
 
+export const ANONYMOUS_USERNAME = 'Anonymous';
+
 export const MICROSOFT_HOST = 'microsoft.com';
 
 export const APPLE_HOST = 'apple.com';

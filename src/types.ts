@@ -44,7 +44,6 @@ export interface IScore {
 
 export interface IScoreRecord {
   id: string;
-  rank: number;
   username: string;
   score: number;
 }
