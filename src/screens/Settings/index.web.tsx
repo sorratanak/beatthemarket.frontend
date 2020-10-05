@@ -1,32 +1,53 @@
-import React, { useContext, useCallback, useMemo } from 'react';
+import React, { useContext, useCallback, useMemo, useState } from 'react';
 import { Text, Image, View } from 'react-native';
 
 import { TilesList, ContainerWithBurgerMenu } from '../../components';
 import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
-import { ScreenProps } from './props';
-import { SETTINGS_TILES } from './tiles';
+import { SETTINGS_TILES, SETTINGS_NAV_TYPES } from './tiles';
+
+// Tabs / Screens
 import { Subscriptions } from '../Subscriptions';
+import { ExtraSubscriptions } from '../ExtraSubscriptions';
+import { Music } from '../Music';
+import { UserSettings } from '../UserSettings';
+import { SoundEffects } from '../SoundEffects';
 
-export function Settings({ navigation }: ScreenProps) {
+export function Settings() {
   const { theme } = useContext(ThemeContext);
-
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
-  const onNavigateTile = useCallback(
+  const [selectedTab, setSelectedTab] = useState(SETTINGS_TILES[0].nav);
+
+  const onSelectTile = useCallback(
     (item: any) => {
-      const { nav } = item;
-      if (nav) {
-        navigation.navigate(nav);
-      }
+      const { nav: newSelectedTab } = item;
+      setSelectedTab(newSelectedTab);
     },
-    [navigation],
+    [setSelectedTab],
   );
+
+  const renderSelectedScreen = useCallback(() => {
+    switch (selectedTab) {
+      case SETTINGS_NAV_TYPES.SUBSCRIPTIONS:
+        return <Subscriptions />;
+      case SETTINGS_NAV_TYPES.EXTRA_SUBSCRIPTIONS:
+        return <ExtraSubscriptions />;
+      case SETTINGS_NAV_TYPES.SOUND_EFFECTS:
+        return <SoundEffects />;
+      case SETTINGS_NAV_TYPES.MUSIC:
+        return <Music />;
+      case SETTINGS_NAV_TYPES.USER_SETTINGS:
+        return <UserSettings />;
+      default:
+        return null;
+    }
+  }, [selectedTab]);
 
   return (
     <ContainerWithBurgerMenu style={themedStyles.container}>
       <TilesList
-        onTilePress={onNavigateTile}
+        onTilePress={onSelectTile}
         numColumns={1}
         tileStyle={themedStyles.tileContainer}
         data={SETTINGS_TILES}
@@ -39,7 +60,7 @@ export function Settings({ navigation }: ScreenProps) {
         )}
       />
       <View style={themedStyles.settingsContainer}>
-        <Subscriptions />
+        {renderSelectedScreen()}
       </View>
     </ContainerWithBurgerMenu>
   );
