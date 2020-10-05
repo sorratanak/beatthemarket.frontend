@@ -26,6 +26,7 @@ export function Home({ navigation }: ScreenProps) {
   /* Queries */
   const { data: users, error: usersError } = useQuery(
     usersGraphql.queries.GET_USERS,
+    QUERY_WITH_ERRORS_OPTIONS,
   );
 
   /* Error Handling */
@@ -33,7 +34,7 @@ export function Home({ navigation }: ScreenProps) {
     if (createGameError || usersError) {
       logout();
     }
-  }, [createGameError, usersError]);
+  }, [createGameError, usersError, logout]);
 
   useEffect(() => {
     if (createGameResponse?.createGame) {
