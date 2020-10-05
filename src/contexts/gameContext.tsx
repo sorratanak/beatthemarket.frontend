@@ -34,6 +34,7 @@ interface ContextProps {
   onResumeGame: () => void;
   onExitGame: () => void;
   onGetUserProfitLoss: () => void;
+  resetState: () => void;
 }
 
 const DEFAULT_GAME_CONTEXT: ContextProps = {
@@ -58,6 +59,7 @@ const DEFAULT_GAME_CONTEXT: ContextProps = {
   onResumeGame: _.noop,
   onExitGame: _.noop,
   onGetUserProfitLoss: _.noop,
+  resetState: _.noop,
 };
 
 export const GameContext = React.createContext(DEFAULT_GAME_CONTEXT);
@@ -80,15 +82,27 @@ const ContextProvider = ({
   const [isGamePaused, setIsGamePaused] = useState<boolean>(false);
 
   /* ------ Reset states when logout ------ */
+  const resetState = useCallback(() => {
+    setGameId(null);
+    setActiveStock(null);
+    setStocks([]);
+    setGameEvents(null);
+    setGameScore(null);
+    setWins(START_GAME_LEVEL);
+    setIsGamePaused(false);
+  }, [
+    setGameId,
+    setActiveStock,
+    setStocks,
+    setGameEvents,
+    setGameScore,
+    setWins,
+    setIsGamePaused,
+  ]);
+
   useEffect(() => {
     if (!user) {
-      setGameId(null);
-      setActiveStock(null);
-      setStocks([]);
-      setGameEvents(null);
-      setGameScore(null);
-      setWins(START_GAME_LEVEL);
-      setIsGamePaused(false);
+      resetState();
     }
   }, [user]);
 
@@ -250,6 +264,7 @@ const ContextProvider = ({
         onResumeGame,
         onExitGame,
         onGetUserProfitLoss,
+        resetState,
       }}>
       {children}
     </GameContext.Provider>

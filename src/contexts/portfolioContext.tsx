@@ -15,6 +15,7 @@ interface ContextProps {
   balance: { [balanceId: string]: IPortfolioBalance };
   onPortfolioUpdate: (updates: IPortfolio[] | any[]) => void;
   onGetAccountBalances: () => void;
+  resetState: () => void;
 }
 
 const DEFAULT_PORTFOLIO_CONTEXT: ContextProps = {
@@ -23,6 +24,7 @@ const DEFAULT_PORTFOLIO_CONTEXT: ContextProps = {
   balance: null,
   onPortfolioUpdate: _.noop,
   onGetAccountBalances: _.noop,
+  resetState: _.noop,
 };
 
 export const PortfolioContext = React.createContext(DEFAULT_PORTFOLIO_CONTEXT);
@@ -46,10 +48,14 @@ const ContextProvider = ({
   }>({});
 
   /* ------ Reset states when logout ------ */
+  const resetState = useCallback(() => {
+    setProfit(null);
+    setBalance(null);
+  }, [setProfit, setBalance]);
+
   useEffect(() => {
     if (!user) {
-      setProfit(null);
-      setBalance(null);
+      resetState();
     }
   }, [user]);
 
@@ -145,6 +151,7 @@ const ContextProvider = ({
         balance,
         onPortfolioUpdate,
         onGetAccountBalances,
+        resetState,
       }}>
       {children}
     </PortfolioContext.Provider>

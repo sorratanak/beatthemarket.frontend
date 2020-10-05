@@ -21,7 +21,6 @@ import {
   MAX_WINS_COUNT,
   LEVEL_WIN_STEP,
   GAME_EVENT_NAMES,
-  START_GAME_LEVEL,
 } from '../../constants';
 
 export function Game() {
@@ -35,8 +34,12 @@ export function Game() {
     gameScore,
     wins,
     setWins,
+    resetState: gameContextResetState,
   } = useContext(GameContext);
-  const { onPortfolioUpdate } = useContext(PortfolioContext);
+  const {
+    onPortfolioUpdate,
+    resetState: portfolioContextResetState,
+  } = useContext(PortfolioContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -106,8 +109,8 @@ export function Game() {
           headerType={endGameModalType}
           onFinishPress={() => {
             setIsEndGameModalVisible(false);
-            onSetGameScore(null);
-            setWins(START_GAME_LEVEL);
+            gameContextResetState();
+            portfolioContextResetState();
           }}
         />
       </DefaultModal>
