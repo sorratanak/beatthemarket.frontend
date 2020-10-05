@@ -15,12 +15,12 @@ export const SETTINGS_TILES = [
     nav: SETTINGS_NAV_TYPES.SUBSCRIPTIONS,
     title: 'Subscription',
   },
-  {
-    id: 'tile-fire',
-    source: IMAGES.FIRE,
-    nav: SETTINGS_NAV_TYPES.EXTRA_SUBSCRIPTIONS,
-    title: 'Extra subscription',
-  },
+  // {
+  //   id: 'tile-fire',
+  //   source: IMAGES.FIRE,
+  //   nav: SETTINGS_NAV_TYPES.EXTRA_SUBSCRIPTIONS,
+  //   title: 'Extra subscription',
+  // },
   {
     id: 'tile-speaker',
     source: IMAGES.SPEAKER,
