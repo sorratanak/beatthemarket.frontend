@@ -1,5 +1,6 @@
 import React, { useContext, useCallback, useEffect, useMemo } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
+import _ from 'lodash';
 
 import { ScreenProps } from './props';
 import { Container, ScoreBoard, DefaultButton } from '../../components';
@@ -23,14 +24,16 @@ export function Home({ navigation }: ScreenProps) {
   );
 
   /* Queries */
-  const { data: users } = useQuery(usersGraphql.queries.GET_USERS);
+  const { data: users, error: usersError } = useQuery(
+    usersGraphql.queries.GET_USERS,
+  );
 
   /* Error Handling */
   useEffect(() => {
-    if (createGameError) {
+    if (createGameError || usersError) {
       logout();
     }
-  }, [createGameError]);
+  }, [createGameError, usersError]);
 
   useEffect(() => {
     if (createGameResponse?.createGame) {
