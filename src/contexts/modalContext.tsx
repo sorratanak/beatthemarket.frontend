@@ -99,12 +99,12 @@ const ContextProvider = ({
           title={{ img: IMAGES.WARNING }}
           infoText={currentAlert?.title}
           firstButton={{
-            text: 'Cancel',
-            onPress: onResetAlertModal,
-          }}
-          secondButton={{
             text: 'Confirm',
             onPress: currentAlert?.onConfirmPress,
+          }}
+          secondButton={{
+            text: 'Cancel',
+            onPress: onResetAlertModal,
           }}
         />
       </DefaultModal>

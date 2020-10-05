@@ -225,7 +225,8 @@ const ContextProvider = ({
   const onExitGame = useCallback(
     (callback?: () => void) => {
       onSetAlertModal({
-        title: 'Are you want to exit game? You will lose your current progress',
+        title:
+          'Are you want to exit game?\nYou will lose your current progress',
         onConfirmPress: () => {
           exitGame(getPauseResumeGameRequest(gameId));
           resetState();

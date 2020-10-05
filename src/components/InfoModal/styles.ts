@@ -36,14 +36,21 @@ export const getThemedStyles = (theme: ITheme) =>
       fontSize: 20,
       lineHeight: 24,
       textAlign: 'center',
+      marginBottom: 20,
     },
     oneButtonContainer: {
       marginVertical: 20,
       marginHorizontal: 60,
     },
-    twoButtonsContainer: {},
-    firstButton: {},
-    secondButton: {},
+    twoButtonsContainer: {
+      marginHorizontal: 20,
+    },
+    firstButton: {
+      marginVertical: 10,
+    },
+    secondButton: {
+      marginVertical: 10,
+    },
     buttonText: {
       color: theme.DEFAULT.TEXT_COLOR,
       fontSize: 20,
