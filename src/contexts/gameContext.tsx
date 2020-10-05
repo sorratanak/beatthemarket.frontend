@@ -10,7 +10,7 @@ import {
 } from '../utils/parsing';
 import gameGraphql from '../graphql/game';
 import { START_GAME_LEVEL, QUERY_WITH_ERRORS_OPTIONS } from '../constants';
-import { ErrorModalContext, UserContext } from '.';
+import { ModalContext, UserContext } from '.';
 
 interface ContextProps {
   wins: number;
@@ -32,7 +32,7 @@ interface ContextProps {
   setWins: (count: number) => void;
   onPauseGame: () => void;
   onResumeGame: () => void;
-  onExitGame: () => void;
+  onExitGame: (callback?: () => void) => void;
   onGetUserProfitLoss: () => void;
   resetState: () => void;
 }
@@ -70,7 +70,7 @@ const ContextProvider = ({
   children: React.ReactNode | React.ReactNode[];
 }) => {
   const { user } = useContext(UserContext);
-  const { onSetErrorModal } = useContext(ErrorModalContext);
+  const { onSetErrorModal, onSetAlertModal } = useContext(ModalContext);
 
   /* ------ State ------ */
   const [gameId, setGameId] = useState<string>(null);
@@ -222,10 +222,21 @@ const ContextProvider = ({
     setIsGamePaused(false);
   }, [gameId, resumeGame]);
 
-  const onExitGame = useCallback(() => {
-    exitGame(getPauseResumeGameRequest(gameId));
-    resetState();
-  }, [gameId, exitGame, resetState]);
+  const onExitGame = useCallback(
+    (callback?: () => void) => {
+      onSetAlertModal({
+        title: 'Are you want to exit game? You will lose your current progress',
+        onConfirmPress: () => {
+          exitGame(getPauseResumeGameRequest(gameId));
+          resetState();
+          if (callback) {
+            callback();
+          }
+        },
+      });
+    },
+    [gameId, exitGame, resetState],
+  );
 
   const onGetUserProfitLoss = useCallback(() => {
     console.log(

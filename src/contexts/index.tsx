@@ -4,9 +4,7 @@ import UserContextProvider, { UserContext } from './userContext';
 import IapContextProvider, { IapContext } from './iapContext';
 import GameContextProvider, { GameContext } from './gameContext';
 import PortfolioContextProvider, { PortfolioContext } from './portfolioContext';
-import ErrorModalContextProvider, {
-  ErrorModalContext,
-} from './errorModalContext';
+import ModalContextProvider, { ModalContext } from './modalContext';
 
 interface Props {
   children: ReactNode;
@@ -14,7 +12,7 @@ interface Props {
 const MultipleContextProvider = ({ children }: Props) => {
   return (
     <ThemeContextProvider>
-      <ErrorModalContextProvider>
+      <ModalContextProvider>
         <UserContextProvider>
           <IapContextProvider>
             <GameContextProvider>
@@ -22,14 +20,14 @@ const MultipleContextProvider = ({ children }: Props) => {
             </GameContextProvider>
           </IapContextProvider>
         </UserContextProvider>
-      </ErrorModalContextProvider>
+      </ModalContextProvider>
     </ThemeContextProvider>
   );
 };
 
 export {
   ThemeContext,
-  ErrorModalContext,
+  ModalContext,
   UserContext,
   IapContext,
   GameContext,

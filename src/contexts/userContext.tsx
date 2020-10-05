@@ -20,7 +20,7 @@ import { IUser } from '../types';
 import { resetNavigation } from '../utils';
 import { TIME_TO_RESET_NAVIGATION } from '../constants';
 import { auth as firebaseAuth } from '../firebase/helper';
-import { ErrorModalContext } from './errorModalContext';
+import { ModalContext } from './modalContext';
 
 interface ContextProps {
   token: string | null;
@@ -54,7 +54,7 @@ const ContextProvider = ({
   const [localUser, setLocalUser] = useState<IUser | null>(null);
   const [localToken, setLocalToken] = useState<string | null>(null);
 
-  const { onSetErrorModal } = useContext(ErrorModalContext);
+  const { onSetErrorModal } = useContext(ModalContext);
 
   useEffect(() => {
     getUserFromStorage().then((user) => {

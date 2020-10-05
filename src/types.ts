@@ -143,6 +143,11 @@ export interface IPurchase {
   PRICE?: number;
 }
 
+export interface IAlertItem {
+  title: string;
+  onConfirmPress: () => void;
+}
+
 /* ------ Requests ------ */
 
 export interface IGraphqlVariableRequest<VariablesObj> {
