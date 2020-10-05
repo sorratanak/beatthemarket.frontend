@@ -35,14 +35,26 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
   const { logout } = useContext(UserContext);
   const { themedStyles } = props;
 
-  const { gameId, isGamePaused, onPauseGame, onResumeGame } = useContext(
-    GameContext,
-  );
+  const {
+    gameId,
+    isGamePaused,
+    onPauseGame,
+    onResumeGame,
+    onExitGame,
+  } = useContext(GameContext);
 
   return (
     <DrawerContentScrollView {...props}>
       <Text style={themedStyles.title}>Beat the Market</Text>
       <DrawerItemList {...props} />
+      {gameId && (
+        <DrawerItem
+          label="Exit Game"
+          onPress={() => onExitGame()}
+          style={themedStyles.logoutContainer}
+          labelStyle={themedStyles.logout}
+        />
+      )}
       <DrawerItem
         label="Logout"
         onPress={logout}

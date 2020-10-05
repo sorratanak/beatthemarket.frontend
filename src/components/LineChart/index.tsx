@@ -95,7 +95,7 @@ export function LineChart({ data }: Props) {
 
         <WinBackgroundEffect />
       </View>
-      {gameId && (
+      {gameId && isNotWeb && (
         <TouchableOpacity
           style={styles.XbuttonContainer}
           onPress={() => {
