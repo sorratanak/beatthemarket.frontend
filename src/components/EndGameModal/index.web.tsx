@@ -4,7 +4,12 @@ import { useQuery } from '@apollo/client';
 import _ from 'lodash';
 
 import { getThemedStyles } from './styles';
-import { ThemeContext, PortfolioContext, GameContext } from '../../contexts';
+import {
+  ThemeContext,
+  PortfolioContext,
+  GameContext,
+  UserContext,
+} from '../../contexts';
 import { IMAGES } from '../../assets';
 import usersGraphql from '../../graphql/users';
 import { ScoreBoard } from '../ScoreBoard';
@@ -28,6 +33,7 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
+  const { user } = useContext(UserContext);
   const { stocks, gameScore, onGetUserProfitLoss, userProfitLoss } = useContext(
     GameContext,
   );
@@ -81,7 +87,7 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
 
         <View style={themedStyles.contentContainer}>
           <View style={themedStyles.rankInfo}>
-            <Text style={themedStyles.subTitle}>Lorem ipsum</Text>
+            <Text style={themedStyles.subTitle}>{user?.userName}</Text>
             <View style={themedStyles.scoreBoardContainer}>
               <ScoreBoard users={users?.users || []} isTabsVisible={false} />
             </View>
