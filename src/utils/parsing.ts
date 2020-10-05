@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import random from 'random';
+import moment from 'moment';
 import {
   IPoint,
   IStockChange,
@@ -50,6 +52,23 @@ export function selectBestUserScore(user: IBoardUser): number {
   });
 
   return Math.floor(bestScore);
+}
+
+export function generateRandomPointData(length: number = 20): IPoint[] {
+  const RANDOM_POINT_RANGES = {
+    y: [75, 125],
+  };
+
+  const randomPoints: IPoint[] = [];
+
+  for (let i = 1; i <= length; i += 1) {
+    randomPoints.push({
+      x: moment(i).format('-mm:ss'),
+      y: random.float(RANDOM_POINT_RANGES.y[0], RANDOM_POINT_RANGES.y[1]),
+    });
+  }
+
+  return randomPoints.reverse();
 }
 
 export function getSellBuyStockRequest(

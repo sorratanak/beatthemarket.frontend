@@ -47,7 +47,6 @@ export function OfferBlock({ title, preset }: Props) {
       onSelectPurchase(foundPurchase);
 
       getProducts([foundPurchase.RNIAP_PRODUCT_ID]).then((result) => {
-        console.log('result', result);
         const purchase = _.find(
           result,
           (el) => el.productId === foundPurchase.RNIAP_PRODUCT_ID,
