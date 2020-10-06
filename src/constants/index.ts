@@ -41,7 +41,7 @@ export const SUBSCRIPTION_TYPE: {
       ? 'margin_trading_1month'
       : 'margin_trading_1month.1',
     STRIPE_PRODUCT_ID: 'prod_I1RAoB8UK5GDab',
-    STRIPE_PRICE_ID: 'price_0HWSA0u4V08wojXsLCpJ7JJZ',
+    STRIPE_PRICE_ID: 'price_0HROINu4V08wojXst9HsC6Yw',
     TYPE: 'subscription',
     PRICE: 12,
   },
