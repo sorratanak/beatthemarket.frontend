@@ -36,7 +36,7 @@ export const SUBSCRIPTION_TYPE: {
   [key: string]: IPurchase;
 } = {
   MARGIN_TRADING: {
-    TITLE: 'Margin trading 1 month',
+    TITLE: 'x10 Cash Boost 1 month',
     RNIAP_PRODUCT_ID: isAndroid
       ? 'margin_trading_1month'
       : 'margin_trading_1month.1',
@@ -46,7 +46,7 @@ export const SUBSCRIPTION_TYPE: {
     PRICE: 12,
   },
   ADDITIONAL_BALANCE_100K: {
-    TITLE: 'Additional balance 100k',
+    TITLE: '100k boost',
     RNIAP_PRODUCT_ID: 'additional_balance_100k',
     STRIPE_PRODUCT_ID: null,
     STRIPE_PRICE_ID: null,
@@ -54,7 +54,7 @@ export const SUBSCRIPTION_TYPE: {
     TYPE: 'subscription',
   },
   ADDITIONAL_BALANCE_200K: {
-    TITLE: 'Additional balance 200k',
+    TITLE: '200k boost',
     RNIAP_PRODUCT_ID: 'additional_balance_200k',
     STRIPE_PRODUCT_ID: null,
     STRIPE_PRICE_ID: null,
@@ -62,7 +62,7 @@ export const SUBSCRIPTION_TYPE: {
     TYPE: 'subscription',
   },
   ADDITIONAL_BALANCE_300K: {
-    TITLE: 'Additional balance 300k',
+    TITLE: '300k boost',
     RNIAP_PRODUCT_ID: 'additional_balance_300k',
     STRIPE_PRODUCT_ID: null,
     STRIPE_PRICE_ID: null,
@@ -70,7 +70,7 @@ export const SUBSCRIPTION_TYPE: {
     TYPE: 'subscription',
   },
   ADDITIONAL_BALANCE_400K: {
-    TITLE: 'Additional balance 400k',
+    TITLE: '400k boost',
     RNIAP_PRODUCT_ID: 'additional_balance_400k',
     STRIPE_PRODUCT_ID: null,
     STRIPE_PRICE_ID: null,
@@ -91,7 +91,7 @@ export const ONE_TIME_PURCHASE_TYPE: {
     PRICE: 5,
   },
   ADDITIONAL_100K: {
-    TITLE: 'Additional $100k',
+    TITLE: '$100k boost',
     RNIAP_PRODUCT_ID: 'additional_100k',
     STRIPE_PRODUCT_ID: 'prod_I1RCtpy369Bu4g',
     STRIPE_PRICE_ID: 'price_0HWSA8u4V08wojXshFrWn24r',
@@ -99,7 +99,7 @@ export const ONE_TIME_PURCHASE_TYPE: {
     TYPE: 'oneTimePurchase',
   },
   ADDITIONAL_200K: {
-    TITLE: 'Additional $200k',
+    TITLE: '$200k boost',
     RNIAP_PRODUCT_ID: 'additional_200k',
     STRIPE_PRODUCT_ID: 'prod_I1RC5THYQrZdYO',
     STRIPE_PRICE_ID: 'price_0HWSADu4V08wojXst8yZGBYI',
@@ -107,7 +107,7 @@ export const ONE_TIME_PURCHASE_TYPE: {
     TYPE: 'oneTimePurchase',
   },
   ADDITIONAL_300K: {
-    TITLE: 'Additional $300k',
+    TITLE: '$300k boost',
     RNIAP_PRODUCT_ID: 'additional_300k',
     STRIPE_PRODUCT_ID: 'prod_I1RDVzSR4oZKJ3',
     STRIPE_PRICE_ID: 'price_0HWSAGu4V08wojXsF4rXRExu',
@@ -115,7 +115,7 @@ export const ONE_TIME_PURCHASE_TYPE: {
     TYPE: 'oneTimePurchase',
   },
   ADDITIONAL_400K: {
-    TITLE: 'Additional $400k',
+    TITLE: '$400k boost',
     RNIAP_PRODUCT_ID: 'additional_400k',
     STRIPE_PRODUCT_ID: 'prod_I1RDqXXxLnMXdb',
     STRIPE_PRICE_ID: 'price_0HWSAIu4V08wojXsEE9smSny',

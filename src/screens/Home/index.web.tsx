@@ -32,14 +32,17 @@ export function Home({ navigation }: ScreenProps) {
   );
 
   /* Queries */
-  const { data: users } = useQuery(usersGraphql.queries.GET_USERS);
+  const { data: users, error: usersError } = useQuery(
+    usersGraphql.queries.GET_USERS,
+    QUERY_WITH_ERRORS_OPTIONS,
+  );
 
   /* Error Handling */
   useEffect(() => {
-    if (createGameError) {
+    if (createGameError || usersError) {
       logout();
     }
-  }, [createGameError, logout]);
+  }, [createGameError, usersError, logout]);
 
   useEffect(() => {
     if (createGameResponse?.createGame) {
