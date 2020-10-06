@@ -37,6 +37,7 @@ export function Game() {
     wins,
     setWins,
     gameScore,
+    onRestartGame,
     resetState: gameContextResetState,
   } = useContext(GameContext);
   const {
@@ -130,8 +131,9 @@ export function Game() {
           headerType={endGameModalType}
           onFinishPress={() => {
             setIsEndGameModalVisible(false);
-            gameContextResetState();
-            portfolioContextResetState();
+            onRestartGame();
+            // gameContextResetState();
+            // portfolioContextResetState();
           }}
         />
       </DefaultModal>

@@ -33,6 +33,7 @@ interface ContextProps {
   onPauseGame: () => void;
   onResumeGame: () => void;
   onExitGame: (callback?: () => void) => void;
+  onRestartGame: () => void;
   onGetUserProfitLoss: () => void;
   resetState: () => void;
 }
@@ -58,6 +59,7 @@ const DEFAULT_GAME_CONTEXT: ContextProps = {
   onPauseGame: _.noop,
   onResumeGame: _.noop,
   onExitGame: _.noop,
+  onRestartGame: _.noop,
   onGetUserProfitLoss: _.noop,
   resetState: _.noop,
 };
@@ -132,6 +134,10 @@ const ContextProvider = ({
   const [exitGame, { data: exitGameResponse }] = useMutation(
     gameGraphql.queries.EXIT_GAME,
   );
+  const [restartGame, { data: restartGameResponse }] = useMutation(
+    gameGraphql.queries.RESTART_GAME,
+  );
+  console.log('response', restartGameResponse);
   const [getUserProfitLoss, { data: userProfitLossResponse }] = useLazyQuery(
     gameGraphql.queries.GET_USER_PROFIT_LOSS,
   );
@@ -215,12 +221,12 @@ const ContextProvider = ({
   const onPauseGame = useCallback(() => {
     pauseGame(getPauseResumeGameRequest(gameId));
     setIsGamePaused(true);
-  }, [gameId, pauseGame]);
+  }, [gameId, pauseGame, setIsGamePaused]);
 
   const onResumeGame = useCallback(() => {
     resumeGame(getPauseResumeGameRequest(gameId));
     setIsGamePaused(false);
-  }, [gameId, resumeGame]);
+  }, [gameId, resumeGame, setIsGamePaused]);
 
   const onExitGame = useCallback(
     (callback?: () => void) => {
@@ -238,6 +244,16 @@ const ContextProvider = ({
     },
     [gameId, exitGame, resetState],
   );
+
+  const onRestartGame = useCallback(() => {
+    console.log('restartGame query', getPauseResumeGameRequest(gameId));
+    restartGame(getPauseResumeGameRequest(gameId));
+    setIsGamePaused(false);
+
+    const savedGameId = gameId;
+    setTimeout(() => setGameId(savedGameId), 5000);
+    setGameId(null);
+  }, [gameId, restartGame, setIsGamePaused]);
 
   const onGetUserProfitLoss = useCallback(() => {
     console.log(
@@ -273,6 +289,7 @@ const ContextProvider = ({
         onPauseGame,
         onResumeGame,
         onExitGame,
+        onRestartGame,
         onGetUserProfitLoss,
         resetState,
       }}>

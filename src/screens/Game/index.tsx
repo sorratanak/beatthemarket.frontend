@@ -91,6 +91,7 @@ export function Game() {
     return randomData;
   }, [randomData, data]);
 
+  console.log('gameId is', gameId);
   return (
     <Container style={themedStyles.container}>
       <GameHeader />
