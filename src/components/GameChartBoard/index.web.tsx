@@ -11,14 +11,26 @@ import _ from 'lodash';
 
 import { IPoint, IStockChange } from '../../types';
 import { LineChart } from '../LineChart';
-import { GameContext, ThemeContext, PortfolioContext } from '../../contexts';
-import { getThemedStyles } from './styles.web';
+import {
+  GameContext,
+  ThemeContext,
+  PortfolioContext,
+  IapContext,
+} from '../../contexts';
+import { getThemedStyles, MODAL_CONTAINER_STYLE } from './styles.web';
 import { getStockChanges } from '../../utils/parsing';
 import { StockList } from '../StockList';
 import { COLORS } from '../../themes/colors';
-import { STOCK_CHANGE_TYPE, ACCOUNT_BALANCE_TYPE } from '../../constants';
+import {
+  STOCK_CHANGE_TYPE,
+  ACCOUNT_BALANCE_TYPE,
+  PURCHASE_TYPE,
+  SUBSCRIPTION_TYPE,
+} from '../../constants';
 import { getMoneyFormat } from '../../utils';
 import { SwitchRow } from '../SwitchRow';
+import { DefaultModal } from '../DefaultModal';
+import { BuySubscriptionModal } from '../BuySubscriptionModal';
 
 interface ChartHeaderProps {
   themedStyles: any;
@@ -27,6 +39,7 @@ interface ChartHeaderProps {
 function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
   const { profit, profitsRealized, balance } = useContext(PortfolioContext);
   const { activeStock } = useContext(GameContext);
+  const { onSelectSubscription } = useContext(IapContext);
 
   const activeProfit = useMemo(() => profit?.[activeStock?.id], [
     profit,
@@ -58,15 +71,20 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
   }, [data]);
 
   const [stockChange, setStockChange] = useState<IStockChange>(null);
+
   const [isCashBoost, setIsCashBoost] = useState<boolean>(false);
+  const [isCashBoostModalVisible, setIsCashBoostModalVisible] = useState<
+    boolean
+  >(false);
   const onCashBoostChange = useCallback(() => {
     setIsCashBoost(!isCashBoost);
   }, [isCashBoost, setIsCashBoost]);
   useEffect(() => {
     if (isCashBoost) {
-      // TODO call buy modal
+      onSelectSubscription(SUBSCRIPTION_TYPE.MARGIN_TRADING);
+      setIsCashBoostModalVisible(true);
     }
-  }, [isCashBoost]);
+  }, [isCashBoost, setIsCashBoostModalVisible]);
 
   useEffect(() => {
     setStockChange(getStockChanges(prelastItem, lastItem));
@@ -118,6 +136,17 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
           container: themedStyles.cashBoost10xContainer,
         }}
       />
+
+      <DefaultModal
+        style={MODAL_CONTAINER_STYLE}
+        isVisible={isCashBoostModalVisible}
+        isBackdrop
+        onBackdropPress={() => {
+          setIsCashBoostModalVisible(false);
+          setIsCashBoost(false);
+        }}>
+        <BuySubscriptionModal purchaseType={PURCHASE_TYPE.SUBSCRIPTION} />
+      </DefaultModal>
     </>
   );
 }

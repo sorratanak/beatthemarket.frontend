@@ -83,6 +83,7 @@ export const getThemedStyles = (theme: ITheme) =>
     cashBoost10xContainer: {
       alignSelf: 'flex-start',
       width: 200,
+      marginLeft: 30,
     },
 
     /* Chart */
@@ -154,3 +155,9 @@ export const getThemedStyles = (theme: ITheme) =>
       marginRight: 20,
     },
   });
+
+export const MODAL_CONTAINER_STYLE: any = {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+};
