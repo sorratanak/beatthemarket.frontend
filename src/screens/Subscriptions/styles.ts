@@ -24,4 +24,8 @@ export const getThemedStyles = (theme: ITheme) =>
       backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
     },
     buyModalContainer: {},
+    subscriptionsFlex: {
+      flex: 0.4,
+      flexGrow: 0.4,
+    },
   });

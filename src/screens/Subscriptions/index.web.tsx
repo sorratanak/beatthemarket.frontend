@@ -10,15 +10,42 @@ import {
 import { getThemedStyles, MODAL_CONTAINER_STYLE } from './styles.web';
 import { ThemeContext, IapContext } from '../../contexts';
 import { IMAGES } from '../../assets';
-import { SUBSCRIPTION_TYPE, PURCHASE_TYPE } from '../../constants';
+import {
+  SUBSCRIPTION_TYPE,
+  PURCHASE_TYPE,
+  ONE_TIME_PURCHASE_TYPE,
+} from '../../constants';
+import { IPurchase, PurchaseType } from '../../types';
 
 export function Subscriptions() {
   const { theme } = useContext(ThemeContext);
-  const { onSelectSubscription } = useContext(IapContext);
+  const { onSelectPurchase, onSelectSubscription } = useContext(IapContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
+  const [modalType, setModalType] = useState<PurchaseType>(
+    PURCHASE_TYPE.ONE_TIME_PURCHASE,
+  );
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const onItemPress = useCallback(
+    (purchase: IPurchase) => {
+      switch (purchase.TYPE) {
+        case PURCHASE_TYPE.ONE_TIME_PURCHASE:
+          onSelectPurchase(purchase);
+          break;
+        case PURCHASE_TYPE.SUBSCRIPTION:
+          onSelectSubscription(purchase);
+          break;
+        default:
+          break;
+      }
+
+      setModalType(purchase.TYPE);
+      setIsModalVisible(true);
+    },
+    [setIsModalVisible, onSelectSubscription, onSelectPurchase],
+  );
 
   const onCloseModal = useCallback(() => {
     setIsModalVisible(false);
@@ -30,30 +57,26 @@ export function Subscriptions() {
       style={themedStyles.container}>
       <View style={themedStyles.flexContainer}>
         <SubscriptionsList
-          subscriptions={Object.values(SUBSCRIPTION_TYPE).slice(0, 1)}
-          onSubscriptionPress={onSelectSubscription}
+          title="Subscriptions"
+          subscriptions={Object.values(SUBSCRIPTION_TYPE)}
+          onSubscriptionPress={onItemPress}
+          style={{
+            container: themedStyles.subscriptionsFlex,
+          }}
+        />
+        <SubscriptionsList
+          title="Purchases"
+          subscriptions={Object.values(ONE_TIME_PURCHASE_TYPE)}
+          onSubscriptionPress={onItemPress}
         />
       </View>
-      <Text style={themedStyles.description}>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo nam
-        cumque, dolore magnam recusandae maiores enim laborum suscipit nisi
-        facere quaerat beatae corrupti modi magni ipsum quia alias laudantium
-        asperiores!
-      </Text>
-      <DefaultButton
-        onPress={() => setIsModalVisible(true)}
-        style={{
-          container: themedStyles.buttonContainer,
-        }}>
-        Buy
-      </DefaultButton>
 
       <DefaultModal
         style={MODAL_CONTAINER_STYLE}
         isVisible={isModalVisible}
         isBackdrop
         onBackdropPress={onCloseModal}>
-        <BuySubscriptionModal purchaseType={PURCHASE_TYPE.SUBSCRIPTION} />
+        <BuySubscriptionModal purchaseType={modalType} />
       </DefaultModal>
     </SettingsNestedScreenWrapper>
   );

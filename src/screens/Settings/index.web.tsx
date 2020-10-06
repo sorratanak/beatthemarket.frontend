@@ -31,8 +31,8 @@ export function Settings() {
     switch (selectedTab) {
       case SETTINGS_NAV_TYPES.SUBSCRIPTIONS:
         return <Subscriptions />;
-      case SETTINGS_NAV_TYPES.EXTRA_SUBSCRIPTIONS:
-        return <ExtraSubscriptions />;
+      // case SETTINGS_NAV_TYPES.EXTRA_SUBSCRIPTIONS:
+      //   return <ExtraSubscriptions />;
       case SETTINGS_NAV_TYPES.SOUND_EFFECTS:
         return <SoundEffects />;
       case SETTINGS_NAV_TYPES.MUSIC:

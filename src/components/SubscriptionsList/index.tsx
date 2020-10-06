@@ -1,46 +1,46 @@
 import React, { useContext, useMemo } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ViewStyle } from 'react-native';
 
-import { ThemeContext, IapContext } from '../../contexts';
+import { ThemeContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 import { TilesList } from '../TilesList';
 import { IPurchase } from '../../types';
 
 interface Props {
+  title: string;
   subscriptions: IPurchase[];
   onSubscriptionPress: (subscription: IPurchase) => void;
+  style?: {
+    container?: ViewStyle;
+  };
 }
 
 export function SubscriptionsList({
+  title,
   subscriptions,
   onSubscriptionPress,
+  style: propStyle = {},
 }: Props) {
   const { theme } = useContext(ThemeContext);
-  const { selectedSubscription } = useContext(IapContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   return (
-    <TilesList
-      onTilePress={onSubscriptionPress}
-      data={subscriptions}
-      tileStyle={themedStyles.tileContainer}
-      extraData={selectedSubscription}
-      renderItem={({ item }) => (
-        <View
-          style={[
-            themedStyles.itemContainer,
-            selectedSubscription?.RNIAP_PRODUCT_ID === item.RNIAP_PRODUCT_ID
-              ? themedStyles.activeItemContainer
-              : null,
-          ]}>
-          <Text style={themedStyles.itemPriceText}>$ {item.PRICE}</Text>
-          <Text style={themedStyles.itemBalanceText}>
-            An additional ${item.PRICE * 100}k balance, up to $500k
-          </Text>
-        </View>
-      )}
-      keyExtractor={(item, index) => `radio-subscription-${item.id}-${index}`}
-    />
+    <>
+      <Text style={themedStyles.itemPriceText}>{title}</Text>
+      <TilesList
+        onTilePress={onSubscriptionPress}
+        data={subscriptions}
+        tileStyle={themedStyles.tileContainer}
+        renderItem={({ item }) => (
+          <View style={themedStyles.itemContainer}>
+            <Text style={themedStyles.itemPriceText}>$ {item.PRICE}</Text>
+            <Text style={themedStyles.itemBalanceText}>{item.TITLE}</Text>
+          </View>
+        )}
+        keyExtractor={(item, index) => `radio-subscription-${item.id}-${index}`}
+        style={propStyle.container}
+      />
+    </>
   );
 }

@@ -1,35 +1,53 @@
 import React, { useContext, useMemo, useCallback } from 'react';
 import { View } from 'react-native';
-import { getSubscriptions, requestSubscription } from 'react-native-iap';
+import {
+  getProducts,
+  getSubscriptions,
+  requestPurchase,
+  requestSubscription,
+} from 'react-native-iap';
 
 import {
   SettingsNestedScreenWrapper,
   SubscriptionsList,
-  DefaultButton,
 } from '../../components';
 import { getThemedStyles } from './styles';
-import { ThemeContext, IapContext } from '../../contexts';
+import { ThemeContext } from '../../contexts';
 import { IMAGES } from '../../assets';
-import { SUBSCRIPTION_TYPE } from '../../constants';
+import {
+  ONE_TIME_PURCHASE_TYPE,
+  PURCHASE_TYPE,
+  SUBSCRIPTION_TYPE,
+} from '../../constants';
+import { IPurchase } from '../../types';
 
 export function Subscriptions() {
   const { theme } = useContext(ThemeContext);
-  const { selectedSubscription, onSelectSubscription } = useContext(IapContext);
 
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
-  const onSubscriptionPurchase = useCallback(() => {
-    if (selectedSubscription) {
-      getSubscriptions([selectedSubscription?.RNIAP_PRODUCT_ID]).then(
-        (result) => {
+  const onItemPress = useCallback((purchase: IPurchase) => {
+    switch (purchase.TYPE) {
+      case PURCHASE_TYPE.ONE_TIME_PURCHASE:
+        getProducts([purchase?.RNIAP_PRODUCT_ID]).then((result) => {
+          console.log('getProducts', result);
+
+          const [currentPurchase] = result;
+          requestPurchase(currentPurchase?.productId);
+        });
+        break;
+      case PURCHASE_TYPE.SUBSCRIPTION:
+        getSubscriptions([purchase?.RNIAP_PRODUCT_ID]).then((result) => {
           console.log('getSubscriptions', result);
 
           const [subscription] = result;
           requestSubscription(subscription?.productId);
-        },
-      );
+        });
+        break;
+      default:
+        break;
     }
-  }, [selectedSubscription]);
+  }, []);
 
   return (
     <SettingsNestedScreenWrapper
@@ -37,18 +55,19 @@ export function Subscriptions() {
       style={themedStyles.container}>
       <View style={themedStyles.flexContainer}>
         <SubscriptionsList
-          subscriptions={Object.values(SUBSCRIPTION_TYPE).slice(0, 1)}
-          onSubscriptionPress={onSelectSubscription}
+          title="Subscriptions"
+          subscriptions={Object.values(SUBSCRIPTION_TYPE)}
+          onSubscriptionPress={onItemPress}
+          style={{
+            container: themedStyles.subscriptionsFlex,
+          }}
+        />
+        <SubscriptionsList
+          title="Purchases"
+          subscriptions={Object.values(ONE_TIME_PURCHASE_TYPE)}
+          onSubscriptionPress={onItemPress}
         />
       </View>
-      <DefaultButton
-        onPress={onSubscriptionPurchase}
-        style={{
-          container: themedStyles.buttonContainer,
-          text: themedStyles.buttonText,
-        }}>
-        Purchase
-      </DefaultButton>
     </SettingsNestedScreenWrapper>
   );
 }

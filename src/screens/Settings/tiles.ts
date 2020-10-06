@@ -2,7 +2,7 @@ import { IMAGES } from '../../assets';
 
 export const SETTINGS_NAV_TYPES = {
   SUBSCRIPTIONS: 'Subscriptions',
-  EXTRA_SUBSCRIPTIONS: 'ExtraSubscriptions',
+  // EXTRA_SUBSCRIPTIONS: 'ExtraSubscriptions',
   SOUND_EFFECTS: 'SoundEffects',
   MUSIC: 'Music',
   USER_SETTINGS: 'UserSettings',
@@ -13,7 +13,7 @@ export const SETTINGS_TILES = [
     id: 'tile-flag',
     source: IMAGES.FLAG,
     nav: SETTINGS_NAV_TYPES.SUBSCRIPTIONS,
-    title: 'Subscription',
+    title: 'Subscriptions',
   },
   // {
   //   id: 'tile-fire',

@@ -32,6 +32,10 @@ export const getThemedStyles = (theme: ITheme) =>
       justifyContent: 'center',
       alignItems: 'center',
     },
+    subscriptionsFlex: {
+      flex: 0.4,
+      flexGrow: 0.4,
+    },
   });
 
 export const MODAL_CONTAINER_STYLE: any = {

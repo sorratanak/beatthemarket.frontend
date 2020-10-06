@@ -23,12 +23,6 @@ export function ExtraSubscriptions() {
           Extra subscription buys margin trading
         </Text>
       </TouchableOpacity>
-      <Text style={themedStyles.description}>
-        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsumLorem
-        ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-        ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-        ipsumLorem ipsumLorem ipsumLorem ipsum
-      </Text>
       <DefaultButton
         onPress={() => {}}
         style={{
