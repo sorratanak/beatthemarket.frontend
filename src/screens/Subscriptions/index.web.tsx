@@ -1,9 +1,8 @@
 import React, { useContext, useMemo, useState, useCallback } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import {
   SettingsNestedScreenWrapper,
   SubscriptionsList,
-  DefaultButton,
   DefaultModal,
   BuySubscriptionModal,
 } from '../../components';

@@ -102,6 +102,15 @@ const EXIT_GAME = gql`
   }
 `;
 
+const RESTART_GAME = gql`
+  mutation RestartGame($gameId: String!) {
+    restartGame(gameId: $gameId) {
+      event
+      gameId
+    }
+  }
+`;
+
 const GET_USER_PROFIT_LOSS = gql`
   query UserPersonalProfitLoss($email: String!, $gameId: String!) {
     userPersonalProfitLoss(email: $email, gameId: $gameId) {
@@ -123,6 +132,7 @@ const queries = {
   PAUSE_GAME,
   RESUME_GAME,
   EXIT_GAME,
+  RESTART_GAME,
   GET_USER_PROFIT_LOSS,
 };
 
