@@ -3,6 +3,7 @@ import { View, Text, Image } from 'react-native';
 import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
 import { DefaultButton } from '../DefaultButton';
+import { OfferBlock } from '../OfferBlock';
 
 interface Props {
   onClosePress: () => void;
@@ -50,6 +51,15 @@ export function InfoModal({
               ? themedStyles.twoButtonsContainer
               : themedStyles.oneButtonContainer
           }>
+          {
+            // TODO remove temporary crutches
+            infoText?.startsWith('InsufficientFunds') && (
+              <OfferBlock
+                title="Do you need more attempts?"
+                preset="additionalBalance"
+              />
+            )
+          }
           {firstButton?.text && (
             <DefaultButton
               onPress={() => onButtonPress(firstButton.onPress)}
