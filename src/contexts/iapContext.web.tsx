@@ -8,7 +8,7 @@ import { IPurchase, IStripeUserInfo, PurchaseType } from '../types';
 import { UserContext } from './userContext';
 import { getVerifyPaymentRequest } from '../utils/parsing';
 import { getIapProvider } from '../utils';
-import { PURCHASE_TYPE } from '../constants';
+import { PURCHASE_TYPE, QUERY_WITH_ERRORS_OPTIONS } from '../constants';
 
 interface ContextProps {
   isProcessing: boolean;
@@ -16,8 +16,14 @@ interface ContextProps {
   selectedSubscription: IPurchase;
   onSelectPurchase: (purchase: IPurchase) => void;
   onSelectSubscription: (subscription: IPurchase) => void;
-  onRequestPurchase: (userInfo: IStripeUserInfo) => void;
-  onRequestSubscription: (userInfo: IStripeUserInfo) => void;
+  onRequestPurchase: (
+    userInfo: IStripeUserInfo,
+    paymentCallback: () => void,
+  ) => void;
+  onRequestSubscription: (
+    userInfo: IStripeUserInfo,
+    paymentCallback: () => void,
+  ) => void;
 }
 
 const DEFAULT_IAP_CONTEXT: ContextProps = {
@@ -44,6 +50,7 @@ const ContextProvider = ({
   const [lastRequestType, setLastRequestType] = useState<PurchaseType>(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [paymentToken, setPaymentToken] = useState(null);
+  const [paymentCallback, setPaymentCallback] = useState<() => void>(null);
   const [selectedPurchase, setSelectedPurchase] = useState<IPurchase>(null);
   const [selectedSubscription, setSelectedSubscription] = useState<IPurchase>(
     null,
@@ -56,14 +63,24 @@ const ContextProvider = ({
       setPaymentMethod(null);
       setLastRequestType(null);
       setSelectedPurchase(null);
+      setPaymentCallback(null);
       setSelectedSubscription(null);
     }
   }, [user]);
 
   /* ------ Queries ------ */
-  const [verifyPayment, { data: verifyPaymentResponse }] = useMutation(
-    iapGraphql.queries.VERIFY_PAYMENT,
-  );
+  const [
+    verifyPayment,
+    { data: verifyPaymentResponse, error: verifyPaymentError },
+  ] = useMutation(iapGraphql.queries.VERIFY_PAYMENT, QUERY_WITH_ERRORS_OPTIONS);
+  useEffect(() => {
+    console.log('verifyPaymentResponse', verifyPaymentResponse);
+    console.log('verifyPaymentError', verifyPaymentError);
+    if ((verifyPaymentResponse || verifyPaymentError) && paymentCallback) {
+      paymentCallback();
+      setPaymentCallback(null);
+    }
+  }, [verifyPaymentResponse, verifyPaymentError]);
 
   const [
     createStripeCustomer,
@@ -91,7 +108,7 @@ const ContextProvider = ({
         tokenPayload = {
           source: paymentItem.id,
           customer: currentStripeCustomer?.id,
-          amount: selectedPurchaseItem.PRICE * 100,
+          amount: selectedPurchaseItem.PRICE * 100, // cents
           currency: 'usd',
         };
       } else {
@@ -126,7 +143,7 @@ const ContextProvider = ({
   const elements = useElements();
 
   const onRequestPurchase = useCallback(
-    async (userInfo: IStripeUserInfo) => {
+    async (userInfo: IStripeUserInfo, callback: () => void) => {
       console.log(
         'onRequestPurchase, selectedPurchase:',
         selectedPurchase,
@@ -147,6 +164,7 @@ const ContextProvider = ({
         console.log('[error]', error);
       } else {
         console.log('email is', user?.userEmail);
+        setPaymentCallback(callback);
         setPaymentToken(newToken);
         createStripeCustomer({ variables: { email: user?.userEmail } });
       }
@@ -155,7 +173,7 @@ const ContextProvider = ({
   );
 
   const onRequestSubscription = useCallback(
-    async (userInfo: IStripeUserInfo) => {
+    async (userInfo: IStripeUserInfo, callback: () => void) => {
       setLastRequestType(PURCHASE_TYPE.SUBSCRIPTION);
       console.log('onRequestSubscription', selectedSubscription, userInfo);
 
@@ -177,6 +195,7 @@ const ContextProvider = ({
         console.log('[error]', error);
       } else {
         console.log('email is', user?.userEmail);
+        setPaymentCallback(callback);
         setPaymentMethod(newPaymentMethod);
         createStripeCustomer({ variables: { email: user?.userEmail } });
       }

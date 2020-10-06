@@ -13,9 +13,13 @@ import { IStripeUserInfo, PurchaseType } from '../../types';
 
 interface Props {
   purchaseType: PurchaseType;
+  paymentCallback?: () => void;
 }
 
-export function BuySubscriptionModal({ purchaseType }: Props) {
+export function BuySubscriptionModal({
+  purchaseType,
+  paymentCallback = () => null,
+}: Props) {
   const { theme, themeKey } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -73,7 +77,9 @@ export function BuySubscriptionModal({ purchaseType }: Props) {
             <CardElement options={CARD_ELEMENT_OPTIONS(theme)} />
           </View>
           <DefaultButton
-            onPress={() => currentRequestPurchase(getUserInfo())}
+            onPress={() =>
+              currentRequestPurchase(getUserInfo(), paymentCallback)
+            }
             style={{
               container: themedStyles.payButtonContainer,
               text: themedStyles.payButtonTitle,

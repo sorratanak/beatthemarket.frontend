@@ -145,7 +145,10 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
           setIsCashBoostModalVisible(false);
           setIsCashBoost(false);
         }}>
-        <BuySubscriptionModal purchaseType={PURCHASE_TYPE.SUBSCRIPTION} />
+        <BuySubscriptionModal
+          paymentCallback={() => setIsCashBoostModalVisible(false)}
+          purchaseType={PURCHASE_TYPE.SUBSCRIPTION}
+        />
       </DefaultModal>
     </>
   );

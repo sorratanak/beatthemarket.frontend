@@ -32,8 +32,14 @@ interface ContextProps {
   selectedSubscription: IPurchase;
   onSelectPurchase: (purchase: IPurchase) => void;
   onSelectSubscription: (subscription: IPurchase) => void;
-  onRequestPurchase: (userInfo?: IStripeUserInfo) => void;
-  onRequestSubscription: (userInfo?: IStripeUserInfo) => void;
+  onRequestPurchase: (
+    userInfo?: IStripeUserInfo,
+    paymentCallback?: () => void,
+  ) => void;
+  onRequestSubscription: (
+    userInfo?: IStripeUserInfo,
+    paymentCallback?: () => void,
+  ) => void;
 }
 
 const DEFAULT_IAP_CONTEXT: ContextProps = {
