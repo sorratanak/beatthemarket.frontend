@@ -18,6 +18,7 @@ import { StockList } from '../StockList';
 import { COLORS } from '../../themes/colors';
 import { STOCK_CHANGE_TYPE, ACCOUNT_BALANCE_TYPE } from '../../constants';
 import { getMoneyFormat } from '../../utils';
+import { SwitchRow } from '../SwitchRow';
 
 interface ChartHeaderProps {
   themedStyles: any;
@@ -57,46 +58,67 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
   }, [data]);
 
   const [stockChange, setStockChange] = useState<IStockChange>(null);
+  const [isCashBoost, setIsCashBoost] = useState<boolean>(false);
+  const onCashBoostChange = useCallback(() => {
+    setIsCashBoost(!isCashBoost);
+  }, [isCashBoost, setIsCashBoost]);
+  useEffect(() => {
+    if (isCashBoost) {
+      // TODO call buy modal
+    }
+  }, [isCashBoost]);
 
   useEffect(() => {
     setStockChange(getStockChanges(prelastItem, lastItem));
   }, [prelastItem, lastItem]);
 
   return (
-    <View style={themedStyles.chartHeaderContainer}>
-      <View style={themedStyles.chartHeaderSubcontainer}>
-        <Text style={themedStyles.chartHeaderTitle}>{activeStock?.name} </Text>
-        <Text style={themedStyles.chartHeaderTitleAbbr}>
-          {activeStock?.symbol && `[${activeStock?.symbol}]`}
-        </Text>
-      </View>
-      {stockChange && (
-        <View style={themedStyles.chartHeaderNumberContainer}>
-          <Text style={themedStyles.chartHeaderStockProfitLoss}>
-            {getMoneyFormat(stockChange.currentValue || 0)}
+    <>
+      <View style={themedStyles.chartHeaderContainer}>
+        <View style={themedStyles.chartHeaderSubcontainer}>
+          <Text style={themedStyles.chartHeaderTitle}>
+            {activeStock?.name}{' '}
           </Text>
-          <Text
-            style={
-              stockChange.percent > 0
-                ? themedStyles.chartHeaderStockChangePositivePercent
-                : themedStyles.chartHeaderStockChangeNegativePercent
-            }>
-            {stockChange.difference}
-            {`    `}({stockChange.percent}%)
+          <Text style={themedStyles.chartHeaderTitleAbbr}>
+            {activeStock?.symbol && `[${activeStock?.symbol}]`}
           </Text>
         </View>
-      )}
-      <View style={themedStyles.userBalanceContainer}>
-        <Text style={themedStyles.chartHeaderStockProfitLoss}>
-          {getMoneyFormat(
-            profitsRealizedValue + (activeProfit?.profitLoss || 0),
-          )}
-        </Text>
-        <Text style={themedStyles.chartHeaderCashBalance}>
-          {getMoneyFormat(activeBalance?.balance || 0)}
-        </Text>
+        {stockChange && (
+          <View style={themedStyles.chartHeaderNumberContainer}>
+            <Text style={themedStyles.chartHeaderStockProfitLoss}>
+              {getMoneyFormat(stockChange.currentValue || 0)}
+            </Text>
+            <Text
+              style={
+                stockChange.percent > 0
+                  ? themedStyles.chartHeaderStockChangePositivePercent
+                  : themedStyles.chartHeaderStockChangeNegativePercent
+              }>
+              {stockChange.difference}
+              {`    `}({stockChange.percent}%)
+            </Text>
+          </View>
+        )}
+        <View style={themedStyles.userBalanceContainer}>
+          <Text style={themedStyles.chartHeaderStockProfitLoss}>
+            {getMoneyFormat(
+              profitsRealizedValue + (activeProfit?.profitLoss || 0),
+            )}
+          </Text>
+          <Text style={themedStyles.chartHeaderCashBalance}>
+            {getMoneyFormat(activeBalance?.balance || 0)}
+          </Text>
+        </View>
       </View>
-    </View>
+      <SwitchRow
+        title="10x Cash Boost"
+        switchValue={isCashBoost}
+        onSwitchValueChange={onCashBoostChange}
+        style={{
+          container: themedStyles.cashBoost10xContainer,
+        }}
+      />
+    </>
   );
 }
 

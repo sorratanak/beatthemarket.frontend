@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import { ITheme } from '../../themes/interface';
-import { COMMON_STYLES } from '../../themes/commonStyles';
 import { COLORS } from '../../themes/colors';
 
 export const getThemedStyles = (theme: ITheme) =>
@@ -81,6 +80,10 @@ export const getThemedStyles = (theme: ITheme) =>
     },
     expandedStocksContainer: {},
     expandedStocksSubcontainer: {},
+    cashBoost10xContainer: {
+      alignSelf: 'flex-start',
+      width: 200,
+    },
 
     /* Chart */
     chartContainer: {

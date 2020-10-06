@@ -58,6 +58,7 @@ export const getThemedStyles = (theme: ITheme) =>
       paddingHorizontal: 16,
       backgroundColor: theme.DEFAULT.PRIMARY_BACKGROUND_COLOR,
     },
+    cashBoost10xContainer: {},
 
     /* Chart */
     chartContainer: {
