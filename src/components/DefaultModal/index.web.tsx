@@ -11,6 +11,7 @@ interface Props {
   isVisible: boolean;
   onBackdropPress?: () => void;
   isBackdrop?: boolean;
+  isConnectedToGame?: boolean;
   children: React.ReactNode;
 }
 
@@ -22,6 +23,7 @@ export function DefaultModal({
   isVisible,
   onBackdropPress,
   isBackdrop = false,
+  isConnectedToGame = true,
   children,
   ...props
 }: Props) {
@@ -35,7 +37,7 @@ export function DefaultModal({
   );
 
   useEffect(() => {
-    if (gameId) {
+    if (isConnectedToGame && gameId) {
       if (!isGamePaused && _.some(Object.values(modalsVisibleState))) {
         onPauseGame();
       }
