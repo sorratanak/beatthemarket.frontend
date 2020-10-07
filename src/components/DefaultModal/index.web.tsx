@@ -1,7 +1,10 @@
 import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Modal from 'modal-react-native-web';
-import { ThemeContext } from '../../contexts';
+import randomString from 'random-string';
+import _ from 'lodash';
+
+import { GameContext, ModalContext, ThemeContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 
 interface Props {
@@ -22,12 +25,35 @@ export function DefaultModal({
   children,
   ...props
 }: Props) {
+  const [id] = useState(randomString());
+
+  const { gameId, isGamePaused, onPauseGame, onResumeGame } = useContext(
+    GameContext,
+  );
+  const { modalsVisibleState, writeModalVisibleState } = useContext(
+    ModalContext,
+  );
+
+  useEffect(() => {
+    if (gameId) {
+      if (!isGamePaused && _.some(Object.values(modalsVisibleState))) {
+        onPauseGame();
+      }
+
+      if (isGamePaused && !_.every(Object.values(modalsVisibleState))) {
+        onResumeGame();
+      }
+    }
+  }, [gameId, modalsVisibleState]);
+
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   // Render only when modal is visible + closing animation
   const [isRenderModalContent, setIsRenderModalContent] = useState(false);
   useEffect(() => {
+    writeModalVisibleState(id, isVisible);
+
     if (isVisible) {
       setIsRenderModalContent(isVisible);
     } else {

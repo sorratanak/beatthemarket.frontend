@@ -219,11 +219,13 @@ const ContextProvider = ({
   );
 
   const onPauseGame = useCallback(() => {
+    console.log('PAUSE!');
     pauseGame(getPauseResumeGameRequest(gameId));
     setIsGamePaused(true);
   }, [gameId, pauseGame, setIsGamePaused]);
 
   const onResumeGame = useCallback(() => {
+    console.log('RESUME!');
     resumeGame(getPauseResumeGameRequest(gameId));
     setIsGamePaused(false);
   }, [gameId, resumeGame, setIsGamePaused]);

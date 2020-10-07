@@ -9,15 +9,19 @@ import { IAlertItem } from '../types';
 interface ContextProps {
   currentError: string;
   currentAlert: IAlertItem;
+  modalsVisibleState: { [id: string]: boolean };
   onSetErrorModal: (newError: string) => void;
   onSetAlertModal: (newAlertItem: IAlertItem) => void;
+  writeModalVisibleState: (modalId: string, isVisible: boolean) => void;
 }
 
 const DEFAULT_MODAL_CONTEXT: ContextProps = {
   currentError: null,
   currentAlert: null,
+  modalsVisibleState: null,
   onSetErrorModal: _.noop,
   onSetAlertModal: _.noop,
+  writeModalVisibleState: _.noop,
 };
 
 export const ModalContext = React.createContext(DEFAULT_MODAL_CONTEXT);
@@ -30,6 +34,9 @@ const ContextProvider = ({
   const { user } = useContext(UserContext);
 
   /* ------ State ------ */
+  const [modalsVisibleState, setModalsVisibleState] = useState<{
+    [id: string]: boolean;
+  }>({});
   const [currentError, setCurrentError] = useState<string>(null);
   const [currentAlert, setCurrentAlert] = useState<IAlertItem>(null);
 
@@ -62,16 +69,27 @@ const ContextProvider = ({
     onSetAlertModal(null);
   }, [onSetAlertModal]);
 
+  const writeModalVisibleState = useCallback(
+    (modalId: string, isVisible: boolean) => {
+      const newModalsVisibleState = { ...modalsVisibleState };
+      newModalsVisibleState[modalId] = isVisible;
+      setModalsVisibleState(newModalsVisibleState);
+    },
+    [modalsVisibleState, setModalsVisibleState],
+  );
+
   return (
     <ModalContext.Provider
       value={{
         // Data
         currentError,
         currentAlert,
+        modalsVisibleState,
 
         // Functions
         onSetErrorModal,
         onSetAlertModal,
+        writeModalVisibleState,
       }}>
       {children}
 
