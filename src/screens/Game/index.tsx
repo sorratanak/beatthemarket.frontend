@@ -48,17 +48,12 @@ export function Game() {
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   const [data, setData] = useState<IPoint[]>([]);
-  const [randomData, setRandomData] = useState<IPoint[]>([]);
   const [endGameModalType, setEndGameModalType] = useState<'lose' | 'win'>(
     null,
   );
   const [isEndGameModalVisible, setIsEndGameModalVisible] = useState<boolean>(
     false,
   );
-
-  useEffect(() => {
-    setRandomData(generateRandomPointData(RANDOM_POINTS_LENGTH));
-  }, [activeStock]);
 
   useEffect(() => {
     if (gameScore) {
@@ -86,17 +81,11 @@ export function Game() {
     }
   }, [gameId, activeStock, activeStock?.ticks?.length]);
 
-  const parsedRandomData = useMemo(() => {
-    if (!data.length) return [];
-
-    return randomData;
-  }, [randomData, data]);
-
   console.log('gameId is', gameId);
   return (
     <Container style={themedStyles.container}>
       <GameHeader />
-      <GameChartBoard chartData={[...parsedRandomData, ...data]} />
+      <GameChartBoard chartData={data} />
       {gameId && (
         <>
           <StockTicksSubscriber gameId={gameId} callback={onAddStockTicks} />

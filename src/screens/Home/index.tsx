@@ -38,12 +38,15 @@ export function Home({ navigation }: ScreenProps) {
 
   useEffect(() => {
     if (createGameResponse?.createGame) {
-      startGame({ variables: { id: createGameResponse.createGame.id } });
+      startGame({
+        variables: { id: createGameResponse.createGame.id, startPosition: 20 },
+      });
     }
   }, [createGameResponse]);
 
   useEffect(() => {
     if (createGameResponse && startGameResponse) {
+      console.log('createGameResponse', createGameResponse.createGame);
       const { stocks, id: gameId } = createGameResponse.createGame;
       onSetStocks(stocks);
       onSetGameId(gameId);

@@ -49,17 +49,12 @@ export function Game() {
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   const [data, setData] = useState<IPoint[]>([]);
-  const [randomData, setRandomData] = useState<IPoint[]>([]);
   const [endGameModalType, setEndGameModalType] = useState<'lose' | 'win'>(
     null,
   );
   const [isEndGameModalVisible, setIsEndGameModalVisible] = useState<boolean>(
     false,
   );
-
-  useEffect(() => {
-    setRandomData(generateRandomPointData(RANDOM_POINTS_LENGTH));
-  }, [activeStock]);
 
   useEffect(() => {
     if (gameId) {
@@ -93,15 +88,9 @@ export function Game() {
     }
   }, [gameId, activeStock, activeStock?.ticks?.length]);
 
-  const parsedRandomData = useMemo(() => {
-    if (!data.length) return [];
-
-    return randomData;
-  }, [randomData, data]);
-
   return (
     <ContainerWithBurgerMenu style={themedStyles.container}>
-      <GameChartBoard chartData={[...parsedRandomData, ...data]} />
+      <GameChartBoard chartData={data} />
       <GameSideBar />
       {gameId && (
         <>
