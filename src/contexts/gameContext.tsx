@@ -72,7 +72,9 @@ const ContextProvider = ({
   children: React.ReactNode | React.ReactNode[];
 }) => {
   const { user } = useContext(UserContext);
-  const { onSetErrorModal, onSetAlertModal } = useContext(ModalContext);
+  const { onSetErrorModal, onSetAlertModal, modalsVisibleState } = useContext(
+    ModalContext,
+  );
 
   /* ------ State ------ */
   const [gameId, setGameId] = useState<string>(null);
@@ -264,6 +266,20 @@ const ContextProvider = ({
     );
     getUserProfitLoss(getUserProfitLossRequest(gameId, user?.userEmail));
   }, [gameId, user, getUserProfitLoss]);
+
+  // Modal state watcher
+  useEffect(() => {
+    console.log('new modalsVisibleState', modalsVisibleState);
+    if (gameId) {
+      if (!isGamePaused && _.some(Object.values(modalsVisibleState))) {
+        onPauseGame();
+      }
+
+      if (isGamePaused && !_.every(Object.values(modalsVisibleState))) {
+        onResumeGame();
+      }
+    }
+  }, [modalsVisibleState]);
 
   return (
     <GameContext.Provider

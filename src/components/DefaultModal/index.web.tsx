@@ -23,30 +23,12 @@ export function DefaultModal({
   isVisible,
   onBackdropPress,
   isBackdrop = false,
-  isConnectedToGame = true,
   children,
   ...props
 }: Props) {
   const [id] = useState(randomString());
 
-  const { gameId, isGamePaused, onPauseGame, onResumeGame } = useContext(
-    GameContext,
-  );
-  const { modalsVisibleState, writeModalVisibleState } = useContext(
-    ModalContext,
-  );
-
-  useEffect(() => {
-    if (isConnectedToGame && gameId) {
-      if (!isGamePaused && _.some(Object.values(modalsVisibleState))) {
-        onPauseGame();
-      }
-
-      if (isGamePaused && !_.every(Object.values(modalsVisibleState))) {
-        onResumeGame();
-      }
-    }
-  }, [gameId, modalsVisibleState]);
+  const { writeModalVisibleState } = useContext(ModalContext);
 
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
