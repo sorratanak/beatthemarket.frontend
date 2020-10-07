@@ -46,7 +46,9 @@ export function Home({ navigation }: ScreenProps) {
 
   useEffect(() => {
     if (createGameResponse?.createGame) {
-      startGame({ variables: { id: createGameResponse.createGame.id } });
+      startGame({
+        variables: { id: createGameResponse.createGame.id, startPosition: 20 },
+      });
     }
   }, [createGameResponse, startGame]);
 
