@@ -146,25 +146,40 @@ const ContextProvider = ({
     };
   }, []);
 
-  const onRequestPurchase = useCallback(async () => {
-    try {
-      setIsProcessing(true);
-      await requestPurchase(selectedPurchase?.RNIAP_PRODUCT_ID, false);
-      setIsProcessing(false);
-    } catch (err) {
-      setIsProcessing(false);
-    }
-  }, [selectedPurchase, setIsProcessing]);
+  const onRequestPurchase = useCallback(
+    async (userInfo, callback) => {
+      try {
+        setIsProcessing(true);
+        await requestPurchase(selectedPurchase?.RNIAP_PRODUCT_ID, false);
+        if (callback) {
+          callback();
+        }
+        setIsProcessing(false);
+      } catch (err) {
+        setIsProcessing(false);
+      }
+    },
+    [selectedPurchase, setIsProcessing],
+  );
 
-  const onRequestSubscription = useCallback(async () => {
-    try {
-      setIsProcessing(true);
-      await requestSubscription(selectedSubscription?.RNIAP_PRODUCT_ID, false);
-      setIsProcessing(false);
-    } catch (err) {
-      setIsProcessing(false);
-    }
-  }, [selectedSubscription, setIsProcessing]);
+  const onRequestSubscription = useCallback(
+    async (userInfo, callback) => {
+      try {
+        setIsProcessing(true);
+        await requestSubscription(
+          selectedSubscription?.RNIAP_PRODUCT_ID,
+          false,
+        );
+        if (callback) {
+          callback();
+        }
+        setIsProcessing(false);
+      } catch (err) {
+        setIsProcessing(false);
+      }
+    },
+    [selectedSubscription, setIsProcessing],
+  );
 
   const onSelectPurchase = useCallback(
     (newPurchase: IPurchase) => {

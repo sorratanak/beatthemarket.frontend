@@ -19,7 +19,7 @@ interface Props {
   onPurchase: () => void;
 }
 
-export function OfferBlock({ title, preset }: Props) {
+export function OfferBlock({ title, preset, onPurchase }: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -52,7 +52,7 @@ export function OfferBlock({ title, preset }: Props) {
           result,
           (el) => el.productId === foundPurchase.RNIAP_PRODUCT_ID,
         );
-        requestPurchase(purchase?.productId);
+        requestPurchase(purchase?.productId).then(onPurchase);
       });
     },
     [preset, onSelectPurchase],

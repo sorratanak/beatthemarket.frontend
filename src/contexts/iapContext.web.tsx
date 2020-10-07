@@ -214,7 +214,6 @@ const ContextProvider = ({
 
   const onSelectPurchase = useCallback(
     (newPurchase: IPurchase) => {
-      console.log('newPurchase', newPurchase);
       setSelectedPurchase(newPurchase);
     },
     [setSelectedPurchase],
