@@ -251,7 +251,7 @@ const ContextProvider = ({
     setIsGamePaused(false);
 
     const savedGameId = gameId;
-    setTimeout(() => setGameId(savedGameId), 5000);
+    setTimeout(() => setGameId(savedGameId), 2000);
     setGameId(null);
   }, [gameId, restartGame, setIsGamePaused]);
 

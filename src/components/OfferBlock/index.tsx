@@ -16,6 +16,7 @@ import {
 interface Props {
   title?: string;
   preset: TOfferBlockPreset;
+  onPurchase: () => void;
 }
 
 export function OfferBlock({ title, preset }: Props) {

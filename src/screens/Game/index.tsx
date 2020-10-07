@@ -37,6 +37,7 @@ export function Game() {
     gameScore,
     wins,
     setWins,
+    onRestartGame,
     resetState: gameContextResetState,
   } = useContext(GameContext);
   const {
@@ -126,6 +127,10 @@ export function Game() {
             setIsEndGameModalVisible(false);
             gameContextResetState();
             portfolioContextResetState();
+          }}
+          onAdditionalPurchase={() => {
+            setIsEndGameModalVisible(false);
+            onRestartGame();
           }}
         />
       </DefaultModal>

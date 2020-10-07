@@ -21,9 +21,10 @@ import { BuySubscriptionModal } from '../BuySubscriptionModal';
 interface Props {
   title?: string;
   preset: TOfferBlockPreset;
+  onPurchase: () => void;
 }
 
-export function OfferBlock({ title, preset }: Props) {
+export function OfferBlock({ title, preset, onPurchase }: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -81,7 +82,13 @@ export function OfferBlock({ title, preset }: Props) {
         isBackdrop
         onBackdropPress={() => setIsPayModalVisible(false)}
         style={MODAL_CONTAINER_STYLE}>
-        <BuySubscriptionModal purchaseType={PURCHASE_TYPE.ONE_TIME_PURCHASE} />
+        <BuySubscriptionModal
+          paymentCallback={() => {
+            onPurchase();
+            setIsPayModalVisible(false);
+          }}
+          purchaseType={PURCHASE_TYPE.ONE_TIME_PURCHASE}
+        />
       </DefaultModal>
     </View>
   );

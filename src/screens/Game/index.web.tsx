@@ -131,9 +131,12 @@ export function Game() {
           headerType={endGameModalType}
           onFinishPress={() => {
             setIsEndGameModalVisible(false);
+            gameContextResetState();
+            portfolioContextResetState();
+          }}
+          onAdditionalPurchase={() => {
+            setIsEndGameModalVisible(false);
             onRestartGame();
-            // gameContextResetState();
-            // portfolioContextResetState();
           }}
         />
       </DefaultModal>

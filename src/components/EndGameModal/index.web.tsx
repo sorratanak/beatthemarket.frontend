@@ -125,6 +125,7 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
               <OfferBlock
                 title="Do you need more attempts?"
                 preset="additionalBalance"
+                onPurchase={() => {}}
               />
             )}
 

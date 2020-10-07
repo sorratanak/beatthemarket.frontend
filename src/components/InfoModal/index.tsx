@@ -57,6 +57,7 @@ export function InfoModal({
               <OfferBlock
                 title="Do you need more attempts?"
                 preset="additionalBalance"
+                onPurchase={() => {}}
               />
             )
           }
