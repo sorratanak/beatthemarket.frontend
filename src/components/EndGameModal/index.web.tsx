@@ -26,10 +26,16 @@ const HEADER_TYPES = {
 interface Props {
   headerType: 'lose' | 'win';
   onFinishPress: () => void;
+  onAdditionalPurchase: () => void;
   isVisible: boolean;
 }
 
-export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
+export function EndGameModal({
+  headerType,
+  onFinishPress,
+  onAdditionalPurchase,
+  isVisible,
+}: Props) {
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
@@ -125,7 +131,7 @@ export function EndGameModal({ headerType, onFinishPress, isVisible }: Props) {
               <OfferBlock
                 title="Do you need more attempts?"
                 preset="additionalBalance"
-                onPurchase={() => {}}
+                onPurchase={onAdditionalPurchase}
               />
             )}
 

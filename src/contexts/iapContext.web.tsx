@@ -1,4 +1,10 @@
-import React, { useState, useCallback, useContext, useEffect } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+} from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useMutation } from '@apollo/client';
 import _ from 'lodash';
@@ -50,7 +56,7 @@ const ContextProvider = ({
   const [lastRequestType, setLastRequestType] = useState<PurchaseType>(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [paymentToken, setPaymentToken] = useState(null);
-  const [paymentCallback, setPaymentCallback] = useState<() => void>(null);
+  const paymentCallback = useRef<() => void>(null);
   const [selectedPurchase, setSelectedPurchase] = useState<IPurchase>(null);
   const [selectedSubscription, setSelectedSubscription] = useState<IPurchase>(
     null,
@@ -63,7 +69,7 @@ const ContextProvider = ({
       setPaymentMethod(null);
       setLastRequestType(null);
       setSelectedPurchase(null);
-      setPaymentCallback(null);
+      paymentCallback.current = null;
       setSelectedSubscription(null);
     }
   }, [user]);
@@ -76,16 +82,19 @@ const ContextProvider = ({
   useEffect(() => {
     console.log('verifyPaymentResponse', verifyPaymentResponse);
     console.log('verifyPaymentError', verifyPaymentError);
-    if ((verifyPaymentResponse || verifyPaymentError) && paymentCallback) {
-      paymentCallback();
-      setPaymentCallback(null);
+    if (
+      verifyPaymentResponse &&
+      !verifyPaymentError &&
+      paymentCallback.current
+    ) {
+      paymentCallback.current();
+      paymentCallback.current = null;
     }
   }, [verifyPaymentResponse, verifyPaymentError]);
 
-  const [
-    createStripeCustomer,
-    { data: stripeCustomer, error: stripeCustomerError },
-  ] = useMutation(iapGraphql.queries.CREATE_STRIPE_CUSTOMER);
+  const [createStripeCustomer, { data: stripeCustomer }] = useMutation(
+    iapGraphql.queries.CREATE_STRIPE_CUSTOMER,
+  );
   useEffect(() => {
     const isOneTimePurchase =
       lastRequestType === PURCHASE_TYPE.ONE_TIME_PURCHASE;
@@ -149,6 +158,8 @@ const ContextProvider = ({
         selectedPurchase,
         'userInfo:',
         userInfo,
+        'callback',
+        callback,
       );
 
       setLastRequestType(PURCHASE_TYPE.ONE_TIME_PURCHASE);
@@ -163,8 +174,7 @@ const ContextProvider = ({
       if (error) {
         console.log('[error]', error);
       } else {
-        console.log('email is', user?.userEmail);
-        setPaymentCallback(callback);
+        paymentCallback.current = callback;
         setPaymentToken(newToken);
         createStripeCustomer({ variables: { email: user?.userEmail } });
       }
@@ -194,8 +204,7 @@ const ContextProvider = ({
       if (error) {
         console.log('[error]', error);
       } else {
-        console.log('email is', user?.userEmail);
-        setPaymentCallback(callback);
+        paymentCallback.current = callback;
         setPaymentMethod(newPaymentMethod);
         createStripeCustomer({ variables: { email: user?.userEmail } });
       }

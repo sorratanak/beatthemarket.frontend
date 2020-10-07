@@ -84,8 +84,8 @@ export function OfferBlock({ title, preset, onPurchase }: Props) {
         style={MODAL_CONTAINER_STYLE}>
         <BuySubscriptionModal
           paymentCallback={() => {
-            onPurchase();
             setIsPayModalVisible(false);
+            onPurchase();
           }}
           purchaseType={PURCHASE_TYPE.ONE_TIME_PURCHASE}
         />
