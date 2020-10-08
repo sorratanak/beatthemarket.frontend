@@ -3,8 +3,6 @@ import { TThemeKey } from '../themes/interface';
 import { TOfferBlockPreset, IPurchase, PurchaseType } from '../types';
 import { isAndroid } from '../utils';
 
-export * from './keys';
-
 export const USER_KEY = '_user';
 export const THEME_KEY = '_themeKey';
 export const UUID_KEY = '_uuid';
@@ -233,14 +231,3 @@ export const MICROSOFT_HOST = 'microsoft.com';
 
 export const APPLE_HOST = 'apple.com';
 export const APPLE_WEB_ANDROID_AUTH_SERVICE_ID = 'com.beatthemarket';
-
-export const FIREBASE_AUTH_REDIRECT_URL =
-  'https://beatthemarket-c13f8.firebaseapp.com/__/auth/handler';
-
-export const FIREBASE_CLIENT_ID = '64fbbc6d-0696-4ab3-9511-b84081472d27';
-
-export const FIREBASE_CLIENT_SECRET = 'u_KRGS4uu~ISvOES._2VAyM4gOH83opB0.';
-
-export const SERVER_BASE_IP = 'backend.beatthemarket.io';
-
-export const SERVER_PORT = '443';

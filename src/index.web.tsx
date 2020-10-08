@@ -7,10 +7,10 @@ import { Elements } from '@stripe/react-stripe-js';
 import { graphqlApi } from './graphql';
 import RootNavigation from './navigation/rootNavigation';
 import MultipleContextProvider from './contexts';
-import { STRIPE_PUBLISH_KEY } from './constants';
+import CONFIG from './config';
 import { isWeb } from './utils';
 
-export const stripePromise = loadStripe(STRIPE_PUBLISH_KEY);
+export const stripePromise = loadStripe(CONFIG.STRIPE_PUBLISH_KEY);
 
 export function App() {
   return (

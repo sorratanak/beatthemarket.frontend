@@ -10,10 +10,8 @@ import {
   appleAuthAndroid,
 } from '@invertase/react-native-apple-authentication';
 import { Platform } from 'react-native';
-import {
-  APPLE_WEB_ANDROID_AUTH_SERVICE_ID,
-  FIREBASE_AUTH_REDIRECT_URL,
-} from '../constants';
+import { APPLE_WEB_ANDROID_AUTH_SERVICE_ID } from '../constants';
+import CONFIG from '../config';
 
 GoogleSignin.configure({
   webClientId:
@@ -76,7 +74,7 @@ export const authApple = async () => {
 
         // Return URL added to your Apple dev console. We intercept this redirect, but it must still match
         // the URL you provided to Apple. It can be an empty route on your backend as it's never called.
-        redirectUri: FIREBASE_AUTH_REDIRECT_URL,
+        redirectUri: CONFIG.FIREBASE_AUTH_REDIRECT_URL,
 
         // [OPTIONAL]
         // Scope.ALL (DEFAULT) = 'email name'

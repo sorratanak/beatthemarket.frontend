@@ -1,11 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import {
-  APPLE_HOST,
-  FIREBASE_AUTH_REDIRECT_URL,
-  FIREBASE_CLIENT_ID,
-  MICROSOFT_HOST,
-} from '../constants';
+import { APPLE_HOST } from '../constants';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDe_UVKBE3N1MCwWDJvZnPGudm-5vgMTmw',

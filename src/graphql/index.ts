@@ -10,17 +10,17 @@ import { WebSocketLink } from '@apollo/client/link/ws';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 
+import CONFIG from '../config';
 import { getFirebaseToken, getUuidFromStorage } from '../utils/storage';
 // import { isAndroid } from '../utils';
-import { SERVER_BASE_IP, SERVER_PORT } from '../constants';
 
 // const ip = isAndroid ? '10.0.2.2' : '127.0.0.1';
 
 // export const SERVER_API_URL = `http://${ip}:5000/api`;
 // export const SERVER_WS_URL = `ws://${ip}:5000/ws`;
 
-export const SERVER_API_URL = `https://${SERVER_BASE_IP}:${SERVER_PORT}/api`;
-export const SERVER_WS_URL = `wss://${SERVER_BASE_IP}:${SERVER_PORT}/ws`;
+export const SERVER_API_URL = `https://${CONFIG.SERVER_BASE_IP}:${CONFIG.SERVER_PORT}/api`;
+export const SERVER_WS_URL = `wss://${CONFIG.SERVER_BASE_IP}:${CONFIG.SERVER_PORT}/ws`;
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
