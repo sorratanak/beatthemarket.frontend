@@ -32,7 +32,8 @@ export const getThemedStyles = (theme: ITheme) =>
       fontSize: 14,
     },
     pauseButtonContainer: {
-      alignSelf: 'center',
+      alignSelf: 'flex-end',
+      marginRight: 10,
       alignItems: 'center',
     },
     pauseButtonImage: {
