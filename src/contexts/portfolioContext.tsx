@@ -49,9 +49,10 @@ const ContextProvider = ({
 
   /* ------ Reset states when logout ------ */
   const resetState = useCallback(() => {
-    setProfit(null);
-    setBalance(null);
-  }, [setProfit, setBalance]);
+    setProfit({});
+    setProfitsRealized({});
+    setBalance({});
+  }, [setProfit, setBalance, setProfitsRealized]);
 
   useEffect(() => {
     if (!user) {
