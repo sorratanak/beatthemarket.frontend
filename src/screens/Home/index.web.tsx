@@ -13,7 +13,11 @@ import { GameContext, ThemeContext, UserContext } from '../../contexts';
 import gameGraphql from '../../graphql/game';
 import usersGraphql from '../../graphql/users';
 import { getThemedStyles } from './styles';
-import { START_GAME_LEVEL, QUERY_WITH_ERRORS_OPTIONS } from '../../constants';
+import {
+  START_GAME_LEVEL,
+  QUERY_WITH_ERRORS_OPTIONS,
+  ANONYMOUS_USERNAME,
+} from '../../constants';
 
 export function Home({ navigation }: ScreenProps) {
   const { gameEvents, onSetGameId, onSetStocks } = useContext(GameContext);
@@ -72,7 +76,9 @@ export function Home({ navigation }: ScreenProps) {
     <ContainerWithBurgerMenu style={themedStyles.container}>
       <View style={themedStyles.headerContainer}>
         <View style={themedStyles.greetContainer}>
-          <Text style={themedStyles.greetUserName}>Hello, {userName}</Text>
+          <Text style={themedStyles.greetUserName}>
+            Hello, {userName || ANONYMOUS_USERNAME}
+          </Text>
         </View>
         <View style={themedStyles.profileInfoContainer}>
           <View style={themedStyles.profileTitleContainer}>
