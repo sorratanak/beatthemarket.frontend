@@ -5,6 +5,9 @@ import { ITheme } from '../../themes/interface';
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
+      position: 'absolute',
+      height: '100%',
+      width: '100%',
       flex: 1,
       paddingHorizontal: '10%',
       paddingTop: 130,
