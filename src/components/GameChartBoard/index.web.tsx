@@ -238,7 +238,9 @@ interface Props {
 }
 export function GameChartBoard({ chartData }: Props) {
   const { theme } = useContext(ThemeContext);
-  const { onSetActiveStock, stocks, activeStock } = useContext(GameContext);
+  const { gameId, onSetActiveStock, stocks, activeStock } = useContext(
+    GameContext,
+  );
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   const [isChart, setIsChart] = useState(false);
@@ -257,7 +259,7 @@ export function GameChartBoard({ chartData }: Props) {
         </View>
       </View>
       <View style={themedStyles.infoArea}>
-        <ChartFooter themedStyles={themedStyles} />
+        {gameId && <ChartFooter themedStyles={themedStyles} />}
         <StockList
           data={stocks}
           activeStock={activeStock}

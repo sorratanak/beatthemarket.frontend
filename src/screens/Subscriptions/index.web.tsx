@@ -75,7 +75,10 @@ export function Subscriptions() {
         isVisible={isModalVisible}
         isBackdrop
         onBackdropPress={onCloseModal}>
-        <BuySubscriptionModal purchaseType={modalType} />
+        <BuySubscriptionModal
+          purchaseType={modalType}
+          paymentCallback={onCloseModal}
+        />
       </DefaultModal>
     </SettingsNestedScreenWrapper>
   );

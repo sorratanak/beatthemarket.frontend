@@ -139,7 +139,6 @@ const ContextProvider = ({
   const [restartGame, { data: restartGameResponse }] = useMutation(
     gameGraphql.queries.RESTART_GAME,
   );
-  console.log('response', restartGameResponse);
   const [getUserProfitLoss, { data: userProfitLossResponse }] = useLazyQuery(
     gameGraphql.queries.GET_USER_PROFIT_LOSS,
   );
