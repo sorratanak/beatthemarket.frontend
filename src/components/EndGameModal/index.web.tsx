@@ -126,7 +126,6 @@ export function EndGameModal({
             <Text style={themedStyles.balanceText}>
               Balance: {getMoneyFormat(balanceSumm)}
             </Text>
-
             {headerType === HEADER_TYPES.LOSE && (
               <OfferBlock
                 title="Do you need more attempts?"

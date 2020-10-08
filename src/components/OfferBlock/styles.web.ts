@@ -5,7 +5,9 @@ import { COLORS } from '../../themes/colors';
 
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
-    container: {},
+    container: {
+      marginBottom: 16,
+    },
     title: {
       color: theme.DEFAULT.TEXT_COLOR,
       marginBottom: 16,
@@ -13,9 +15,7 @@ export const getThemedStyles = (theme: ITheme) =>
     },
 
     /* Offer item */
-    offerListContentContainer: {
-      paddingHorizontal: 8,
-    },
+    offerListContentContainer: {},
     offerItemContainer: {
       marginHorizontal: 8,
       padding: 8,
