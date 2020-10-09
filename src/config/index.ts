@@ -13,4 +13,4 @@ function selectConfig(type: string) {
 }
 
 // To switch change ENV_CONFIG_TYPE to any you like
-export default selectConfig(ENV_CONFIG_TYPE.DEVELOPMENT);
+export default selectConfig(ENV_CONFIG_TYPE.PRODUCTION);
