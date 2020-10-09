@@ -15,6 +15,11 @@ export const WEB_SCREEN_WIDTH_POINT = 1280;
 
 export const TIME_TO_RESET_NAVIGATION = 20;
 
+export const ENV_CONFIG_TYPE = {
+  DEVELOPMENT: 'development',
+  PRODUCTION: 'production',
+};
+
 export const STOCK_CHANGE_TYPE = {
   BUY: 'buy',
   SELL: 'sell',
