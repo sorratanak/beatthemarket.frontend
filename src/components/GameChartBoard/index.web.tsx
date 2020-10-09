@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import Slider from '@react-native-community/slider';
 import _ from 'lodash';
 
@@ -31,6 +31,7 @@ import { getMoneyFormat } from '../../utils';
 import { SwitchRow } from '../SwitchRow';
 import { DefaultModal } from '../DefaultModal';
 import { BuySubscriptionModal } from '../BuySubscriptionModal';
+import { IMAGES } from '../../assets';
 
 interface ChartHeaderProps {
   themedStyles: any;
@@ -64,6 +65,16 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
       ),
     [profitsRealized, activeStock],
   );
+
+  const onSharePress = useCallback(async () => {
+    try {
+      // await Share.share({
+      //   message: `Look at my achievement in BeatTheMarket! My current score: ${profitsRealizedValue}`,
+      // });
+    } catch (e) {
+      console.log('share error', e);
+    }
+  }, [profitsRealizedValue]);
 
   const [prelastItem, lastItem] = useMemo(() => {
     const [prelast, last] = data.slice(-2);
@@ -136,6 +147,11 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
           container: themedStyles.cashBoost10xContainer,
         }}
       />
+      <TouchableOpacity
+        onPress={onSharePress}
+        style={themedStyles.shareContainer}>
+        <Image source={IMAGES.SHARE} style={themedStyles.shareIcon} />
+      </TouchableOpacity>
 
       <DefaultModal
         style={MODAL_CONTAINER_STYLE}

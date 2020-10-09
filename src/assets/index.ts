@@ -13,6 +13,7 @@ export const IMAGES = {
   PAUSE_BUTTON: require('./navigation/pause.png'),
   PLAY_BUTTON: require('./navigation/play.png'),
   BURGER_MENU: require('./navigation/burgerMenu.png'),
+  SHARE: require('./navigation/shareIcon.png'),
 
   /* Logos */
   GOOGLE: require('./logo/google.png'),

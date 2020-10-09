@@ -154,6 +154,15 @@ export const getThemedStyles = (theme: ITheme) =>
       height: '100%',
       marginRight: 20,
     },
+    shareContainer: {
+      position: 'absolute',
+      right: 0,
+      bottom: 0,
+    },
+    shareIcon: {
+      width: 35,
+      height: 35,
+    },
   });
 
 export const MODAL_CONTAINER_STYLE: any = {

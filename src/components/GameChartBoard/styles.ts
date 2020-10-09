@@ -135,4 +135,13 @@ export const getThemedStyles = (theme: ITheme) =>
     mr16: {
       marginRight: 16,
     },
+    shareContainer: {
+      position: 'absolute',
+      right: -10,
+      bottom: 0,
+    },
+    shareIcon: {
+      width: 18,
+      height: 18,
+    },
   });
