@@ -93,7 +93,7 @@ export function EndGameModal({
 
         <View style={themedStyles.contentContainer}>
           <View style={themedStyles.rankInfo}>
-            <Text style={themedStyles.subTitle}>Lorem ipsum</Text>
+            <Text style={themedStyles.subTitle}>Leaderboard</Text>
             <View style={themedStyles.scoreBoardContainer}>
               <ScoreBoard users={users?.users || []} isTabsVisible={false} />
             </View>

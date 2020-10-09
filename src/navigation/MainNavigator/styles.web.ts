@@ -43,7 +43,12 @@ export const getThemedStyles = (theme: ITheme) =>
       color: theme.DEFAULT.TEXT_COLOR,
     },
     pauseButtonContainer: {
-      marginTop: '100%',
+      position: 'absolute',
+      width: '100%',
+      height: '10%',
+      bottom: 0,
+      left: 0,
+      right: 0,
       margin: 'auto',
       alignItems: 'center',
     },
