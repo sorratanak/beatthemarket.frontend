@@ -103,16 +103,6 @@ const ContextProvider = ({
 
             await finishTransaction(purchase);
 
-            console.log(
-              'verifyPaymentRequest',
-              JSON.stringify(
-                getVerifyPaymentRequest(
-                  purchase.productId,
-                  getIapProvider(),
-                  purchase,
-                ).variables,
-              ),
-            );
             verifyPayment(
               getVerifyPaymentRequest(
                 purchase.productId,

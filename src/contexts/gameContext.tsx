@@ -220,13 +220,11 @@ const ContextProvider = ({
   );
 
   const onPauseGame = useCallback(() => {
-    console.log('PAUSE!');
     pauseGame(getPauseResumeGameRequest(gameId));
     setIsGamePaused(true);
   }, [gameId, pauseGame, setIsGamePaused]);
 
   const onResumeGame = useCallback(() => {
-    console.log('RESUME!');
     resumeGame(getPauseResumeGameRequest(gameId));
     setIsGamePaused(false);
   }, [gameId, resumeGame, setIsGamePaused]);
@@ -249,7 +247,6 @@ const ContextProvider = ({
   );
 
   const onRestartGame = useCallback(() => {
-    console.log('restartGame query', getPauseResumeGameRequest(gameId));
     restartGame(getPauseResumeGameRequest(gameId));
     setIsGamePaused(false);
 
@@ -259,16 +256,11 @@ const ContextProvider = ({
   }, [gameId, restartGame, setIsGamePaused]);
 
   const onGetUserProfitLoss = useCallback(() => {
-    console.log(
-      'onGetUserProfitLoss',
-      getUserProfitLossRequest(gameId, user?.userEmail),
-    );
     getUserProfitLoss(getUserProfitLossRequest(gameId, user?.userEmail));
   }, [gameId, user, getUserProfitLoss]);
 
   // Modal state watcher
   useEffect(() => {
-    console.log('new modalsVisibleState', modalsVisibleState);
     if (gameId) {
       if (!isGamePaused && _.some(Object.values(modalsVisibleState))) {
         onPauseGame();

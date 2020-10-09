@@ -62,7 +62,6 @@ const ContextProvider = ({
         generateStorageUuid();
         setLocalUser(user);
         getFirebaseToken().then((accessToken) => {
-          console.log('new accessToken', accessToken);
           setLocalToken(accessToken);
         });
       }
@@ -85,7 +84,6 @@ const ContextProvider = ({
   const signInCallback = useCallback(
     (response) => {
       if (response) {
-        console.log('INSIDE SUCCES RESPONSE!');
         const { accessToken, user } = response;
 
         setUserToStorage(user);

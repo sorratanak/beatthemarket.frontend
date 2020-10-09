@@ -80,8 +80,6 @@ const ContextProvider = ({
     { data: verifyPaymentResponse, error: verifyPaymentError },
   ] = useMutation(iapGraphql.queries.VERIFY_PAYMENT, QUERY_WITH_ERRORS_OPTIONS);
   useEffect(() => {
-    console.log('verifyPaymentResponse', verifyPaymentResponse);
-    console.log('verifyPaymentError', verifyPaymentError);
     if (
       verifyPaymentResponse &&
       !verifyPaymentError &&
@@ -128,14 +126,6 @@ const ContextProvider = ({
         };
       }
 
-      console.log(
-        getVerifyPaymentRequest(
-          selectedPurchaseItem.STRIPE_PRODUCT_ID,
-          getIapProvider(),
-          tokenPayload,
-        ),
-      );
-
       verifyPayment(
         getVerifyPaymentRequest(
           selectedPurchaseItem.STRIPE_PRODUCT_ID,
@@ -146,22 +136,11 @@ const ContextProvider = ({
     }
   }, [stripeCustomer]);
 
-  console.log('stripeCustomer', stripeCustomer);
-
   const stripe = useStripe();
   const elements = useElements();
 
   const onRequestPurchase = useCallback(
     async (userInfo: IStripeUserInfo, callback: () => void) => {
-      console.log(
-        'onRequestPurchase, selectedPurchase:',
-        selectedPurchase,
-        'userInfo:',
-        userInfo,
-        'callback',
-        callback,
-      );
-
       setLastRequestType(PURCHASE_TYPE.ONE_TIME_PURCHASE);
 
       if (!stripe || !elements) {
@@ -185,7 +164,6 @@ const ContextProvider = ({
   const onRequestSubscription = useCallback(
     async (userInfo: IStripeUserInfo, callback: () => void) => {
       setLastRequestType(PURCHASE_TYPE.SUBSCRIPTION);
-      console.log('onRequestSubscription', selectedSubscription, userInfo);
 
       if (!stripe || !elements) {
         return;

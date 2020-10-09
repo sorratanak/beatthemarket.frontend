@@ -46,7 +46,6 @@ export function Home({ navigation }: ScreenProps) {
 
   useEffect(() => {
     if (createGameResponse && startGameResponse) {
-      console.log('createGameResponse', createGameResponse.createGame);
       const { stocks, id: gameId } = createGameResponse.createGame;
       onSetStocks(stocks);
       onSetGameId(gameId);

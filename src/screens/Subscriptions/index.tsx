@@ -30,16 +30,12 @@ export function Subscriptions() {
     switch (purchase.TYPE) {
       case PURCHASE_TYPE.ONE_TIME_PURCHASE:
         getProducts([purchase?.RNIAP_PRODUCT_ID]).then((result) => {
-          console.log('getProducts', result);
-
           const [currentPurchase] = result;
           requestPurchase(currentPurchase?.productId);
         });
         break;
       case PURCHASE_TYPE.SUBSCRIPTION:
         getSubscriptions([purchase?.RNIAP_PRODUCT_ID]).then((result) => {
-          console.log('getSubscriptions', result);
-
           const [subscription] = result;
           requestSubscription(subscription?.productId);
         });

@@ -102,13 +102,10 @@ export const authApple = async () => {
 
       const response = await appleAuthAndroid.signIn();
       if (response) {
-        console.log('android response', response);
         const appleCredential = firebaseAuth.AppleAuthProvider.credential(
           response.id_token,
           nonce,
         );
-
-        console.log('appleCredential', appleCredential);
 
         return auth.signInWithCredential(appleCredential);
       }

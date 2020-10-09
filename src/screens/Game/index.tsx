@@ -81,7 +81,6 @@ export function Game() {
     }
   }, [gameId, activeStock, activeStock?.ticks?.length]);
 
-  console.log('gameId is', gameId);
   return (
     <Container style={themedStyles.container}>
       <GameHeader />
