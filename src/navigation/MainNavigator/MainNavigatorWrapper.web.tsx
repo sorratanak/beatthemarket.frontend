@@ -22,7 +22,12 @@ import {
 } from '@react-navigation/drawer';
 
 import { getThemedStyles } from './styles.web';
-import { ThemeContext, GameContext, UserContext } from '../../contexts';
+import {
+  ThemeContext,
+  GameContext,
+  UserContext,
+  PortfolioContext,
+} from '../../contexts';
 import { IMAGES } from '../../assets';
 import { WEB_SCREEN_WIDTH_POINT } from '../../constants';
 
@@ -43,6 +48,10 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
     onExitGame,
   } = useContext(GameContext);
 
+  const { resetState: portfolioContextResetState } = useContext(
+    PortfolioContext,
+  );
+
   return (
     <>
       <DrawerContentScrollView {...props}>
@@ -51,7 +60,10 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
         {gameId && (
           <DrawerItem
             label="Exit Game"
-            onPress={() => onExitGame()}
+            onPress={() => {
+              onExitGame();
+              portfolioContextResetState();
+            }}
             style={themedStyles.logoutContainer}
             labelStyle={themedStyles.logout}
           />

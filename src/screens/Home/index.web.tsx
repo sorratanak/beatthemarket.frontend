@@ -1,5 +1,5 @@
 import React, { useContext, useCallback, useEffect, useMemo } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation, useLazyQuery } from '@apollo/client';
 import { View, Text } from 'react-native';
 
 import { ScreenProps } from './props';
@@ -18,6 +18,7 @@ import {
   QUERY_WITH_ERRORS_OPTIONS,
   ANONYMOUS_USERNAME,
 } from '../../constants';
+import { getFirebaseToken } from '../../utils/storage';
 
 export function Home({ navigation }: ScreenProps) {
   const { gameEvents, onSetGameId, onSetStocks } = useContext(GameContext);
@@ -36,10 +37,20 @@ export function Home({ navigation }: ScreenProps) {
   );
 
   /* Queries */
-  const { data: users, error: usersError } = useQuery(
+  const [getUsers, { data: users, error: usersError }] = useLazyQuery(
     usersGraphql.queries.GET_USERS,
     QUERY_WITH_ERRORS_OPTIONS,
   );
+  useEffect(() => {
+    const WAIT_TOKEN_REG_TIMEOUT_MS = 700;
+
+    const refreshFirebaseTokenAndGetUsers = async () => {
+      await getFirebaseToken();
+      setTimeout(() => getUsers(), WAIT_TOKEN_REG_TIMEOUT_MS);
+    };
+
+    refreshFirebaseTokenAndGetUsers();
+  }, []);
 
   /* Error Handling */
   useEffect(() => {

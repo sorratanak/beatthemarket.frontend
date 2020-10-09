@@ -1,6 +1,5 @@
 import React, { useContext, useCallback, useEffect, useMemo } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import _ from 'lodash';
 
 import { ScreenProps } from './props';
 import { Container, ScoreBoard, DefaultButton } from '../../components';
