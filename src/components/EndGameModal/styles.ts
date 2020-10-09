@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native';
 
 import { ITheme } from '../../themes/interface';
-import { COLORS } from '../../themes/colors';
 
 export const getThemedStyles = (theme: ITheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
+      overflow: 'hidden',
       paddingBottom: 24,
       marginVertical: 50,
       paddingVertical: 10,
