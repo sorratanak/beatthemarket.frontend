@@ -5,6 +5,12 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterShareButton,
+  TwitterIcon,
+} from 'react-share';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import Slider from '@react-native-community/slider';
 import _ from 'lodash';
@@ -65,16 +71,6 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
       ),
     [profitsRealized, activeStock],
   );
-
-  const onSharePress = useCallback(async () => {
-    try {
-      // await Share.share({
-      //   message: `Look at my achievement in BeatTheMarket! My current score: ${profitsRealizedValue}`,
-      // });
-    } catch (e) {
-      console.log('share error', e);
-    }
-  }, [profitsRealizedValue]);
 
   const [prelastItem, lastItem] = useMemo(() => {
     const [prelast, last] = data.slice(-2);
@@ -139,19 +135,31 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
           </Text>
         </View>
       </View>
-      <SwitchRow
-        title="10x Cash Boost"
-        switchValue={isCashBoost}
-        onSwitchValueChange={onCashBoostChange}
-        style={{
-          container: themedStyles.cashBoost10xContainer,
-        }}
-      />
-      <TouchableOpacity
-        onPress={onSharePress}
-        style={themedStyles.shareContainer}>
-        <Image source={IMAGES.SHARE} style={themedStyles.shareIcon} />
-      </TouchableOpacity>
+      <View style={themedStyles.cashShareRow}>
+        <SwitchRow
+          title="10x Cash Boost"
+          switchValue={isCashBoost}
+          onSwitchValueChange={onCashBoostChange}
+          style={{
+            container: themedStyles.cashBoost10xContainer,
+          }}
+        />
+
+        <View style={themedStyles.shareRowContainer}>
+          <FacebookShareButton
+            url="https://www.beatthemarket.io"
+            quote={`Look at my new achievement! My score: ${profitsRealizedValue}`}
+            hashtag="#beatthemarket">
+            <FacebookIcon size={36} />
+          </FacebookShareButton>
+          <TwitterShareButton
+            url="https://www.beatthemarket.io"
+            title={`Look at my new achievement! My score: ${profitsRealizedValue}`}
+            hashtags={['#beatthemarket']}>
+            <TwitterIcon size={36} />
+          </TwitterShareButton>
+        </View>
+      </View>
 
       <DefaultModal
         style={MODAL_CONTAINER_STYLE}

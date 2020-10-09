@@ -62,6 +62,7 @@
     "react-native-webview": "^10.9.0",
     "react-query": "^2.5.6",
     "react-scripts": "^3.4.1",
+    "react-share": "^4.3.0",
     "subscriptions-transport-ws": "^0.9.17",
     "uuid": "^8.3.0"
   },

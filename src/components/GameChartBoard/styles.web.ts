@@ -149,6 +149,18 @@ export const getThemedStyles = (theme: ITheme) =>
       color: theme.DEFAULT.TEXT_COLOR,
     },
 
+    cashShareRow: {
+      flexDirection: 'row',
+      width: '100%',
+      justifyContent: 'space-between',
+    },
+    shareRowContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: 85,
+      marginHorizontal: 16,
+    },
+
     chartHeaderSymbolContainer: {
       justifyContent: 'center',
       height: '100%',
