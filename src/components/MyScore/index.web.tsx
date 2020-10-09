@@ -8,7 +8,6 @@ import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
 import { IBoardUser } from '../../types';
 import { selectBestUserScore } from '../../utils/parsing';
-import { ANONYMOUS_USERNAME } from '../../constants';
 
 interface Props {
   users: IBoardUser[];
@@ -21,11 +20,14 @@ export function MyScore({ users }: Props) {
   const parsedUsers = useMemo(
     () =>
       _.orderBy(
-        _.map(users, (user) => ({
-          id: randomString(),
-          username: user.userName || ANONYMOUS_USERNAME,
-          score: selectBestUserScore(user),
-        })),
+        _.map(
+          users.filter((el) => el.userName),
+          (user) => ({
+            id: randomString(),
+            username: user.userName,
+            score: selectBestUserScore(user),
+          }),
+        ),
         ['score'],
         'desc',
       ),
