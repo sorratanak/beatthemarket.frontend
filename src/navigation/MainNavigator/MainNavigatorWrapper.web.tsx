@@ -44,23 +44,25 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
   } = useContext(GameContext);
 
   return (
-    <DrawerContentScrollView {...props}>
-      <Text style={themedStyles.title}>Beat the Market</Text>
-      <DrawerItemList {...props} />
-      {gameId && (
+    <>
+      <DrawerContentScrollView {...props}>
+        <Text style={themedStyles.title}>Beat the Market</Text>
+        <DrawerItemList {...props} />
+        {gameId && (
+          <DrawerItem
+            label="Exit Game"
+            onPress={() => onExitGame()}
+            style={themedStyles.logoutContainer}
+            labelStyle={themedStyles.logout}
+          />
+        )}
         <DrawerItem
-          label="Exit Game"
-          onPress={() => onExitGame()}
+          label="Logout"
+          onPress={logout}
           style={themedStyles.logoutContainer}
           labelStyle={themedStyles.logout}
         />
-      )}
-      <DrawerItem
-        label="Logout"
-        onPress={logout}
-        style={themedStyles.logoutContainer}
-        labelStyle={themedStyles.logout}
-      />
+      </DrawerContentScrollView>
       {gameId && (
         <TouchableOpacity
           onPress={isGamePaused ? onResumeGame : onPauseGame}
@@ -71,7 +73,7 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
           />
         </TouchableOpacity>
       )}
-    </DrawerContentScrollView>
+    </>
   );
 }
 
@@ -100,11 +102,7 @@ export const MainNavigatorWrapper = ({ children }: Props) => {
     <MainNavigator.Navigator
       drawerType={isLargeScreen ? 'permanent' : 'front'}
       drawerContent={(props: CustomDrawerContentProps) => (
-        <CustomDrawerContent
-          themedStyles={themedStyles}
-          // navigation={navigation}
-          {...props}
-        />
+        <CustomDrawerContent themedStyles={themedStyles} {...props} />
       )}
       drawerContentOptions={{
         activeBackgroundColor: null,

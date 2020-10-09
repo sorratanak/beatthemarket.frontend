@@ -44,17 +44,17 @@ export const getThemedStyles = (theme: ITheme) =>
     },
     pauseButtonContainer: {
       position: 'absolute',
-      width: '100%',
-      height: '10%',
-      bottom: 0,
+      bottom: 50,
       left: 0,
       right: 0,
       margin: 'auto',
+      width: 150,
+      height: 150,
       alignItems: 'center',
     },
     pauseButtonImage: {
       flex: 1,
-      width: 125,
+      width: 150,
       height: 150,
     },
   });
