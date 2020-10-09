@@ -21,18 +21,18 @@ export const SETTINGS_TILES = [
   //   nav: SETTINGS_NAV_TYPES.EXTRA_SUBSCRIPTIONS,
   //   title: 'Extra subscription',
   // },
-  {
-    id: 'tile-speaker',
-    source: IMAGES.SPEAKER,
-    nav: SETTINGS_NAV_TYPES.SOUND_EFFECTS,
-    title: 'Sounds effects',
-  },
-  {
-    id: 'tile-headphones',
-    source: IMAGES.HEADPHONES,
-    nav: SETTINGS_NAV_TYPES.MUSIC,
-    title: 'Music',
-  },
+  // {
+  //   id: 'tile-speaker',
+  //   source: IMAGES.SPEAKER,
+  //   nav: SETTINGS_NAV_TYPES.SOUND_EFFECTS,
+  //   title: 'Sounds effects',
+  // },
+  // {
+  //   id: 'tile-headphones',
+  //   source: IMAGES.HEADPHONES,
+  //   nav: SETTINGS_NAV_TYPES.MUSIC,
+  //   title: 'Music',
+  // },
   {
     id: 'tile-user',
     source: IMAGES.USER,
