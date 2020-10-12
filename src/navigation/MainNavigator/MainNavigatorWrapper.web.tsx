@@ -61,8 +61,9 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
           <DrawerItem
             label="Exit Game"
             onPress={() => {
-              onExitGame();
-              portfolioContextResetState();
+              onExitGame(() => {
+                portfolioContextResetState();
+              });
             }}
             style={themedStyles.logoutContainer}
             labelStyle={themedStyles.logout}
