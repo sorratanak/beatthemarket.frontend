@@ -114,7 +114,7 @@ export function Home({ navigation }: ScreenProps) {
         style={{
           container: themedStyles.playButtonContainer,
         }}>
-        Start
+        PLAY
       </DefaultButton>
     </ContainerWithBurgerMenu>
   );

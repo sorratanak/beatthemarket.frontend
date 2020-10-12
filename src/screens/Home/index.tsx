@@ -70,7 +70,7 @@ export function Home({ navigation }: ScreenProps) {
         style={{
           container: themedStyles.playButtonContainer,
         }}>
-        Play
+        PLAY
       </DefaultButton>
     </Container>
   );
