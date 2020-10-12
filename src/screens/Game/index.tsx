@@ -22,9 +22,6 @@ import {
   LEVEL_WIN_STEP,
   GAME_EVENT_NAMES,
 } from '../../constants';
-import { generateRandomPointData } from '../../utils/parsing';
-
-const RANDOM_POINTS_LENGTH = 20;
 
 export function Game() {
   const { theme } = useContext(ThemeContext);

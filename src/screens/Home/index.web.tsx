@@ -17,6 +17,7 @@ import {
   START_GAME_LEVEL,
   QUERY_WITH_ERRORS_OPTIONS,
   ANONYMOUS_USERNAME,
+  WAIT_TOKEN_REG_TIMEOUT_MS,
 } from '../../constants';
 import { getFirebaseToken } from '../../utils/storage';
 
@@ -42,8 +43,6 @@ export function Home({ navigation }: ScreenProps) {
     QUERY_WITH_ERRORS_OPTIONS,
   );
   useEffect(() => {
-    const WAIT_TOKEN_REG_TIMEOUT_MS = 700;
-
     const refreshFirebaseTokenAndGetUsers = async () => {
       await getFirebaseToken();
       setTimeout(() => getUsers(), WAIT_TOKEN_REG_TIMEOUT_MS);

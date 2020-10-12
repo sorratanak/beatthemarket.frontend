@@ -242,3 +242,5 @@ export const MICROSOFT_HOST = 'microsoft.com';
 
 export const APPLE_HOST = 'apple.com';
 export const APPLE_WEB_ANDROID_AUTH_SERVICE_ID = 'com.beatthemarket';
+
+export const WAIT_TOKEN_REG_TIMEOUT_MS = 700;

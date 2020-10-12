@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
+import { useLazyQuery } from '@apollo/client';
 import noop from 'lodash/noop';
 
+import usersGraphql from '../graphql/users';
 import {
   getFirebaseToken,
   setUserToStorage,
@@ -16,32 +18,41 @@ import {
   FirebaseFacebookSignIn,
   FirebaseAppleSignIn,
 } from '../firebase/firebase';
-import { IUser } from '../types';
+import { IUser, IUserInfo } from '../types';
 import { resetNavigation } from '../utils';
-import { TIME_TO_RESET_NAVIGATION } from '../constants';
+import {
+  QUERY_WITH_ERRORS_OPTIONS,
+  TIME_TO_RESET_NAVIGATION,
+  WAIT_TOKEN_REG_TIMEOUT_MS,
+} from '../constants';
 import { auth as firebaseAuth } from '../firebase/helper';
 import { ModalContext } from './modalContext';
+import { getUserInfoRequest } from '../utils/parsing';
 
 interface ContextProps {
   token: string | null;
   user: IUser | null;
+  userInfo: { user: IUserInfo };
   signInWithGoogle: () => void;
   signInWithFacebook: () => void;
   signInWithApple: () => void;
   signIn: (email: string, password: string) => void;
   forgotPassword: (email: string) => void;
   logout: () => void;
+  onGetUserInfo: () => void;
 }
 
 const DEFAULT_USER_CONTEXT: ContextProps = {
   token: null,
   user: null,
+  userInfo: null,
   signInWithGoogle: noop,
   signInWithFacebook: noop,
   signInWithApple: noop,
   signIn: noop,
   forgotPassword: noop,
   logout: noop,
+  onGetUserInfo: noop,
 };
 
 export const UserContext = React.createContext(DEFAULT_USER_CONTEXT);
@@ -56,6 +67,18 @@ const ContextProvider = ({
 
   const { onSetErrorModal } = useContext(ModalContext);
 
+  const [getUserInfo, { data: userInfo, error }] = useLazyQuery(
+    usersGraphql.queries.GET_USER_INFO,
+    QUERY_WITH_ERRORS_OPTIONS,
+  );
+
+  const onGetUserInfo = useCallback(() => {
+    console.log('onGetUserInfo', localUser);
+    if (localUser?.userEmail) {
+      getUserInfo(getUserInfoRequest(localUser?.userEmail));
+    }
+  }, [getUserInfo, localUser]);
+
   useEffect(() => {
     getUserFromStorage().then((user) => {
       if (user) {
@@ -63,6 +86,8 @@ const ContextProvider = ({
         setLocalUser(user);
         getFirebaseToken().then((accessToken) => {
           setLocalToken(accessToken);
+
+          setTimeout(() => onGetUserInfo(), WAIT_TOKEN_REG_TIMEOUT_MS);
         });
       }
     });
@@ -90,6 +115,10 @@ const ContextProvider = ({
         generateStorageUuid();
         setLocalUser(user);
         setLocalToken(accessToken);
+        setTimeout(
+          () => getUserInfo(getUserInfoRequest(user.userEmail)),
+          WAIT_TOKEN_REG_TIMEOUT_MS,
+        );
       }
     },
     [setUserToStorage, setLocalToken, setLocalUser],
@@ -133,12 +162,14 @@ const ContextProvider = ({
       value={{
         token: localToken,
         user: localUser,
+        userInfo,
         forgotPassword,
         logout,
         signInWithGoogle,
         signInWithFacebook,
         signInWithApple,
         signIn,
+        onGetUserInfo,
       }}>
       {children}
     </UserContext.Provider>

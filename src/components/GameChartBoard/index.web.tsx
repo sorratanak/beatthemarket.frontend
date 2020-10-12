@@ -22,6 +22,7 @@ import {
   ThemeContext,
   PortfolioContext,
   IapContext,
+  UserContext,
 } from '../../contexts';
 import { getThemedStyles, MODAL_CONTAINER_STYLE } from './styles.web';
 import { getStockChanges } from '../../utils/parsing';
@@ -36,7 +37,7 @@ import {
   SHARE_DESCRIPTION,
   HASHTAG_BEATTHEMARKET,
 } from '../../constants';
-import { getMoneyFormat } from '../../utils';
+import { getMoneyFormat, isActiveMarginTradingSubscription } from '../../utils';
 import { SwitchRow } from '../SwitchRow';
 import { DefaultModal } from '../DefaultModal';
 import { BuySubscriptionModal } from '../BuySubscriptionModal';
@@ -46,6 +47,7 @@ interface ChartHeaderProps {
   data: IPoint[];
 }
 function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
+  const { userInfo, onGetUserInfo } = useContext(UserContext);
   const { profit, profitsRealized, balance } = useContext(PortfolioContext);
   const { activeStock } = useContext(GameContext);
   const { onSelectSubscription } = useContext(IapContext);
@@ -81,19 +83,21 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
 
   const [stockChange, setStockChange] = useState<IStockChange>(null);
 
-  const [isCashBoost, setIsCashBoost] = useState<boolean>(false);
+  const [isCashBoost, setIsCashBoost] = useState<boolean>(
+    isActiveMarginTradingSubscription(userInfo?.user?.subscriptions),
+  );
+  useEffect(() => {
+    setIsCashBoost(
+      isActiveMarginTradingSubscription(userInfo?.user?.subscriptions),
+    );
+  }, [userInfo]);
+
   const [isCashBoostModalVisible, setIsCashBoostModalVisible] = useState<
     boolean
   >(false);
   const onCashBoostChange = useCallback(() => {
     setIsCashBoost(!isCashBoost);
   }, [isCashBoost, setIsCashBoost]);
-  useEffect(() => {
-    if (isCashBoost) {
-      onSelectSubscription(SUBSCRIPTION_TYPE.MARGIN_TRADING);
-      setIsCashBoostModalVisible(true);
-    }
-  }, [isCashBoost, setIsCashBoostModalVisible]);
 
   useEffect(() => {
     setStockChange(getStockChanges(prelastItem, lastItem));
@@ -138,14 +142,23 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
         </View>
       </View>
       <View style={themedStyles.cashShareRow}>
-        <SwitchRow
-          title="10x Cash Boost"
-          switchValue={isCashBoost}
-          onSwitchValueChange={onCashBoostChange}
-          style={{
-            container: themedStyles.cashBoost10xContainer,
-          }}
-        />
+        <TouchableOpacity
+          disabled={isCashBoost}
+          onPress={() => {
+            onSelectSubscription(SUBSCRIPTION_TYPE.MARGIN_TRADING);
+            setIsCashBoostModalVisible(true);
+          }}>
+          <View pointerEvents="none">
+            <SwitchRow
+              title="10x Cash Boost"
+              switchValue={isCashBoost}
+              onSwitchValueChange={onCashBoostChange}
+              style={{
+                container: themedStyles.cashBoost10xContainer,
+              }}
+            />
+          </View>
+        </TouchableOpacity>
 
         <View style={themedStyles.shareRowContainer}>
           <FacebookShareButton
@@ -172,7 +185,10 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
           setIsCashBoost(false);
         }}>
         <BuySubscriptionModal
-          paymentCallback={() => setIsCashBoostModalVisible(false)}
+          paymentCallback={() => {
+            setIsCashBoostModalVisible(false);
+            onGetUserInfo();
+          }}
           purchaseType={PURCHASE_TYPE.SUBSCRIPTION}
         />
       </DefaultModal>

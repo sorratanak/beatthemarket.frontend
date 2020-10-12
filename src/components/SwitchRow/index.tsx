@@ -9,6 +9,7 @@ import { THEME_KEYS } from '../../constants';
 interface Props {
   title: string;
   switchValue: boolean;
+  isDisabled?: boolean;
   onSwitchValueChange: () => void;
   style?: {
     container?: ViewStyle;
@@ -20,6 +21,7 @@ export function SwitchRow({
   title,
   switchValue,
   onSwitchValueChange,
+  isDisabled = false,
   style: propStyle = {},
 }: Props) {
   const { theme, themeKey } = useContext(ThemeContext);
@@ -31,6 +33,7 @@ export function SwitchRow({
     <View style={[themedStyles.container, propStyle.container]}>
       <Text style={[themedStyles.title, propStyle.title]}>{title}</Text>
       <Switch
+        disabled={isDisabled}
         trackColor={{ false: COLORS.GRAY, true: COLORS.VIKING }}
         thumbColor={isLightTheme ? COLORS.SILVER : COLORS.GRAY}
         onValueChange={onSwitchValueChange}

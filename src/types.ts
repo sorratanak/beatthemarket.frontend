@@ -32,8 +32,18 @@ export interface IUserGame {
   __typename: 'GameStatus';
 }
 
+export interface IUserSubscription {
+  paymentId: string;
+  productId: string;
+  provider: string;
+}
+
 export interface IBoardUser extends IUserBase {
   games: IUserGame[];
+}
+
+export interface IUserInfo extends IBoardUser {
+  subscriptions: IUserSubscription[];
 }
 
 export interface IScore {
@@ -165,6 +175,9 @@ export interface IGetAccountBalancesRequest
 
 export interface IGetUserProfitLossRequest
   extends IGraphqlVariableRequest<{ gameId: string; email: string }> {}
+
+export interface IGetUserInfoRequest
+  extends IGraphqlVariableRequest<{ email: string }> {}
 
 export interface IVerifyPaymentRequest
   extends IGraphqlVariableRequest<{

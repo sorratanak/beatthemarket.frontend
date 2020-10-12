@@ -11,6 +11,7 @@ import {
   IGetUserProfitLossRequest,
   IVerifyPaymentRequest,
   IBoardUser,
+  IGetUserInfoRequest,
 } from '../types';
 
 export function getStockChanges(prelastItem: IPoint, lastItem: IPoint) {
@@ -87,6 +88,16 @@ export function getSellBuyStockRequest(
         tickId: lastTick.stockTickId,
         tickPrice: lastTick.stockTickClose,
       },
+    },
+  };
+
+  return requestBody;
+}
+
+export function getUserInfoRequest(email: string): IGetUserInfoRequest {
+  const requestBody: IGetUserInfoRequest = {
+    variables: {
+      email,
     },
   };
 

@@ -1,5 +1,30 @@
 import { gql } from '@apollo/client';
 
+const GET_USER_INFO = gql`
+  query User($email: String!) {
+    user(email: $email) {
+      userEmail
+      userName
+      userExternalUid
+      subscriptions {
+        paymentId
+        productId
+        provider
+      }
+      games {
+        gameId
+        status
+        profitLoss {
+          profitLoss
+          stockId
+          gameId
+          profitLossType
+        }
+      }
+    }
+  }
+`;
+
 const GET_USERS = gql`
   query Users {
     users {
@@ -26,6 +51,7 @@ const GET_USERS = gql`
 `;
 
 const queries = {
+  GET_USER_INFO,
   GET_USERS,
 };
 
