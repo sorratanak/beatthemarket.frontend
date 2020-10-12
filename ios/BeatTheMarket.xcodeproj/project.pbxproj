@@ -309,6 +309,7 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = PAJM63M8SZ;
 						LastSwiftMigration = 1120;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -689,6 +690,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BeatTheMarket/BeatTheMarket.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = PAJM63M8SZ;
 				ENABLE_BITCODE = NO;
@@ -705,6 +708,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.beatthemarket.beatthemarket;
 				PRODUCT_NAME = BeatTheMarket;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -718,6 +722,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BeatTheMarket/BeatTheMarket.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = PAJM63M8SZ;
 				INFOPLIST_FILE = BeatTheMarket/Info.plist;
@@ -733,6 +739,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.beatthemarket.beatthemarket;
 				PRODUCT_NAME = BeatTheMarket;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
