@@ -26,7 +26,7 @@ import { COLORS } from '../../themes/colors';
 import {
   STOCK_CHANGE_TYPE,
   ACCOUNT_BALANCE_TYPE,
-  LEVEL_THRESHOLDS,
+  LEVEL_THRESHOLDS,, SHARE_DESCRIPTION
 } from '../../constants';
 import { DefaultModal } from '../DefaultModal';
 import { ExpandedStockList } from '../ExpandedStockList';
@@ -79,7 +79,7 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
   const onSharePress = useCallback(async () => {
     try {
       await Share.share({
-        message: `Look at my achievement in BeatTheMarket! My current score: ${profitsRealizedValue}`,
+        message: `${SHARE_DESCRIPTION} ${profitsRealizedValue}`,
       });
     } catch (e) {
       console.log('share error', e);

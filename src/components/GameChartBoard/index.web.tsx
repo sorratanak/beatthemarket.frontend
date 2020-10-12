@@ -31,7 +31,7 @@ import {
   STOCK_CHANGE_TYPE,
   ACCOUNT_BALANCE_TYPE,
   PURCHASE_TYPE,
-  SUBSCRIPTION_TYPE,
+  SUBSCRIPTION_TYPE,, MAIN_URL, SHARE_DESCRIPTION, HASHTAG_BEATTHEMARKET
 } from '../../constants';
 import { getMoneyFormat } from '../../utils';
 import { SwitchRow } from '../SwitchRow';
@@ -147,15 +147,15 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
 
         <View style={themedStyles.shareRowContainer}>
           <FacebookShareButton
-            url="https://www.beatthemarket.io"
-            quote={`Look at my new achievement! My score: ${profitsRealizedValue}`}
-            hashtag="#beatthemarket">
+            url={MAIN_URL}
+            quote={`${SHARE_DESCRIPTION} ${profitsRealizedValue}`}
+            hashtag={HASHTAG_BEATTHEMARKET}>
             <FacebookIcon size={36} />
           </FacebookShareButton>
           <TwitterShareButton
-            url="https://www.beatthemarket.io"
-            title={`Look at my new achievement! My score: ${profitsRealizedValue}`}
-            hashtags={['#beatthemarket']}>
+            url={MAIN_URL}
+            title={`${SHARE_DESCRIPTION} ${profitsRealizedValue}`}
+            hashtags={[HASHTAG_BEATTHEMARKET]}>
             <TwitterIcon size={36} />
           </TwitterShareButton>
         </View>

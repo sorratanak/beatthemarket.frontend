@@ -230,6 +230,12 @@ export const PROFIT_LOSS_TYPE = {
   REALIZED: 'realized',
 };
 
+export const MAIN_URL = 'https://www.beatthemarket.io';
+
+export const SHARE_DESCRIPTION = `Can you "Beat The Market"? #BeatTheMarket.io (https://Beatthemarket.io)\nMy latest score:`;
+
+export const HASHTAG_BEATTHEMARKET = '#beatthemarket';
+
 export const ANONYMOUS_USERNAME = 'Anonymous';
 
 export const MICROSOFT_HOST = 'microsoft.com';
