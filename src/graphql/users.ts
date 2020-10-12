@@ -6,6 +6,11 @@ const GET_USERS = gql`
       userEmail
       userName
       userExternalUid
+      subscriptions {
+        paymentId
+        productId
+        provider
+      }
       games {
         gameId
         status

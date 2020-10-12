@@ -5,14 +5,7 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-  Image,
-  Share,
-} from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import Slider from '@react-native-community/slider';
 import _ from 'lodash';
 
@@ -31,14 +24,12 @@ import {
 import { DefaultModal } from '../DefaultModal';
 import { ExpandedStockList } from '../ExpandedStockList';
 import { getMoneyFormat } from '../../utils';
-import { IMAGES } from '../../assets';
 
 interface ChartHeaderProps {
   themedStyles: any;
   data: IPoint[];
 }
 function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
-  // const { user } = useContext(UserContext);
   const { profit, profitsRealized, balance } = useContext(PortfolioContext);
   const { activeStock, gameEvents } = useContext(GameContext);
 
@@ -75,16 +66,6 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
   useEffect(() => {
     setStockChange(getStockChanges(prelastItem, lastItem));
   }, [prelastItem, lastItem]);
-
-  const onSharePress = useCallback(async () => {
-    try {
-      await Share.share({
-        message: `Look at my achievement in BeatTheMarket! My current score: ${profitsRealizedValue}`,
-      });
-    } catch (e) {
-      console.log('share error', e);
-    }
-  }, [profitsRealizedValue]);
 
   return (
     <View style={themedStyles.chartHeaderContainer}>
@@ -126,12 +107,6 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
           {getMoneyFormat(activeBalance?.balance || 0)}
         </Text>
       </View>
-
-      <TouchableOpacity
-        onPress={onSharePress}
-        style={themedStyles.shareContainer}>
-        <Image source={IMAGES.SHARE} style={themedStyles.shareIcon} />
-      </TouchableOpacity>
     </View>
   );
 }

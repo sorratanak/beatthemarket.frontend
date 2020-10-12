@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useState, useMemo } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+  useMemo,
+} from 'react';
 import {
   View,
   Text,
@@ -6,13 +12,21 @@ import {
   ViewStyle,
   TextStyle,
   Image,
+  Share,
 } from 'react-native';
 import moment from 'moment';
+import _ from 'lodash';
 
-import { ThemeContext, UserContext, GameContext } from '../../contexts';
+import {
+  ThemeContext,
+  UserContext,
+  GameContext,
+  PortfolioContext,
+} from '../../contexts';
 import { getThemedStyles } from './styles';
 import { GameTimer } from '../GameTimer';
 import { IMAGES } from '../../assets';
+import { SHARE_DESCRIPTION } from '../../constants';
 
 const EMPTY_TIMER = '00:00:00';
 
@@ -33,12 +47,34 @@ export function GameHeader({ style: propStyle = {} }: Props) {
     isGamePaused,
     onResumeGame,
     onPauseGame,
+    activeStock,
   } = useContext(GameContext);
+  const { profitsRealized } = useContext(PortfolioContext);
 
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
   const [timeRemaining, setTimeRemaining] = useState<string>(EMPTY_TIMER);
+
+  const profitsRealizedValue = useMemo(
+    () =>
+      _.reduce(
+        profitsRealized?.[activeStock?.id],
+        (accum, el) => accum + el.profitLoss,
+        0,
+      ),
+    [profitsRealized, activeStock],
+  );
+
+  const onSharePress = useCallback(async () => {
+    try {
+      await Share.share({
+        message: `${SHARE_DESCRIPTION} ${profitsRealizedValue}`,
+      });
+    } catch (e) {
+      console.log('share error', e);
+    }
+  }, [profitsRealizedValue]);
 
   useEffect(() => {
     setTimeRemaining(
@@ -62,14 +98,21 @@ export function GameHeader({ style: propStyle = {} }: Props) {
       </View>
       <View style={themedStyles.cellContainer}>
         {gameId && (
-          <TouchableOpacity
-            style={themedStyles.pauseButtonContainer}
-            onPress={isGamePaused ? onResumeGame : onPauseGame}>
-            <Image
-              source={isGamePaused ? IMAGES.PLAY_BUTTON : IMAGES.PAUSE_BUTTON}
-              style={themedStyles.pauseButtonImage}
-            />
-          </TouchableOpacity>
+          <View style={themedStyles.rowContainer}>
+            <TouchableOpacity
+              style={themedStyles.pauseButtonContainer}
+              onPress={isGamePaused ? onResumeGame : onPauseGame}>
+              <Image
+                source={isGamePaused ? IMAGES.PLAY_BUTTON : IMAGES.PAUSE_BUTTON}
+                style={themedStyles.pauseButtonImage}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={onSharePress}
+              style={themedStyles.shareContainer}>
+              <Image source={IMAGES.SHARE} style={themedStyles.shareIcon} />
+            </TouchableOpacity>
+          </View>
         )}
       </View>
     </View>
