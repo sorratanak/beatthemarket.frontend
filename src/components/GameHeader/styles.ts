@@ -32,12 +32,21 @@ export const getThemedStyles = (theme: ITheme) =>
       fontSize: 14,
     },
     pauseButtonContainer: {
-      alignSelf: 'flex-end',
-      marginRight: 10,
       alignItems: 'center',
     },
     pauseButtonImage: {
       width: 32,
       height: 32,
+    },
+    shareContainer: {
+      marginHorizontal: 10,
+    },
+    shareIcon: {
+      width: 23,
+      height: 29,
+    },
+    rowContainer: {
+      justifyContent: 'flex-end',
+      flexDirection: 'row',
     },
   });

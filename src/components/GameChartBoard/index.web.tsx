@@ -11,7 +11,7 @@ import {
   TwitterShareButton,
   TwitterIcon,
 } from 'react-share';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
 import _ from 'lodash';
 
@@ -31,13 +31,15 @@ import {
   STOCK_CHANGE_TYPE,
   ACCOUNT_BALANCE_TYPE,
   PURCHASE_TYPE,
-  SUBSCRIPTION_TYPE,, MAIN_URL, SHARE_DESCRIPTION, HASHTAG_BEATTHEMARKET
+  SUBSCRIPTION_TYPE,
+  MAIN_URL,
+  SHARE_DESCRIPTION,
+  HASHTAG_BEATTHEMARKET,
 } from '../../constants';
 import { getMoneyFormat } from '../../utils';
 import { SwitchRow } from '../SwitchRow';
 import { DefaultModal } from '../DefaultModal';
 import { BuySubscriptionModal } from '../BuySubscriptionModal';
-import { IMAGES } from '../../assets';
 
 interface ChartHeaderProps {
   themedStyles: any;
