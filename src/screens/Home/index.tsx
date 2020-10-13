@@ -1,5 +1,6 @@
 import React, { useContext, useCallback, useEffect, useMemo } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
+import _ from 'lodash';
 
 import { ScreenProps } from './props';
 import { Container, ScoreBoard, DefaultButton } from '../../components';
@@ -7,7 +8,12 @@ import { GameContext, ThemeContext, UserContext } from '../../contexts';
 import gameGraphql from '../../graphql/game';
 import usersGraphql from '../../graphql/users';
 import { getThemedStyles } from './styles';
-import { START_GAME_LEVEL, QUERY_WITH_ERRORS_OPTIONS } from '../../constants';
+import {
+  START_GAME_LEVEL,
+  QUERY_WITH_ERRORS_OPTIONS,
+  START_GAME_START_POSITION,
+} from '../../constants';
+import { IStockTick } from '../../types';
 
 export function Home({ navigation }: ScreenProps) {
   const { onSetGameId, onSetStocks } = useContext(GameContext);
@@ -38,7 +44,10 @@ export function Home({ navigation }: ScreenProps) {
   useEffect(() => {
     if (createGameResponse?.createGame) {
       startGame({
-        variables: { id: createGameResponse.createGame.id, startPosition: 20 },
+        variables: {
+          id: createGameResponse.createGame.id,
+          startPosition: START_GAME_START_POSITION,
+        },
       });
     }
   }, [createGameResponse]);
@@ -46,7 +55,12 @@ export function Home({ navigation }: ScreenProps) {
   useEffect(() => {
     if (createGameResponse && startGameResponse) {
       const { stocks, id: gameId } = createGameResponse.createGame;
-      onSetStocks(stocks);
+      const newTicks: IStockTick[] = [];
+      const initialTicks = startGameResponse.startGame;
+      _.forEach(initialTicks, (tickBunch) => {
+        newTicks.push(...tickBunch);
+      });
+      onSetStocks(stocks, newTicks);
       onSetGameId(gameId);
       navigation.navigate('Game');
     }

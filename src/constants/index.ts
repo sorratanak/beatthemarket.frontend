@@ -225,6 +225,8 @@ export const PURCHASE_TYPE: {
   ONE_TIME_PURCHASE: 'oneTimePurchase',
 };
 
+export const START_GAME_START_POSITION = 30;
+
 export const PROFIT_LOSS_TYPE = {
   RUNNING: 'running',
   REALIZED: 'realized',

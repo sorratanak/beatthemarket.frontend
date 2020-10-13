@@ -1,6 +1,7 @@
 import React, { useContext, useCallback, useEffect, useMemo } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/client';
 import { View, Text } from 'react-native';
+import _ from 'lodash';
 
 import { ScreenProps } from './props';
 import {
@@ -18,8 +19,10 @@ import {
   QUERY_WITH_ERRORS_OPTIONS,
   ANONYMOUS_USERNAME,
   WAIT_TOKEN_REG_TIMEOUT_MS,
+  START_GAME_START_POSITION,
 } from '../../constants';
 import { getFirebaseToken } from '../../utils/storage';
+import { IStockTick } from '../../types';
 
 export function Home({ navigation }: ScreenProps) {
   const { gameEvents, onSetGameId, onSetStocks } = useContext(GameContext);
@@ -61,7 +64,10 @@ export function Home({ navigation }: ScreenProps) {
   useEffect(() => {
     if (createGameResponse?.createGame) {
       startGame({
-        variables: { id: createGameResponse.createGame.id, startPosition: 20 },
+        variables: {
+          id: createGameResponse.createGame.id,
+          startPosition: START_GAME_START_POSITION,
+        },
       });
     }
   }, [createGameResponse, startGame]);
@@ -69,7 +75,12 @@ export function Home({ navigation }: ScreenProps) {
   useEffect(() => {
     if (createGameResponse && startGameResponse) {
       const { stocks, id: gameId } = createGameResponse.createGame;
-      onSetStocks(stocks);
+      const newTicks: IStockTick[] = [];
+      const initialTicks = startGameResponse.startGame;
+      _.forEach(initialTicks, (tickBunch) => {
+        newTicks.push(...tickBunch);
+      });
+      onSetStocks(stocks, newTicks);
       onSetGameId(gameId);
       navigation.navigate('Game');
     }

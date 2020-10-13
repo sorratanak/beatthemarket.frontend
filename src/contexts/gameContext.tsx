@@ -22,7 +22,7 @@ interface ContextProps {
   isGamePaused: boolean;
   userProfitLoss: any;
   onSetGameId: (gameId: string) => void;
-  onSetStocks: (stocks: IStock[]) => void;
+  onSetStocks: (stocks: IStock[], initialTicks?: IStockTick[]) => void;
   onAddStockTicks: (ticks: IStockTick[]) => void;
   onSetActiveStock: (activeStock: IStock) => void;
   onSellStock: (stockAmount: number) => void;
@@ -154,10 +154,25 @@ const ContextProvider = ({
   );
 
   const onSetStocks = useCallback(
-    (data: IStock[]) => {
+    (data: IStock[], initialTicks?: IStockTick[]) => {
       if (data) {
-        setStocks(data);
-        setActiveStock(data[0]);
+        const dataWithInitialTicks = [...data];
+
+        if (initialTicks) {
+          _.forEach(initialTicks, (tick) => {
+            const currentStock = _.find(
+              dataWithInitialTicks,
+              (stock) => stock.id === tick.stockId,
+            );
+
+            if (currentStock) {
+              currentStock.ticks = [...(currentStock.ticks || []), tick];
+            }
+          });
+        }
+
+        setStocks(dataWithInitialTicks);
+        setActiveStock(dataWithInitialTicks[0]);
       }
     },
     [setStocks],
@@ -172,6 +187,7 @@ const ContextProvider = ({
           updatedStocks,
           (stock) => stock.id === tick.stockId,
         );
+
         if (currentStock) {
           currentStock.ticks = [...(currentStock.ticks || []), tick];
         }
