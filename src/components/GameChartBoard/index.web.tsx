@@ -47,7 +47,7 @@ interface ChartHeaderProps {
   data: IPoint[];
 }
 function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
-  const { userInfo, onGetUserInfo } = useContext(UserContext);
+  const { user, userInfo, onGetUserInfo } = useContext(UserContext);
   const { profit, profitsRealized, balance } = useContext(PortfolioContext);
   const { activeStock } = useContext(GameContext);
   const { onSelectSubscription } = useContext(IapContext);
@@ -187,7 +187,7 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
         <BuySubscriptionModal
           paymentCallback={() => {
             setIsCashBoostModalVisible(false);
-            onGetUserInfo();
+            onGetUserInfo(user);
           }}
           purchaseType={PURCHASE_TYPE.SUBSCRIPTION}
         />

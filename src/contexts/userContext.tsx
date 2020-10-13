@@ -39,7 +39,7 @@ interface ContextProps {
   signIn: (email: string, password: string) => void;
   forgotPassword: (email: string) => void;
   logout: () => void;
-  onGetUserInfo: () => void;
+  onGetUserInfo: (user: IUser) => void;
 }
 
 const DEFAULT_USER_CONTEXT: ContextProps = {
@@ -62,8 +62,8 @@ const ContextProvider = ({
 }: {
   children: React.ReactNode | React.ReactNode[];
 }) => {
-  const [localUser, setLocalUser] = useState<IUser | null>(null);
-  const [localToken, setLocalToken] = useState<string | null>(null);
+  const [localUser, setLocalUser] = useState<IUser>(null);
+  const [localToken, setLocalToken] = useState<string>(null);
 
   const { onSetErrorModal } = useContext(ModalContext);
 
@@ -72,12 +72,14 @@ const ContextProvider = ({
     QUERY_WITH_ERRORS_OPTIONS,
   );
 
-  const onGetUserInfo = useCallback(() => {
-    console.log('onGetUserInfo', localUser);
-    if (localUser?.userEmail) {
-      getUserInfo(getUserInfoRequest(localUser?.userEmail));
-    }
-  }, [getUserInfo, localUser]);
+  const onGetUserInfo = useCallback(
+    (user: IUser) => {
+      if (user?.userEmail) {
+        getUserInfo(getUserInfoRequest(user?.userEmail));
+      }
+    },
+    [getUserInfo],
+  );
 
   useEffect(() => {
     getUserFromStorage().then((user) => {
@@ -86,8 +88,7 @@ const ContextProvider = ({
         setLocalUser(user);
         getFirebaseToken().then((accessToken) => {
           setLocalToken(accessToken);
-
-          setTimeout(() => onGetUserInfo(), WAIT_TOKEN_REG_TIMEOUT_MS);
+          setTimeout(() => onGetUserInfo(user), WAIT_TOKEN_REG_TIMEOUT_MS);
         });
       }
     });
@@ -115,10 +116,7 @@ const ContextProvider = ({
         generateStorageUuid();
         setLocalUser(user);
         setLocalToken(accessToken);
-        setTimeout(
-          () => getUserInfo(getUserInfoRequest(user.userEmail)),
-          WAIT_TOKEN_REG_TIMEOUT_MS,
-        );
+        setTimeout(() => onGetUserInfo(user), WAIT_TOKEN_REG_TIMEOUT_MS);
       }
     },
     [setUserToStorage, setLocalToken, setLocalUser],
