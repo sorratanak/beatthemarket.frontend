@@ -12,6 +12,7 @@ import {
   IVerifyPaymentRequest,
   IBoardUser,
   IGetUserInfoRequest,
+  IUserGame,
 } from '../types';
 
 export function getStockChanges(prelastItem: IPoint, lastItem: IPoint) {
@@ -37,15 +38,21 @@ export function getStockChanges(prelastItem: IPoint, lastItem: IPoint) {
   return stockChange;
 }
 
+export function getGameScore(game: IUserGame) {
+  let gameScore = 0;
+
+  _.forEach(game?.profitLoss, (gameProfit) => {
+    gameScore += gameProfit.profitLoss;
+  });
+
+  return gameScore;
+}
+
 export function selectBestUserScore(user: IBoardUser): number {
   let bestScore = 0;
 
   _.forEach(user?.games, (game) => {
-    let currentGameScore = 0;
-
-    _.forEach(game?.profitLoss, (gameProfit) => {
-      currentGameScore += gameProfit.profitLoss;
-    });
+    const currentGameScore = getGameScore(game);
 
     if (currentGameScore > bestScore) {
       bestScore = currentGameScore;

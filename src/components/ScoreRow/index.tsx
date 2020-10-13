@@ -1,36 +1,28 @@
 import React, { useContext, useMemo } from 'react';
 import { View, Text } from 'react-native';
-import _ from 'lodash';
 
 import { getThemedStyles } from './styles';
-import { ThemeContext, PortfolioContext } from '../../contexts';
+import { ThemeContext, UserContext } from '../../contexts';
 import { getMoneyFormat } from '../../utils';
+import { getGameScore } from '../../utils/parsing';
 
 export function ScoreRow() {
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
-  const { balance } = useContext(PortfolioContext);
-
-  const summBalance = useMemo(() => {
-    return balance
-      ? _.reduce(
-          Object.values(balance),
-          (summ, someBalance) => summ + someBalance.balance,
-          0,
-        )
-      : 0;
-  }, [balance]);
+  const { userInfo } = useContext(UserContext);
 
   return (
     <View style={themedStyles.container}>
       <View style={themedStyles.percentContainer}>
         {/* <Text style={themedStyles.percentLabel}>{percent}</Text> */}
       </View>
-      {summBalance !== 0 && (
+      {userInfo?.user?.games && (
         <ScoreLabel
-          title="Cash + Stock"
-          value={getMoneyFormat(summBalance)}
+          title="Cash + Profit/Loss"
+          value={getMoneyFormat(
+            getGameScore(userInfo.user.games[userInfo.user.games.length - 1]),
+          )}
           themedStyles={themedStyles}
         />
       )}
