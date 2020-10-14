@@ -7,7 +7,7 @@ export const getThemedRules = (theme: ITheme) => [
     id: RULES_ID.FIRST_BLOCK,
     number: IMAGES.ONE,
     image: IMAGES.ROCKET,
-    text: `Start with $100'000 balance (user can subscribe for more starting balance)`,
+    text: `Start with $100'000 balance (purchase to get more starting balance)`,
     bgColor: theme.RULES.FIRST_RULE_BACKGROUND_COLOR,
   },
   {
@@ -28,7 +28,7 @@ export const getThemedRules = (theme: ITheme) => [
     id: RULES_ID.FOURTH_BLOCK,
     number: IMAGES.FOUR,
     image: IMAGES.REVIEW,
-    text: `Try to beat your best profit levels! Try to be all other traders on the market!`,
+    text: `Try to beat your best profits! Try to beat all other players on the market!`,
     bgColor: theme.RULES.FOURTH_RULE_BACKGROUND_COLOR,
   },
 ];

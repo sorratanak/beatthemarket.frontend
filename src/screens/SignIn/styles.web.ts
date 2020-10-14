@@ -44,7 +44,7 @@ export const getThemedStyles = (theme: ITheme) =>
     },
     loginButtonContainer: {
       flex: 1,
-      marginRight: 11,
+      marginBottom: 10,
       height: 40,
     },
     loginButtonText: {
