@@ -7,6 +7,7 @@ interface IDefaultTheme {
 
 interface IMenuTheme {
   TITLE_COLOR?: string;
+  SUBTITLE_COLOR?: string;
   ACTIVE_LABEL_COLOR?: string;
   INACTIVE_LABEL_COLOR?: string;
   BACKGROUND_COLOR?: string;
