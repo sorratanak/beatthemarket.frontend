@@ -232,11 +232,11 @@ export const PROFIT_LOSS_TYPE = {
   REALIZED: 'realized',
 };
 
-export const MAIN_URL = 'https://www.beatthemarket.io';
+export const MAIN_URL = 'https://Beatthemarket.io';
 
-export const SHARE_DESCRIPTION = `Can you "Beat The Market"? #BeatTheMarket.io (https://Beatthemarket.io)\nMy latest score:`;
+export const SHARE_DESCRIPTION = `Can you "Beat The Market"? A fun Day Trading video game.\n\nMy latest score:`
 
-export const HASHTAG_BEATTHEMARKET = '#beatthemarket';
+export const HASHTAG_BEATTHEMARKET = 'BeatTheMarket';
 
 export const ANONYMOUS_USERNAME = 'Anonymous';
 
