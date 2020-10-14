@@ -61,9 +61,9 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
     () =>
       balance
         ? _.find(
-            Object.values(balance),
-            (someBalance) => someBalance.name === ACCOUNT_BALANCE_TYPE.CASH,
-          )
+          Object.values(balance),
+          (someBalance) => someBalance.name === ACCOUNT_BALANCE_TYPE.CASH,
+        )
         : null,
     [balance],
   );
@@ -171,13 +171,13 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
         <View style={themedStyles.shareRowContainer}>
           <FacebookShareButton
             url={MAIN_URL}
-            quote={`${SHARE_DESCRIPTION} ${profitsRealizedValue}`}
+            quote={`${SHARE_DESCRIPTION} ${profitsRealizedValue}\n`}
             hashtag={HASHTAG_BEATTHEMARKET}>
             <FacebookIcon size={36} />
           </FacebookShareButton>
           <TwitterShareButton
             url={MAIN_URL}
-            title={`${SHARE_DESCRIPTION} ${profitsRealizedValue}`}
+            title={`${SHARE_DESCRIPTION} ${profitsRealizedValue}\n`}
             hashtags={[HASHTAG_BEATTHEMARKET]}>
             <TwitterIcon size={36} />
           </TwitterShareButton>

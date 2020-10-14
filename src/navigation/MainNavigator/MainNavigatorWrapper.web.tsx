@@ -55,7 +55,10 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
   return (
     <>
       <DrawerContentScrollView {...props}>
-        <Text style={themedStyles.title}>Beat the Market</Text>
+        <Text style={themedStyles.title}>
+          Beat The Market{"\n"}
+          <Text style={themedStyles.subtitle}>The Day Trading Video Game!!</Text>
+        </Text>
         <DrawerItemList {...props} />
         {gameId && (
           <DrawerItem

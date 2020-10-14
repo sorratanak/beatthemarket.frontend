@@ -21,9 +21,15 @@ export const getThemedStyles = (theme: ITheme) =>
     },
     title: {
       textAlign: 'center',
-      fontSize: 28,
+      fontSize: 30,
       color: theme.MENU.TITLE_COLOR,
       marginVertical: 90,
+    },
+    subtitle: {
+      textAlign: 'center',
+      fontSize: 14,
+      fontStyle: 'italic',
+      color: theme.MENU.SUBTITLE_COLOR,
     },
     itemContainer: {
       flex: 1,

@@ -84,12 +84,6 @@ export function SignIn() {
             secureTextEntry
             style={themedStyles.inputContainer}
           />
-          <View style={themedStyles.forgotPasswordContainer}>
-            <Text style={themedStyles.forgotPassword}>Forgot password?</Text>
-            <TouchableOpacity onPress={onForgotPasswordPress}>
-              <Text style={themedStyles.restorePassword}> Click here</Text>
-            </TouchableOpacity>
-          </View>
           <View style={themedStyles.buttonContainer}>
             <DefaultButton
               onPress={() => signIn(email, password)}
@@ -97,8 +91,14 @@ export function SignIn() {
                 container: themedStyles.loginButtonContainer,
                 text: themedStyles.loginButtonText,
               }}>
-              Go
+              Play
             </DefaultButton>
+          </View>
+          <View style={themedStyles.forgotPasswordContainer}>
+            <Text style={themedStyles.forgotPassword}>Forgot password?</Text>
+            <TouchableOpacity onPress={onForgotPasswordPress}>
+              <Text style={themedStyles.restorePassword}> Click here</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
