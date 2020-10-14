@@ -41,6 +41,7 @@ import { getMoneyFormat, isActiveMarginTradingSubscription } from '../../utils';
 import { SwitchRow } from '../SwitchRow';
 import { DefaultModal } from '../DefaultModal';
 import { BuySubscriptionModal } from '../BuySubscriptionModal';
+import { styles } from '../Container/styles';
 
 interface ChartHeaderProps {
   themedStyles: any;
@@ -159,6 +160,13 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
             />
           </View>
         </TouchableOpacity>
+        {isCashBoost && (
+          <View style={themedStyles.cashBoostLevelContainer}>
+            <Text style={themedStyles.cashBoostLevelText}>
+              Cash Boost Level {getMoneyFormat(1000000)}
+            </Text>
+          </View>
+        )}
 
         <View style={themedStyles.shareRowContainer}>
           <FacebookShareButton

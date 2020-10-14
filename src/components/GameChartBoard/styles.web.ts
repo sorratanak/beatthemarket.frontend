@@ -175,6 +175,14 @@ export const getThemedStyles = (theme: ITheme) =>
       width: 35,
       height: 35,
     },
+    cashBoostLevelContainer: {
+      justifyContent: 'center',
+      marginTop: -3,
+    },
+    cashBoostLevelText: {
+      fontSize: 16,
+      color: theme.DEFAULT.TEXT_COLOR,
+    },
   });
 
 export const MODAL_CONTAINER_STYLE: any = {
