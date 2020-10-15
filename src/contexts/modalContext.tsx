@@ -94,6 +94,7 @@ const ContextProvider = ({
       {children}
 
       <DefaultModal
+        modalId="error-modal"
         isVisible={!!currentError}
         isBackdrop
         onBackdropPress={onResetErrorModal}>
@@ -109,6 +110,7 @@ const ContextProvider = ({
       </DefaultModal>
 
       <DefaultModal
+        modalId="warning-modal"
         isVisible={!!currentAlert}
         isBackdrop
         onBackdropPress={onResetAlertModal}>

@@ -278,11 +278,19 @@ const ContextProvider = ({
   // Modal state watcher
   useEffect(() => {
     if (gameId) {
+      // Pause game: if game isn't paused && some modal is open
       if (!isGamePaused && _.some(Object.values(modalsVisibleState))) {
         onPauseGame();
       }
 
-      if (isGamePaused && !_.every(Object.values(modalsVisibleState))) {
+      // Resume game: if game is paused && every modal is hidden
+      if (
+        isGamePaused &&
+        _.every(
+          Object.values(modalsVisibleState),
+          (isModalVisible) => !isModalVisible,
+        )
+      ) {
         onResumeGame();
       }
     }

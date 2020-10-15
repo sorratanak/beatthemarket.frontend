@@ -71,6 +71,7 @@ export function Subscriptions() {
       </View>
 
       <DefaultModal
+        modalId="settings-subscriptions-modal"
         style={MODAL_CONTAINER_STYLE}
         isVisible={isModalVisible}
         isBackdrop

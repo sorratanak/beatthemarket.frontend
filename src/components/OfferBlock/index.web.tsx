@@ -78,6 +78,7 @@ export function OfferBlock({ title, preset, onPurchase }: Props) {
       />
 
       <DefaultModal
+        modalId="offer-block-pay-modal"
         isVisible={isPayModalVisible}
         isBackdrop
         onBackdropPress={() => setIsPayModalVisible(false)}

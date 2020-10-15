@@ -114,7 +114,7 @@ export function Game() {
         </>
       )}
 
-      <DefaultModal isVisible={isEndGameModalVisible}>
+      <DefaultModal modalId="end-game-modal" isVisible={isEndGameModalVisible}>
         <EndGameModal
           isVisible={isEndGameModalVisible}
           headerType={endGameModalType}
