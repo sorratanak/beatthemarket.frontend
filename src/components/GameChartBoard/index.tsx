@@ -246,6 +246,8 @@ export function GameChartBoard({ chartData }: Props) {
       </View>
 
       <DefaultModal
+        modalId="expanded-stock-list-modal"
+        isConnectedToGame={false}
         isVisible={isStockListExpanded}
         onBackdropPress={() => setIsStockListExpanded(false)}
         style={themedStyles.expandedStocksContainer}>

@@ -185,6 +185,7 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
       </View>
 
       <DefaultModal
+        modalId="cash-boost-pay-modal"
         style={MODAL_CONTAINER_STYLE}
         isVisible={isCashBoostModalVisible}
         isBackdrop

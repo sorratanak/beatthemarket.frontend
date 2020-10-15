@@ -1,70 +1,99 @@
-# React Native Web with TypeScript
-
-![image](https://i.imgur.com/sa5z3DR.gif)
+# React Native Web with TypeScript Project!
 
 ### Featuring
+
+Platforms:
 
 - iOS
 - Android
 - Web
+
+Tech Stack:
+
+- React Native 0.63
 - Typescript
 - React-Navigation
-- Jest
 - Eslint
 
-### Install brew
+### Preinstall
+
+Get the env-dev.ts / env-prod.ts files from admin and put their to root/src/config/
+
+### Web
+
+#### Setup
 
 ```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+yarn
 ```
 
-### Install dependencies
+#### Run
 
 ```sh
-brew install node
-brew install watchman
-sudo gem install cocoapods
-npm i -g yarn
+yarn web --reset-cache
 ```
 
-### Install code
-
-```sh
-git clone git@github.com:ethanneff/react-native-web-typescript.git
-cd react-native-web-typescript
-yarn install
-cd ios
-pod install
-```
-
-### Run
-
-```sh
-yarn ios
-```
-
-```sh
-yarn android
-```
-
-```sh
-yarn web
-```
-
-### Lint
-
-```sh
-yarn lint
-```
-
-### Test
-
-```sh
-yarn test
-```
-
-### Deploy
+#### Deploy
 
 ```sh
 yarn build
 ```
+
+The build destination by default:
+root/build
+
+### iOS
+
+#### Setup
+
+```sh
+yarn
+cd ios
+pod install
+```
+
+#### Run
+
+Auto:
+
+```sh
+react-native run-ios
+```
+
+Manual:
+xCode -> open project (ios directory) -> switch device to iPhone -> 'Run' button
+
+#### Deploy
+
+xCode -> switch to Any iOS device -> Product -> Archive -> building.. -> 'Deploy' button -> follow steps
+
+### Android
+
+#### Setup
+
+```sh
+yarn
+react-native run-android
+```
+
+#### Run
+
+Auto:
+
+```sh
+react-native run-android
+```
+
+Manual:
+Android Studio -> open project (android directory) -> run emulator -> 'Run' button
+
+### Deploy
+
+```sh
+cd android
+./gradlew clean
+./gradlew app:assembleRelease
+```
+
+The APK destination by default:
+root/android/app/build/outputs/apk/release/app-release.apk

@@ -1,13 +1,12 @@
 import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Modal from 'modal-react-native-web';
-import randomString from 'random-string';
-import _ from 'lodash';
 
-import { GameContext, ModalContext, ThemeContext } from '../../contexts';
+import { ModalContext, ThemeContext } from '../../contexts';
 import { getThemedStyles } from './styles';
 
 interface Props {
+  modalId: string;
   isVisible: boolean;
   onBackdropPress?: () => void;
   isBackdrop?: boolean;
@@ -22,22 +21,27 @@ const MODAL_CLOSING_DURATION = 500;
 export function DefaultModal({
   isVisible,
   onBackdropPress,
+  isConnectedToGame = true,
+  modalId,
   isBackdrop = false,
   children,
   ...props
 }: Props) {
-  const [id] = useState(randomString());
+  const [id] = useState(modalId);
 
   const { writeModalVisibleState } = useContext(ModalContext);
 
   const { theme } = useContext(ThemeContext);
   const themedStyles = useMemo(() => getThemedStyles(theme), [theme]);
 
-  // Render only when modal is visible + closing animation
   const [isRenderModalContent, setIsRenderModalContent] = useState(false);
   useEffect(() => {
-    writeModalVisibleState(id, isVisible);
+    // Write visible state if connected
+    if (isConnectedToGame) {
+      writeModalVisibleState(id, isVisible);
+    }
 
+    // Render only when modal is visible + closing animation
     if (isVisible) {
       setIsRenderModalContent(isVisible);
     } else {
