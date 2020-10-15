@@ -61,9 +61,9 @@ function ChartHeader({ themedStyles, data }: ChartHeaderProps) {
     () =>
       balance
         ? _.find(
-            Object.values(balance),
-            (someBalance) => someBalance.name === ACCOUNT_BALANCE_TYPE.CASH,
-          )
+          Object.values(balance),
+          (someBalance) => someBalance.name === ACCOUNT_BALANCE_TYPE.CASH,
+        )
         : null,
     [balance],
   );
