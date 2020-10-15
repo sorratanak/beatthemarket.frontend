@@ -11,6 +11,8 @@ import {
 import gameGraphql from '../graphql/game';
 import { START_GAME_LEVEL, QUERY_WITH_ERRORS_OPTIONS } from '../constants';
 import { ModalContext, UserContext } from '.';
+import { DefaultModal, InfoModal } from '../components';
+import { IMAGES } from '../assets';
 
 interface ContextProps {
   wins: number;
@@ -78,6 +80,7 @@ const ContextProvider = ({
 
   /* ------ State ------ */
   const [gameId, setGameId] = useState<string>(null);
+  const [gameErrorModal, setGameErrorModal] = useState<string>(null);
   const [activeStock, setActiveStock] = useState<IStock>(null);
   const [stocks, setStocks] = useState<IStock[]>([]);
   const [gameEvents, setGameEvents] = useState<IGameEvent>(null);
@@ -116,7 +119,7 @@ const ContextProvider = ({
     { data: buyStockResponse, error: buyStockError },
   ] = useMutation(gameGraphql.queries.BUY_STOCK, QUERY_WITH_ERRORS_OPTIONS);
   useEffect(() => {
-    onSetErrorModal(buyStockError?.message);
+    setGameErrorModal(buyStockError?.message);
   }, [buyStockError]);
 
   const [
@@ -327,6 +330,22 @@ const ContextProvider = ({
         resetState,
       }}>
       {children}
+
+      <DefaultModal
+        modalId="game-error-modal"
+        isVisible={!!gameErrorModal}
+        isBackdrop
+        onBackdropPress={() => setGameErrorModal(null)}>
+        <InfoModal
+          onClosePress={() => setGameErrorModal(null)}
+          title={{ img: IMAGES.ERROR }}
+          infoText={gameErrorModal}
+          firstButton={{
+            text: 'OK',
+            onPress: () => setGameErrorModal(null),
+          }}
+        />
+      </DefaultModal>
     </GameContext.Provider>
   );
 };
