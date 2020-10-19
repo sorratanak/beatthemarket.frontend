@@ -64,3 +64,7 @@ export function resetNavigation() {
     }),
   );
 }
+
+export function getEmailPrefix(email: string): string {
+  return email.split('@')[0];
+}

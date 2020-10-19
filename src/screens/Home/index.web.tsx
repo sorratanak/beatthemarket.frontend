@@ -17,17 +17,17 @@ import { getThemedStyles } from './styles';
 import {
   START_GAME_LEVEL,
   QUERY_WITH_ERRORS_OPTIONS,
-  ANONYMOUS_USERNAME,
   WAIT_TOKEN_REG_TIMEOUT_MS,
   START_GAME_START_POSITION,
 } from '../../constants';
 import { getFirebaseToken } from '../../utils/storage';
 import { IStockTick } from '../../types';
+import { getEmailPrefix } from '../../utils';
 
 export function Home({ navigation }: ScreenProps) {
   const { gameEvents, onSetGameId, onSetStocks } = useContext(GameContext);
   const {
-    user: { userName },
+    user: { userName, userEmail },
     logout,
   } = useContext(UserContext);
 
@@ -98,7 +98,7 @@ export function Home({ navigation }: ScreenProps) {
       <View style={themedStyles.headerContainer}>
         <View style={themedStyles.greetContainer}>
           <Text style={themedStyles.greetUserName}>
-            Hello, {userName || ANONYMOUS_USERNAME}
+            Hello, {userName || getEmailPrefix(userEmail)}
           </Text>
         </View>
         <View style={themedStyles.profileInfoContainer}>

@@ -9,7 +9,7 @@ import { getThemedStyles } from './styles';
 import { ThemeContext } from '../../contexts';
 import { IBoardUser } from '../../types';
 import { selectBestUserScore } from '../../utils/parsing';
-import { ANONYMOUS_USERNAME } from '../../constants';
+import { getEmailPrefix } from '../../utils';
 
 interface Props {
   users: IBoardUser[];
@@ -24,9 +24,9 @@ export function MyScore({ users }: Props) {
       _.orderBy(
         _.map(users, (user) => ({
           id: randomString(),
-          username: user.userName || ANONYMOUS_USERNAME,
+          username: user.userName || getEmailPrefix(user.userEmail),
           score: selectBestUserScore(user),
-        })).filter((us) => us.username !== ANONYMOUS_USERNAME || us.score),
+        })).filter((us) => us.score),
         ['score'],
         'desc',
       ),
