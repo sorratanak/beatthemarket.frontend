@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
+import { Linking } from 'react-native';
 import { useLazyQuery } from '@apollo/client';
 import noop from 'lodash/noop';
 
@@ -19,7 +20,7 @@ import {
   FirebaseAppleSignIn,
 } from '../firebase/firebase';
 import { IUser, IUserInfo } from '../types';
-import { resetNavigation } from '../utils';
+import { isWeb, resetNavigation } from '../utils';
 import {
   QUERY_WITH_ERRORS_OPTIONS,
   TIME_TO_RESET_NAVIGATION,
@@ -28,6 +29,8 @@ import {
 import { auth as firebaseAuth } from '../firebase/helper';
 import { ModalContext } from './modalContext';
 import { getUserInfoRequest } from '../utils/parsing';
+
+const ViewAgent = isWeb ? require('react-device-detect') : null;
 
 interface ContextProps {
   token: string | null;
@@ -136,7 +139,12 @@ const ContextProvider = ({
   }, [FirebaseFacebookSignIn, signInCallback]);
 
   const signInWithApple = useCallback(() => {
-    FirebaseAppleSignIn(handleSignInError).then(signInCallback);
+    if (isWeb && ViewAgent.isMobile) {
+      // TODO: change to app store link
+      Linking.openURL('https://www.google.com');
+    } else {
+      FirebaseAppleSignIn(handleSignInError).then(signInCallback);
+    }
   }, [FirebaseAppleSignIn, signInCallback]);
 
   const signIn = useCallback(
