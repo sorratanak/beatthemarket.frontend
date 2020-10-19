@@ -692,7 +692,7 @@
 				CODE_SIGN_ENTITLEMENTS = BeatTheMarket/BeatTheMarket.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PAJM63M8SZ;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = BeatTheMarket/Info.plist;
@@ -701,6 +701,7 @@
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/swift",
 				);
+				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -724,7 +725,7 @@
 				CODE_SIGN_ENTITLEMENTS = BeatTheMarket/BeatTheMarket.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PAJM63M8SZ;
 				INFOPLIST_FILE = BeatTheMarket/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -732,6 +733,7 @@
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/swift",
 				);
+				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
