@@ -14,8 +14,8 @@ interface Props {
 }
 
 export function SocialButton({
-  imageSource,
   onPress,
+  imageSource,
   style: propStyle = {},
 }: Props) {
   const { theme } = useContext(ThemeContext);
@@ -28,6 +28,7 @@ export function SocialButton({
       <Image
         source={imageSource}
         style={[themedStyles.image, propStyle.image]}
+        resizeMode="contain"
       />
     </TouchableOpacity>
   );

@@ -64,7 +64,9 @@ export const getThemedStyles = (theme: ITheme) =>
     googleIconContainer: {
       backgroundColor: theme.SIGNIN_SCREEN.GOOGLE_ICON_CONTAINER_COLOR,
     },
-    appleIcon: {},
+    appleIcon: {
+      marginVertical: 0,
+    },
     appleIconContainer: {
       backgroundColor: theme.SIGNIN_SCREEN.APPLE_ICON_CONTAINER_COLOR,
     },

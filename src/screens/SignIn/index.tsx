@@ -13,6 +13,7 @@ import {
 } from '../../components';
 import { ThemeContext, UserContext } from '../../contexts';
 import { getThemedStyles } from './styles';
+import { THEME_KEYS } from '../../constants';
 import { IMAGES } from '../../assets';
 import { isNotAndroid, isWeb } from '../../utils';
 
@@ -23,7 +24,7 @@ export function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { theme } = useContext(ThemeContext);
+  const { theme, themeKey } = useContext(ThemeContext);
   const {
     signIn,
     signInWithGoogle,
@@ -36,6 +37,10 @@ export function SignIn() {
   const onForgotPasswordPress = useCallback(() => navigate('ForgotPassword'), [
     navigate,
   ]);
+
+  function appleImageSource() {
+    return (themeKey === THEME_KEYS.LIGHT_THEME) ? IMAGES.WHITE_APPLE : IMAGES.APPLE
+  }
 
   return (
     <Container style={themedStyles.signinContainer}>
@@ -62,7 +67,7 @@ export function SignIn() {
           {isNotAndroid && (
             <SocialButton
               onPress={signInWithApple}
-              imageSource={IMAGES.APPLE}
+              imageSource={appleImageSource()}
               style={{
                 container: themedStyles.appleIconContainer,
                 image: themedStyles.appleIcon,

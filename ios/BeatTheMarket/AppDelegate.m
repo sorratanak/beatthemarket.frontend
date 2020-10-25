@@ -9,6 +9,7 @@
 #import <UMReactNativeAdapter/UMModuleRegistryAdapter.h>
 #import <FBSDKCoreKit.h>
 
+
 @import Firebase;
 
 #ifdef FB_SONARKIT_ENABLED
@@ -31,9 +32,9 @@ static void InitializeFlipper(UIApplication *application) {
 #endif
 
 @interface AppDelegate () <RCTBridgeDelegate>
-	 
-	@property (nonatomic, strong) UMModuleRegistryAdapter *moduleRegistryAdapter;
-	 
+
+  @property (nonatomic, strong) UMModuleRegistryAdapter *moduleRegistryAdapter;
+
 @end
 
 @implementation AppDelegate
@@ -46,11 +47,11 @@ static void InitializeFlipper(UIApplication *application) {
 
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
-  
+
    if ([FIRApp defaultApp] == nil) {
      [FIRApp configure];
    }
-  
+
   self.moduleRegistryAdapter = [[UMModuleRegistryAdapter alloc]
                                 initWithModuleRegistryProvider:[[UMModuleRegistryProvider alloc] init]];
 
@@ -86,7 +87,7 @@ static void InitializeFlipper(UIApplication *application) {
   // If you'd like to export some custom RCTBridgeModules that are not Expo modules, add them here!
   return extraModules;
 }
-	 
+
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
